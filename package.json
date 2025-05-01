@@ -4,9 +4,9 @@
   "description": "A web application for customers to order food online.",
   "main": "src/index.js",
   "scripts": {
-  "start": "node server.js",
-  "build": "webpack --mode production",
-  "test": "jest"
+    "start": "node server.js",
+    "build": "webpack --mode production",
+    "test": "jest"
   },
   "keywords": [
     "food",
@@ -34,3 +34,4 @@
     "webpack-cli": "^4.5.0"
   }
 }
+

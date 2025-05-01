@@ -10,56 +10,81 @@
   <script type="text/javascript">
     (function(){
       // Initialize EmailJS with your public user ID
-      emailjs.init('YOUR_USER_ID');
+      emailjs.init('YOUR_USER_ID'); // Replace with your actual EmailJS User ID
     })();
   </script>
+  <style>
+    /* Optional inline styles for the price labels */
+    .price {
+      font-size: 0.9em;
+      color: #555;
+      text-align: center;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
   <div id="app">
     <h1>Welcome to Rio's Cafe</h1>
     <p>Select your order:</p>
+    <!-- First Row of Items -->
     <div class="menu-buttons">
-      <button onclick="addToOrder('Dessert')" class="menu-button tooltip" data-title="Dessert">
+      <button onclick="addToOrder('Dessert', 3.00)" class="menu-button tooltip" data-title="Dessert">
         <img src="images/Dessert.jpg" alt="Dessert" class="menu-image">
+        <div class="price">$3.00</div>
       </button>
-      <button onclick="addToOrder('Cake')" class="menu-button tooltip" data-title="Cake">
+      <button onclick="addToOrder('Cake', 4.00)" class="menu-button tooltip" data-title="Cake">
         <img src="images/Cake.jpg" alt="Cake" class="menu-image">
+        <div class="price">$4.00</div>
       </button>
-      <button onclick="addToOrder('IceCream')" class="menu-button tooltip" data-title="IceCream">
+      <button onclick="addToOrder('IceCream', 3.50)" class="menu-button tooltip" data-title="IceCream">
         <img src="images/IceCream.jpg" alt="IceCream" class="menu-image">
+        <div class="price">$3.50</div>
       </button>
     </div>
+    <!-- Second Row of Items -->
     <div class="menu-buttons">
-      <button onclick="addToOrder('Coffee')" class="menu-button tooltip" data-title="Coffee">
+      <button onclick="addToOrder('Coffee', 2.50)" class="menu-button tooltip" data-title="Coffee">
         <img src="images/Coffee.jpg" alt="Coffee" class="menu-image">
+        <div class="price">$2.50</div>
       </button>
-      <button onclick="addToOrder('Cappuccino')" class="menu-button tooltip" data-title="Cappuccino">
+      <button onclick="addToOrder('Cappuccino', 3.50)" class="menu-button tooltip" data-title="Cappuccino">
         <img src="images/Cappuccino.jpg" alt="Cappuccino" class="menu-image">
+        <div class="price">$3.50</div>
       </button>
-      <button onclick="addToOrder('Mocha')" class="menu-button tooltip" data-title="Mocha">
+      <button onclick="addToOrder('Mocha', 4.00)" class="menu-button tooltip" data-title="Mocha">
         <img src="images/Mocha.jpg" alt="Mocha" class="menu-image">
+        <div class="price">$4.00</div>
       </button>
     </div>
+    <!-- Third Row of Items -->
     <div class="menu-buttons">
-      <button onclick="addToOrder('Meal')" class="menu-button tooltip" data-title="Meal">
+      <button onclick="addToOrder('Meal', 10.00)" class="menu-button tooltip" data-title="Meal">
         <img src="images/Meal.jpg" alt="Meal" class="menu-image">
+        <div class="price">$10.00</div>
       </button>
-      <button onclick="addToOrder('Sushi')" class="menu-button tooltip" data-title="Sushi">
+      <button onclick="addToOrder('Sushi', 8.00)" class="menu-button tooltip" data-title="Sushi">
         <img src="images/Sushi.jpg" alt="Sushi" class="menu-image">
+        <div class="price">$8.00</div>
       </button>
-      <button onclick="addToOrder('Teriyaki')" class="menu-button tooltip" data-title="Teriyaki">
+      <button onclick="addToOrder('Teriyaki', 9.00)" class="menu-button tooltip" data-title="Teriyaki">
         <img src="images/Teriyaki.jpg" alt="Teriyaki" class="menu-image">
+        <div class="price">$9.00</div>
       </button>
     </div>
+    <!-- Fourth Row of Items -->
     <div class="menu-buttons">
-      <button onclick="addToOrder('Juice')" class="menu-button tooltip" data-title="Juice">
+      <button onclick="addToOrder('Juice', 2.00)" class="menu-button tooltip" data-title="Juice">
         <img src="images/Juice.jpg" alt="Juice" class="menu-image">
+        <div class="price">$2.00</div>
       </button>
-      <button onclick="addToOrder('Tea')" class="menu-button tooltip" data-title="Tea">
+      <button onclick="addToOrder('Tea', 1.50)" class="menu-button tooltip" data-title="Tea">
         <img src="images/Tea.jpg" alt="Tea" class="menu-image">
+        <div class="price">$1.50</div>
       </button>
-      <button onclick="addToOrder('Beer')" class="menu-button tooltip" data-title="Beer">
+      <button onclick="addToOrder('Beer', 5.00)" class="menu-button tooltip" data-title="Beer">
         <img src="images/Beer.jpg" alt="Beer" class="menu-image">
+        <div class="price">$5.00</div>
       </button>
     </div>
 
@@ -81,13 +106,13 @@
   <script>
     const orders = [];
 
-    // Adds a selected item to the order list
-    function addToOrder(item) {
-      orders.push(item);
-      alert(`${item} added to your order!`);
+    // Adds a selected item to the order list as an object containing the item name and price.
+    function addToOrder(item, price) {
+      orders.push({ name: item, price: price });
+      alert(`${item} ($${price.toFixed(2)}) added to your order!`);
     }
 
-    // Uses EmailJS to send the order details via email
+    // Uses EmailJS to send the order details via email.
     function sendOrder() {
       if (orders.length === 0) {
         alert('No items in your order!');
@@ -103,10 +128,14 @@
         return;
       }
 
+      // Create a summary string for order items with prices.
+      const orderSummary = orders
+        .map(itemObj => `${itemObj.name} ($${itemObj.price.toFixed(2)})`)
+        .join(', ');
+
       // Construct order details for the EmailJS template.
-      // Adjust the keys (orders, name, location, time) to match your EmailJS template variables.
       const orderDetails = {
-        orders: orders.join(', '),
+        orders: orderSummary,
         name: name,
         location: location,
         time: time
@@ -116,8 +145,8 @@
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
           alert('Order sent successfully!');
-          orders.length = 0; // Clear the orders array
-          document.getElementById('order-form').reset(); // Reset the form
+          orders.length = 0; // Clear the orders array.
+          document.getElementById('order-form').reset(); // Reset the form.
         }, function(error) {
           console.error('FAILED...', error);
           alert('Failed to send order. Please try again later.');

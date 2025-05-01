@@ -9,12 +9,12 @@
   <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-      // Initialize EmailJS with your public user ID
-      emailjs.init('4QFjtZqAR4nM6hMsG'); // Replace with your actual EmailJS User ID
+      // Initialize EmailJS with your Public Key (API key)
+      emailjs.init('4QFjtZqAR4nM6hMsG');
     })();
   </script>
   <style>
-    /* Optional inline styles; adjust as needed or use your external stylesheet */
+    /* Inline styles (optional - you can also use your external stylesheet) */
     .menu-buttons {
       display: flex;
       gap: 10px;
@@ -136,33 +136,35 @@
   <script>
     const orders = [];
 
-    // Adds a selected item to the order list and updates the summary display.
+    // Adds a selected item (with its price) to the order and updates the summary
     function addToOrder(item, price) {
       orders.push({ name: item, price: price });
       updateOrderSummary();
       alert(`${item} ($${price.toFixed(2)}) added to your order!`);
     }
 
-    // This function calculates the total price of the order.
+    // Calculates the total price of the order.
     function calculateTotal() {
       return orders.reduce((total, order) => total + order.price, 0);
     }
 
-    // Updates the order summary list and displays the total price.
+    // Updates the order summary list and refreshes the total price display.
     function updateOrderSummary() {
       const orderListElem = document.getElementById('orderList');
-      orderListElem.innerHTML = '';  // Clear the current list
+      orderListElem.innerHTML = '';  // Clear current list
+
       orders.forEach(order => {
         const listItem = document.createElement('li');
         listItem.textContent = `${order.name} - $${order.price.toFixed(2)}`;
         orderListElem.appendChild(listItem);
       });
-      // Calculate total price using calculateTotal() and update the display.
+
+      // Calculate total price and update display.
       const total = calculateTotal();
       document.getElementById('orderTotal').textContent = total.toFixed(2);
     }
 
-    // Uses EmailJS to send the order details via email.
+    // Sends the order details via EmailJS.
     function sendOrder() {
       if (orders.length === 0) {
         alert('No items in your order!');
@@ -178,7 +180,7 @@
         return;
       }
 
-      // Create a summary string for the email: "Item ($Price), ..."
+      // Create a summary string for the email (e.g., "Coffee ($2.50), Cake ($4.00), ...")
       const orderSummary = orders
         .map(order => `${order.name} ($${order.price.toFixed(2)})`)
         .join(', ');
@@ -191,13 +193,14 @@
         time: time
       };
 
+      // Send the email using your Service ID and Template ID.
       emailjs.send('service_epydqmi', 'template_vzuexod', orderDetails)
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
           alert('Order sent successfully!');
-          orders.length = 0; // Clear the orders array.
-          document.getElementById('order-form').reset(); // Reset the form.
-          updateOrderSummary(); // Refresh the order summary display.
+          orders.length = 0; // Clear the orders array
+          document.getElementById('order-form').reset(); // Reset the form
+          updateOrderSummary(); // Refresh the order summary display
         }, function(error) {
           console.error('FAILED...', error);
           alert('Failed to send order. Please try again later.');
@@ -206,3 +209,4 @@
   </script>
 </body>
 </html>
+

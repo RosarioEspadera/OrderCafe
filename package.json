@@ -2,7 +2,7 @@
   "name": "food-ordering-web",
   "version": "1.0.0",
   "description": "A web application for customers to order food online.",
-  "main": "src/index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "build": "webpack --mode production",

@@ -1,228 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rio's Cafe</title>
-  <link rel="stylesheet" href="styles/main.css" />
-  <!-- Include EmailJS SDK v4 from jsdelivr CDN -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-      // Initialize EmailJS with your public key (API key)
-      emailjs.init('4QFjtZqAR4nM6hMsG');
-    })();
-  </script>
-  <style>
-    /* Example inline CSS – adjust as needed or move these rules to your external stylesheet */
-    .menu-buttons {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .menu-button {
-      border: none;
-      background: none;
-      cursor: pointer;
-    }
-    .menu-image {
-      width: 100px;
-      height: auto;
-    }
-    .price {
-      text-align: center;
-      font-size: 0.9em;
-      color: #555;
-      margin-top: 5px;
-    }
-    #orderSummary {
-      margin-top: 20px;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-    #orderSummary ul {
-      list-style-type: none;
-      padding: 0;
-    }
-    form label {
-      display: block;
-      margin-top: 10px;
-    }
-    form input {
-      width: 100%;
-      padding: 5px;
-      margin-top: 5px;
-      box-sizing: border-box;
-    }
-  </style>
-</head>
-<body>
-  <div id="app">
-    <h1>Welcome to Rio's Cafe</h1>
-    <p>Select your order:</p>
-    <!-- Menu Items -->
-    <div class="menu-buttons">
-      <!-- First Row of Items -->
-      <button onclick="addToOrder('Dessert', 3.00)" class="menu-button" data-title="Dessert">
-        <img src="images/Dessert.jpg" alt="Dessert" class="menu-image">
-        <div class="price">$3.00</div>
-      </button>
-      <button onclick="addToOrder('Cake', 4.00)" class="menu-button" data-title="Cake">
-        <img src="images/Cake.jpg" alt="Cake" class="menu-image">
-        <div class="price">$4.00</div>
-      </button>
-      <button onclick="addToOrder('IceCream', 3.50)" class="menu-button" data-title="IceCream">
-        <img src="images/IceCream.jpg" alt="IceCream" class="menu-image">
-        <div class="price">$3.50</div>
-      </button>
-      <!-- Second Row of Items -->
-      <button onclick="addToOrder('Coffee', 2.50)" class="menu-button" data-title="Coffee">
-        <img src="images/Coffee.jpg" alt="Coffee" class="menu-image">
-        <div class="price">$2.50</div>
-      </button>
-      <button onclick="addToOrder('Cappuccino', 3.50)" class="menu-button" data-title="Cappuccino">
-        <img src="images/Cappuccino.jpg" alt="Cappuccino" class="menu-image">
-        <div class="price">$3.50</div>
-      </button>
-      <button onclick="addToOrder('Mocha', 4.00)" class="menu-button" data-title="Mocha">
-        <img src="images/Mocha.jpg" alt="Mocha" class="menu-image">
-        <div class="price">$4.00</div>
-      </button>
-      <!-- Third Row of Items -->
-      <button onclick="addToOrder('Meal', 10.00)" class="menu-button" data-title="Meal">
-        <img src="images/Meal.jpg" alt="Meal" class="menu-image">
-        <div class="price">$10.00</div>
-      </button>
-      <button onclick="addToOrder('Sushi', 8.00)" class="menu-button" data-title="Sushi">
-        <img src="images/Sushi.jpg" alt="Sushi" class="menu-image">
-        <div class="price">$8.00</div>
-      </button>
-      <button onclick="addToOrder('Teriyaki', 9.00)" class="menu-button" data-title="Teriyaki">
-        <img src="images/Teriyaki.jpg" alt="Teriyaki" class="menu-image">
-        <div class="price">$9.00</div>
-      </button>
-      <!-- Fourth Row of Items -->
-      <button onclick="addToOrder('Juice', 2.00)" class="menu-button" data-title="Juice">
-        <img src="images/Juice.jpg" alt="Juice" class="menu-image">
-        <div class="price">$2.00</div>
-      </button>
-      <button onclick="addToOrder('Tea', 1.50)" class="menu-button" data-title="Tea">
-        <img src="images/Tea.jpg" alt="Tea" class="menu-image">
-        <div class="price">$1.50</div>
-      </button>
-      <button onclick="addToOrder('Beer', 5.00)" class="menu-button" data-title="Beer">
-        <img src="images/Beer.jpg" alt="Beer" class="menu-image">
-        <div class="price">$5.00</div>
-      </button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rio's Cafe</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <!-- Include EmailJS SDK v4 from jsDelivr CDN -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        // Initialize EmailJS with your public key (API key)
+        emailjs.init("4QFjtZqAR4nM6hMsG");
+      })();
+    </script>
+    <style>
+      /* Inline CSS for demonstration – adjust or move these rules to your stylesheet */
+      .menu-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .menu-button {
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
+      .menu-image {
+        width: 100px;
+        height: auto;
+      }
+      .price {
+        text-align: center;
+        font-size: 0.9em;
+        color: #555;
+        margin-top: 5px;
+      }
+      #orderSummary {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      #orderSummary ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      form label {
+        display: block;
+        margin-top: 10px;
+      }
+      form input {
+        width: 100%;
+        padding: 5px;
+        margin-top: 5px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Welcome to Rio's Cafe</h1>
+      <p>Select your order:</p>
+      <!-- Menu Items -->
+      <div class="menu-buttons">
+        <!-- First Row of Items -->
+        <button onclick="addToOrder('Dessert', 3.00)" class="menu-button">
+          <img src="images/Dessert.jpg" alt="Dessert" class="menu-image" />
+          <div class="price">$3.00</div>
+        </button>
+        <button onclick="addToOrder('Cake', 4.00)" class="menu-button">
+          <img src="images/Cake.jpg" alt="Cake" class="menu-image" />
+          <div class="price">$4.00</div>
+        </button>
+        <button onclick="addToOrder('IceCream', 3.50)" class="menu-button">
+          <img src="images/IceCream.jpg" alt="IceCream" class="menu-image" />
+          <div class="price">$3.50</div>
+        </button>
+        <!-- Second Row of Items -->
+        <button onclick="addToOrder('Coffee', 2.50)" class="menu-button">
+          <img src="images/Coffee.jpg" alt="Coffee" class="menu-image" />
+          <div class="price">$2.50</div>
+        </button>
+        <button onclick="addToOrder('Cappuccino', 3.50)" class="menu-button">
+          <img src="images/Cappuccino.jpg" alt="Cappuccino" class="menu-image" />
+          <div class="price">$3.50</div>
+        </button>
+        <button onclick="addToOrder('Mocha', 4.00)" class="menu-button">
+          <img src="images/Mocha.jpg" alt="Mocha" class="menu-image" />
+          <div class="price">$4.00</div>
+        </button>
+        <!-- Third Row of Items -->
+        <button onclick="addToOrder('Meal', 10.00)" class="menu-button">
+          <img src="images/Meal.jpg" alt="Meal" class="menu-image" />
+          <div class="price">$10.00</div>
+        </button>
+        <button onclick="addToOrder('Sushi', 8.00)" class="menu-button">
+          <img src="images/Sushi.jpg" alt="Sushi" class="menu-image" />
+          <div class="price">$8.00</div>
+        </button>
+        <button onclick="addToOrder('Teriyaki', 9.00)" class="menu-button">
+          <img src="images/Teriyaki.jpg" alt="Teriyaki" class="menu-image" />
+          <div class="price">$9.00</div>
+        </button>
+        <!-- Fourth Row of Items -->
+        <button onclick="addToOrder('Juice', 2.00)" class="menu-button">
+          <img src="images/Juice.jpg" alt="Juice" class="menu-image" />
+          <div class="price">$2.00</div>
+        </button>
+        <button onclick="addToOrder('Tea', 1.50)" class="menu-button">
+          <img src="images/Tea.jpg" alt="Tea" class="menu-image" />
+          <div class="price">$1.50</div>
+        </button>
+        <button onclick="addToOrder('Beer', 5.00)" class="menu-button">
+          <img src="images/Beer.jpg" alt="Beer" class="menu-image" />
+          <div class="price">$5.00</div>
+        </button>
+      </div>
+
+      <!-- Order Form -->
+      <h2>Order Details</h2>
+      <form id="order-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required />
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" placeholder="Enter your location" required />
+
+        <label for="time">Serving Time:</label>
+        <input type="time" id="time" required />
+
+        <!-- Added Email Input Field -->
+        <label for="email">Email Address:</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email address"
+          required
+        />
+
+        <button type="button" onclick="sendOrder()">Send Order</button>
+      </form>
+
+      <!-- Order Summary Display -->
+      <div id="orderSummary">
+        <h3>Your Current Order:</h3>
+        <ul id="orderList"></ul>
+        <p>
+          Total Price: $
+          <span id="orderTotal">0.00</span>
+        </p>
+      </div>
     </div>
-    
-    <!-- Order Form -->
-    <h2>Order Details</h2>
-    <form id="order-form">
-      <label for="name">Name:</label>
-      <input type="text" id="name" placeholder="Enter your name" required>
 
-      <label for="location">Location:</label>
-      <input type="text" id="location" placeholder="Enter your location" required>
+    <script>
+      const orders = [];
 
-      <label for="time">Serving Time:</label>
-      <input type="time" id="time" required>
-
-      <!-- New Input Field for Recipient's Email -->
-      <label for="email">Email Address:</label>
-      <input type="email" id="email" placeholder="Enter your email address" required>
-
-      <button type="button" onclick="sendOrder()">Send Order</button>
-    </form>
-
-    <!-- Order Summary Display -->
-    <div id="orderSummary">
-      <h3>Your Current Order:</h3>
-      <ul id="orderList"></ul>
-      <p>Total Price: $<span id="orderTotal">0.00</span></p>
-    </div>
-  </div>
-
-  <script>
-    const orders = [];
-
-    // Adds a selected item (with its price) to the order list and updates the summary.
-    function addToOrder(item, price) {
-      orders.push({ name: item, price: price });
-      updateOrderSummary();
-      alert(`${item} ($${price.toFixed(2)}) added to your order!`);
-    }
-
-    // Calculates the total price of the order.
-    function calculateTotal() {
-      return orders.reduce((total, order) => total + order.price, 0);
-    }
-
-    // Updates the order summary list and displays the running total.
-    function updateOrderSummary() {
-      const orderListElem = document.getElementById('orderList');
-      orderListElem.innerHTML = '';  // Clear the current list
-      
-      orders.forEach(order => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${order.name} - $${order.price.toFixed(2)}`;
-        orderListElem.appendChild(listItem);
-      });
-      
-      // Update the total price display.
-      document.getElementById('orderTotal').textContent = calculateTotal().toFixed(2);
-    }
-
-    // Sends the order details using EmailJS.
-    function sendOrder() {
-      if (orders.length === 0) {
-        alert('No items in your order!');
-        return;
+      // Adds a selected item with its price to the order and updates the summary.
+      function addToOrder(item, price) {
+        orders.push({ name: item, price: price });
+        updateOrderSummary();
+        alert(`${item} ($${price.toFixed(2)}) added to your order!`);
       }
 
-      const name = document.getElementById('name').value.trim();
-      const location = document.getElementById('location').value.trim();
-      const time = document.getElementById('time').value;
-      const emailRecipient = document.getElementById('email').value.trim();
-
-      if (!name || !location || !time || !emailRecipient) {
-        alert('Please fill in all the details!');
-        return;
+      // Sums up the total order price.
+      function calculateTotal() {
+        return orders.reduce((total, order) => total + order.price, 0);
       }
 
-      // Create a summary string for the email.
-      const orderSummary = orders
-        .map(order => `${order.name} ($${order.price.toFixed(2)})`)
-        .join(', ');
+      // Updates the displayed order summary and total.
+      function updateOrderSummary() {
+        const orderListElem = document.getElementById("orderList");
+        orderListElem.innerHTML = ""; // Clear current list
 
-      // Construct the parameters to send via EmailJS.
-      // Make sure your EmailJS template has matching placeholders (e.g., {{name}}, {{location}}, {{time}}, {{orders}}, and {{to_email}}).
-      const orderDetails = {
-        orders: orderSummary,
-        name: name,
-        location: location,
-        time: time,
-        to_email: emailRecipient
-      };
-
-      // Send the email using the specified Service ID and Template ID.
-      emailjs.send('service_epydqmi', 'template_vzuexod', orderDetails)
-        .then(function(response) {
-          console.log('SUCCESS!', response.status, response.text);
-          alert('Order sent successfully!');
-          // Clear the orders array and the form.
-          orders.length = 0;
-          document.getElementById('order-form').reset();
-          updateOrderSummary();
-        }, function(error) {
-          console.error('FAILED...', error);
-          alert('Failed to send order. Please try again later.');
+        orders.forEach((order) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${order.name} - $${order.price.toFixed(2)}`;
+          orderListElem.appendChild(listItem);
         });
-    }
-  </script>
-</body>
-</html>
 
+        document.getElementById("orderTotal").textContent =
+          calculateTotal().toFixed(2);
+      }
 
+      // Sends the order details via EmailJS.
+      function sendOrder() {
+        if (orders.length === 0) {
+          alert("No items in your order!");
+          return;
+        }
 
+        const name = document.getElementById("name").value.trim();
+        const location = document.getElementById("location").value.trim();
+        const time = document.getElementById("time").value;
+        const emailRecipient = document.getElementById("email").value.trim();
+
+        if (!name || !location || !time || !emailRecipient) {
+          alert("Please fill in all the details!");
+          return;
+        }
+
+        // Create a summary string for the email.
+        const orderSummary = orders
+          .map((order) => `${order.name} ($${order.price.toFixed(2)})`)
+          .join(", ");
+
+        // Construct the parameters for EmailJS.
+        const orderDetails = {
+          orders: orderSummary,
+          name: name,
+          location: location,
+          time: time,
+          to_email: emailRecipient // Pass the entered email address
+        };
+
+        // Send the email using your EmailJS Service ID and Template

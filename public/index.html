@@ -187,41 +187,54 @@
     }
     
     // Function to send the order (simulate EmailJS sending and then display confirmation)
-    function sendOrder() {
-      if (orders.length === 0) {
-        alert("No items in your order!");
-        return;
-      }
-      
-      const name = document.getElementById("name").value.trim();
-      const address = document.getElementById("address").value.trim();
-      const time = document.getElementById("time").value;
-      const emailRecipient = document.getElementById("email").value.trim();
-      
-      if (!name || !address || !time || !emailRecipient) {
-        alert("Please fill in all the details!");
-        return;
-      }
-      
-      // Create a textual summary of the order items
-      const ordersText = orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", ");
-      
-      // Custom order details message
-      const orderDetailsMessage = "Your order has been received";
-      
-      // Calculate the total cost
-      const totalCostValue = calculateTotal().toFixed(2);
-      
-      // Build the details object that matches the placeholders in your template
-      const details = {
-        orderDetails: orderDetailsMessage,
-        orders: ordersText,
-        name: name,
-        address: address,
-        time: time,
-        email: emailRecipient,
-        totalCost: totalCostValue
-      };
+   function sendOrder() {
+  if (orders.length === 0) {
+    alert("No items in your order!");
+    return;
+  }
+
+  // Collect form field values
+  const name = document.getElementById("name").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const time = document.getElementById("time").value;
+  const emailRecipient = document.getElementById("email").value.trim();
+
+  if (!name || !address || !time || !emailRecipient) {
+    alert("Please fill in all the details!");
+    return;
+  }
+
+  // Create a textual summary of the order items
+  const ordersText = orders
+    .map(order => `${order.name} ($${order.price.toFixed(2)})`)
+    .join(", ");
+
+  // Here, you build the details object with all the data you need to send via EmailJS.
+  const details = {
+    orderDetails: "Your order has been received",
+    orders: ordersText,                  // e.g., "Coffee ($2.50), Cake ($4.00)"
+    name: name,
+    address: address,
+    time: time,
+    email: emailRecipient,
+    totalCost: calculateTotal().toFixed(2) // computed total cost
+  };
+
+  // Now send the details object with EmailJS
+  emailjs.send("service_epydqmi", "template_vzuexod", details)
+    .then(function(response) {
+      console.log("SUCCESS!", response.status, response.text);
+      alert("Order sent successfully!");
+      // Clear the order and form afterward if desired...
+      orders.length = 0;
+      document.getElementById("order-form").reset();
+      updateOrderSummary();
+    }, function(error) {
+      console.error("FAILED...", error);
+      alert("Failed to send order. Please try again later.");
+    });
+}
+
       
       // For a real integration, you'd call EmailJS, e.g.:
       // emailjs.send("Your_Service_ID", "Your_Template_ID", details).then(

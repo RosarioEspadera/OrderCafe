@@ -217,7 +217,7 @@ const details = {
   address: address,
   time: time,
   email: emailRecipient,
-  totalPrice: totalPriceValue  // This property must be sent as totalPrice
+  totalPrice: calculateTotal().toFixed(2) // This property must be sent as totalPrice
 };
 console.log(details); // Add this to check if totalPrice has a valid value.
 

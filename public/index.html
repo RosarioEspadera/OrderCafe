@@ -14,7 +14,7 @@
     })();
   </script>
   <style>
-    /* Optional inline styles, adjust or move to your CSS file */
+    /* Optional inline styles; adjust as needed or use your external stylesheet */
     .menu-buttons {
       display: flex;
       gap: 10px;
@@ -33,6 +33,7 @@
       text-align: center;
       font-size: 0.9em;
       color: #555;
+      margin-top: 5px;
     }
     #orderSummary {
       margin-top: 20px;
@@ -142,17 +143,22 @@
       alert(`${item} ($${price.toFixed(2)}) added to your order!`);
     }
 
-    // Updates the order summary list and calculates the total price.
+    // This function calculates the total price of the order.
+    function calculateTotal() {
+      return orders.reduce((total, order) => total + order.price, 0);
+    }
+
+    // Updates the order summary list and displays the total price.
     function updateOrderSummary() {
       const orderListElem = document.getElementById('orderList');
-      orderListElem.innerHTML = '';  // Clear current list
-      let total = 0;
+      orderListElem.innerHTML = '';  // Clear the current list
       orders.forEach(order => {
         const listItem = document.createElement('li');
         listItem.textContent = `${order.name} - $${order.price.toFixed(2)}`;
         orderListElem.appendChild(listItem);
-        total += order.price;
       });
+      // Calculate total price using calculateTotal() and update the display.
+      const total = calculateTotal();
       document.getElementById('orderTotal').textContent = total.toFixed(2);
     }
 
@@ -172,7 +178,7 @@
         return;
       }
 
-      // Create a summary string for EmailJS: "Item ($Price), ..." 
+      // Create a summary string for the email: "Item ($Price), ..."
       const orderSummary = orders
         .map(order => `${order.name} ($${order.price.toFixed(2)})`)
         .join(', ');
@@ -189,9 +195,9 @@
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
           alert('Order sent successfully!');
-          orders.length = 0; // Clear the orders array
-          document.getElementById('order-form').reset(); // Reset the form
-          updateOrderSummary(); // Refresh the order summary display
+          orders.length = 0; // Clear the orders array.
+          document.getElementById('order-form').reset(); // Reset the form.
+          updateOrderSummary(); // Refresh the order summary display.
         }, function(error) {
           console.error('FAILED...', error);
           alert('Failed to send order. Please try again later.');

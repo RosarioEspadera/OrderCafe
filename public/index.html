@@ -1,240 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rio's Cafe</title>
-    <link rel="stylesheet" href="styles/main.css" />
-    <!-- Include EmailJS SDK v4 from jsDelivr CDN -->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
-    ></script>
-    <script type="text/javascript">
-      (function () {
-        // Initialize EmailJS with your public key (API key)
-        emailjs.init("4QFjtZqAR4nM6hMsG");
-      })();
-    </script>
-    <style>
-      /* Inline CSS – adjust as needed or move to your external stylesheet */
-      .menu-buttons {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-      }
-      .menu-button {
-        border: none;
-        background: none;
-        cursor: pointer;
-      }
-      .menu-image {
-        width: 100px;
-        height: auto;
-      }
-      .price {
-        text-align: center;
-        font-size: 0.9em;
-        color: #555;
-        margin-top: 5px;
-      }
-      #orderSummary {
-        margin-top: 20px;
-        border: 1px solid #ccc;
-        padding: 10px;
-      }
-      #orderSummary ul {
-        list-style-type: none;
-        padding: 0;
-      }
-      form label {
-        display: block;
-        margin-top: 10px;
-      }
-      form input {
-        width: 100%;
-        padding: 5px;
-        margin-top: 5px;
-        box-sizing: border-box;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="app">
-      <h1>Welcome to Rio's Cafe</h1>
-      <p>Select your order:</p>
-      <!-- Menu Items -->
-      <div class="menu-buttons">
-        <!-- First Row -->
-        <button onclick="addToOrder('Dessert', 3.00)" class="menu-button">
-          <img src="images/Dessert.jpg" alt="Dessert" class="menu-image" />
-          <div class="price">$3.00</div>
-        </button>
-        <button onclick="addToOrder('Cake', 4.00)" class="menu-button">
-          <img src="images/Cake.jpg" alt="Cake" class="menu-image" />
-          <div class="price">$4.00</div>
-        </button>
-        <button onclick="addToOrder('IceCream', 3.50)" class="menu-button">
-          <img src="images/IceCream.jpg" alt="IceCream" class="menu-image" />
-          <div class="price">$3.50</div>
-        </button>
-        <!-- Second Row -->
-        <button onclick="addToOrder('Coffee', 2.50)" class="menu-button">
-          <img src="images/Coffee.jpg" alt="Coffee" class="menu-image" />
-          <div class="price">$2.50</div>
-        </button>
-        <button onclick="addToOrder('Cappuccino', 3.50)" class="menu-button">
-          <img src="images/Cappuccino.jpg" alt="Cappuccino" class="menu-image" />
-          <div class="price">$3.50</div>
-        </button>
-        <button onclick="addToOrder('Mocha', 4.00)" class="menu-button">
-          <img src="images/Mocha.jpg" alt="Mocha" class="menu-image" />
-          <div class="price">$4.00</div>
-        </button>
-        <!-- Third Row -->
-        <button onclick="addToOrder('Meal', 10.00)" class="menu-button">
-          <img src="images/Meal.jpg" alt="Meal" class="menu-image" />
-          <div class="price">$10.00</div>
-        </button>
-        <button onclick="addToOrder('Sushi', 8.00)" class="menu-button">
-          <img src="images/Sushi.jpg" alt="Sushi" class="menu-image" />
-          <div class="price">$8.00</div>
-        </button>
-        <button onclick="addToOrder('Teriyaki', 9.00)" class="menu-button">
-          <img src="images/Teriyaki.jpg" alt="Teriyaki" class="menu-image" />
-          <div class="price">$9.00</div>
-        </button>
-        <!-- Fourth Row -->
-        <button onclick="addToOrder('Juice', 2.00)" class="menu-button">
-          <img src="images/Juice.jpg" alt="Juice" class="menu-image" />
-          <div class="price">$2.00</div>
-        </button>
-        <button onclick="addToOrder('Tea', 1.50)" class="menu-button">
-          <img src="images/Tea.jpg" alt="Tea" class="menu-image" />
-          <div class="price">$1.50</div>
-        </button>
-        <button onclick="addToOrder('Beer', 5.00)" class="menu-button">
-          <img src="images/Beer.jpg" alt="Beer" class="menu-image" />
-          <div class="price">$5.00</div>
-        </button>
-      </div>
-
-      <!-- Order Form -->
-      <h2>Order Details</h2>
-      <form id="order-form">
-        <label for="name">Name:</label>
-        <input type="text" id="name" placeholder="Enter your name" required />
-
-        <!-- Changed field: "Location" is replaced with "Address" -->
-        <label for="address">Address:</label>
-        <input type="text" id="address" placeholder="Enter your address" required />
-
-        <label for="time">Serving Time:</label>
-        <input type="time" id="time" required />
-
-        <label for="email">Email Address:</label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email address"
-          required
-        />
-
-        <button type="button" onclick="sendOrder()">Send Order</button>
-      </form>
-
-      <!-- Order Summary Display -->
-      <div id="orderSummary">
-        <h3>Your Current Order:</h3>
-        <ul id="orderList"></ul>
-        <p>
-          Total Price: $<span id="orderTotal">0.00</span>
-        </p>
-      </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rio's Cafe</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <!-- Include EmailJS SDK v4 from jsDelivr CDN -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      // Initialize EmailJS with your public key (API key)
+      emailjs.init("4QFjtZqAR4nM6hMsG");
+    })();
+  </script>
+  <style>
+    /* Basic styling for the app */
+    body {
+      font-family: system-ui, sans-serif, Arial;
+      margin: 0;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    #app {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    .menu-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .menu-button {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .menu-image {
+      width: 100px;
+      height: auto;
+    }
+    .price {
+      text-align: center;
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 5px;
+    }
+    form label {
+      display: block;
+      margin-top: 10px;
+    }
+    form input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    #orderSummary {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    #orderSummary ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #orderConfirmationPreview {
+      display: none;
+      margin-top: 20px;
+      padding: 10px;
+      border: 2px solid #458500;
+      background-color: #e8f5e9;
+    }
+    #orderConfirmationPreview h3 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h1>Welcome to Rio's Cafe</h1>
+    <p>Select your order:</p>
+    <!-- Menu Items -->
+    <div class="menu-buttons">
+      <!-- Example menu buttons -->
+      <button onclick="addToOrder('Dessert', 3.00)" class="menu-button">
+        <img src="images/Dessert.jpg" alt="Dessert" class="menu-image">
+        <div class="price">$3.00</div>
+      </button>
+      <button onclick="addToOrder('Cake', 4.00)" class="menu-button">
+        <img src="images/Cake.jpg" alt="Cake" class="menu-image">
+        <div class="price">$4.00</div>
+      </button>
+      <button onclick="addToOrder('IceCream', 3.50)" class="menu-button">
+        <img src="images/IceCream.jpg" alt="IceCream" class="menu-image">
+        <div class="price">$3.50</div>
+      </button>
+      <!-- Add additional menu buttons as needed -->
     </div>
-
-    <script>
-      const orders = [];
-
-      // Adds a selected item (with its price) to the order and updates the summary.
-  function addToOrder(item, price) {
-  orders.push({ name: item, price: price });
-  updateOrderSummary();
-  alert(`${item} ($${price.toFixed(2)}) added to your order!`);
-}
-
-
-      // Calculates the total price of the order.
-      function calculateTotal() {
-        return orders.reduce((total, order) => total + order.price, 0);
+    
+    <!-- Order Form -->
+    <h2>Order Details</h2>
+    <form id="order-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+      
+      <label for="address">Address:</label>
+      <input type="text" id="address" placeholder="Enter your address" required>
+      
+      <label for="time">Serving Time:</label>
+      <input type="time" id="time" required>
+      
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" placeholder="Enter your email address" required>
+      
+      <button type="button" onclick="sendOrder()">Send Order</button>
+    </form>
+    
+    <!-- Order Summary Display -->
+    <div id="orderSummary">
+      <h3>Your Current Order:</h3>
+      <ul id="orderList"></ul>
+      <p>Total Price: $<span id="orderTotal">0.00</span></p>
+    </div>
+    
+    <!-- Confirmation Preview (to simulate email template placeholders) -->
+    <div id="orderConfirmationPreview">
+      <h3>Order Confirmation</h3>
+      <p><strong>{{orderDetails}}:</strong> <span id="confirmOrderDetails"></span></p>
+      <p><strong>Orders:</strong> <span id="confirmOrders"></span></p>
+      <p><strong>Name:</strong> <span id="confirmName"></span></p>
+      <p><strong>Address:</strong> <span id="confirmAddress"></span></p>
+      <p><strong>Serving Time:</strong> <span id="confirmTime"></span></p>
+      <p><strong>Email:</strong> <span id="confirmEmail"></span></p>
+      <p><strong>Total Cost:</strong> <span id="confirmTotalCost"></span></p>
+    </div>
+  </div>
+  
+  <script>
+    // Array to store order items
+    const orders = [];
+    
+    // Function to add an item to the order
+    function addToOrder(item, price) {
+      orders.push({ name: item, price: price });
+      updateOrderSummary();
+      alert(`${item} ($${price.toFixed(2)}) added to your order!`);
+    }
+    
+    // Function to calculate the total cost of the order
+    function calculateTotal() {
+      return orders.reduce((total, order) => total + order.price, 0);
+    }
+    
+    // Function to update the order summary display on the page
+    function updateOrderSummary() {
+      const orderListElem = document.getElementById("orderList");
+      orderListElem.innerHTML = ''; // Clear the list
+      
+      orders.forEach(order => {
+        const li = document.createElement("li");
+        li.textContent = `${order.name} - $${order.price.toFixed(2)}`;
+        orderListElem.appendChild(li);
+      });
+      
+      document.getElementById("orderTotal").innerText = calculateTotal().toFixed(2);
+    }
+    
+    // Function to display a confirmation preview with dynamic placeholders
+    function displayConfirmation(details) {
+      document.getElementById('confirmOrderDetails').innerText = details.orderDetails;
+      document.getElementById('confirmOrders').innerText = details.orders;
+      document.getElementById('confirmName').innerText = details.name;
+      document.getElementById('confirmAddress').innerText = details.address;
+      document.getElementById('confirmTime').innerText = details.time;
+      document.getElementById('confirmEmail').innerText = details.email;
+      document.getElementById('confirmTotalCost').innerText = "$" + details.totalCost;
+      document.getElementById('orderConfirmationPreview').style.display = 'block';
+    }
+    
+    // Function to send the order (simulate EmailJS sending and then display confirmation)
+    function sendOrder() {
+      if (orders.length === 0) {
+        alert("No items in your order!");
+        return;
       }
-
-      // Updates the order summary list and the total cost display.
-      function updateOrderSummary() {
-        const orderListElem = document.getElementById("orderList");
-        orderListElem.innerHTML = ""; // Clear the current list
-
-        orders.forEach((order) => {
-          const listItem = document.createElement("li");
-          listItem.textContent = `${order.name} - $${order.price.toFixed(2)}`;
-          orderListElem.appendChild(listItem);
-        });
-
-        document.getElementById("orderTotal").textContent =
-          calculateTotal().toFixed(2);
+      
+      const name = document.getElementById("name").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const time = document.getElementById("time").value;
+      const emailRecipient = document.getElementById("email").value.trim();
+      
+      if (!name || !address || !time || !emailRecipient) {
+        alert("Please fill in all the details!");
+        return;
       }
-
-      // Sends the order details using EmailJS.
-      function sendOrder() {
-        if (orders.length === 0) {
-          alert("No items in your order!");
-          return;
-        }
-
-        const name = document.getElementById("name").value.trim();
-        const address = document.getElementById("address").value.trim();
-        const time = document.getElementById("time").value;
-        const emailRecipient = document.getElementById("email").value.trim();
-
-        if (!name || !address || !time || !emailRecipient) {
-          alert("Please fill in all the details!");
-          return;
-        }
-
-        // Create a summary string for the email.
-        const orderSummary = orders
-          .map((order) => `${order.name} ($${order.price.toFixed(2)})`)
-          .join(", ");
-
-        // Construct the parameters for EmailJS.
-        // Note: The EmailJS template should use placeholders like {{name}}, {{address}}, {{time}}, {{orders}}, and {{to_email}}.
-        const orderDetails = {
-          orders: orderSummary,
-          name: name,
-          address: address,
-          time: time,
-          to_email: emailRecipient,
-        };
-
-        // Send the email using your EmailJS Service ID and Template ID.
-        emailjs
-          .send("service_epydqmi", "template_vzuexod", orderDetails)
-          .then(
-            function (response) {
-              console.log("SUCCESS!", response.status, response.text);
-              alert("Order sent successfully!");
-              orders.length = 0; // Clear the orders array
-              document.getElementById("order-form").reset(); // Reset the form
-              updateOrderSummary(); // Refresh the order summary display
-            },
-            function (error) {
-              console.error("FAILED...", error);
-              alert("Failed to send order. Please try again later.");
-            }
-          );
-      }
-    </script>
-  </body>
+      
+      // Create a textual summary of the order items
+      const ordersText = orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", ");
+      
+      // Custom order details message
+      const orderDetailsMessage = "Your order has been received";
+      
+      // Calculate the total cost
+      const totalCostValue = calculateTotal().toFixed(2);
+      
+      // Build the details object that matches the placeholders in your template
+      const details = {
+        orderDetails: orderDetailsMessage,
+        orders: ordersText,
+        name: name,
+        address: address,
+        time: time,
+        email: emailRecipient,
+        totalCost: totalCostValue
+      };
+      
+      // For a real integration, you'd call EmailJS, e.g.:
+      // emailjs.send("Your_Service_ID", "Your_Template_ID", details).then(
+      //   function (response) { console.log("SUCCESS!", response.status, response.text); },
+      //   function (error) { console.error("FAILED...", error); }
+      // );
+      // For demo purposes, we'll directly display the confirmation preview:
+      displayConfirmation(details);
+      
+      // Clear the order and form after submission if desired
+      orders.length = 0;
+      document.getElementById("order-form").reset();
+      updateOrderSummary();
+      
+      alert("Order sent successfully!");
+    }
+  </script>
+</body>
 </html>
+
 

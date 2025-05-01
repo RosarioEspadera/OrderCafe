@@ -158,11 +158,12 @@
       const orders = [];
 
       // Adds a selected item (with its price) to the order and updates the summary.
-      function addToOrder(item, price) {
-        orders.push({ name: item, price: price });
-        updateOrderSummary();
-        alert(`${item} ($${price.toFixed(2)}) added to your order!`);
-      }
+  function addToOrder(item, price) {
+  orders.push({ name: item, price: price });
+  updateOrderSummary();
+  alert(`${item} ($${price.toFixed(2)}) added to your order!`);
+}
+
 
       // Calculates the total price of the order.
       function calculateTotal() {

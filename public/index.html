@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rio's Cafe</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Welcome to Rio's Cafe</h1>
+        <p>Select your order:</p>
+        <div class="menu-buttons">
+            <button onclick="addToOrder('Dessert')" class="menu-button tooltip"data-title="Dessert">
+                <img src="images/Dessert.jpg" alt="Dessert" class="menu-image">
+            </button>
+            <button onclick="addToOrder('Cake')" class="menu-button tooltip" data-title="Cake">
+                <img src="images/Cake.jpg" alt="Cake" class="menu-image">
+            </button>
+            <button onclick="addToOrder('IceCream')" class="menu-button tooltip" data-title="IceCream">
+                <img src="images/IceCream.jpg" alt="IceCream" class="menu-image">
+            </button>
+        </div>
+        <div class="menu-buttons">
+            <button onclick="addToOrder('Coffee')" class="menu-button tooltip" data-title="Coffee">
+                <img src="images/Coffee.jpg" alt="Coffee" class="menu-image">
+            </button>
+            <button onclick="addToOrder('Cappuccino')" class="menu-button tooltip" data-title="Cappuccino">
+                <img src="images/Cappuccino.jpg" alt="Cappuccino" class="menu-image">
+            </button>
+            <button onclick="addToOrder('Mocha')" class="menu-button tooltip" data-title="Mocha">
+                <img src="images/Mocha.jpg" alt="Mocha" class="menu-image">
+        </div>
+        <div class="menu-buttons">
+            <button onclick="addToOrder('Meal')" class="menu-button tooltip" data-title="Meal">
+                <img src="images/Meal.jpg" alt="Meal" class="menu-image">
+            </button>
+            <button onclick="addToOrder('Sushi')" class="menu-button tooltip" data-title="Sushi">
+                <img src="images/Sushi.jpg" alt="Sushi" class="menu-image">
+            </button>
+            <button onclick="addToOrder('Teriyaki')" class="menu-button tooltip" data-title="Teriyaki">
+                <img src="images/Teriyaki.jpg" alt="Teriyaki" class="menu-image">
+            </button>
+        </div>
+        <div class="menu-buttons">
+            <button onclick="addToOrder('Juice')" class="menu-button tooltip" data-title="Juice">
+                <img src="images/Juice.jpg" alt="Juice" class="menu-image">
+            </button>
+            <button onclick="addToOrder('Tea')" class="menu-button tooltip" data-title="Tea">
+                <img src="images/Tea.jpg" alt="Tea" class="menu-image">
+            </button>
+            <button onclick="addToOrder('Beer')" class="menu-button tooltip" data-title="Beer">
+                <img src="images/Beer.jpg" alt="Beer" class="menu-image">
+            </button>
+        </div>
+
+        <h2>Order Details</h2>
+        <form id="order-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required><br><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" placeholder="Enter your location" required><br><br>
+
+            <label for="time">Serving Time:</label>
+            <input type="time" id="time" required><br><br>
+
+            <button type="button" onclick="sendOrder()">Send Order</button>
+        </form>
+    </div>
+
+    <script>
+        const orders = [];
+
+        function addToOrder(item) {
+            orders.push(item);
+            alert(`${item} added to your order!`);
+        }
+
+        async function sendOrder() {
+            if (orders.length === 0) {
+                alert('No items in your order!');
+                return;
+            }
+
+            const name = document.getElementById('name').value;
+            const location = document.getElementById('location').value;
+            const time = document.getElementById('time').value;
+
+            if (!name || !location || !time) {
+                alert('Please fill in all the details!');
+                return;
+            }
+
+            const orderDetails = {
+                orders,
+                name,
+                location,
+                time
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/send-order', { 
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderDetails)
+                });
+
+                if (response.ok) {
+                    alert('Order sent successfully!');
+                    orders.length = 0; // Clear the orders array
+                    document.getElementById('order-form').reset(); // Reset the form
+                } else {
+                    alert('Failed to send order. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error sending order:', error);
+                alert('An error occurred while sending your order.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "A web application for customers to order food online.",
   "main": "src/index.js",
-  "scripts": {
-    "start": "webpack serve --mode development",
+  ""scripts": {
+  "start": "node server.js"
+}
     "build": "webpack --mode production",
     "test": "jest"
   },

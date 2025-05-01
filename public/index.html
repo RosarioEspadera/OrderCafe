@@ -14,12 +14,34 @@
     })();
   </script>
   <style>
-    /* Optional inline styles for the price labels */
+    /* Optional inline styles, adjust or move to your CSS file */
+    .menu-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .menu-button {
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .menu-image {
+      width: 100px;
+      height: auto;
+    }
     .price {
+      text-align: center;
       font-size: 0.9em;
       color: #555;
-      text-align: center;
-      margin-top: 5px;
+    }
+    #orderSummary {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+    #orderSummary ul {
+      list-style-type: none;
+      padding: 0;
     }
   </style>
 </head>
@@ -101,15 +123,37 @@
 
       <button type="button" onclick="sendOrder()">Send Order</button>
     </form>
+
+    <!-- Order summary displayed to the customer -->
+    <div id="orderSummary">
+      <h3>Your Current Order:</h3>
+      <ul id="orderList"></ul>
+      <p>Total Price: $<span id="orderTotal">0.00</span></p>
+    </div>
   </div>
 
   <script>
     const orders = [];
 
-    // Adds a selected item to the order list as an object containing the item name and price.
+    // Adds a selected item to the order list and updates the summary display.
     function addToOrder(item, price) {
       orders.push({ name: item, price: price });
+      updateOrderSummary();
       alert(`${item} ($${price.toFixed(2)}) added to your order!`);
+    }
+
+    // Updates the order summary list and calculates the total price.
+    function updateOrderSummary() {
+      const orderListElem = document.getElementById('orderList');
+      orderListElem.innerHTML = '';  // Clear current list
+      let total = 0;
+      orders.forEach(order => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `${order.name} - $${order.price.toFixed(2)}`;
+        orderListElem.appendChild(listItem);
+        total += order.price;
+      });
+      document.getElementById('orderTotal').textContent = total.toFixed(2);
     }
 
     // Uses EmailJS to send the order details via email.
@@ -128,12 +172,12 @@
         return;
       }
 
-      // Create a summary string for order items with prices.
+      // Create a summary string for EmailJS: "Item ($Price), ..." 
       const orderSummary = orders
-        .map(itemObj => `${itemObj.name} ($${itemObj.price.toFixed(2)})`)
+        .map(order => `${order.name} ($${order.price.toFixed(2)})`)
         .join(', ');
 
-      // Construct order details for the EmailJS template.
+      // Data to send through EmailJS
       const orderDetails = {
         orders: orderSummary,
         name: name,
@@ -145,8 +189,9 @@
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
           alert('Order sent successfully!');
-          orders.length = 0; // Clear the orders array.
-          document.getElementById('order-form').reset(); // Reset the form.
+          orders.length = 0; // Clear the orders array
+          document.getElementById('order-form').reset(); // Reset the form
+          updateOrderSummary(); // Refresh the order summary display
         }, function(error) {
           console.error('FAILED...', error);
           alert('Failed to send order. Please try again later.');

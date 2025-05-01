@@ -17,7 +17,7 @@
       })();
     </script>
     <style>
-      /* Inline CSS for demonstration – adjust or move these rules to your stylesheet */
+      /* Inline CSS – adjust as needed or move to your external stylesheet */
       .menu-buttons {
         display: flex;
         gap: 10px;
@@ -66,7 +66,7 @@
       <p>Select your order:</p>
       <!-- Menu Items -->
       <div class="menu-buttons">
-        <!-- First Row of Items -->
+        <!-- First Row -->
         <button onclick="addToOrder('Dessert', 3.00)" class="menu-button">
           <img src="images/Dessert.jpg" alt="Dessert" class="menu-image" />
           <div class="price">$3.00</div>
@@ -79,7 +79,7 @@
           <img src="images/IceCream.jpg" alt="IceCream" class="menu-image" />
           <div class="price">$3.50</div>
         </button>
-        <!-- Second Row of Items -->
+        <!-- Second Row -->
         <button onclick="addToOrder('Coffee', 2.50)" class="menu-button">
           <img src="images/Coffee.jpg" alt="Coffee" class="menu-image" />
           <div class="price">$2.50</div>
@@ -92,7 +92,7 @@
           <img src="images/Mocha.jpg" alt="Mocha" class="menu-image" />
           <div class="price">$4.00</div>
         </button>
-        <!-- Third Row of Items -->
+        <!-- Third Row -->
         <button onclick="addToOrder('Meal', 10.00)" class="menu-button">
           <img src="images/Meal.jpg" alt="Meal" class="menu-image" />
           <div class="price">$10.00</div>
@@ -105,7 +105,7 @@
           <img src="images/Teriyaki.jpg" alt="Teriyaki" class="menu-image" />
           <div class="price">$9.00</div>
         </button>
-        <!-- Fourth Row of Items -->
+        <!-- Fourth Row -->
         <button onclick="addToOrder('Juice', 2.00)" class="menu-button">
           <img src="images/Juice.jpg" alt="Juice" class="menu-image" />
           <div class="price">$2.00</div>
@@ -126,13 +126,13 @@
         <label for="name">Name:</label>
         <input type="text" id="name" placeholder="Enter your name" required />
 
-        <label for="location">Location:</label>
-        <input type="text" id="location" placeholder="Enter your location" required />
+        <!-- Changed field: "Location" is replaced with "Address" -->
+        <label for="address">Address:</label>
+        <input type="text" id="address" placeholder="Enter your address" required />
 
         <label for="time">Serving Time:</label>
         <input type="time" id="time" required />
 
-        <!-- Added Email Input Field -->
         <label for="email">Email Address:</label>
         <input
           type="email"
@@ -149,8 +149,7 @@
         <h3>Your Current Order:</h3>
         <ul id="orderList"></ul>
         <p>
-          Total Price: $
-          <span id="orderTotal">0.00</span>
+          Total Price: $<span id="orderTotal">0.00</span>
         </p>
       </div>
     </div>
@@ -158,22 +157,22 @@
     <script>
       const orders = [];
 
-      // Adds a selected item with its price to the order and updates the summary.
+      // Adds a selected item (with its price) to the order and updates the summary.
       function addToOrder(item, price) {
         orders.push({ name: item, price: price });
         updateOrderSummary();
         alert(`${item} ($${price.toFixed(2)}) added to your order!`);
       }
 
-      // Sums up the total order price.
+      // Calculates the total price of the order.
       function calculateTotal() {
         return orders.reduce((total, order) => total + order.price, 0);
       }
 
-      // Updates the displayed order summary and total.
+      // Updates the order summary list and the total cost display.
       function updateOrderSummary() {
         const orderListElem = document.getElementById("orderList");
-        orderListElem.innerHTML = ""; // Clear current list
+        orderListElem.innerHTML = ""; // Clear the current list
 
         orders.forEach((order) => {
           const listItem = document.createElement("li");
@@ -185,7 +184,7 @@
           calculateTotal().toFixed(2);
       }
 
-      // Sends the order details via EmailJS.
+      // Sends the order details using EmailJS.
       function sendOrder() {
         if (orders.length === 0) {
           alert("No items in your order!");
@@ -193,11 +192,11 @@
         }
 
         const name = document.getElementById("name").value.trim();
-        const location = document.getElementById("location").value.trim();
+        const address = document.getElementById("address").value.trim();
         const time = document.getElementById("time").value;
         const emailRecipient = document.getElementById("email").value.trim();
 
-        if (!name || !location || !time || !emailRecipient) {
+        if (!name || !address || !time || !emailRecipient) {
           alert("Please fill in all the details!");
           return;
         }
@@ -208,12 +207,33 @@
           .join(", ");
 
         // Construct the parameters for EmailJS.
+        // Note: The EmailJS template should use placeholders like {{name}}, {{address}}, {{time}}, {{orders}}, and {{to_email}}.
         const orderDetails = {
           orders: orderSummary,
           name: name,
-          location: location,
+          address: address,
           time: time,
-          to_email: emailRecipient // Pass the entered email address
+          to_email: emailRecipient,
         };
 
-        // Send the email using your EmailJS Service ID and Template
+        // Send the email using your EmailJS Service ID and Template ID.
+        emailjs
+          .send("service_epydqmi", "template_vzuexod", orderDetails)
+          .then(
+            function (response) {
+              console.log("SUCCESS!", response.status, response.text);
+              alert("Order sent successfully!");
+              orders.length = 0; // Clear the orders array
+              document.getElementById("order-form").reset(); // Reset the form
+              updateOrderSummary(); // Refresh the order summary display
+            },
+            function (error) {
+              console.error("FAILED...", error);
+              alert("Failed to send order. Please try again later.");
+            }
+          );
+      }
+    </script>
+  </body>
+</html>
+

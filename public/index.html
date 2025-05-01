@@ -209,18 +209,18 @@
       const orderDetailsMessage = "Your order has been received";
       
       // Calculate the total price
-      const totalPriceValue = calculateTotal().toFixed(2);
-      
-      // Build the details object that matches the placeholders in your EmailJS template
-      const details = {
-        orderDetails: orderDetailsMessage,
-        orders: ordersText,  // e.g., "Coffee ($2.50), Cake ($4.00)"
-        name: name,
-        address: address,
-        time: time,
-        email: emailRecipient,
-        totalPrice: totalPriceValue // Using 'totalPrice' instead of 'totalCost'
-      };
+      const totalPriceValue = calculateTotal().toFixed(2); // e.g., "7.50" or whatever the sum is
+const details = {
+  orderDetails: "Your order has been received",
+  orders: ordersText, // e.g., "Juice ($2.00), Beer ($5.00), Tea ($1.50), Teriyaki ($9.00)"
+  name: name,
+  address: address,
+  time: time,
+  email: emailRecipient,
+  totalPrice: totalPriceValue  // This property must be sent as totalPrice
+};
+console.log(details); // Add this to check if totalPrice has a valid value.
+
       
       // Example: sending data using EmailJS. Replace SERVICE_ID and TEMPLATE_ID accordingly.
       emailjs.send("service_epydqmi", "template_vzuexod", details)

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <title>Rio's Cafe - Order Confirmation</title>
-  <link rel="stylesheet" href="styles/main.css?v=1.0.0">
-<!-- Load EmailJS SDK v4 from jsDelivr CDN -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script type="text/javascript">
-  document.addEventListener("DOMContentLoaded", function () {
-    emailjs.init({ publicKey: "zBO_0fJf8CLgOs1Zj" });
-  });
-</script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <title>Rio's Cafe - Order Confirmation</title>
+    <link rel="stylesheet" href="styles/main.css?v=1.0.0" />
+
+    <!-- Load EmailJS SDK v4 from jsDelivr CDN -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+      // Initialize EmailJS with your public key
+      document.addEventListener("DOMContentLoaded", function () {
+        emailjs.init({ publicKey: "zBO_0fJf8CLgOs1Zj" });
+      });
+    </script>
   <style>
     /* Basic styling for the demo page */
     body {
@@ -284,150 +286,100 @@ footer {
 
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 <script>
- 
-  (function() {
-    emailjs.init("service_epydqmi"); // Your Service ID
-  })();
-
-  function sendOrder() {
-    const templateParams = {
-      name: document.getElementById("name").value,
-      location: document.getElementById("location").value,
-      time: document.getElementById("time").value,
-      totalPrice: `$${totalPrice}`
-    };
-
-    emailjs.send("service_epydqmi", "template_vzuexod", templateParams)
-      .then(response => {
-        console.log("SUCCESS!", response.status, response.text);
-        alert("Order sent successfully!");
-      })
-      .catch(error => {
-        console.error("FAILED...", error);
-        alert("Error sending order. Please try again.");
-      });
-  }
-</script>
-
-    <!-- Order Summary Display -->
-    <div id="orderSummary">
-      <h3>Your Current Order:</h3>
-      <ul id="orderList"></ul>
-      <p>Total Price: $<span id="orderTotal">0.00</span></p>
-    </div>
-    
-    <!-- Confirmation Preview (for demonstration, mirroring EmailJS template placeholders) -->
-    <div id="orderConfirmationPreview">
-      <h3>Order Confirmation</h3>
-      <p><strong>{{orderDetails}}:</strong> <span id="confirmOrderDetails"></span></p>
-      <p><strong>Orders:</strong> <span id="confirmOrders"></span></p>
-      <p><strong>Name:</strong> <span id="confirmName"></span></p>
-      <p><strong>Address:</strong> <span id="confirmAddress"></span></p>
-      <p><strong>Serving Time:</strong> <span id="confirmTime"></span></p>
-      <p><strong>Email:</strong> <span id="confirmEmail"></span></p>
-      <p><strong>Total Price:</strong> <span id="confirmTotalPrice"></span></p>
-    </div>
-  </div>
+  // Array to store order items
+  const orders = [];
   
-  <script>
-    // Array to store order items
-    const orders = [];
-    
-    // Function to add an item to the order
-    function addToOrder(item, price) {
-      orders.push({ name: item, price: price });
-      updateOrderSummary();
-      alert(`${item} ($${price.toFixed(2)}) added to your order!`);
-    }
-    
-    // Function to calculate the total price of the order
-    function calculateTotal() {
-      return orders.reduce((total, order) => total + order.price, 0);
-    }
-    
-    // Function to update the order summary display on the page
-function updateOrderSummary() {
+  // Function to add an item to the order
+  function addToOrder(item, price) {
+    orders.push({ name: item, price: price });
+    updateOrderSummary();
+    alert(`${item} ($${price.toFixed(2)}) added to your order!`);
+  }
+  
+  // Function to calculate the total price of the order
+  function calculateTotal() {
+    return orders.reduce((total, order) => total + order.price, 0);
+  }
+  
+  // Function to update the order summary display on the page
+  function updateOrderSummary() {
     const orderListElem = document.getElementById("orderList");
-    orderListElem.innerHTML = ''; // Clear current list
+    orderListElem.innerHTML = ""; // Clear current list
 
     orders.forEach(order => {
-        const li = document.createElement("li"); // Define the element
-        li.textContent = `${order.name} - $${order.price.toFixed(2)}`;
-        orderListElem.appendChild(li);
+      const li = document.createElement("li");
+      li.textContent = `${order.name} - $${order.price.toFixed(2)}`;
+      orderListElem.appendChild(li);
     });
 
     // Ensure total price updates properly
     document.getElementById("orderTotal").innerText = calculateTotal().toFixed(2);
-}
-
-
-    
-    // Function to display a confirmation preview with dynamic placeholders
-    function displayConfirmation(details) {
-      document.getElementById('confirmOrderDetails').innerText = details.orderDetails;
-      document.getElementById('confirmOrders').innerText = details.orders;
-      document.getElementById('confirmName').innerText = details.name;
-      document.getElementById('confirmAddress').innerText = details.address;
-      document.getElementById('confirmTime').innerText = details.time;
-      document.getElementById('confirmEmail').innerText = details.email;
-      document.getElementById('confirmTotalPrice').innerText = "$" + details.totalPrice;
-      document.getElementById('orderConfirmationPreview').style.display = 'block';
+  }
+  
+  // Function to display a confirmation preview with dynamic placeholders
+  function displayConfirmation(details) {
+    document.getElementById("confirmOrderDetails").innerText = details.orderDetails;
+    document.getElementById("confirmOrders").innerText = details.orders;
+    document.getElementById("confirmName").innerText = details.name;
+    document.getElementById("confirmAddress").innerText = details.address;
+    document.getElementById("confirmTime").innerText = details.time;
+    document.getElementById("confirmEmail").innerText = details.email;
+    document.getElementById("confirmTotalPrice").innerText = "$" + details.totalPrice;
+    document.getElementById("orderConfirmationPreview").style.display = "block";
+  }
+  
+  // Function to send the order details via EmailJS
+  function sendOrder() {
+    if (orders.length === 0) {
+      alert("No items in your order!");
+      return;
     }
     
-    // Function to send the order details via EmailJS
-    function sendOrder() {
-      if (orders.length === 0) {
-        alert("No items in your order!");
-        return;
-      }
-      
-      const name = document.getElementById("name").value.trim();
-      const address = document.getElementById("address").value.trim();
-      const time = document.getElementById("time").value;
-      const emailRecipient = document.getElementById("email").value.trim();
-      
-      if (!name || !address || !time || !emailRecipient) {
-        alert("Please fill in all the details!");
-        return;
-      }
-      
-      // Create a textual summary of the order items
-      const ordersText = orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", ");
-      
-      // Custom order details message
-      const orderDetailsMessage = "Your order has been received";
-      
-      // Calculate the total price
-      const totalPriceValue = calculateTotal().toFixed(2); // e.g., "7.50" or whatever the sum is
-const details = {
-  orderDetails: "Your order has been received",
-  orders: ordersText, // e.g., "Juice ($2.00), Beer ($5.00), Tea ($1.50), Teriyaki ($9.00)"
-  name: name,
-  address: address,
-  time: time,
-  email: emailRecipient,
-  totalPrice: calculateTotal().toFixed(2) // This property must be sent as totalPrice
-};
-console.log(details); // Add this to check if totalPrice has a valid value.
-
-      
-      // Example: sending data using EmailJS. Replace SERVICE_ID and TEMPLATE_ID accordingly.
-   emailjs.send("service_epydqmi", "template_vzuexod", details)
-  .then(function(response) {
-    console.log("SUCCESS!", response.status, response.text);
-    alert("Order sent successfully!");
-    displayConfirmation(details);
-    orders.length = 0;
-    document.getElementById("order-form").reset();
-    updateOrderSummary();
-  })
-  .catch(function(error) {
-    console.error("FAILED...", error);
-    alert("Failed to send order. Please try again later.");
-  });
-
+    const name = document.getElementById("name").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const time = document.getElementById("time").value;
+    const emailRecipient = document.getElementById("email").value.trim();
+    
+    if (!name || !address || !time || !emailRecipient) {
+      alert("Please fill in all the details!");
+      return;
     }
-  </script>
+    
+    // Create a textual summary of the order items
+    const ordersText = orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", ");
+    
+    // Define the details object to send
+    const details = {
+      orderDetails: "Your order has been received",
+      orders: ordersText,
+      name: name,
+      address: address,
+      time: time,
+      email: emailRecipient,
+      totalPrice: calculateTotal().toFixed(2)
+    };
+    
+    console.log(details); // Debug: check details object
+    
+    // Send the order using EmailJS
+    emailjs.send("service_epydqmi", "template_vzuexod", details)
+      .then(function(response) {
+        console.log("SUCCESS!", response.status, response.text);
+        alert("Order sent successfully!");
+        displayConfirmation(details);
+        
+        // Clear the orders and reset the form after sending
+        orders.length = 0;
+        document.getElementById("order-form").reset();
+        updateOrderSummary();
+      })
+      .catch(function(error) {
+        console.error("FAILED...", error);
+        alert("Failed to send order. Please try again later.");
+      });
+  }
+</script>
+
 </body>
 </html>
 

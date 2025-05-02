@@ -5,7 +5,7 @@
       background: #f5f5f5;
     }
 #app {
-  max-width: 1000px;
+  max-width: 12000px;
   margin: auto;
   background-color: #caa689;
   background-size: contain; /* Ensures the full image is visible */

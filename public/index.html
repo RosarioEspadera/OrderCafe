@@ -6,16 +6,14 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <title>Rio's Cafe - Order Confirmation</title>
   <link rel="stylesheet" href="styles/main.css?v=1.0.0">
-  <!-- Include EmailJS SDK v4 from jsDelivr CDN -->
+<!-- Include EmailJS SDK v4 from jsDelivr CDN -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    emailjs.init({ publicKey: "zBO_0fJf8CLgOs1Zj" }); // Use your actual public key from your EmailJS Dashboard
+  });
+</script>
 
- <script type="module">
-    import emailjs from '@emailjs/browser';
-
-    // Initialize EmailJS with your actual public key from the EmailJS Dashboard
-    emailjs.init({
-      publicKey: "zBO_0fJf8CLgOs1Zj"  // Replace with your actual public key if needed
-    });
-  </script>
 
 
 

@@ -27,10 +27,6 @@
       gap: 10px;
       margin-bottom: 20px;
     }
-    .menu-image {
-      width: 100px;
-      height: auto;
-    }
     .price {
       text-align: center;
       font-size: 0.9em;
@@ -131,7 +127,7 @@ footer {
     background-color: #e68900;
 }
 .menu-image {
-    width: 200px; /* Adjust width as needed */
+    width: 186px; /* Adjust width as needed */
     height: auto; /* Maintain aspect ratio */
 }
 .tooltip {

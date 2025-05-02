@@ -10,12 +10,12 @@
   <title>Rio's Cafe - Order Confirmation</title>
   
   <link rel="stylesheet" href="styles/main.css?v=1.0.2">
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
       // Initialize EmailJS with your public key
-      document.addEventListener("DOMContentLoaded", function () {
-        emailjs.init({ publicKey: "zBO_0fJf8CLgOs1Zj" });
-      });
+    document.addEventListener("DOMContentLoaded", function () {
+    emailjs.init({ publicKey: "zBO_0fJf8CLgOs1Zj" });
+});
     </script>
   <style>
     /* Basic styling for the demo page */
@@ -347,55 +347,47 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   
   // Function to send the order details via EmailJS
-  function sendOrder() {
-    if (orders.length === 0) {
-      alert("No items in your order!");
-      return;
-    }
-    
-    const name = document.getElementById("name").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const time = document.getElementById("time").value;
-    const emailRecipient = document.getElementById("email").value.trim();
-    
-    if (!name || !address || !time || !emailRecipient) {
-      alert("Please fill in all the details!");
-      return;
-    }
-    
-    // Create a textual summary of the order items
-    const ordersText = orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", ");
-    
-    // Define the details object to send
-    const details = {
-      orderDetails: "Your order has been received",
-      orders: ordersText,
-      name: name,
-      address: address,
-      time: time,
-      email: emailRecipient,
-      totalPrice: calculateTotal().toFixed(2)
-    };
-    
-    console.log(details); // Debug: check details object
-    
-    // Send the order using EmailJS
-    emailjs.send("service_epydqmi", "template_vzuexod", details)
-      .then(function(response) {
-        console.log("SUCCESS!", response.status, response.text);
-        alert("Order sent successfully!");
-        displayConfirmation(details);
-        
-        // Clear the orders and reset the form after sending
-        orders.length = 0;
-        document.getElementById("order-form").reset();
-        updateOrderSummary();
-      })
-      .catch(function(error) {
-        console.error("FAILED...", error);
-        alert("Failed to send order. Please try again later.");
-      });
-  }
+function sendOrder() {
+   if (orders.length === 0) {
+       alert("No items in your order!");
+       return;
+   }
+
+   const name = document.getElementById("name").value.trim();
+   const address = document.getElementById("address").value.trim();
+   const time = document.getElementById("time").value;
+   const emailRecipient = document.getElementById("email").value.trim();
+
+   if (!name || !address || !time || !emailRecipient) {
+       alert("Please fill in all the details!");
+       return;
+   }
+
+   const ordersText = orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", ");
+   const details = {
+       orderDetails: "Your order has been received",
+       orders: ordersText,
+       name: name,
+       address: address,
+       time: time,
+       email: emailRecipient,
+       totalPrice: calculateTotal().toFixed(2)
+   };
+
+   emailjs.send("service_epydqmi", "template_vzuexod", details)
+       .then(response => {
+           console.log("SUCCESS!", response.status, response.text);
+           alert("Order sent successfully!");
+           orders.length = 0;
+           document.getElementById("order-form").reset();
+           updateOrderSummary();
+       })
+       .catch(error => {
+           console.error("FAILED...", error);
+           alert("Failed to send order. Please try again later.");
+       });
+}
+
 </script>
 
 </body>

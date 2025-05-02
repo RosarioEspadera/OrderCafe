@@ -9,14 +9,16 @@
   <title>Rio's Cafe - Order Confirmation</title>
   
   <link rel="stylesheet" href="styles/main.css?v=1.0.2">
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.0.0/dist/email.min.js"></script>
-    <script type="text/javascript">
-      // Initialize EmailJS with your public key
-    document.addEventListener("DOMContentLoaded", function () {
-    emailjs.init({ publicKey: "AqvkFhQnxowOJda9J" });
-});
-
-    </script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "AqvkFhQnxowOJda9J",
+      });
+   })();
+</script>
   <style>
     /* Basic styling for the demo page */
     body {

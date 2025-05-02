@@ -330,17 +330,16 @@ function updateOrderSummary() {
     const orderListElem = document.getElementById("orderList");
     orderListElem.innerHTML = ''; // Clear current list
 
-orders.forEach(order => {
-    const li = document.createElement("li"); // Define the element
-    li.textContent = `${order.name} - $${order.price.toFixed(2)}`;
-    orderListElem.appendChild(li);
-});
+    orders.forEach(order => {
+        const li = document.createElement("li"); // Define the element
+        li.textContent = `${order.name} - $${order.price.toFixed(2)}`;
+        orderListElem.appendChild(li);
+    });
 
-
-
-    // Update the total price display
+    // Ensure total price updates properly
     document.getElementById("orderTotal").innerText = calculateTotal().toFixed(2);
 }
+
 
     
     // Function to display a confirmation preview with dynamic placeholders

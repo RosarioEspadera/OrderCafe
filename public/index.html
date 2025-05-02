@@ -330,10 +330,11 @@ function updateOrderSummary() {
     const orderListElem = document.getElementById("orderList");
     orderListElem.innerHTML = ''; // Clear current list
 
-   orders.forEach(order => {
-  console.log(order.price); // Check if 'price' is undefined
-  li.textContent = `${order.name} - $${order.price.toFixed(2)}`; // Error occurs here!
+orders.forEach(order => {
+    li.textContent = `${order.name} - $${order.price.toFixed(2)}`;
+    orderListElem.appendChild(li);
 });
+
 
 
     // Update the total price display

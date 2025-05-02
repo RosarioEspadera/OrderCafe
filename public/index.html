@@ -89,21 +89,66 @@
     <h1>Welcome to Rio's Cafe</h1>
     <p>Select your order:</p>
     <!-- Menu Items -->
-    <div class="menu-buttons">
-      <button onclick="addToOrder('Dessert', 3.00)" class="menu-button">
-        <img src="images/Dessert.jpg" alt="Dessert" class="menu-image" />
+    <!-- Menu Items -->
+<div class="menu-buttons">
+    <button onclick="addToOrder('Dessert')" class="menu-button tooltip" data-title="Dessert">
+        <img src="images/Dessert.jpg" alt="Dessert" class="menu-image">
         <div class="price">$3.00</div>
-      </button>
-      <button onclick="addToOrder('Cake', 4.00)" class="menu-button">
-        <img src="images/Cake.jpg" alt="Cake" class="menu-image" />
+    </button>
+    <button onclick="addToOrder('Cake')" class="menu-button tooltip" data-title="Cake">
+        <img src="images/Cake.jpg" alt="Cake" class="menu-image">
         <div class="price">$4.00</div>
-      </button>
-      <button onclick="addToOrder('IceCream', 3.50)" class="menu-button">
-        <img src="images/IceCream.jpg" alt="IceCream" class="menu-image" />
+    </button>
+    <button onclick="addToOrder('IceCream')" class="menu-button tooltip" data-title="IceCream">
+        <img src="images/IceCream.jpg" alt="IceCream" class="menu-image">
         <div class="price">$3.50</div>
-      </button>
-      <!-- You can add more menu buttons similarly -->
-    </div>
+    </button>
+</div>
+
+<div class="menu-buttons">
+    <button onclick="addToOrder('Coffee')" class="menu-button tooltip" data-title="Coffee">
+        <img src="images/Coffee.jpg" alt="Coffee" class="menu-image">
+        <div class="price">$2.50</div>
+    </button>
+    <button onclick="addToOrder('Cappuccino')" class="menu-button tooltip" data-title="Cappuccino">
+        <img src="images/Cappuccino.jpg" alt="Cappuccino" class="menu-image">
+        <div class="price">$3.50</div>
+    </button>
+    <button onclick="addToOrder('Mocha')" class="menu-button tooltip" data-title="Mocha">
+        <img src="images/Mocha.jpg" alt="Mocha" class="menu-image">
+        <div class="price">$4.00</div>
+    </button>
+</div>
+
+<div class="menu-buttons">
+    <button onclick="addToOrder('Meal')" class="menu-button tooltip" data-title="Meal">
+        <img src="images/Meal.jpg" alt="Meal" class="menu-image">
+        <div class="price">$10.00</div>
+    </button>
+    <button onclick="addToOrder('Sushi')" class="menu-button tooltip" data-title="Sushi">
+        <img src="images/Sushi.jpg" alt="Sushi" class="menu-image">
+        <div class="price">$12.00</div>
+    </button>
+    <button onclick="addToOrder('Teriyaki')" class="menu-button tooltip" data-title="Teriyaki">
+        <img src="images/Teriyaki.jpg" alt="Teriyaki" class="menu-image">
+        <div class="price">$8.50</div>
+    </button>
+</div>
+
+<div class="menu-buttons">
+    <button onclick="addToOrder('Juice')" class="menu-button tooltip" data-title="Juice">
+        <img src="images/Juice.jpg" alt="Juice" class="menu-image">
+        <div class="price">$2.00</div>
+    </button>
+    <button onclick="addToOrder('Tea')" class="menu-button tooltip" data-title="Tea">
+        <img src="images/Tea.jpg" alt="Tea" class="menu-image">
+        <div class="price">$2.50</div>
+    </button>
+    <button onclick="addToOrder('Beer')" class="menu-button tooltip" data-title="Beer">
+        <img src="images/Beer.jpg" alt="Beer" class="menu-image">
+        <div class="price">$5.00</div>
+    </button>
+</div>
     
     <!-- Order Form -->
     <h2>Order Details</h2>

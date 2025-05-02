@@ -331,6 +331,7 @@ function updateOrderSummary() {
     orderListElem.innerHTML = ''; // Clear current list
 
 orders.forEach(order => {
+    const li = document.createElement("li"); // Define the element
     li.textContent = `${order.name} - $${order.price.toFixed(2)}`;
     orderListElem.appendChild(li);
 });

@@ -412,20 +412,20 @@ console.log(details); // Add this to check if totalPrice has a valid value.
 
       
       // Example: sending data using EmailJS. Replace SERVICE_ID and TEMPLATE_ID accordingly.
-      emailjs.send("service_epydqmi", "template_vzuexod", details)
-        .then(function(response) {
-          console.log("SUCCESS!", response.status, response.text);
-          alert("Order sent successfully!");
-          // Optional: display a confirmation preview (for demonstration)
-          displayConfirmation(details);
-          // Clear the orders and form after sending
-          orders.length = 0;
-          document.getElementById("order-form").reset();
-          updateOrderSummary();
-        }, function(error) {
-          console.error("FAILED...", error);
-          alert("Failed to send order. Please try again later.");
-        });
+   emailjs.send("service_epydqmi", "template_vzuexod", details)
+  .then(function(response) {
+    console.log("SUCCESS!", response.status, response.text);
+    alert("Order sent successfully!");
+    displayConfirmation(details);
+    orders.length = 0;
+    document.getElementById("order-form").reset();
+    updateOrderSummary();
+  })
+  .catch(function(error) {
+    console.error("FAILED...", error);
+    alert("Failed to send order. Please try again later.");
+  });
+
     }
   </script>
 </body>

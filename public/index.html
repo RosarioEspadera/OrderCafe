@@ -289,6 +289,18 @@ footer {
 </form>
 
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".menu-button").forEach(button => {
+        button.addEventListener("click", function() {
+            const item = this.getAttribute("data-title");
+            const price = parseFloat(this.querySelector(".price").textContent.replace("$", ""));
+            addToOrder(item, price);
+        });
+    });
+});
+</script>
+
 <script>
   // Array to store order items
   const orders = [];

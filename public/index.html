@@ -374,17 +374,24 @@ function sendOrder() {
     totalPrice: calculateTotal().toFixed(2)
 };
 
-emailjs.send("service_epydqmi", "template_vzuexod", details)
-    .then(response => {
-        console.log("SUCCESS!", response.status, response.text);
-        alert("Order sent successfully!");
-    })
-    .catch(error => {
-        console.error("EmailJS Error:", error);
-        alert(`Failed to send order: ${error.text || "Unknown error"}`);
-    });
+emailjs.send("service_epydqmi", "template_vzuexod", {
+    orderDetails: "Your order has been received",
+    orders: orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", "),
+    name: document.getElementById("name").value.trim(),
+    address: document.getElementById("address").value.trim(),
+    time: document.getElementById("time").value,
+    email: document.getElementById("email").value.trim(),
+    totalPrice: calculateTotal().toFixed(2)
+})
+.then(response => {
+    console.log("SUCCESS!", response.status, response.text);
+    alert("Order sent successfully!");
+})
+.catch(error => {
+    console.error("EmailJS Error:", error);
+    alert(`Failed to send order: ${error.text || "Unknown error"}`);
+});
 
-}
 
 </script>
 

@@ -184,60 +184,60 @@ footer {
     <!-- Menu Items -->
     <!-- Menu Items -->
 <div class="menu-buttons">
-    <button onclick="addToOrder('Dessert')" class="menu-button tooltip" data-title="Dessert">
+    <button onclick="addToOrder('Dessert, 3.00')" class="menu-button tooltip" data-title="Dessert">
         <img src="images/Dessert.jpg" alt="Dessert" class="menu-image">
         <div class="price">$3.00</div>
     </button>
-    <button onclick="addToOrder('Cake')" class="menu-button tooltip" data-title="Cake">
+    <button onclick="addToOrder('Cake, 4.00')" class="menu-button tooltip" data-title="Cake">
         <img src="images/Cake.jpg" alt="Cake" class="menu-image">
         <div class="price">$4.00</div>
     </button>
-    <button onclick="addToOrder('IceCream')" class="menu-button tooltip" data-title="IceCream">
+    <button onclick="addToOrder('IceCream, 3.50')" class="menu-button tooltip" data-title="IceCream">
         <img src="images/IceCream.jpg" alt="IceCream" class="menu-image">
         <div class="price">$3.50</div>
     </button>
 </div>
 
 <div class="menu-buttons">
-    <button onclick="addToOrder('Coffee')" class="menu-button tooltip" data-title="Coffee">
+    <button onclick="addToOrder('Coffee, 2.50')" class="menu-button tooltip" data-title="Coffee">
         <img src="images/Coffee.jpg" alt="Coffee" class="menu-image">
         <div class="price">$2.50</div>
     </button>
-    <button onclick="addToOrder('Cappuccino')" class="menu-button tooltip" data-title="Cappuccino">
+    <button onclick="addToOrder('Cappuccino, 3.50')" class="menu-button tooltip" data-title="Cappuccino">
         <img src="images/Cappuccino.jpg" alt="Cappuccino" class="menu-image">
         <div class="price">$3.50</div>
     </button>
-    <button onclick="addToOrder('Mocha')" class="menu-button tooltip" data-title="Mocha">
+    <button onclick="addToOrder('Mocha, 4.00')" class="menu-button tooltip" data-title="Mocha">
         <img src="images/Mocha.jpg" alt="Mocha" class="menu-image">
         <div class="price">$4.00</div>
     </button>
 </div>
 
 <div class="menu-buttons">
-    <button onclick="addToOrder('Meal')" class="menu-button tooltip" data-title="Meal">
+    <button onclick="addToOrder('Meal, 10.00')" class="menu-button tooltip" data-title="Meal">
         <img src="images/Meal.jpg" alt="Meal" class="menu-image">
         <div class="price">$10.00</div>
     </button>
-    <button onclick="addToOrder('Sushi')" class="menu-button tooltip" data-title="Sushi">
+    <button onclick="addToOrder('Sushi, 12.00')" class="menu-button tooltip" data-title="Sushi">
         <img src="images/Sushi.jpg" alt="Sushi" class="menu-image">
         <div class="price">$12.00</div>
     </button>
-    <button onclick="addToOrder('Teriyaki')" class="menu-button tooltip" data-title="Teriyaki">
+    <button onclick="addToOrder('Teriyaki, 8.50')" class="menu-button tooltip" data-title="Teriyaki">
         <img src="images/Teriyaki.jpg" alt="Teriyaki" class="menu-image">
         <div class="price">$8.50</div>
     </button>
 </div>
 
 <div class="menu-buttons">
-    <button onclick="addToOrder('Juice')" class="menu-button tooltip" data-title="Juice">
+    <button onclick="addToOrder('Juice, 2.00')" class="menu-button tooltip" data-title="Juice">
         <img src="images/Juice.jpg" alt="Juice" class="menu-image">
         <div class="price">$2.00</div>
     </button>
-    <button onclick="addToOrder('Tea')" class="menu-button tooltip" data-title="Tea">
+    <button onclick="addToOrder('Tea, 2.50')" class="menu-button tooltip" data-title="Tea">
         <img src="images/Tea.jpg" alt="Tea" class="menu-image">
         <div class="price">$2.50</div>
     </button>
-    <button onclick="addToOrder('Beer')" class="menu-button tooltip" data-title="Beer">
+    <button onclick="addToOrder('Beer, 5.00')" class="menu-button tooltip" data-title="Beer">
         <img src="images/Beer.jpg" alt="Beer" class="menu-image">
         <div class="price">$5.00</div>
     </button>
@@ -271,10 +271,11 @@ footer {
     const templateParams = {
       name: document.getElementById("name").value,
       location: document.getElementById("location").value,
-      time: document.getElementById("time").value
+      time: document.getElementById("time").value,
+      totalPrice: `$${totalPrice}`
     };
 
-    emailjs.send("service_epydqmi", "your_template_id", templateParams)
+    emailjs.send("service_epydqmi", "template_vzuexod", templateParams)
       .then(response => {
         console.log("SUCCESS!", response.status, response.text);
         alert("Order sent successfully!");
@@ -323,18 +324,20 @@ footer {
     }
     
     // Function to update the order summary display on the page
-    function updateOrderSummary() {
-      const orderListElem = document.getElementById("orderList");
-      orderListElem.innerHTML = ''; // Clear current list
-      
-      orders.forEach(order => {
+function updateOrderSummary() {
+    const orderListElem = document.getElementById("orderList");
+    orderListElem.innerHTML = ''; // Clear current list
+
+    orders.forEach(order => {
         const li = document.createElement("li");
         li.textContent = `${order.name} - $${order.price.toFixed(2)}`;
         orderListElem.appendChild(li);
-      });
-      
-      document.getElementById("orderTotal").innerText = calculateTotal().toFixed(2);
-    }
+    });
+
+    // Update the total price display
+    document.getElementById("orderTotal").innerText = calculateTotal().toFixed(2);
+}
+
     
     // Function to display a confirmation preview with dynamic placeholders
     function displayConfirmation(details) {

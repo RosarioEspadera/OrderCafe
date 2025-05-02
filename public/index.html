@@ -167,7 +167,32 @@
 
       <button type="button" onclick="sendOrder()">Send Order</button>
     </form>
-    
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+ 
+  (function() {
+    emailjs.init("service_epydqmi"); // Your Service ID
+  })();
+
+  function sendOrder() {
+    const templateParams = {
+      name: document.getElementById("name").value,
+      location: document.getElementById("location").value,
+      time: document.getElementById("time").value
+    };
+
+    emailjs.send("service_epydqmi", "your_template_id", templateParams)
+      .then(response => {
+        console.log("SUCCESS!", response.status, response.text);
+        alert("Order sent successfully!");
+      })
+      .catch(error => {
+        console.error("FAILED...", error);
+        alert("Error sending order. Please try again.");
+      });
+  }
+</script>
+
     <!-- Order Summary Display -->
     <div id="orderSummary">
       <h3>Your Current Order:</h3>

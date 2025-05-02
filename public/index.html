@@ -291,36 +291,32 @@ footer {
 
   <button type="button" onclick="sendOrder()">Send Order</button>
 </form>
+<!-- Load EmailJS first -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".menu-button").forEach(button => {
-        button.addEventListener("click", function() {
-            const item = this.getAttribute("data-title");
-            const price = parseFloat(this.querySelector(".price").textContent.replace("$", ""));
-            addToOrder(item, price);
-        });
-    });
-});
+<!-- Initialize EmailJS -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    emailjs.init("AqvkFhQnxowOJda9J");
+  });
 </script>
 
+<!-- Declare orders array globally -->
 <script>
-  // Array to store order items
   const orders = [];
-  
+
   // Function to add an item to the order
   function addToOrder(item, price) {
     orders.push({ name: item, price: price });
     updateOrderSummary();
     alert(`${item} ($${price.toFixed(2)}) added to your order!`);
   }
-  
+
   // Function to calculate the total price of the order
   function calculateTotal() {
     return orders.reduce((total, order) => total + order.price, 0);
   }
-  
+
   // Function to update the order summary display on the page
   function updateOrderSummary() {
     const orderListElem = document.getElementById("orderList");
@@ -335,8 +331,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ensure total price updates properly
     document.getElementById("orderTotal").innerText = calculateTotal().toFixed(2);
   }
-  
-  // Function to display a confirmation preview with dynamic placeholders
+</script>
+
+<!-- Event Listeners for Menu Buttons -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".menu-button").forEach(button => {
+      button.addEventListener("click", function() {
+        const item = this.getAttribute("data-title");
+        const price = parseFloat(this.querySelector(".price").textContent.replace("$", ""));
+        addToOrder(item, price);
+      });
+    });
+  });
+</script>
+
+<!-- Function to display order confirmation -->
+<script>
   function displayConfirmation(details) {
     document.getElementById("confirmOrderDetails").innerText = details.orderDetails;
     document.getElementById("confirmOrders").innerText = details.orders;
@@ -347,55 +358,48 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("confirmTotalPrice").innerText = "$" + details.totalPrice;
     document.getElementById("orderConfirmationPreview").style.display = "block";
   }
-  
-  // Function to send the order details via EmailJS
-function sendOrder() {
-   if (orders.length === 0) {
-       alert("No items in your order!");
-       return;
-   }
-
-   const name = document.getElementById("name").value.trim();
-   const address = document.getElementById("address").value.trim();
-   const time = document.getElementById("time").value;
-   const emailRecipient = document.getElementById("email").value.trim();
-
-   if (!name || !address || !time || !emailRecipient) {
-       alert("Please fill in all the details!");
-       return;
-   }
-
-   const ordersText = orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", ");
-   const details = {
-    orderDetails: "Your order has been received",
-    orders: orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", "),
-    name: document.getElementById("name").value.trim(),
-    address: document.getElementById("address").value.trim(),
-    time: document.getElementById("time").value,
-    email: document.getElementById("email").value.trim(),
-    totalPrice: calculateTotal().toFixed(2)
-};
-
-emailjs.send("service_epydqmi", "template_vzuexod", {
-    orderDetails: "Your order has been received",
-    orders: orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", "),
-    name: document.getElementById("name").value.trim(),
-    address: document.getElementById("address").value.trim(),
-    time: document.getElementById("time").value,
-    email: document.getElementById("email").value.trim(),
-    totalPrice: calculateTotal().toFixed(2)
-})
-.then(response => {
-    console.log("SUCCESS!", response.status, response.text);
-    alert("Order sent successfully!");
-})
-.catch(error => {
-    console.error("EmailJS Error:", error);
-    alert(`Failed to send order: ${error.text || "Unknown error"}`);
-});
-
-
 </script>
+
+<!-- Function to send the order via EmailJS -->
+<script>
+  function sendOrder() {
+    if (orders.length === 0) {
+      alert("No items in your order!");
+      return;
+    }
+
+    const name = document.getElementById("name").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const time = document.getElementById("time").value;
+    const emailRecipient = document.getElementById("email").value.trim();
+
+    if (!name || !address || !time || !emailRecipient) {
+      alert("Please fill in all the details!");
+      return;
+    }
+
+    const details = {
+      orderDetails: "Your order has been received",
+      orders: orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", "),
+      name: name,
+      address: address,
+      time: time,
+      email: emailRecipient,
+      totalPrice: calculateTotal().toFixed(2)
+    };
+
+    emailjs.send("service_epydqmi", "template_vzuexod", details)
+      .then(response => {
+        console.log("SUCCESS!", response.status, response.text);
+        alert("Order sent successfully!");
+      })
+      .catch(error => {
+        console.error("EmailJS Error:", error);
+        alert(`Failed to send order: ${error.text || "Unknown error"}`);
+      });
+  }
+</script>
+
 
 </body>
 </html>

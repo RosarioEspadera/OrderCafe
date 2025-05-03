@@ -96,15 +96,9 @@ h1, h2 {
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background: #f0ad4e;
+  background: #f5f5f5;
   color: #fff;
   transition: background 0.3s;
-   width: 120px;  /* Set a fixed width */
-  height: 50px;  /* Set a fixed height */
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-size: cover;
 }
 
@@ -119,6 +113,8 @@ h1, h2 {
 .menu-image {
   width: 226px; /* Adjust width as needed */
   height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Crops the image */
+  object-position: center; /* Centers the cropped area */
 }
 /* Modal Container */
 .size-modal {

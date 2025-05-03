@@ -101,22 +101,6 @@ function updateOrderSummary() {
   }
 }
 
-
-  orderListElem.innerHTML = ""; // Clear current list
-
-  orders.forEach(order => {
-    const li = document.createElement("li");
-    li.textContent = `${order.name} - $${order.price.toFixed(2)}`;
-    orderListElem.appendChild(li);
-  });
-
-  // Update the total price display
-  const orderTotalElem = document.getElementById("orderTotal");
-  if (orderTotalElem) {
-    orderTotalElem.innerText = calculateTotal().toFixed(2);
-  }
-}
-
 // ---------- Display & Sending Order ----------
 
 // Function to display a confirmation preview with dynamic placeholders

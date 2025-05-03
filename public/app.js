@@ -1,23 +1,35 @@
 // ---------- EmailJS Initialization & DOMContentLoaded Setup ----------
 
 // When the DOM is ready, initialize EmailJS and attach event listeners.
-document.addEventListener("DOMContentLoaded", () => {
-  // Initialize EmailJS (make sure the library is loaded via a separate <script src="..."> tag in HTML)
-  if (typeof emailjs !== "undefined") {
-    emailjs.init("AqvkFhQnxowOJda9J");
-  } else {
-    console.error("EmailJS library is not loaded.");
-  }
+// ---------- EmailJS Initialization & DOMContentLoaded Setup ----------
 
-  // Attach event listeners for all menu buttons
-  document.querySelectorAll(".menu-button").forEach(button => {
-    button.addEventListener("click", function () {
-      const item = this.getAttribute("data-title");
-      const price = parseFloat(this.querySelector(".price").textContent.replace("$", ""));
-      addToOrder(item, price);
+// When the DOM is ready, initialize EmailJS and attach event listeners.
+document.addEventListener("DOMContentLoaded", () => {
+    // Set the logo source dynamically
+    const logoElement = document.getElementById("logo");
+    if (logoElement) {
+        logoElement.src = "Cafelogo.png"; // Ensure the filename matches exactly
+    } else {
+        console.error("Logo element not found.");
+    }
+
+    // Initialize EmailJS (make sure the library is loaded via a separate <script src=\"...\"> tag in HTML)
+    if (typeof emailjs !== "undefined") {
+        emailjs.init("AqvkFhQnxowOJda9J");
+    } else {
+        console.error("EmailJS library is not loaded.");
+    }
+
+    // Attach event listeners for all menu buttons
+    document.querySelectorAll(".menu-button").forEach(button => {
+        button.addEventListener("click", function () {
+            const item = this.getAttribute("data-title");
+            const price = parseFloat(this.querySelector(".price").textContent.replace("$", ""));
+            addToOrder(item, price);
+        });
     });
-  });
 });
+
 
 // ---------- Global Variables & Order Functions ----------
 

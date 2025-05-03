@@ -5,12 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.error("EmailJS library is not loaded.");
   }
-const sendOrderBtn = document.getElementById("sendOrderBtn");
+
+  const sendOrderBtn = document.getElementById("sendOrderBtn");
   if (sendOrderBtn) {
     sendOrderBtn.addEventListener("click", sendOrder);
   } else {
     console.error("sendOrderBtn not found in the DOM");
   }
+
   // Attach event listeners for all menu buttons
   document.querySelectorAll(".menu-button").forEach(button => {
     button.addEventListener("click", function () {
@@ -49,16 +51,25 @@ const sendOrderBtn = document.getElementById("sendOrderBtn");
       modal.remove();
     });
 
-    // When a size option is clicked, update the order
+    // When a size option is clicked, update the order with the adjusted price
     modal.querySelectorAll(".size-option").forEach(button => {
       button.addEventListener("click", function () {
         const size = this.getAttribute("data-size");
-        // Call addToOrder with the size as a separate argument
-        addToOrder(item, price, size);
+        let modifiedPrice = price;
+        // Adjust the price based on the selected size
+        if (size === "Small") {
+          modifiedPrice = price * 0.9; // 10% decrease
+        } else if (size === "Large") {
+          modifiedPrice = price * 1.1; // 10% increase
+        }
+        // Round to 2 decimal places
+        modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
+        // Call addToOrder with the adjusted price and size
+        addToOrder(item, modifiedPrice, size);
         modal.remove();
       });
     });
-  }  // <-- MISSING CLOSING BRACE ADDED HERE! 
+  } // End of showSizeOptions
 
   // ---------- Global Variables & Order Functions ----------
 
@@ -67,7 +78,6 @@ const sendOrderBtn = document.getElementById("sendOrderBtn");
 
   // Function to add an item to the order
   function addToOrder(item, price, size) {
-    // Store the item name, price, and size separately in the orders array
     orders.push({ name: item, price: price, size: size });
     updateOrderSummary();
     alert(`${item} (${size}) ($${price.toFixed(2)}) added to your order!`);
@@ -81,19 +91,16 @@ const sendOrderBtn = document.getElementById("sendOrderBtn");
   // Function to update the order summary display on the page
   function updateOrderSummary() {
     const orderListElem = document.getElementById("orderList");
-    if (!orderListElem) return;  // Exit if the element doesn't exist
+    if (!orderListElem) return;
+    orderListElem.innerHTML = "";
     
-    orderListElem.innerHTML = ""; // Clear the current list
-
     orders.forEach(order => {
-      const li = document.createElement("li");  // Create a new <li> for each order
-      // Determine whether to include the size information
+      const li = document.createElement("li");
       const sizeText = order.size ? ` (${order.size})` : "";
       li.textContent = `${order.name}${sizeText} - $${order.price.toFixed(2)}`;
       orderListElem.appendChild(li);
     });
-
-    // Update the displayed total price
+    
     const orderTotalElem = document.getElementById("orderTotal");
     if (orderTotalElem) {
       orderTotalElem.innerText = calculateTotal().toFixed(2);
@@ -120,7 +127,6 @@ const sendOrderBtn = document.getElementById("sendOrderBtn");
       alert("No items in your order!");
       return;
     }
-
     const name = document.getElementById("name").value.trim();
     const address = document.getElementById("address").value.trim();
     const time = document.getElementById("time").value;
@@ -153,3 +159,4 @@ const sendOrderBtn = document.getElementById("sendOrderBtn");
       });
   }
 });
+

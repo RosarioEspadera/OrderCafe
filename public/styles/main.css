@@ -88,8 +88,6 @@ h1, h2 {
 }
 
 .menu-buttons button {
-  width: 250px;  /* Fixed button size */
-  height: 250px;
   padding: 10px 20px;
   display: flex;
   font-size: 16px;

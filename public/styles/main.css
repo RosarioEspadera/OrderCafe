@@ -106,6 +106,10 @@ h1, h2 {
   transform: scale(0.95);
   opacity: 0.8;
 }
+.menu-image {
+  width: 226px; /* Adjust width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
 
 /* Form Elements for Order Information */
 form label {

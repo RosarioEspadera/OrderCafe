@@ -13,15 +13,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Attach event listeners for all menu buttons
-    document.querySelectorAll(".menu-button").forEach(button => {
-        button.addEventListener("click", function () {
-            const item = this.getAttribute("data-title");
-            const price = parseFloat(this.querySelector(".price").textContent.replace("$", ""));
-            addToOrder(item, price);
-        });
+    // Attach event listeners for all menu buttons
+document.querySelectorAll(".menu-button").forEach(button => {
+    button.addEventListener("click", function () {
+        const item = this.getAttribute("data-title");
+        const price = parseFloat(
+            this.querySelector(".price").textContent.replace("$", "")
+        );
+        // Instead of immediately adding the order, ask for the size:
+        showSizeOptions(item, price);
     });
 });
+function showSizeOptions(item, price) {
+    // Create a modal container
+    const modal = document.createElement("div");
+    modal.className = "size-modal";
 
+    // The modal's inner HTML (a simple box with size options)
+    modal.innerHTML = `
+      <div class="size-modal-content">
+          <span class="close">&times;</span>
+          <h3>Select Size for ${item}</h3>
+          <button class="size-option" data-size="Small">Small</button>
+          <button class="size-option" data-size="Medium">Medium</button>
+          <button class="size-option" data-size="Large">Large</button>
+      </div>
+    `;
+
+    // Append the modal to the document and display it
+    document.body.appendChild(modal);
+    modal.style.display = "block";
+    
+    // Close the modal when clicking on the close button
+    modal.querySelector(".close").addEventListener("click", () => {
+        modal.remove();
+    });
+
+    // When a size option is clicked, update the order
+    modal.querySelectorAll(".size-option").forEach(button => {
+        button.addEventListener("click", function () {
+            const size = this.getAttribute("data-size");
+            // Optionally, you can update the item name to include the size.
+            addToOrder(`${item} (${size})`, price);
+            modal.remove();
+        });
+    });
+}
 
 // ---------- Global Variables & Order Functions ----------
 

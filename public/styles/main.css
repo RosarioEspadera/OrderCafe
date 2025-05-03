@@ -110,6 +110,61 @@ h1, h2 {
   width: 226px; /* Adjust width as needed */
   height: auto; /* Maintain aspect ratio */
 }
+/* Modal Container */
+.size-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+/* Modal Content Box */
+.size-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Close Button */
+.size-modal-content .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.size-modal-content .close:hover {
+  color: black;
+}
+
+/* Size Option Buttons */
+.size-modal-content .size-option {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f0ad4e;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.size-modal-content .size-option:hover {
+  background-color: #e68900;
+}
+
 
 /* Form Elements for Order Information */
 form label {

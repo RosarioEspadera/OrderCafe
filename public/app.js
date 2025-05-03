@@ -5,14 +5,6 @@
 
 // When the DOM is ready, initialize EmailJS and attach event listeners.
 document.addEventListener("DOMContentLoaded", () => {
-    // Set the logo source dynamically
-    const logoElement = document.getElementById("logo");
-    if (logoElement) {
-        logoElement.src = "Cafelogo.png"; // Ensure the filename matches exactly
-    } else {
-        console.error("Logo element not found.");
-    }
-
     // Initialize EmailJS (make sure the library is loaded via a separate <script src=\"...\"> tag in HTML)
     if (typeof emailjs !== "undefined") {
         emailjs.init("AqvkFhQnxowOJda9J");

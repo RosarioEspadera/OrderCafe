@@ -81,9 +81,10 @@ h1, h2 {
 /* Menu Buttons Section */
 .menu-buttons {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 20px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 10px;
+  overflow-x: auto;
   margin-bottom: 20px;
 }
 
@@ -97,6 +98,7 @@ h1, h2 {
   background: #f5f5f5;
   color: #5B2929;
   transition: background 0.3s;
+  flex=shrink:0;
 }
 
 .menu-buttons button:hover {

@@ -5,8 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.error("EmailJS library is not loaded.");
   }
-document.getElementById("sendOrderBtn").addEventListener("click", sendOrder);
-
+const sendOrderBtn = document.getElementById("sendOrderBtn");
+  if (sendOrderBtn) {
+    sendOrderBtn.addEventListener("click", sendOrder);
+  } else {
+    console.error("sendOrderBtn not found in the DOM");
+  }
   // Attach event listeners for all menu buttons
   document.querySelectorAll(".menu-button").forEach(button => {
     button.addEventListener("click", function () {

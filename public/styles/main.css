@@ -1,3 +1,52 @@
+/* Mobile Styles */
+@media only screen and (max-width: 600px) {
+  /* Reduce overall padding for the body */
+  body {
+    padding: 10px;
+  }
+
+  /* Adjust the container for better mobile view */
+  #app {
+    width: 95%;           /* Slightly larger width for small screens */
+    padding: 15px;        /* Reduce padding */
+    background-size: cover; /* Cover might be better than contain on mobile */
+    box-shadow: none;     /* Optional: remove complex shadows if unwanted */
+  }
+
+  /* Resize the logo to fit mobile screens */
+  .logo img {
+    width: 120px;         /* Smaller logo width */
+    margin-bottom: 15px;  /* More space below the logo if needed */
+  }
+
+  /* Modify the header text size */
+  .header {
+    font-size: 1.2rem;   /* Adjust header font size */
+    margin-bottom: 15px; /* Less margin for mobile */
+  }
+
+  /* Improve layout for order confirmation content */
+  .container {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  /* Adjust menu buttons layout for mobile */
+  .menu-buttons {
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 15px;
+  }
+
+  /* Resize input fields for forms */
+  form input {
+    padding: 6px;
+  }
+
+  /* Adjust text alignment or font sizes if necessary */
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+}
  /* Global Reset */
 * {
   box-sizing: border-box;

@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.error("EmailJS library is not loaded.");
   }
+document.getElementById("sendOrderBtn").addEventListener("click", sendOrder);
 
   // Attach event listeners for all menu buttons
   document.querySelectorAll(".menu-button").forEach(button => {

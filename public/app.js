@@ -63,11 +63,12 @@ function showSizeOptions(item, price) {
 // ---------- Global Variables & Order Functions ----------
 
 // Global array to store order items
+// Global array to store order items
 const orders = [];
 
 // Function to add an item to the order
 function addToOrder(item, price, size) {
-  // Store the item name, price, and size separately
+  // Store the item name, price, and size separately in the orders array
   orders.push({ name: item, price: price, size: size });
   updateOrderSummary();
   alert(`${item} (${size}) ($${price.toFixed(2)}) added to your order!`);
@@ -81,17 +82,19 @@ function calculateTotal() {
 // Function to update the order summary display on the page
 function updateOrderSummary() {
   const orderListElem = document.getElementById("orderList");
-  if (!orderListElem) return;
-  orderListElem.innerHTML = ""; // Clear current list
+  if (!orderListElem) return;  // Exit if the element doesn't exist
   
+  orderListElem.innerHTML = ""; // Clear the current list
+
   orders.forEach(order => {
-    // Include the size if available
+    const li = document.createElement("li");  // Create a new <li> for each order
+    // Determine whether to include the size information
     const sizeText = order.size ? ` (${order.size})` : "";
-    const li = document.createElement("li");
     li.textContent = `${order.name}${sizeText} - $${order.price.toFixed(2)}`;
     orderListElem.appendChild(li);
   });
-  
+
+  // Update the displayed total price
   const orderTotalElem = document.getElementById("orderTotal");
   if (orderTotalElem) {
     orderTotalElem.innerText = calculateTotal().toFixed(2);

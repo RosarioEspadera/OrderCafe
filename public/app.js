@@ -50,15 +50,15 @@ function showSizeOptions(item, price) {
     });
 
     // When a size option is clicked, update the order
+    // When a size option is clicked, pass the size as a separate argument:
     modal.querySelectorAll(".size-option").forEach(button => {
-        button.addEventListener("click", function () {
-            const size = this.getAttribute("data-size");
-            // Optionally, you can update the item name to include the size.
-            addToOrder(`${item} (${size})`, price);
-            modal.remove();
-        });
+    button.addEventListener("click", function () {
+        const size = this.getAttribute("data-size");
+        // Call addToOrder with the size as a separate argument
+        addToOrder(item, price, size);
+        modal.remove();
     });
-}
+});
 
 // ---------- Global Variables & Order Functions ----------
 
@@ -66,10 +66,11 @@ function showSizeOptions(item, price) {
 const orders = [];
 
 // Function to add an item to the order
-function addToOrder(item, price) {
-  orders.push({ name: item, price: price });
+function addToOrder(item, price, size) {
+  // Store the item name, price, and size separately
+  orders.push({ name: item, price: price, size: size });
   updateOrderSummary();
-  alert(`${item} ($${price.toFixed(2)}) added to your order!`);
+  alert(`${item} (${size}) ($${price.toFixed(2)}) added to your order!`);
 }
 
 // Function to calculate the total price of the order
@@ -81,6 +82,22 @@ function calculateTotal() {
 function updateOrderSummary() {
   const orderListElem = document.getElementById("orderList");
   if (!orderListElem) return;
+  orderListElem.innerHTML = ""; // Clear current list
+  
+  orders.forEach(order => {
+    // Include the size if available
+    const sizeText = order.size ? ` (${order.size})` : "";
+    const li = document.createElement("li");
+    li.textContent = `${order.name}${sizeText} - $${order.price.toFixed(2)}`;
+    orderListElem.appendChild(li);
+  });
+  
+  const orderTotalElem = document.getElementById("orderTotal");
+  if (orderTotalElem) {
+    orderTotalElem.innerText = calculateTotal().toFixed(2);
+  }
+}
+
 
   orderListElem.innerHTML = ""; // Clear current list
 

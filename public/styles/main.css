@@ -88,7 +88,10 @@ h1, h2 {
 }
 
 .menu-buttons button {
+  width: 120px;  /* Fixed button size */
+  height: 50px;
   padding: 10px 20px;
+  display: flex;
   font-size: 16px;
   cursor: pointer;
   border: none;
@@ -96,6 +99,13 @@ h1, h2 {
   background: #f0ad4e;
   color: #fff;
   transition: background 0.3s;
+   width: 120px;  /* Set a fixed width */
+  height: 50px;  /* Set a fixed height */
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
 }
 
 .menu-buttons button:hover {

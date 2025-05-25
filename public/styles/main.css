@@ -28,7 +28,11 @@ h1, h2 {
   text-align: center;
   margin-bottom: 10px;
 }
-
+.div-container {
+  margin: 20px;  /* Space outside the div */
+  padding: 10px; /* Space inside the div */
+  background-color: #674736 ;
+}
 /* Container for Email Confirmation and Order Preview */
 .container {
   background-color: #fff;

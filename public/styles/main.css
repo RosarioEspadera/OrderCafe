@@ -33,6 +33,10 @@ h1, h2 {
   padding: 10px; /* Space inside the div */
   background-color: #674736 ;
 }
+.button-container {
+  display: flex;
+  gap: 15px; /* Space between buttons */
+}
 /* Container for Email Confirmation and Order Preview */
 .container {
   background-color: #fff;

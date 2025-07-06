@@ -317,10 +317,12 @@ form input:focus {
 }
 .selected-size {
   background-color: #a3d3a2;
-  color: #2b4c2b;
+  color: #1b3e1b;
   font-weight: bold;
-  box-shadow: 0 0 6px rgba(0, 128, 0, 0.3);
-  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(0, 128, 0, 0.25);
+  transform: scale(1.07);
+  transition: all 0.2s ease-in-out;
 }
+
 
 

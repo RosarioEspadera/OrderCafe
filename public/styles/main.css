@@ -23,7 +23,7 @@ body {
 }
 
 .logo img {
-  width: 120px;
+  width: 150px;
   height: auto;
   border-radius: 12px;
 }
@@ -49,10 +49,10 @@ h2 {
 }
 
 .menu-buttons {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
-  background-color: rgba(255, 255, 255, 0.8)
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
 }
 
 .menu-section,
@@ -74,19 +74,13 @@ h2 {
 }
 
 .menu-button {
-  background: #fdf1e7;
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(150, 80, 20, 0.15);
-  padding: 12px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 110px;
-  min-height: 140px;
-  position: relative;
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fffbe7;
+  border: 1px solid #e0c3a2;
+  box-shadow: 0 4px 8px rgba(80, 40, 20, 0.1);
 }
 
 .menu-button:hover, .menu-button:focus {
@@ -97,14 +91,10 @@ h2 {
 }
 
 .menu-image {
-  width: 200px;
-  height: 200px;
-  object-fit: contain;
-  display: block;
+   display: block;
+  max-width: 100%;
+  height: auto;
   margin: 0 auto;
-  border-radius: 12px;
-  background: #f5e9e0;
-  box-shadow: 0 1px 4px rgba(160, 82, 45, 0.07);
 }
 /*
 /* Add space for menu item name under the image */
@@ -120,6 +110,7 @@ h2 {
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(160, 82, 45, 0.08);
   margin-bottom: 50px;
+  width: 140px;
 }
 
 .menu-button .menu-name {

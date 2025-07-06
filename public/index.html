@@ -315,6 +315,30 @@
 <button id="sendOrderBtn" type="button">Send Order</button>
 
 </form>
+    <script>
+document.querySelectorAll('.menu-button').forEach(button => {
+  button.addEventListener('click', function(e) {
+    // Prevent toggling when clicking on the select or label
+    if (
+      e.target.tagName.toLowerCase() === 'select' ||
+      e.target.tagName.toLowerCase() === 'option' ||
+      e.target.tagName.toLowerCase() === 'label'
+    ) return;
+
+    // Hide all other size selects
+    document.querySelectorAll('.size-select-wrapper').forEach(wrapper => {
+      if (wrapper !== button.querySelector('.size-select-wrapper')) {
+        wrapper.style.display = 'none';
+      }
+    });
+
+    // Toggle this one
+    const sizeWrapper = button.querySelector('.size-select-wrapper');
+    sizeWrapper.style.display =
+      sizeWrapper.style.display === 'block' ? 'none' : 'block';
+  });
+});
+</script>
 
 </body>
 </html>

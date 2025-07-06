@@ -27,47 +27,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Function to display the size options modal
   function showSizeOptions(item, price) {
-    // Create a modal container
     const modal = document.createElement("div");
     modal.className = "size-modal";
-
-    // The modal's inner HTML (a simple box with size options)
     modal.innerHTML = `
       <div class="size-modal-content">
-          <span class="close">&times;</span>
-          <h3>Select Size for ${item}</h3>
-          <button class="size-option" data-size="Small">Small</button>
-          <button class="size-option" data-size="Medium">Medium</button>
-          <button class="size-option" data-size="Large">Large</button>
+        <span class="close">&times;</span>
+        <h3>Select Size for ${item}</h3>
+        <button class="size-option" data-size="Small">Small</button>
+        <button class="size-option" data-size="Medium">Medium</button>
+        <button class="size-option" data-size="Large">Large</button>
+        <div id="confirm-section" style="margin-top: 1em; display: none;">
+          <button id="confirm-size-btn">Confirm</button>
+        </div>
       </div>
     `;
-
-    // Append the modal to the document and display it
     document.body.appendChild(modal);
     modal.style.display = "block";
 
-    // Close the modal when clicking on the close button
     modal.querySelector(".close").addEventListener("click", () => {
       modal.remove();
     });
 
-    // When a size option is clicked, update the order with the adjusted price
+    let selectedSize = null;
+    let modifiedPrice = price;
+
     modal.querySelectorAll(".size-option").forEach(button => {
       button.addEventListener("click", function () {
-        const size = this.getAttribute("data-size");
-        let modifiedPrice = price;
-        // Adjust the price based on the selected size
-        if (size === "Small") {
-          modifiedPrice = price * 0.9; // 10% decrease
-        } else if (size === "Large") {
-          modifiedPrice = price * 1.1; // 10% increase
-        }
-        // Round to 2 decimal places
+        selectedSize = this.getAttribute("data-size");
+        modifiedPrice = price;
+        if (selectedSize === "Small") modifiedPrice = price * 0.9;
+        else if (selectedSize === "Large") modifiedPrice = price * 1.1;
         modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
-        // Call addToOrder with the adjusted price and size
-        addToOrder(item, modifiedPrice, size);
-        modal.remove();
+        modal.querySelector("#confirm-section").style.display = "block";
       });
+    });
+
+    modal.querySelector("#confirm-size-btn").addEventListener("click", function () {
+      if (selectedSize) {
+        addToOrder(item, modifiedPrice, selectedSize);
+        modal.remove();
+      }
     });
   } // End of showSizeOptions
 
@@ -76,11 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Global array to store order items
   const orders = [];
 
-  // Function to add an item to the order
+  // Function to add an item to the order (alert removed)
   function addToOrder(item, price, size) {
     orders.push({ name: item, price: price, size: size });
     updateOrderSummary();
-    alert(`${item} (${size}) ($${price.toFixed(2)}) added to your order!`);
+    // No alert needed
   }
 
   // Function to calculate the total price of the order
@@ -93,14 +92,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const orderListElem = document.getElementById("orderList");
     if (!orderListElem) return;
     orderListElem.innerHTML = "";
-    
+
     orders.forEach(order => {
       const li = document.createElement("li");
       const sizeText = order.size ? ` (${order.size})` : "";
       li.textContent = `${order.name}${sizeText} - $${order.price.toFixed(2)}`;
       orderListElem.appendChild(li);
     });
-    
+
     const orderTotalElem = document.getElementById("orderTotal");
     if (orderTotalElem) {
       orderTotalElem.innerText = calculateTotal().toFixed(2);
@@ -137,14 +136,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-const details = {
-  orderDetails: "Your order has been received",
-  orders: orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", "),
-  name: name,
-  address: address,
-  time: time,
-  email: emailRecipient,
-  totalPrice: calculateTotal().toFixed(2)
+    const details = {
+      orderDetails: "Your order has been received",
+      orders: orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", "),
+      name: name,
+      address: address,
+      time: time,
+      email: emailRecipient,
+      totalPrice: calculateTotal().toFixed(2)
     };
 
     emailjs
@@ -159,4 +158,3 @@ const details = {
       });
   }
 });
-

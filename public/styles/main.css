@@ -259,7 +259,8 @@ form input:focus {
   border: 2px solid #e0c3a2;
   border-radius: 12px;
   padding: 16px;
-  width: 300px;
+  width: 90%;
+  max-width: 400px;
   box-shadow: 0 5px 20px rgba(160, 82, 45, 0.15);
   font-family: 'Pacifico', cursive;
   color: #7b4f2c;

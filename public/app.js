@@ -58,16 +58,25 @@ modal.innerHTML = `
   let modifiedPrice = price;
 
   // Show confirm button after size selected
-  modal.querySelectorAll(".size-options button").forEach(button => {
-    button.addEventListener("click", function () {
-      selectedSize = this.getAttribute("data-size");
-      modifiedPrice = price;
-      if (selectedSize === "Small") modifiedPrice = price * 0.9;
-      else if (selectedSize === "Large") modifiedPrice = price * 1.1;
-      modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
-      modal.querySelector("#confirm-section").style.display = "block";
-    });
+modal.querySelectorAll(".size-options button").forEach(button => {
+  button.addEventListener("click", function () {
+    // Remove 'selected-size' from any previously selected button
+    modal.querySelectorAll(".size-options button").forEach(btn =>
+      btn.classList.remove("selected-size")
+    );
+
+    // Add 'selected-size' class to the clicked button
+    this.classList.add("selected-size");
+
+    selectedSize = this.getAttribute("data-size");
+    modifiedPrice = price;
+    if (selectedSize === "Small") modifiedPrice = price * 0.9;
+    else if (selectedSize === "Large") modifiedPrice = price * 1.1;
+    modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
+    modal.querySelector("#confirm-section").style.display = "block";
   });
+});
+
 
   // Confirm handler
   modal.querySelector("#confirm-size-btn").addEventListener("click", function () {

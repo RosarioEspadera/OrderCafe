@@ -346,4 +346,16 @@ form input:focus {
   gap: 1em;
   width: 100%;
 }
+.size-options {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1em;
+}
+
+.size-options button {
+  flex: 1;
+  min-width: 80px;
+}
 

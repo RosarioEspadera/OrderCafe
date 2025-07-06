@@ -74,6 +74,20 @@ h2 {
   border-radius: 12px;
   padding: 12px 0;
 }
+.menu-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 20px;
+  padding-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.menu-button {
+  scroll-snap-align: start;
+  flex: 0 0 auto; /* Prevent shrinking */
+}
 
 .menu-button {
   display: flex;

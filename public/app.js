@@ -46,7 +46,6 @@ modal.innerHTML = `
   </div>
 `;
 
-
   document.body.appendChild(modal);
 
   // Close modal handler
@@ -59,7 +58,7 @@ modal.innerHTML = `
   let modifiedPrice = price;
 
   // Show confirm button after size selected
-  modal.querySelectorAll(".size-option").forEach(button => {
+  modal.querySelectorAll(".size-options button").forEach(button => {
     button.addEventListener("click", function () {
       selectedSize = this.getAttribute("data-size");
       modifiedPrice = price;

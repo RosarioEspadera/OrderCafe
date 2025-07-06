@@ -14,11 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Attach event listeners for all menu buttons
- document.querySelectorAll(".menu-button").forEach(button => {
-  button.addEventListener("click", function () {
-    const item = this.getAttribute("data-title");
-    const price = parseFloat(this.querySelector(".price").textContent.replace("$", ""));
-    const hasSize = this.getAttribute("data-size") === "true";
+// Expand/collapse accordion sections (once)
+document.querySelectorAll(".accordion-toggle").forEach(toggle => {
+  toggle.addEventListener("click", () => {
+    const section = toggle.parentElement;
+    section.classList.toggle("expanded");
+  });
+});
+
+// Handle clicks on menu items (once)
+document.querySelectorAll(".menu-button").forEach(button => {
+  button.addEventListener("click", () => {
+    const item = button.getAttribute("data-title");
+    const price = parseFloat(button.querySelector(".price").textContent.replace("$", ""));
+    const hasSize = button.getAttribute("data-size") === "true";
 
     if (hasSize) {
       showSizeOptions(item, price);
@@ -27,6 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+
   // Function to display the size options modal
 function showSizeOptions(item, price) {
   const modal = document.createElement("div");

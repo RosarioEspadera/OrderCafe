@@ -87,8 +87,8 @@ h2 {
 }
 
 .menu-image {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
   display: block;
   margin: 0 auto;
@@ -101,8 +101,8 @@ h2 {
 .menu-button {
   flex-direction: column;
   align-items: center;
-  min-width: 140px;
-  min-height: 180px;
+  min-width: 150px;
+  min-height: 190px;
   padding: 16px 10px 12px 10px;
   position: relative;
   background: #fff;

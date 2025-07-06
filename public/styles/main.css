@@ -255,35 +255,57 @@ form input:focus {
   }
 }
 .size-modal {
-  background: #fffbe7;
-  border: 2px solid #e0c3a2;
-  border-radius: 12px;
-  padding: 16px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 5px 20px rgba(160, 82, 45, 0.15);
-  font-family: 'Pacifico', cursive;
-  color: #7b4f2c;
+  width: 360px;
+  padding: 20px;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: pop-in 0.4s ease-out;
+  background: #fffbe7;
+  border: 2px solid #e0c3a2;
+  border-radius: 12px;
+  font-family: 'Pacifico', cursive;
+  color: #7b4f2c;
+  box-shadow: 0 5px 20px rgba(160, 82, 45, 0.15);
   z-index: 1000;
 }
 
-@keyframes pop-in {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  font-size: 24px;
+  border: none;
+  color: #7b4f2c;
+  cursor: pointer;
 }
+
+.size-options {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: nowrap;
+  margin: 1em 0;
+}
+
+.size-options button {
+  flex: 1;
+  padding: 10px;
+  min-width: 80px;
+  border-radius: 8px;
+  border: none;
+  background-color: #f1d3b3;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.confirm-wrap {
+  text-align: center;
+}
+
 #confirm-size-btn {
-  background-color: #4CAF50;   /* Green */
+  background-color: #4CAF50;
   color: white;
   border: none;
   padding: 0.6em 1.5em;
@@ -291,91 +313,6 @@ form input:focus {
   font-size: 1em;
   cursor: pointer;
   transition: background 0.2s;
-  background: linear-gradient(to bottom right, #66bb6a, #4caf50);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
 }
 
-#confirm-size-btn:hover {
-  background-color: #388e3c;   /* Darker green on hover */
-  transform: scale(1.04);
-}
-@media (max-width: 500px) {
-  #confirm-size-btn {
-    font-size: 0.9em;
-    padding: 0.5em 1em;
-  }
-}
-
-.size-modal button {
-  background: #d9a87c;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 18px;
-  font-size: 1rem;
-  margin: 8px;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.size-modal button:hover {
-  background: #b8794f;
-}
-/* Center the modal content */
-.size-modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Center the size option buttons in a row and add spacing */
-.size-modal-content .size-option {
-  margin: 0.5em;
-  width: 120px; /* Optional: make buttons the same width */
-  font-size: 1.1em;
-}
-
-/* Optional: display the size buttons in a row, centered */
-.size-modal-content .size-option {
-  display: inline-block;
-}
-
-/* Optional: if you want them in a horizontal row, wrap them in a div */
-.size-modal-content .size-options-row {
-  display: flex;
-  justify-content: center;
-  gap: 1em;
-  width: 100%;
-}
-.size-options {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 1em;
-}
-
-.size-options button {
-  flex: 1;
-  min-width: 80px;
-}
-.close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  background: transparent;
-  font-size: 24px;
-  border: none;
-  color: #7b4f2c;
-  cursor: pointer;
-}
-
-.confirm-wrap {
-  display: flex;
-  justify-content: center;
-  margin-top: 1em;
-}
-.close-btn:hover {
-  color: #d9534f;
-}
 

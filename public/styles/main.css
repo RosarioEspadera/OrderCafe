@@ -293,20 +293,33 @@ form input:focus {
   cursor: pointer;
   transition: background 0.2s ease;
 }
-.size-modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;    /* Horizontally center all children */
-  justify-content: center; /* Vertically center if you want, optional */
-}
-
-.size-modal-content .size-option {
-  margin: 0.5em 0;
-  width: 120px; /* Optional: make buttons same width */
-  font-size: 1.1em;
-}
 
 .size-modal button:hover {
   background: #b8794f;
 }
+/* Center the modal content */
+.size-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+/* Center the size option buttons in a row and add spacing */
+.size-modal-content .size-option {
+  margin: 0.5em;
+  width: 120px; /* Optional: make buttons the same width */
+  font-size: 1.1em;
+}
+
+/* Optional: display the size buttons in a row, centered */
+.size-modal-content .size-option {
+  display: inline-block;
+}
+
+/* Optional: if you want them in a horizontal row, wrap them in a div */
+.size-modal-content .size-options-row {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  width: 100%;
+}

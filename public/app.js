@@ -31,20 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
 function showSizeOptions(item, price) {
   const modal = document.createElement("div");
   modal.className = "size-modal";
- modal.innerHTML = `
-  <div class="size-modal-content">
-    <span class="close">&times;</span>
-    <h3>Select Size for ${item}</h3>
-    <div class="size-options-row">
-      <button class="size-option" data-size="Small">Small</button>
-      <button class="size-option" data-size="Medium">Medium</button>
-      <button class="size-option" data-size="Large">Large</button>
+modal.innerHTML = `
+  <div class="size-modal">
+    <h2>Select Size for ${item}</h2>
+    <div class="size-options">
+      <button data-size="Small">Small</button>
+      <button data-size="Medium">Medium</button>
+      <button data-size="Large">Large</button>
     </div>
-    <div id="confirm-section" style="margin-top: 1em; display: none;">
-      <button id="confirm-size-btn">Confirm</button>
-    </div>
+    <button id="confirm-size-btn">Confirm</button>
   </div>
 `;
+
   document.body.appendChild(modal);
 
   // Close modal handler

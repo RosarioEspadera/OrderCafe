@@ -86,15 +86,47 @@ h2 {
   outline: none;
 }
 
+/* ...existing code... */
 .menu-image {
-  width: 64px;
-  height: 64px;
+  width: 120px;   /* Increased size for bigger menu images */
+  height: 120px;  /* Keep square for consistency */
   object-fit: contain;
-  margin-bottom: 10px;
+  display: block;
+  margin: 0 auto 16px auto; /* Center image and add space below */
   border-radius: 8px;
   background: #f5e9e0;
   box-shadow: 0 1px 4px rgba(160, 82, 45, 0.07);
 }
+
+/* Add space for menu item name under the image */
+.menu-button {
+  flex-direction: column;
+  align-items: center;
+  min-width: 140px;
+  min-height: 180px;
+  padding: 16px 10px 12px 10px;
+  position: relative;
+  background: #fff;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(160, 82, 45, 0.08);
+  margin-bottom: 10px;
+}
+
+.menu-button .menu-name {
+  margin-top: 8px;
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #7b4f2c;
+  text-align: center;
+  min-height: 24px; /* Reserve space for name even if empty */
+  letter-spacing: 0.5px;
+  width: 100%;
+  display: block;
+}
+
+/* ...existing code... */
 
 .price {
   font-weight: bold;

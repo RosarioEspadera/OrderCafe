@@ -33,15 +33,19 @@ function showSizeOptions(item, price) {
   modal.className = "size-modal";
 modal.innerHTML = `
   <div class="size-modal">
+    <button class="close-btn">×</button>
     <h2>Select Size for ${item}</h2>
     <div class="size-options">
       <button data-size="Small">Small</button>
       <button data-size="Medium">Medium</button>
       <button data-size="Large">Large</button>
     </div>
-    <button id="confirm-size-btn">Confirm</button>
+    <div class="confirm-wrap">
+      <button id="confirm-size-btn">Confirm</button>
+    </div>
   </div>
 `;
+
 
   document.body.appendChild(modal);
 

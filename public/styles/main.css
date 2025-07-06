@@ -48,7 +48,7 @@ h2 {
 .menu-section,
 .menu-section-highlight,
 .menu-section-special {
-  margin-bottom: 18px;
+  margin-bottom: 50px;
 }
 
 .menu-section-highlight {
@@ -88,8 +88,8 @@ h2 {
 
 /* ...existing code... */
 .menu-image {
-  width: 120px;   /* Increased size for bigger menu images */
-  height: 120px;  /* Keep square for consistency */
+  width: 300px;   /* Increased size for bigger menu images */
+  height: 300px;  /* Keep square for consistency */
   object-fit: contain;
   display: block;
   margin: 0 auto 16px auto; /* Center image and add space below */

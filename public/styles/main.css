@@ -290,11 +290,21 @@ form input:focus {
   font-size: 1em;
   cursor: pointer;
   transition: background 0.2s;
+  background: linear-gradient(to bottom right, #66bb6a, #4caf50);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
 }
 
 #confirm-size-btn:hover {
   background-color: #388e3c;   /* Darker green on hover */
+  transform: scale(1.04);
 }
+@media (max-width: 500px) {
+  #confirm-size-btn {
+    font-size: 0.9em;
+    padding: 0.5em 1em;
+  }
+}
+
 .size-modal button {
   background: #d9a87c;
   border: none;

@@ -50,9 +50,10 @@ modal.innerHTML = `
   document.body.appendChild(modal);
 
   // Close modal handler
-  modal.querySelector(".close").addEventListener("click", () => {
-    modal.remove();
-  });
+ modal.querySelector(".close-btn").addEventListener("click", () => {
+  modal.remove();
+});
+
 
   let selectedSize = null;
   let modifiedPrice = price;

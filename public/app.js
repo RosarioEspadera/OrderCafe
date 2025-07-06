@@ -137,14 +137,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const details = {
-      orderDetails: "Your order has been received",
-      orders: orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", "),
-      name: name,
-      address: address,
-      time: time,
-      email: emailRecipient,
-      totalPrice: calculateTotal().toFixed(2)
+const details = {
+  orderDetails: "Your order has been received",
+  orders: orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", "),
+  name: name,
+  address: address,
+  time: time,
+  email: emailRecipient,
+  totalPrice: calculateTotal().toFixed(2)
     };
 
     emailjs

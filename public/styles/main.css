@@ -359,4 +359,23 @@ form input:focus {
   flex: 1;
   min-width: 80px;
 }
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  font-size: 24px;
+  border: none;
+  color: #7b4f2c;
+  cursor: pointer;
+}
+
+.confirm-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+}
+.close-btn:hover {
+  color: #d9534f;
+}
 

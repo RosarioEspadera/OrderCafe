@@ -27,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
   // Function to display the size options modal
 function showSizeOptions(item, price) {
   const modal = document.createElement("div");

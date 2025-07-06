@@ -60,13 +60,13 @@ modal.innerHTML = `
   // Show confirm button after size selected
 modal.querySelectorAll(".size-options button").forEach(button => {
   button.addEventListener("click", function () {
-    // Remove 'selected-size' from any previously selected button
-    modal.querySelectorAll(".size-options button").forEach(btn =>
-      btn.classList.remove("selected-size")
-    );
+    modal.querySelectorAll(".size-options button").forEach(btn => {
+      btn.classList.remove("selected-size");
+      btn.textContent = btn.getAttribute("data-size");
+    });
 
-    // Add 'selected-size' class to the clicked button
     this.classList.add("selected-size");
+    this.textContent = `✓ ${this.getAttribute("data-size")}`;
 
     selectedSize = this.getAttribute("data-size");
     modifiedPrice = price;

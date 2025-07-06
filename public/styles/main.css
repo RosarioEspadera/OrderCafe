@@ -80,8 +80,8 @@ h2 {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 200px;
-  min-height: 220px;
+  width: 180px;
+  min-height: 200px;
   padding: 16px 10px 12px 10px;
   margin-bottom: 50px;
 
@@ -101,13 +101,17 @@ h2 {
   background: #fff3e0;
   outline: none;
 }
-
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+}
 .menu-image {
   width: 100%;
   height: auto;
   border-radius: 8px;
   margin-bottom: 8px;
-  display: block;
 }
 
 /* Add space for menu item name under the image */
@@ -123,8 +127,13 @@ h2 {
   width: 100%;
   display: block;
 }
+.item-name {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1em;
+  color: #6c3b23;
+  margin-bottom: 6px;
+}
 
-/* ...existing code... */
 
 .price {
   font-weight: bold;

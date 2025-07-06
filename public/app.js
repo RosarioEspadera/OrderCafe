@@ -14,16 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Attach event listeners for all menu buttons
-  document.querySelectorAll(".menu-button").forEach(button => {
-    button.addEventListener("click", function () {
-      const item = this.getAttribute("data-title");
-      const price = parseFloat(
-        this.querySelector(".price").textContent.replace("$", "")
-      );
-      // Instead of immediately adding the order, ask for the size:
+ document.querySelectorAll(".menu-button").forEach(button => {
+  button.addEventListener("click", function () {
+    const item = this.getAttribute("data-title");
+    const price = parseFloat(this.querySelector(".price").textContent.replace("$", ""));
+    const hasSize = this.getAttribute("data-size") === "true";
+
+    if (hasSize) {
       showSizeOptions(item, price);
-    });
+    } else {
+      addToOrder(item, price);
+    }
   });
+});
 
   // Function to display the size options modal
 function showSizeOptions(item, price) {

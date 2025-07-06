@@ -26,49 +26,51 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Function to display the size options modal
-  function showSizeOptions(item, price) {
-    const modal = document.createElement("div");
-    modal.className = "size-modal";
-    modal.innerHTML = `
-      <div class="size-modal-content">
-        <span class="close">&times;</span>
-        <h3>Select Size for ${item}</h3>
-        <button class="size-option" data-size="Small">Small</button>
-        <button class="size-option" data-size="Medium">Medium</button>
-        <button class="size-option" data-size="Large">Large</button>
-        <div id="confirm-section" style="margin-top: 1em; display: none;">
-          <button id="confirm-size-btn">Confirm</button>
-        </div>
+function showSizeOptions(item, price) {
+  const modal = document.createElement("div");
+  modal.className = "size-modal";
+  modal.innerHTML = `
+    <div class="size-modal-content">
+      <span class="close">&times;</span>
+      <h3>Select Size for ${item}</h3>
+      <button class="size-option" data-size="Small">Small</button>
+      <button class="size-option" data-size="Medium">Medium</button>
+      <button class="size-option" data-size="Large">Large</button>
+      <div id="confirm-section" style="margin-top: 1em; display: none;">
+        <button id="confirm-size-btn">Confirm</button>
       </div>
-    `;
-    document.body.appendChild(modal);
-    modal.style.display = "block";
+    </div>
+  `;
+  document.body.appendChild(modal);
 
-    modal.querySelector(".close").addEventListener("click", () => {
+  // Close modal handler
+  modal.querySelector(".close").addEventListener("click", () => {
+    modal.remove();
+  });
+
+  let selectedSize = null;
+  let modifiedPrice = price;
+
+  // Show confirm button after size selected
+  modal.querySelectorAll(".size-option").forEach(button => {
+    button.addEventListener("click", function () {
+      selectedSize = this.getAttribute("data-size");
+      modifiedPrice = price;
+      if (selectedSize === "Small") modifiedPrice = price * 0.9;
+      else if (selectedSize === "Large") modifiedPrice = price * 1.1;
+      modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
+      modal.querySelector("#confirm-section").style.display = "block";
+    });
+  });
+
+  // Confirm handler
+  modal.querySelector("#confirm-size-btn").addEventListener("click", function () {
+    if (selectedSize) {
+      addToOrder(item, modifiedPrice, selectedSize);
       modal.remove();
-    });
-
-    let selectedSize = null;
-    let modifiedPrice = price;
-
-    modal.querySelectorAll(".size-option").forEach(button => {
-      button.addEventListener("click", function () {
-        selectedSize = this.getAttribute("data-size");
-        modifiedPrice = price;
-        if (selectedSize === "Small") modifiedPrice = price * 0.9;
-        else if (selectedSize === "Large") modifiedPrice = price * 1.1;
-        modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
-        modal.querySelector("#confirm-section").style.display = "block";
-      });
-    });
-
-    modal.querySelector("#confirm-size-btn").addEventListener("click", function () {
-      if (selectedSize) {
-        addToOrder(item, modifiedPrice, selectedSize);
-        modal.remove();
-      }
-    });
-  } // End of showSizeOptions
+    }
+  });
+}
 
   // ---------- Global Variables & Order Functions ----------
 

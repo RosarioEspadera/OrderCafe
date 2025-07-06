@@ -281,7 +281,20 @@ form input:focus {
     transform: translate(-50%, -50%) scale(1);
   }
 }
+#confirm-size-btn {
+  background-color: #4CAF50;   /* Green */
+  color: white;
+  border: none;
+  padding: 0.6em 1.5em;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
 
+#confirm-size-btn:hover {
+  background-color: #388e3c;   /* Darker green on hover */
+}
 .size-modal button {
   background: #d9a87c;
   border: none;
@@ -324,17 +337,4 @@ form input:focus {
   width: 100%;
   padding-left: 2em; 
 }
-#confirm-size-btn {
-  background-color: #4CAF50;   /* Green */
-  color: white;
-  border: none;
-  padding: 0.6em 1.5em;
-  border-radius: 4px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background 0.2s;
-}
 
-#confirm-size-btn:hover {
-  background-color: #388e3c;   /* Darker green on hover */
-}

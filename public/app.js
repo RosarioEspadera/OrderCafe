@@ -5,7 +5,7 @@ function initializeOrder() {
     } else {
       console.error("EmailJS library is not loaded.");
     }
-
+  
     const sendOrderBtn = document.getElementById("sendOrderBtn");
     if (sendOrderBtn) {
       sendOrderBtn.addEventListener("click", sendOrder);
@@ -54,6 +54,8 @@ if (addressInput) {
     }
   });
 } // ✅ Close the conditional block here
+  });
+} 
 
 
 

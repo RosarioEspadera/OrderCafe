@@ -67,8 +67,12 @@ document.body.appendChild(backdrop);
 
 // Close when clicking outside the modal
 backdrop.addEventListener("click", e => {
-  if (e.target === backdrop) backdrop.remove();
+  if (e.target === backdrop) {
+    selectedSize = null;
+    backdrop.remove();
+  }
 });
+
 
   let selectedSize = null;
   let modifiedPrice = price;

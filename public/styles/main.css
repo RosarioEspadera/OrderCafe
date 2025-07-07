@@ -282,9 +282,17 @@ h1, h2 {
    6. Modal & Backdrop
    ========================== */
 .backdrop-overlay {
-  display: none;        /* hide it by default */
-  pointer-events: none; /* let clicks pass through */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
 }
+
 
 /* when you actually open your modal, your JS should do: */
 .backdrop-overlay.active {
@@ -294,14 +302,18 @@ h1, h2 {
 
 
 .modal-box {
-  position: relative;           /* keep it inside the flex parent */
-  background: var(--light-bg);
-  padding: 2rem;
-  border-radius: var(--radius);
-  max-width: 90%;
-  width: 350px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Optional enhancements */
+  z-index: 1000;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
+
 
 .modal-box h2 {
   margin-bottom: 1rem;

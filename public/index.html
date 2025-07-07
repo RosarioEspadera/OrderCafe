@@ -9,7 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora&family=Pacifico&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js" defer></script>
+
   
 
 
@@ -222,8 +223,12 @@
 
 </form>
   <div id="orderSuccessMsg" style="display: none;">Order Sent Successfully! 🎉</div>
-
+<script>
+  initializeOrder();
+</script>
 </body>
+  
+
 </html>
 
 

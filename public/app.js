@@ -88,21 +88,24 @@ confirmButton.addEventListener("click", function () {
 
   
     const confirmSection = modal.querySelector("#confirm-section");
-    const sizeButtons = modal.querySelectorAll(".size-options button"); 
-  
-    sizeButtons.forEach(button => {
-    button.addEventListener("click", function () {
+    const sizeButtons = modal.querySelectorAll(".size-options button");
+sizeButtons.forEach((btn, i) => {
+  setTimeout(() => {
+    btn.classList.add("option-animate");
+  }, i * 100);
+
+  btn.addEventListener("click", function () {
     confirmSection.style.display = "block";
     confirmSection.classList.add("show");
 
-    sizeButtons.forEach(btn => {
-      btn.classList.remove("selected-size");
-      btn.textContent = btn.getAttribute("data-size");
+    sizeButtons.forEach(b => {
+      b.classList.remove("selected-size");
+      b.textContent = b.getAttribute("data-size");
     });
 
-    this.classList.add("selected-size");
-    this.textContent = `✓ ${this.getAttribute("data-size")}`;
-    selectedSize = this.getAttribute("data-size");
+    btn.classList.add("selected-size");
+    btn.textContent = `✓ ${btn.getAttribute("data-size")}`;
+    selectedSize = btn.getAttribute("data-size");
 
     modifiedPrice = price;
     if (selectedSize === "Small") modifiedPrice = price * 0.9;
@@ -110,7 +113,6 @@ confirmButton.addEventListener("click", function () {
     modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
   });
 });
-
 
   
   modal.querySelector("#confirm-size-btn").addEventListener("click", function () {

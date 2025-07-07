@@ -1,522 +1,252 @@
-/* Global Body Style */
-body {
-  font-family: 'Lora', serif;
-  background: linear-gradient(to right, #fceec8, #f8d1a0); /* Light, cozy background */
-  color: #4e342e;
+/* ==========================
+   1. Variables & Root
+   ========================== */
+:root {
+  --brand-color: #8b4513;
+  --light-bg: #fff;
+  --dark-bg: #333;
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --transition-speed: 0.3s;
+  --radius: 4px;
+}
+
+/* ==========================
+   2. Global Resets & Base
+   ========================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Main Container (#app) */
-#app {
-  width: 95%;
-  max-width: 900px;
-  margin: 40px auto;
-  background-color: #fff8f0; /* Warm container background */
-  border-radius: 18px;
-  box-shadow: 0 6px 32px rgba(80, 60, 40, 0.12);
-  padding: 32px 24px 24px 24px;
-}
-.logo {
-  text-align: center;
-  margin-bottom: 20px;
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.5;
+  background-color: var(--light-bg);
+  color: var(--dark-bg);
 }
 
-.logo img {
-  width: 150px;
-  height: auto;
-  border-radius: 12px;
+a {
+  color: var(--brand-color);
+  text-decoration: none;
 }
 
-/* Headers and Titles */
-h1 {
-  font-family: 'Pacifico', cursive;
-  color: #a0522d;
+ul {
+  list-style: none;
+}
+
+/* ==========================
+   3. Layout & Containers
+   ========================== */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* ==========================
+   4. Header & Title
+   ========================== */
+header {
   text-align: center;
-  margin-bottom: 8px;
+  padding: 2rem 0;
+}
+
+header h1 {
   font-size: 2.5rem;
-  letter-spacing: 2px;
+  color: var(--brand-color);
 }
 
-h2 {
-  font-family: 'Pacifico', cursive;
-  color: #7b4f2c;
-  margin-top: 32px;
-  font-size: 1.4rem;
-  border-bottom: 2px solid #e0c3a2;
-  padding-bottom: 4px;
-  text-align: center;
-}
-
-.menu-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  margin: 20px auto;
-}
-
-
-.menu-section,
-.menu-section-highlight,
-.menu-section-special {
-  margin-bottom: 50px;
-}
-
-.menu-section-highlight {
-  background: #ffe5b4;
-  border-radius: 12px;
-  padding: 12px 0;
-}
-
-.menu-section-special {
-  background: #e3f2fd;
-  border-radius: 12px;
-  padding: 12px 0;
-}
-.menu-carousel {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding: 20px;
-  padding-bottom: 16px;
-  -webkit-overflow-scrolling: touch;
+/* ==========================
+   5. Menu & Accordion
+   ========================== */
+.accordion-toggle {
+  display: block;
   width: 100%;
+  background: var(--brand-color);
+  color: var(--light-bg);
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+
+.accordion-toggle:hover {
+  background: darken(var(--brand-color), 10%);
 }
 
 .menu-button {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-start;
-  width: 220px;
-  height: 100%;
-  min-height: 260px;
-  padding: 10px;
-  margin-bottom: 50px;
-
-  text-align: center;
-  background-color: #fffbe7;
-  border: 1px solid #e0c3a2;
-  border-radius: 14px;
-  box-shadow: 0 2px 10px rgba(160, 82, 45, 0.08);
-  position: relative;
-  transition: transform 0.2s ease;
-
-  scroll-snap-align: start;
-  flex: 0 0 auto;
-}
-
-.accordion-section {
-  margin-bottom: 16px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(160, 82, 45, 0.08);
-  background-color: #fff8ec;
-}
-
-.accordion-toggle {
-  background-color: #f4c47c;
-  border: none;
-  padding: 12px 18px;
   width: 100%;
-  text-align: left;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #4e342e;
+  background: #f7f7f7;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
   cursor: pointer;
-  border-radius: 10px;
-  transition: background 0.3s ease;
+  transition: transform var(--transition-speed);
 }
 
-.accordion-toggle:hover {
-  background-color: #f8d1a0;
+.menu-button:hover {
+  transform: scale(1.02);
 }
 
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.accordion-section.expanded .accordion-content {
-  max-height: 1000px; /* Enough to fit content */
-}
-
-
-.menu-button:hover, .menu-button:focus {
-  transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 6px 18px rgba(160, 82, 45, 0.18);
-  background: #fff3e0;
-  outline: none;
-}
-.menu-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
-}
-.menu-image {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  margin-bottom: 8px; 
-}
-
-/* Add space for menu item name under the image */
-.menu-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #7b4f2c;
-  text-align: center;
-  min-height: 24px; /* Reserve space for name even if empty */
-  letter-spacing: 0.5px;
-  width: 100%;
-  display: block;
-}
-.item-name {
-  font-family: 'Pacifico', cursive;
-  font-size: 1.1em;
-  color: #6c3b23;
-  margin-bottom: 6px;
-}
-
-
-.price {
+.menu-button .price {
   font-weight: bold;
-  color: #a0522d;
-  font-size: 1.1rem;
-  background: #fffbe7;
-  border-radius: 6px;
-  padding: 2px 10px;
-  box-shadow: 0 1px 2px rgba(160, 82, 45, 0.04);
 }
 
-.tooltip::after {
-  content: attr(data-title);
-  position: absolute;
-  left: 50%;
-  bottom: -28px;
-  transform: translateX(-50%);
-  background: #a0522d;
-  color: #fff;
-  padding: 2px 10px;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-  white-space: nowrap;
-  z-index: 10;
-}
-
-.menu-button:hover.tooltip::after,
-.menu-button:focus.tooltip::after {
-  opacity: 1;
-}
-
-#orderSummary {
-  background: #f3e5ab;
-  border-radius: 10px;
-  padding: 14px 18px;
-  margin: 18px 0 8px 0;
-  box-shadow: 0 1px 6px rgba(160, 82, 45, 0.07);
-}
-
-#orderList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#orderList li {
-  padding: 4px 0;
-  border-bottom: 1px dashed #d7b899;
-  font-size: 1.05rem;
-}
-
-#orderTotal {
-  font-weight: bold;
-  color: #a0522d;
-  font-size: 1.2rem;
-}
-
-form#order-form {
-  background: #fffbe7;
-  border-radius: 12px;
-  padding: 18px 20px;
-  box-shadow: 0 1px 8px rgba(160, 82, 45, 0.06);
-  margin-top: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-form label {
-  font-weight: 500;
-  color: #7b4f2c;
-  margin-bottom: 2px;
-}
-
-form input {
-  padding: 8px 10px;
-  border-radius: 6px;
-  border: 1px solid #e0c3a2;
-  font-size: 1rem;
-  background: #fff;
-  margin-bottom: 6px;
-  transition: border 0.2s;
-}
-
-form input:focus {
-  border: 1.5px solid #a0522d;
-  outline: none;
-}
-#address.autofilled {
-  border: 2px solid #91d189;
-  background-color: #f0fff0;
-}
-
-#sendOrderBtn {
-  background: #a0522d;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 0;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background 0.2s, transform 0.1s;
-}
-
-#sendOrderBtn:hover, #sendOrderBtn:focus {
-  background: #7b4f2c;
-  transform: scale(1.03);
-}
-
-@media (max-width: 600px) {
-  #app {
-    padding: 10px 2vw;
-  }
-  .menu-buttons {
-    gap: 10px;
-  }
-  .menu-button {
-    min-height: 320px; 
-  }
-  .menu-image {
-    height: 100%; 
-    object-fit: cover;
-  }
-}
-.size-modal {
-  width: 360px;
-  padding: 20px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fffbe7;
-  border: 2px solid #e0c3a2;
-  border-radius: 12px;
-  font-family: 'Pacifico', cursive;
-  color: #7b4f2c;
-  box-shadow: 0 5px 20px rgba(160, 82, 45, 0.15);
-  z-index: 1000;
-  animation: fadeIn 0.3s ease-out;
-}
-
-.close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  background: none;
-  font-size: 24px;
-  border: none;
-  color: #7b4f2c;
-  cursor: pointer;
-}
-
-.size-options {
-  display: flex;
-  flex-wrap: wrap; /* Allow wrapping on small screens */
-  gap: 12px;
-  justify-content: center;
-  margin: 1em 0;
-}
-
-
-@keyframes fadeSlide {
-  0% {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  60% {
-    opacity: 0.6;
-    transform: translateY(4px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.option-animate {
-  animation: fadeSlide 0.5s ease-out forwards;
-}
-
-.size-options button {
-  flex: 1 1 100px;
-  padding: 10px;
-  min-width: 80px;
-  border-radius: 8px;
-  border: none;
-  background-color: #f1d3b3;
-  font-size: 1rem;
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeSlide 0.4s ease forwards;
-  max-width: 120px
-}
-
-
-@keyframes slideInOption {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.confirm-wrap {
-  text-align: center;
-}
-#confirm-section {
- opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  text-align: center;
-}
-#confirm-section.show {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-#confirm-size-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 0.6em 1.5em;
-  border-radius: 4px;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-#confirm-size-btn:active {
-  transform: scale(0.98);
-  background-color: #eabf9b;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-}
-.selected-size {
-  background-color: #a3d3a2;
-  color: #1b3e1b;
-  font-weight: bold;
-  box-shadow: 0 0 8px rgba(0, 128, 0, 0.25);
-  transform: scale(1.07);
-  transition: all 0.2s ease-in-out;
-}
-#orderSuccessMsg {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #dff8e7;
-  color: #2b7a4b;
-  padding: 16px 24px;
-  border-radius: 12px;
-  font-size: 1.3rem;
-  font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  z-index: 9999;
-  animation: fadeBounce 1.2s ease forwards;
-  display: none;
-}
-
-@keyframes fadeBounce {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: translateX(-50%) scale(1.1);
-  }
-  100% {
-    transform: translateX(-50%) scale(1);
-  }
-}
-/* Add to main.css */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.size-modal {
-  animation: fadeIn 0.3s ease-out;
-}
-.size-backdrop {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background-color: rgba(0,0,0,0.4);
-  -webkit-backdrop-filter: blur(3px); /* Add this line */
-  backdrop-filter: blur(3px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-.fade-in {
-  animation: fadeIn 0.3s ease-in-out;
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+/* ==========================
+   6. Modal & Backdrop
+   ========================== */
 .backdrop-overlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: flex; justify-content: center; align-items: center;
-  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--overlay-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn var(--transition-speed) ease-out forwards;
 }
 
 .modal-box {
-  background: white;
-  padding: 1em;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  background: var(--light-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  max-width: 90%;
+  width: 400px;
+  position: relative;
 }
-@keyframes confirmPop {
+
+.modal-box h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.modal-box .close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ==========================
+   7. Size Options
+   ========================== */
+.size-options {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.size-options button {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #bbb;
+  border-radius: var(--radius);
+  background: #fafafa;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+
+.size-options button:hover,
+.size-options .selected-size {
+  background: var(--brand-color);
+  color: var(--light-bg);
+}
+
+/* ==========================
+   8. Confirm Section & Button
+   ========================== */
+.size-confirm-wrap {
+  text-align: right;
+  margin-top: 1rem;
+  display: none;
+}
+
+.modal-confirm-btn {
+  background: var(--brand-color);
+  color: var(--light-bg);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity var(--transition-speed),
+              transform var(--transition-speed);
+}
+
+.modal-confirm-btn.confirm-animate {
+  animation: popIn 0.4s ease-out forwards;
+}
+
+/* ==========================
+   9. Animations
+   ========================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes popIn {
   0% {
-    transform: scale(0.8);
     opacity: 0;
+    transform: scale(0.5);
   }
   60% {
-    transform: scale(1.1);
     opacity: 1;
+    transform: scale(1.2);
   }
   100% {
     transform: scale(1);
   }
 }
 
-.show.confirm-animate .modal-confirm-btn {
-  animation: confirmPop 0.4s ease-out;
+/* ==========================
+   10. Order Summary & Form
+   ========================== */
+#orderList {
+  margin: 1rem 0;
+  padding: 0;
 }
 
+#orderList li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+#orderTotal {
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+#order-form input,
+#order-form select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #bbb;
+  border-radius: var(--radius);
+}
+
+/* ==========================
+   11. Utility Helpers
+   ========================== */
+.hidden {
+  display: none !important;
+}
 
 
 

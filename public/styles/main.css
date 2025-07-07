@@ -109,6 +109,12 @@ h1, h2 {
   cursor: pointer;
   transition: transform var(--transition-speed);
 }
+.menu-button img {
+  max-width: 100px; /* Shrink it down, adjust as needed */
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
 
 .menu-button:hover {
   transform: scale(1.02);
@@ -207,16 +213,8 @@ h1, h2 {
    6. Modal & Backdrop
    ========================== */
 .backdrop-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--overlay-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn var(--transition-speed) ease-out forwards;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: none;
 }
 
 .modal-box {

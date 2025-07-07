@@ -335,14 +335,26 @@ form input:focus {
 
 .size-options {
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 12px;
+  justify-content: center;
   margin: 1em 0;
 }
 
+
+@keyframes fadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .size-options button {
-  flex: 1;
+  flex: 1 1 100px;
   padding: 10px;
   min-width: 80px;
   border-radius: 8px;
@@ -352,8 +364,10 @@ form input:focus {
   cursor: pointer;
   opacity: 0;
   transform: translateY(20px);
-  animation: slideInOption 0.4s ease forwards;
+  animation: fadeSlide 0.4s ease forwards;
+  max-width: 120px
 }
+
 
 @keyframes slideInOption {
   to {

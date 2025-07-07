@@ -291,7 +291,7 @@ form input:focus {
   transform: scale(1.03);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   #app {
     padding: 10px 2vw;
   }
@@ -299,13 +299,17 @@ form input:focus {
     gap: 10px;
   }
   .menu-button {
-    min-width: 90px;
-    min-height: 110px;
-    padding: 8px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .menu-image {
-    width: 48px;
-    height: 48px;
+    width: 33.33vw;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
   }
 }
 .size-modal {

@@ -119,6 +119,38 @@ header h1 {
   overflow: hidden;
   transition: max-height 0.3s ease;
 }
+.menu-carousel {
+  position: relative;
+  margin: 2rem auto;
+  max-width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.carousel-item {
+  flex: 0 0 80%;           /* show one item plus a peek */
+  margin: 0 0.5rem;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--brand-color);
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.prev { left: 0.5rem; }
+.next { right: 0.5rem; }
+
 /* ==========================
    6. Modal & Backdrop
    ========================== */

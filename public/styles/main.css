@@ -165,8 +165,6 @@ h2 {
 
 /* Add space for menu item name under the image */
 .menu-name {
-  margin-top: 8px;
-  margin-bottom: 6px;
   font-size: 1.1rem;
   font-weight: 600;
   color: #7b4f2c;
@@ -188,7 +186,6 @@ h2 {
   font-weight: bold;
   color: #a0522d;
   font-size: 1.1rem;
-  margin-top: 4px;
   background: #fffbe7;
   border-radius: 6px;
   padding: 2px 10px;

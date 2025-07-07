@@ -68,6 +68,15 @@ function showSizeOptions(item, price) {
       <button class="modal-confirm-btn">Confirm</button>
     </div>
   `;
+modal.classList.add("modal-box");
+backdrop.classList.add("backdrop-overlay", "fade-in");
+
+modal.setAttribute("role", "dialog");
+modal.setAttribute("aria-labelledby", "modal-title");
+
+  modal.querySelector(".close-btn").addEventListener("click", () => {
+  backdrop.remove();
+});
 
   backdrop.appendChild(modal);
   document.body.appendChild(backdrop);

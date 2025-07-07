@@ -469,6 +469,7 @@ form input:focus {
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   background-color: rgba(0,0,0,0.4);
+  -webkit-backdrop-filter: blur(3px); /* Add this line */
   backdrop-filter: blur(3px);
   display: flex;
   align-items: center;

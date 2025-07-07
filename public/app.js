@@ -110,7 +110,7 @@ const confirmBtn = modal.querySelector(".modal-confirm-btn");
     });
   });
 
-  modal.querySelector("#confirm-size-btn").addEventListener("click", () => {
+  modal.querySelector(".modal-confirm-btn").addEventListener("click", () => {
     if (selectedSize) {
       addToOrder(item, modifiedPrice, selectedSize);
       backdrop.remove();

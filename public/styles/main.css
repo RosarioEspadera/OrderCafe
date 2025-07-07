@@ -95,6 +95,11 @@ h1, h2 {
   cursor: pointer;
   transition: background var(--transition-speed);
 }
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
 .accordion-section {
   border: 1px solid var(--dark-bg);
   border-radius: var(--radius);

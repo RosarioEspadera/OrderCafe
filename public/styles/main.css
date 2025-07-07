@@ -91,6 +91,7 @@ h2 {
   align-items: center;
   justify-content: space-between;
   width: 220px;
+  height: 100%;
   min-height: 260px;
   padding: 16px 10px 12px 10px;
   margin-bottom: 50px;
@@ -156,8 +157,10 @@ h2 {
   padding: 12px;
 }
 .menu-image {
-  width: 180px;
-  height: auto;
+  flex-grow: 1;
+  width: 100%;
+  object-fit: cover;
+  object-radius: 8px; 
 }
 
 /* Add space for menu item name under the image */
@@ -299,17 +302,11 @@ form input:focus {
     gap: 10px;
   }
   .menu-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    min-height: 320px; 
   }
   .menu-image {
-    width: 33.33vw;
-    height: auto;
+    height: 100%; 
     object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
   }
 }
 .size-modal {

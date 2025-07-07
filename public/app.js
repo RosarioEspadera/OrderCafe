@@ -259,4 +259,3 @@ const details = {
       alert(`Failed to send order: ${error.text || "Unknown error"}`);
     });
 }
-initializeOrder();

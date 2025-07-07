@@ -260,9 +260,11 @@ h1, h2 {
    8. Confirm Section & Button
    ========================== */
 .size-confirm-wrap {
-  text-align: right;
-  margin-top: 1rem;
-  display: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .modal-confirm-btn {

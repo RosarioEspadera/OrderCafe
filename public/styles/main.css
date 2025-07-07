@@ -150,6 +150,19 @@ header h1 {
 
 .prev { left: 0.5rem; }
 .next { right: 0.5rem; }
+.menu-carousel .carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.menu-carousel .carousel-item {
+  scroll-snap-align: center;
+  flex: 0 0 80%;
+  position: relative;
+}
+
 
 /* ==========================
    6. Modal & Backdrop

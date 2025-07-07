@@ -51,11 +51,10 @@ document.addEventListener("DOMContentLoaded", initializeOrder);
 
 // 🧾 Size Selection Modal
 function showSizeOptions(item, price) {
+  const modal = document.createElement("div");
+  const backdrop = document.createElement("div");
   let selectedSize = null;
   let modifiedPrice = price;
-
-  const backdrop = document.createElement("div");
-  const modal = document.createElement("div");
 
   modal.innerHTML = `
     <button class="close-btn">×</button>

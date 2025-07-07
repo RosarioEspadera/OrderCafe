@@ -292,26 +292,17 @@ h1, h2 {
 
 /* when you actually open your modal, your JS should do: */
 .backdrop-overlay.active {
-  display: flex;        /* or whatever you use to show it */
-  pointer-events: auto; /* now it catches clicks */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
 }
 
 
 .modal-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1001;
-  background: #fff;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  max-width: 400px;
-  width: 90%;
+  position: relative; /* or remove this entirely */
+  transform: none;
 }
-
-
 
 
 .modal-box h2 {
@@ -460,10 +451,6 @@ h1, h2 {
     opacity: 1;
     transform: scale(1) translate(-50%, -50%);
   }
-}
-
-.modal-box {
-  animation: fadeInScale 0.3s ease;
 }
 
 /* ==========================

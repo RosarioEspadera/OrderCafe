@@ -106,25 +106,16 @@ sizeButtons.forEach((btn, i) => {
       b.textContent = b.getAttribute("data-size");
     });
 
-    btn.classList.add("selected-size");
-    btn.textContent = `✓ ${btn.getAttribute("data-size")}`;
-    selectedSize = btn.getAttribute("data-size");
+      btn.addEventListener("click", () => {
+     // … your click logic …
+     confirmBtn.addEventListener("animationend", () => {
+       confirmSection.classList.remove("confirm-animate");
+     }, { once: true });
+   });  // ← closes btn.addEventListener
+ }); // ← closes sizeButtons.forEach
+ }   // ← now correctly closes showSizeOptions
 
-    // Adjust price based on size
-    if (selectedSize === "Small") modifiedPrice = price * 0.9;
-    else if (selectedSize === "Large") modifiedPrice = price * 1.1;
-    modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
-
-    confirmSection.style.display = "block";
-    confirmSection.classList.add("show", "confirm-animate");
-
-    // 🪄 Remove animation class after it finishes
-  confirmBtn.addEventListener("animationend", () => {
-    confirmSection.classList.remove("confirm-animate");
-  }, { once: true });
-});
-} // ← closes showSizeOptions
-
+                    }
 // 🛒 Order Logic
 function addToOrder(item, price, size = null) {
   orders.push({ name: item, price, size });

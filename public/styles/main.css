@@ -65,6 +65,8 @@ header h1 {
    5. Menu & Accordion
    ========================== */
 .accordion-toggle {
+   position: relative;
+  padding-right: 1.5rem;
   display: block;
   width: 100%;
   background: var(--brand-color);
@@ -75,11 +77,22 @@ header h1 {
   cursor: pointer;
   transition: background var(--transition-speed);
 }
-
+.accordion-section.expanded .accordion-toggle::after {
+  content: "▾";
+  position: absolute;
+  right: 0.5rem;
+}
+.accordion-toggle::after {
+  content: "▸";
+  position: absolute;
+  right: 0.5rem;
+}
 .accordion-toggle:hover {
   background: darken(var(--brand-color), 10%);
 }
-
+.accordion-section.expanded .menu-list {
+  max-height: 500px; /* big enough to fit your list */
+}
 .menu-button {
   display: flex;
   justify-content: space-between;
@@ -101,7 +114,11 @@ header h1 {
 .menu-button .price {
   font-weight: bold;
 }
-
+.menu-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
 /* ==========================
    6. Modal & Backdrop
    ========================== */

@@ -124,7 +124,7 @@ function showSizeOptions(item, price) {
   // Apply classes & accessibility
 modal.classList.add("modal-box");
 backdrop.classList.add("backdrop-overlay");
-backdrop.classList.add("active");
+backdrop.classList.add("backdrop-overlay", "active");
 modal.setAttribute("role", "dialog");
 modal.setAttribute("aria-labelledby", "modal-title");
 

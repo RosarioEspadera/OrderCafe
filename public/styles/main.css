@@ -261,21 +261,22 @@ h1, h2 {
    ========================== */
 .backdrop-overlay {
   position: fixed;
-  inset: 0;                     /* shorthand for top:0; right:0; bottom:0; left:0 */
-  display: flex;                /* enable centering */
-  justify-content: center;      /* horizontal center */
-  align-items: center;          /* vertical center */
+  inset: 0;                     /* shorthand for top/right/bottom/left: 0 */
+  display: flex;                /* turn on flex centering */
+  justify-content: center;      /* center horizontally */
+  align-items: center;          /* center vertically */
   background-color: rgba(0,0,0,0.2);
   z-index: 999;
 }
 
 .modal-box {
-  position: relative;           /* keep it within the flex parent */
+  position: relative;           /* keep it inside the flex parent */
   background: var(--light-bg);
   padding: 2rem;
   border-radius: var(--radius);
   max-width: 90%;
   width: 350px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .modal-box h2 {

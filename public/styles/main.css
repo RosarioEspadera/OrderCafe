@@ -143,21 +143,34 @@ h1, h2 {
 .accordion-section.meals    { border-color: var(--color-meals); }
 .accordion-section.drinks   { border-color: var(--color-drinks); }
 
+/* Generic override (optional) */
+.accordion-toggle {
+  color: #333333;   /* fallback/dark text */
+}
+
+/* Per-category label colors */
 .accordion-section.desserts .accordion-toggle {
-  color: #D2691E;  /* chocolate-orange */
+  color: #E07A5F;   /* warm peach for Desserts */
 }
 
 .accordion-section.coffee .accordion-toggle {
-  color: #3B2E2A;  /* dark mocha */
+  color: #6A040F;   /* deep burgundy for Coffee */
 }
 
 .accordion-section.meals .accordion-toggle {
-  color: #556B2F;  /* deep olive */
+  color: #2B2D42;   /* dark slate for Meals */
 }
 
 .accordion-section.drinks .accordion-toggle {
-  color: #2E8B57;  /* teal green */
+  color: #118AB2;   /* cool teal for Drinks */
 }
+
+/* Optional: change on hover or when expanded */
+.accordion-toggle:hover,
+.accordion-section.expanded .accordion-toggle {
+  opacity: 0.8;
+}
+
 
 .menu-button {
   display: flex;

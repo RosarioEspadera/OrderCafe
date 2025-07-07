@@ -74,22 +74,27 @@ backdrop.addEventListener("click", e => {
   let modifiedPrice = price;
 
   
-modal.querySelectorAll(".size-options button").forEach(button => {
-  button.addEventListener("click", function () {
-    modal.querySelectorAll(".size-options button").forEach(btn => {
+    const confirmSection = modal.querySelector("#confirm-section");
+    const sizeButtons = modal.querySelectorAll(".size-options button"); 
+  
+    sizeButtons.forEach(button => {
+    button.addEventListener("click", function () {
+    confirmSection.style.display = "block";
+    confirmSection.classList.add("show");
+
+    sizeButtons.forEach(btn => {
       btn.classList.remove("selected-size");
       btn.textContent = btn.getAttribute("data-size");
     });
 
     this.classList.add("selected-size");
     this.textContent = `✓ ${this.getAttribute("data-size")}`;
-
     selectedSize = this.getAttribute("data-size");
+
     modifiedPrice = price;
     if (selectedSize === "Small") modifiedPrice = price * 0.9;
     else if (selectedSize === "Large") modifiedPrice = price * 1.1;
     modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
-    modal.querySelector("#confirm-section").style.display = "block";
   });
 });
 

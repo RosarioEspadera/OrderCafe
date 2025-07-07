@@ -1,38 +1,7 @@
 // 🌟 Global state
 const orders = [];
 
-// ✅ Initialization
-function initializeOrder() {
-  if (typeof emailjs !== "undefined") {
-    emailjs.init("AqvkFhQnxowOJda9J");
-  } else {
-    console.error("EmailJS library is not loaded.");
-  }
-
-  
-  document.querySelectorAll(".accordion-toggle").forEach(toggle => {
-    toggle.addEventListener("click", () => {
-      toggle.parentElement.classList.toggle("expanded");
-    });
-  });
-
-  // Menu button handler
-  document.querySelectorAll(".menu-button").forEach(button => {
-    button.addEventListener("click", () => {
-      const item = button.getAttribute("data-title");
-      const price = parseFloat(button.querySelector(".price").textContent.replace("$", ""));
-      const hasSize = button.getAttribute("data-size") === "true";
-      hasSize ? showSizeOptions(item, price) : addToOrder(item, price);
-    });
-  });
-
-  // Send order
-  const sendOrderBtn = document.getElementById("sendOrderBtn");
-  if (sendOrderBtn) {
-    sendOrderBtn.addEventListener("click", sendOrder);
-  }
-
-// 🗺 Reverse-geocode helper
+// 🗺 Reverse-geocode helper (top-level, not nested)
 async function fetchAddressFromCoords(lat, lng, input) {
   const apiKey = "432acce8c24a4f58ac8576dc40dd5525";
   const url    = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`;
@@ -45,10 +14,8 @@ async function fetchAddressFromCoords(lat, lng, input) {
       throw new Error("No address found");
     }
 
-    // Fill and mark as autofilled
     input.value = data.results[0].formatted;
     input.classList.add("autofilled");
-    return; 
   }
   catch (err) {
     console.error("Reverse geocoding failed:", err);
@@ -58,7 +25,37 @@ async function fetchAddressFromCoords(lat, lng, input) {
 
 // ✅ Initialization: attach all your handlers
 function initializeOrder() {
-  // … your existing init logic (accordion, menu-buttons, emailjs, etc.) …
+  // EmailJS init
+  if (typeof emailjs !== "undefined") {
+    emailjs.init("AqvkFhQnxowOJda9J");
+  } else {
+    console.error("EmailJS library is not loaded.");
+  }
+
+  // Accordion toggles
+  document.querySelectorAll(".accordion-toggle").forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      toggle.parentElement.classList.toggle("expanded");
+    });
+  });
+
+  // Menu-item buttons
+  document.querySelectorAll(".menu-button").forEach(button => {
+    button.addEventListener("click", () => {
+      const item     = button.dataset.title;
+      const price    = parseFloat(
+        button.querySelector(".price").textContent.replace("$", "")
+      );
+      const hasSize  = button.dataset.size === "true";
+      hasSize ? showSizeOptions(item, price) : addToOrder(item, price);
+    });
+  });
+
+  // Send order button
+  const sendOrderBtn = document.getElementById("sendOrderBtn");
+  if (sendOrderBtn) {
+    sendOrderBtn.addEventListener("click", sendOrder);
+  }
 
   // 📍 “Use My Location” button handler
   const geoBtn       = document.getElementById("useLocationBtn");
@@ -66,7 +63,6 @@ function initializeOrder() {
 
   if (geoBtn && addressInput && navigator.geolocation) {
     geoBtn.addEventListener("click", async () => {
-      // disable + show loading
       geoBtn.disabled    = true;
       geoBtn.textContent = "…";
 
@@ -79,7 +75,7 @@ function initializeOrder() {
           })
         );
 
-        // 2) reverse-geocode
+        // 2) reverse-geocode into the input
         await fetchAddressFromCoords(
           position.coords.latitude,
           position.coords.longitude,
@@ -90,7 +86,6 @@ function initializeOrder() {
         alert("Couldn’t auto-fill your address. Please enter it manually.");
       }
       finally {
-        // restore button
         geoBtn.disabled    = false;
         geoBtn.textContent = "📍";
       }
@@ -98,7 +93,7 @@ function initializeOrder() {
   }
 }
 
-// Kick it off when DOM is ready
+// Kick everything off
 document.addEventListener("DOMContentLoaded", initializeOrder);
 
 // 🧾 Size Selection Modal

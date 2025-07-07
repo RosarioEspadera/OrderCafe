@@ -56,25 +56,28 @@ function showSizeOptions(item, price) {
 
   const backdrop = document.createElement("div");
   const modal = document.createElement("div");
+
   modal.innerHTML = `
-  <button class="close-btn">×</button>
-  <h2>Select Size for ${item}</h2>
-  <div class="size-options">
-    <button data-size="Small">Small</button>
-    <button data-size="Medium">Medium</button>
-    <button data-size="Large">Large</button>
-  </div>
-  <div class="size-confirm-wrap" style="display:none;">
-    <button class="modal-confirm-btn">Confirm</button>
-  </div>
-`;
+    <button class="close-btn">×</button>
+    <h2>Select Size for ${item}</h2>
+    <div class="size-options">
+      <button data-size="Small">Small</button>
+      <button data-size="Medium">Medium</button>
+      <button data-size="Large">Large</button>
+    </div>
+    <div class="size-confirm-wrap" style="display:none;">
+      <button class="modal-confirm-btn">Confirm</button>
+    </div>
+  `;
 
-
-backdrop.appendChild(modal);
+  backdrop.appendChild(modal);
   document.body.appendChild(backdrop);
 
-  // Your confirm logic stays right here:
+  const sizeButtons = modal.querySelectorAll(".size-options button");
+  const confirmSection = modal.querySelector(".size-confirm-wrap");
   const confirmBtn = modal.querySelector(".modal-confirm-btn");
+
+  // 🎯 Confirm button logic
   confirmBtn.addEventListener("click", () => {
     if (selectedSize) {
       addToOrder(item, modifiedPrice, selectedSize);
@@ -83,11 +86,8 @@ backdrop.appendChild(modal);
       alert("Please select a size first.");
     }
   });
-}
 
-  // Animate size options
-  const sizeButtons = modal.querySelectorAll(".size-options button");
-  const confirmSection = modal.querySelector(".size-confirm-wrap");
+  // 🌀 Animate size options
   sizeButtons.forEach((btn, i) => {
     setTimeout(() => btn.classList.add("option-animate"), i * 100);
     btn.addEventListener("click", () => {
@@ -108,6 +108,7 @@ backdrop.appendChild(modal);
       confirmSection.classList.add("show");
     });
   });
+}
 
 
 

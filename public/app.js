@@ -110,7 +110,6 @@ sizeButtons.forEach((btn, i) => {
       btn.addEventListener("click", () => {
         confirmBtn.addEventListener("animationend", () => {
           confirmSection.classList.remove("confirm-animate");
-        }, { once: true });
   });  // ← closes outer btn.addEventListener
 });    // ← closes forEach
 

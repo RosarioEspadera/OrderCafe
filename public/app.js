@@ -32,34 +32,73 @@ function initializeOrder() {
     sendOrderBtn.addEventListener("click", sendOrder);
   }
 
+// 🗺 Reverse-geocode helper
+async function fetchAddressFromCoords(lat, lng, input) {
+  const apiKey = "432acce8c24a4f58ac8576dc40dd5525";
+  const url    = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`;
+
+  try {
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (!data.results?.length) {
+      throw new Error("No address found");
+    }
+
+    // Fill and mark as autofilled
+    input.value = data.results[0].formatted;
+    input.classList.add("autofilled");
+    return; 
+  }
+  catch (err) {
+    console.error("Reverse geocoding failed:", err);
+    throw err;
+  }
+}
+
+// ✅ Initialization: attach all your handlers
+function initializeOrder() {
+  // … your existing init logic (accordion, menu-buttons, emailjs, etc.) …
+
+  // 📍 “Use My Location” button handler
   const geoBtn       = document.getElementById("useLocationBtn");
-  const addressInput = document.getElementById("address");
+  const addressInput = document.getElementById("custAddress");
+
   if (geoBtn && addressInput && navigator.geolocation) {
-    geoBtn.addEventListener("click", () => {
-      geoBtn.disabled   = true;
+    geoBtn.addEventListener("click", async () => {
+      // disable + show loading
+      geoBtn.disabled    = true;
       geoBtn.textContent = "…";
 
-      navigator.geolocation.getCurrentPosition(
-        async ({ coords }) => {
-          await fetchAddressFromCoords(
-            coords.latitude,
-            coords.longitude,
-            addressInput
-          );
-          geoBtn.disabled   = false;
-          geoBtn.textContent = "📍";
-        },
-        () => {
-          alert("Permission denied or unavailable.");
-          geoBtn.disabled   = false;
-          geoBtn.textContent = "📍";
-        },
-        { enableHighAccuracy: true, timeout: 10000 }
-      );
+      try {
+        // 1) get coords
+        const position = await new Promise((res, rej) =>
+          navigator.geolocation.getCurrentPosition(res, rej, {
+            enableHighAccuracy: true,
+            timeout: 10000
+          })
+        );
+
+        // 2) reverse-geocode
+        await fetchAddressFromCoords(
+          position.coords.latitude,
+          position.coords.longitude,
+          addressInput
+        );
+      }
+      catch (err) {
+        alert("Couldn’t auto-fill your address. Please enter it manually.");
+      }
+      finally {
+        // restore button
+        geoBtn.disabled    = false;
+        geoBtn.textContent = "📍";
+      }
     });
   }
 }
 
+// Kick it off when DOM is ready
 document.addEventListener("DOMContentLoaded", initializeOrder);
 
 // 🧾 Size Selection Modal
@@ -199,21 +238,6 @@ function calculateTotal() {
   return orders.reduce((sum, order) => sum + order.price, 0);
 }
 
-// 📍 Address Auto-fill
-function fetchAddressFromCoords(lat, lng, input) {
-  const apiKey = "432acce8c24a4f58ac8576dc40dd5525";
-  const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`;
-
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      if (data.results?.length) {
-        input.value = data.results[0].formatted;
-        input.classList.add("autofilled");
-      }
-    })
-    .catch(err => console.error("Reverse geocoding failed:", err));
-}
 
 // ✉️ Order Submission
 function sendOrder() {

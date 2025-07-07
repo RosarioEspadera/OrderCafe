@@ -118,11 +118,13 @@ sizeButtons.forEach((btn, i) => {
     confirmSection.classList.add("show", "confirm-animate");
 
     // 🪄 Remove animation class after it finishes
-    confirmBtn.addEventListener("animationend", () => {
-  confirmSection.classList.remove("confirm-animate");
-}, { once: true });
-    });
-  });
+  confirmBtn.addEventListener("animationend", () => {
+    confirmSection.classList.remove("confirm-animate");
+  }, { once: true });
+});
+} // ← closes showSizeOptions
+
+
 
 
 

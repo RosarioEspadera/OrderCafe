@@ -13,12 +13,14 @@ function initializeOrder() {
       console.error("sendOrderBtn not found in the DOM");
     }
 
-    document.querySelectorAll(".accordion-toggle").forEach(toggle => {
-      toggle.addEventListener("click", () => {
-        const section = toggle.parentElement;
-        section.classList.toggle("expanded");
-      });
-    });
+   document.querySelectorAll(".accordion-toggle").forEach(toggle => {
+  toggle.addEventListener("click", () => {
+    const section = toggle.parentElement;
+    section.classList.toggle("expanded");
+    console.log("Toggled:", section); // ✅ Debug output
+  });
+});
+
 
  document.querySelectorAll(".menu-button").forEach(button => {
       button.addEventListener("click", () => {

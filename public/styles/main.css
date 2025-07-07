@@ -63,6 +63,7 @@ header h1 {
 }
 h1, h2 {
   font-family: 'Pacifico', cursive;
+  color: #6c3f99;
 }
 
 
@@ -137,8 +138,14 @@ h1, h2 {
 }
 
 .carousel-item {
-  flex: 0 0 80%;           /* show one item plus a peek */
-  margin: 0 0.5rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+  animation-delay: calc(var(--index) * 0.1s);
 }
 
 .carousel-btn {
@@ -291,19 +298,18 @@ h1, h2 {
   animation: popIn 0.4s ease-out forwards;
 }
 .confirm-button {
-  background-color: #1c1c1c;
-  color: #fff;
-  font-family: 'Lora', serif;
-  padding: 0.8rem 1.5rem;
-  border-radius: 8px;
+  background-color: #6c3f99;
+  color: white;
+  font-family: 'Pacifico', cursive;
+  padding: 0.8rem 1.4rem;
   border: none;
+  border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .confirm-button:hover {
-  background-color: #444;
   transform: scale(1.05);
 }
 
@@ -314,11 +320,12 @@ h1, h2 {
 /* ==========================
    9. Animations
    ========================== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
 @keyframes popIn {
   0% {
     opacity: 0;

@@ -64,14 +64,18 @@ document.addEventListener("DOMContentLoaded", initializeOrder);
 
 // 🧾 Size Selection Modal
 function showSizeOptions(item, price) {
-  const modal = document.createElement("div");
+  // Create nodes
+  const modal    = document.createElement("div");
   const backdrop = document.createElement("div");
-  let selectedSize = null;
+  
+  // Track selection + adjusted price
+  let selectedSize  = null;
   let modifiedPrice = price;
 
+  // Inject inner HTML
   modal.innerHTML = `
-    <button class="close-btn">×</button>
-    <h2>Select Size for ${item}</h2>
+    <button class="close-btn" aria-label="Close">×</button>
+    <h2 id="modal-title">Select Size for ${item}</h2>
     <div class="size-options">
       <button data-size="Small">Small</button>
       <button data-size="Medium">Medium</button>
@@ -81,32 +85,64 @@ function showSizeOptions(item, price) {
       <button class="modal-confirm-btn">Confirm</button>
     </div>
   `;
-modal.classList.add("modal-box");
-backdrop.classList.add("backdrop-overlay", "fade-in");
 
-modal.setAttribute("role", "dialog");
-modal.setAttribute("aria-labelledby", "modal-title");
+  // Apply classes & accessibility
+  modal.classList.add("modal-box");
+  backdrop.classList.add("backdrop-overlay");
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-labelledby", "modal-title");
 
+  // Close button
   modal.querySelector(".close-btn").addEventListener("click", () => {
-  backdrop.remove();
-});
+    backdrop.remove();
+  });
 
+  // Mount to DOM
   backdrop.appendChild(modal);
   document.body.appendChild(backdrop);
 
-  const sizeButtons = modal.querySelectorAll(".size-options button");
-  const confirmSection = modal.querySelector(".size-confirm-wrap");
-  const confirmBtn = modal.querySelector(".modal-confirm-btn");
+  // Grab the buttons
+  const sizeBtns      = modal.querySelectorAll(".size-options button");
+  const confirmWrap   = modal.querySelector(".size-confirm-wrap");
+  const confirmBtn    = modal.querySelector(".modal-confirm-btn");
 
-  // 🎯 Confirm button logic
-  confirmBtn.addEventListener("click", () => {
-    if (selectedSize) {
-      addToOrder(item, modifiedPrice, selectedSize);
-      backdrop.remove();
-    } else {
-      alert("Please select a size first.");
-    }
+  // 1) Size‐click handler: mark & adjust price
+  sizeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      // deselect all
+      sizeBtns.forEach(b => b.classList.remove("selected-size"));
+
+      // select this one
+      btn.classList.add("selected-size");
+      selectedSize = btn.dataset.size;
+
+      // price logic (tweak as you like)
+      switch (selectedSize) {
+        case "Small":
+          modifiedPrice = +(price * 0.9).toFixed(2);  // 10% off
+          break;
+        case "Medium":
+          modifiedPrice = price;                      // base price
+          break;
+        case "Large":
+          modifiedPrice = +(price * 1.2).toFixed(2);  // 20% upcharge
+          break;
+      }
+
+      // reveal Confirm
+      confirmWrap.style.display = "block";
+    });
   });
+
+  // 2) Confirm: add to order & teardown
+  confirmBtn.addEventListener("click", () => {
+    if (!selectedSize) {
+      return alert("Please select a size first.");
+    }
+    addToOrder(item, modifiedPrice, selectedSize);
+    backdrop.remove();
+  });
+}
 
 // 🌀 Animate size options
 sizeButtons.forEach((btn, i) => {

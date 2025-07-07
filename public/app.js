@@ -60,17 +60,18 @@ function showSizeOptions(item, price) {
   const modal = document.createElement("div");
   modal.className = "size-modal";
   modal.innerHTML = `
-    <button class="close-btn">×</button>
-    <h2>Select Size for ${item}</h2>
-    <div class="size-options">
-      <button data-size="Small">Small</button>
-      <button data-size="Medium">Medium</button>
-      <button data-size="Large">Large</button>
-    </div>
-    <div id="confirm-section" style="display: none;">
-      <button id="confirm-size-btn">Confirm</button>
-    </div>
-  `;
+  <button class="close-btn">×</button>
+  <h2>Select Size for ${item}</h2>
+  <div class="size-options">
+    <button data-size="Small">Small</button>
+    <button data-size="Medium">Medium</button>
+    <button data-size="Large">Large</button>
+  </div>
+  <div class="size-confirm-wrap" style="display:none;">
+    <button class="modal-confirm-btn">Confirm</button>
+  </div>
+`;
+
 
   backdrop.appendChild(modal);
   document.body.appendChild(backdrop);
@@ -86,7 +87,8 @@ function showSizeOptions(item, price) {
 
   // Animate size options
   const sizeButtons = modal.querySelectorAll(".size-options button");
-  const confirmSection = modal.querySelector("#confirm-section");
+  const confirmSection = modal.querySelector(".size-confirm-wrap");
+const confirmBtn = modal.querySelector(".modal-confirm-btn");
   sizeButtons.forEach((btn, i) => {
     setTimeout(() => btn.classList.add("option-animate"), i * 100);
     btn.addEventListener("click", () => {

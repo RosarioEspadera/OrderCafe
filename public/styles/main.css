@@ -272,6 +272,10 @@ form input:focus {
   border: 1.5px solid #a0522d;
   outline: none;
 }
+#address.autofilled {
+  border: 2px solid #91d189;
+  background-color: #f0fff0;
+}
 
 #sendOrderBtn {
   background: #a0522d;

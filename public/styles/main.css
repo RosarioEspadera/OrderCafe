@@ -290,6 +290,10 @@ h1, h2 {
   transition: opacity var(--transition-speed),
               transform var(--transition-speed);
 }
+.modal-confirm-btn.show {
+  opacity: 1;
+  transform: scale(1);
+}
 
 .modal-confirm-btn.confirm-animate {
   animation: popIn 0.4s ease-out forwards;

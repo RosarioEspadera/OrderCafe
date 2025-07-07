@@ -100,20 +100,23 @@ sizeButtons.forEach((btn, i) => {
   setTimeout(() => btn.classList.add("option-animate"), i * 100);
 
   btn.addEventListener("click", () => {
+    // Deselect others
     sizeButtons.forEach(b => {
       b.classList.remove("selected-size");
       b.textContent = b.getAttribute("data-size");
     });
 
-      // ← This inner click() is nested inside the outer one, 
-      //     and you never close its parentheses properly:
-      btn.addEventListener("click", () => {
-        confirmBtn.addEventListener("animationend", () => {
-          confirmSection.classList.remove("confirm-animate");
-  });  // ← closes outer btn.addEventListener
-});    // ← closes forEach
+    // Select this one
+    btn.classList.add("selected-size");
+    selectedSize = btn.getAttribute("data-size");
 
-}      // ← closes showSizeOptions
+    // Reveal confirm button
+    confirmSection.style.display = 'block';
+    confirmSection.classList.add("confirm-animate");
+  });
+});  // <-- closes forEach
+
+}  // <-- closes showSizeOptions
 
 // 🛒 Order Logic
 function addToOrder(item, price, size = null) {

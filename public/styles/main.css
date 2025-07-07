@@ -292,21 +292,24 @@ h1, h2 {
 
 /* when you actually open your modal, your JS should do: */
 .backdrop-overlay.active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
   background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: auto;
 }
 
 
 
 
+
 .modal-box {
-  position: relative;
+  position: relative; /* or omit entirely */
   z-index: 1001;
   background-color: #fff;
   padding: 2rem;
@@ -315,6 +318,8 @@ h1, h2 {
   max-width: 420px;
   width: 90%;
 }
+
+
 
 
 .modal-box h2 {

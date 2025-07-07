@@ -260,16 +260,16 @@ h1, h2 {
    6. Modal & Backdrop
    ========================== */
 .backdrop-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  position: fixed;        /* pin it to the viewport */
+  top: 0; 
+  left: 0; 
+  width: 100%; 
   height: 100%;
-  display: flex;               /* flex centering */
-  justify-content: center;     /* horizontal center */
-  align-items: center;         /* vertical center */
-  background-color: var(--overlay-bg);
-  z-index: 999;                /* sit above everything */
+  display: flex;          /* enable flex centering */
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 999;           /* above everything else */
 }
 
 .modal-box {

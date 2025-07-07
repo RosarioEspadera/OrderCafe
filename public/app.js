@@ -33,6 +33,25 @@ document.querySelectorAll(".menu-button").forEach(button => {
         }
       });
     });
+ const addressInput = document.getElementById("address");
+    if (addressInput) {
+      addressInput.addEventListener("click", () => {
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+              .then(res => res.json())
+              .then(data => {
+                if (addressInput && data.address) {
+                  addressInput.value = `${data.address.road || ''}, ${data.address.city || data.address.town || ''}`;
+                  addressInput.classList.add("autofilled");
+                }
+              })
+              .catch(err => console.error("Geocode error:", err));
+          });
+        }
+      });
+    }
   });
 }
 
@@ -176,32 +195,6 @@ function fetchAddressFromCoords(lat, lng) {
       console.error("Reverse geocoding failed:", error);
     });
 }
-function initializeOrder() {
-document.addEventListener("DOMContentLoaded", () => {
-  const addressInput = document.getElementById("address");
-  if (addressInput) {
-    addressInput.addEventListener("click", () => {
-      if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(position => {
-          const { latitude, longitude } = position.coords;
-
-          fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
-            .then(res => res.json())
-            .then(data => {
-              const addressInput = document.getElementById('address');
-              if (addressInput && data.address) {
-                addressInput.value = `${data.address.road || ''}, ${data.address.city || data.address.town || ''}`;
-                addressInput.classList.add('autofilled');
-              }
-            })
-            .catch(err => console.error('Geocode error:', err));
-       });
-        }
-      });
-    }
-  }); // ✅ closes DOMContentLoaded
-} // ✅ closes initializeOrder
-
 
 
 // ✅ Now place this after initializeOrder()

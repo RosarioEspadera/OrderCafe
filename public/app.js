@@ -167,24 +167,21 @@ modal.querySelectorAll(".size-options button").forEach(button => {
       totalPrice: calculateTotal().toFixed(2)
     };
 
-    emailjs
-      .send("service_epydqmi", "template_vzuexod", details)
-.then(response => {
-  console.log("SUCCESS!", response.status, response.text);
-
-  const msg = document.getElementById("orderSuccessMsg");
-if (msg) {
-  msg.style.display = "block";
-  msg.classList.add("animated");
-  setTimeout(() => {
-    msg.style.display = "none";
-    msg.classList.remove("animated");
-  }, 2500);
-}
-
-      .catch(error => {
-        console.error("EmailJS Error:", error);
-        alert(`Failed to send order: ${error.text || "Unknown error"}`);
-      });
-  }
-});
+   emailjs
+  .send("service_epydqmi", "template_vzuexod", details)
+  .then(response => {
+    console.log("SUCCESS!", response.status, response.text);
+    const msg = document.getElementById("orderSuccessMsg");
+    if (msg) {
+      msg.style.display = "block";
+      msg.classList.add("animated");
+      setTimeout(() => {
+        msg.style.display = "none";
+        msg.classList.remove("animated");
+      }, 2500);
+    }
+  })
+  .catch(error => {
+    console.error("EmailJS Error:", error);
+    alert(`Failed to send order: ${error.text || "Unknown error"}`);
+  });

@@ -138,6 +138,22 @@ h1, h2 {
 .accordion-section.meals    { border-color: var(--color-meals); }
 .accordion-section.drinks   { border-color: var(--color-drinks); }
 
+.accordion-section.desserts .accordion-toggle {
+  color: #D2691E;  /* chocolate-orange */
+}
+
+.accordion-section.coffee .accordion-toggle {
+  color: #3B2E2A;  /* dark mocha */
+}
+
+.accordion-section.meals .accordion-toggle {
+  color: #556B2F;  /* deep olive */
+}
+
+.accordion-section.drinks .accordion-toggle {
+  color: #2E8B57;  /* teal green */
+}
+
 .menu-button {
   display: flex;
   justify-content: space-between;

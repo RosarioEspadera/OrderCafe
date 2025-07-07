@@ -123,7 +123,6 @@ sizeButtons.forEach((btn, i) => {
 }, { once: true });
     });
   });
-});
 
 
 

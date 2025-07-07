@@ -26,9 +26,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initMenuCarousel();      // 🎡 Now safely defined
   startAutoScroll();       // 🕒 Begin the loop
 });
-document.getElementById('confirmOrder').addEventListener('click', () => {
-  alert('Order Confirmed! ☕');
-});
-
 
 

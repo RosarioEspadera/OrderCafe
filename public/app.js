@@ -171,7 +171,7 @@ sizeButtons.forEach((btn, i) => {
     }
   }
 function fetchAddressFromCoords(lat, lng, addressInput) {
-  const apiKey = "YOUR_API_KEY";
+  const apiKey = "432acce8c24a4f58ac8576dc40dd5525";
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`;
 
   fetch(url)

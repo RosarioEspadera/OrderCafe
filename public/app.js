@@ -96,27 +96,35 @@ modal.setAttribute("aria-labelledby", "modal-title");
   });
 
   // 🌀 Animate size options
-  sizeButtons.forEach((btn, i) => {
-    setTimeout(() => btn.classList.add("option-animate"), i * 100);
-    btn.addEventListener("click", () => {
-      sizeButtons.forEach(b => {
-        b.classList.remove("selected-size");
-        b.textContent = b.getAttribute("data-size");
-      });
-      btn.classList.add("selected-size");
-      btn.textContent = `✓ ${btn.getAttribute("data-size")}`;
-      selectedSize = btn.getAttribute("data-size");
+sizeButtons.forEach((btn, i) => {
+  setTimeout(() => btn.classList.add("option-animate"), i * 100);
 
-      // Adjust price based on size
-      if (selectedSize === "Small") modifiedPrice = price * 0.9;
-      else if (selectedSize === "Large") modifiedPrice = price * 1.1;
+  btn.addEventListener("click", () => {
+    sizeButtons.forEach(b => {
+      b.classList.remove("selected-size");
+      b.textContent = b.getAttribute("data-size");
+    });
 
-      modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
-      confirmSection.style.display = "block";
-      confirmSection.classList.add("show");
+    btn.classList.add("selected-size");
+    btn.textContent = `✓ ${btn.getAttribute("data-size")}`;
+    selectedSize = btn.getAttribute("data-size");
+
+    // Adjust price based on size
+    if (selectedSize === "Small") modifiedPrice = price * 0.9;
+    else if (selectedSize === "Large") modifiedPrice = price * 1.1;
+    modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
+
+    confirmSection.style.display = "block";
+    confirmSection.classList.add("show", "confirm-animate");
+
+    // 🪄 Remove animation class after it finishes
+    confirmBtn.addEventListener("animationend", () => {
+  confirmSection.classList.remove("confirm-animate");
+}, { once: true });
     });
   });
-}
+});
+
 
 
 

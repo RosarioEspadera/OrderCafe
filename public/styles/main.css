@@ -24,10 +24,11 @@
 }
 
 body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  line-height: 1.5;
-  background-color: var(--light-bg);
-  color: var(--dark-bg);
+ font-family: 'Lora', serif;
+  background-color: #fdf6f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
 
 a {

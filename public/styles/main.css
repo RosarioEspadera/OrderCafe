@@ -408,6 +408,11 @@ form input:focus {
   cursor: pointer;
   transition: background 0.2s;
 }
+#confirm-size-btn:active {
+  transform: scale(0.98);
+  background-color: #eabf9b;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
 .selected-size {
   background-color: #a3d3a2;
   color: #1b3e1b;

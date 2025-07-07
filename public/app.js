@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     console.error("EmailJS library is not loaded.");
   }
-
+});
   const sendOrderBtn = document.getElementById("sendOrderBtn");
   if (sendOrderBtn) {
     sendOrderBtn.addEventListener("click", sendOrder);
@@ -185,4 +185,3 @@ modal.querySelectorAll(".size-options button").forEach(button => {
     console.error("EmailJS Error:", error);
     alert(`Failed to send order: ${error.text || "Unknown error"}`);
   });
-

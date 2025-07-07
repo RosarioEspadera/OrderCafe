@@ -167,7 +167,7 @@ modal.querySelectorAll(".size-options button").forEach(button => {
       totalPrice: calculateTotal().toFixed(2)
     };
 
-   emailjs
+  emailjs
   .send("service_epydqmi", "template_vzuexod", details)
   .then(response => {
     console.log("SUCCESS!", response.status, response.text);
@@ -180,7 +180,7 @@ modal.querySelectorAll(".size-options button").forEach(button => {
         msg.classList.remove("animated");
       }, 2500);
     }
-  })
+  })  // ✅ closing the .then block properly
   .catch(error => {
     console.error("EmailJS Error:", error);
     alert(`Failed to send order: ${error.text || "Unknown error"}`);

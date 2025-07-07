@@ -369,6 +369,20 @@ h1, h2 {
 .confirm-button:active {
   transform: scale(0.97);
 }
+.confirm-button.full-width {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  background: var(--brand-color);
+  color: var(--light-bg);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.confirm-button.full-width:hover {
+  transform: scale(1.02);
+}
 
 /* ==========================
    9. Animations
@@ -429,7 +443,47 @@ h1, h2 {
   border: 1px solid #bbb;
   border-radius: var(--radius);
 }
-
+.order-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.full-width {
+  grid-column: span 2;
+}
+   .form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group label {
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+.form-group input {
+  padding: 0.5rem;
+  border: 1px solid #bbb;
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+.time-group {
+  position: relative;
+}
+.time-group input[type="time"] {
+  padding-left: 2rem;
+}
+/* insert a clock emoji—can swap for an SVG icon */
+.time-group::before {
+  content: "⏰";
+  position: absolute;
+  left: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1.2rem;
+}
+   
+   
 /* ==========================
    11. Utility Helpers
    ========================== */

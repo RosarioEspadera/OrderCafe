@@ -1,16 +1,6 @@
 /* ==========================
    1. Variables & Root
    ========================== */
-:root {
-  brand-color: #8b4513;
-  light-bg: #fff;
-  dark-bg: #333;
-  overlay-bg: rgba(0, 0, 0, 0.5);
-  transition-speed: 0.3s;
-  radius: 4px;
-   font-heading: 'Dancing Script', cursive;
-  font-body:    'Cormorant Garamond', serif;
-}
 
 /* ==========================
    2. Global Resets & Base
@@ -27,8 +17,12 @@ body {
  font-family: 'Lora', serif;
   background-color: #fdf6f0;
   opacity: 1;
+   margin: 0;
+  font-family: var(--font-body);
+  color: var(--dark-bg);
 }
-
+* {
+  box-sizing: border-box;
 }
 
 a {

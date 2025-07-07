@@ -74,6 +74,19 @@ backdrop.addEventListener("click", e => {
   let modifiedPrice = price;
 
   
+const confirmButton = modal.querySelector("#confirm-size-btn");
+
+confirmButton.addEventListener("click", function () {
+  if (selectedSize) {
+    // Add item to the order
+    addToOrder(item, modifiedPrice, selectedSize);
+
+    // Remove the entire backdrop to clear blur + modal
+    modal.closest(".size-backdrop")?.remove();
+  }
+});
+
+  
     const confirmSection = modal.querySelector("#confirm-section");
     const sizeButtons = modal.querySelectorAll(".size-options button"); 
   

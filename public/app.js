@@ -160,18 +160,59 @@ sizeButtons.forEach((btn, i) => {
       orderTotalElem.innerText = calculateTotal().toFixed(2);
     }
   }
+function fetchAddressFromCoords(lat, lng) {
+  const apiKey = "432acce8c24a4f58ac8576dc40dd5525"; // Replace with actual OpenCage key
+  const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`;
 
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const address = data.results[0].formatted;
+      const addressInput = document.getElementById("address");
+      addressInput.value = address;
+      addressInput.classList.add("autofilled");
+    })
+    .catch(error => {
+      console.error("Reverse geocoding failed:", error);
+    });
+}
+function initializeOrder() {
+  document.addEventListener("DOMContentLoaded", () => {
+    const addressInput = document.getElementById("address");
+    if (addressInput) {
+      addressInput.addEventListener("click", () => {
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            position => {
+              const { latitude, longitude } = position.coords;
+              fetchAddressFromCoords(latitude, longitude);
+            },
+            error => {
+              alert("Location access denied or unavailable.");
+              console.warn("Geolocation error:", error);
+            }
+          );
+        } else {
+          alert("Geolocation not supported by your browser.");
+        }
+      });
+    }
 
-  function displayConfirmation(details) {
-    document.getElementById("confirmOrderDetails").innerText = details.orderDetails;
-    document.getElementById("confirmOrders").innerText = details.orders;
-    document.getElementById("confirmName").innerText = details.name;
-    document.getElementById("confirmAddress").innerText = details.address;
-    document.getElementById("confirmTime").innerText = details.time;
-    document.getElementById("confirmEmail").innerText = details.email;
-    document.getElementById("confirmTotalPrice").innerText = "$" + details.totalPrice;
-    document.getElementById("orderConfirmationPreview").style.display = "block";
-  }
+    // Other initialization logic (sendOrderBtn, accordions, etc.)
+  });
+}
+
+// ✅ Now place this after initializeOrder()
+function displayConfirmation(details) {
+  document.getElementById("confirmOrderDetails").innerText = details.orderDetails;
+  document.getElementById("confirmOrders").innerText = details.orders;
+  document.getElementById("confirmName").innerText = details.name;
+  document.getElementById("confirmAddress").innerText = details.address;
+  document.getElementById("confirmTime").innerText = details.time;
+  document.getElementById("confirmEmail").innerText = details.email;
+  document.getElementById("confirmTotalPrice").innerText = "$" + details.totalPrice;
+  document.getElementById("orderConfirmationPreview").style.display = "block";
+}
 
  
  function sendOrder() {

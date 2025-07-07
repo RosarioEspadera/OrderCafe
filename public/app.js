@@ -99,6 +99,7 @@ modal.setAttribute("aria-labelledby", "modal-title");
 sizeButtons.forEach((btn, i) => {
   setTimeout(() => btn.classList.add("option-animate"), i * 100);
 
+
   btn.addEventListener("click", () => {
     sizeButtons.forEach(b => {
       b.classList.remove("selected-size");
@@ -123,11 +124,6 @@ sizeButtons.forEach((btn, i) => {
   }, { once: true });
 });
 } // ← closes showSizeOptions
-
-
-
-
-
 
 // 🛒 Order Logic
 function addToOrder(item, price, size = null) {

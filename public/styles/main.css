@@ -95,6 +95,13 @@ h1, h2 {
   cursor: pointer;
   transition: background var(--transition-speed);
 }
+.accordion-section {
+  border: 1px solid var(--dark-bg);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  overflow: hidden;       /* ensure rounded corners clip children */
+  transition: box-shadow var(--transition-speed);
+}
 /* Collapsed by default */
 .accordion-section .accordion-content {
   max-height: 0;
@@ -123,6 +130,14 @@ h1, h2 {
 .accordion-section.expanded .menu-list {
   max-height: 500px; /* big enough to fit your list */
 }
+.accordion-section.expanded {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+.accordion-section.desserts { border-color: var(--color-desserts); }
+.accordion-section.coffee   { border-color: var(--color-coffee); }
+.accordion-section.meals    { border-color: var(--color-meals); }
+.accordion-section.drinks   { border-color: var(--color-drinks); }
+
 .menu-button {
   display: flex;
   justify-content: space-between;

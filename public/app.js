@@ -206,8 +206,8 @@ sizeButtons.forEach((btn, i) => {
 
 // 🛒 Order Logic
 function addToOrder(item, price, size = null) {
-  orders.push({ name: item, price, size });
-  updateOrderSummary();
+ orders.push({ item, price, size });
+updateOrderSummary(); // or whatever function updates the DOM
 }
 
 function updateOrderSummary() {

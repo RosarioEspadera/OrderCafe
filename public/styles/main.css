@@ -289,6 +289,26 @@ h1, h2 {
 .modal-confirm-btn.confirm-animate {
   animation: popIn 0.4s ease-out forwards;
 }
+.confirm-button {
+  background-color: #1c1c1c;
+  color: #fff;
+  font-family: 'Lora', serif;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.confirm-button:hover {
+  background-color: #444;
+  transform: scale(1.05);
+}
+
+.confirm-button:active {
+  transform: scale(0.97);
+}
 
 /* ==========================
    9. Animations

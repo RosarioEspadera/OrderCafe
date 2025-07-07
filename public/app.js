@@ -133,6 +133,7 @@ function showSizeOptions(item, price) {
   });
 
   // Mount to DOM
+  console.log("Appending modal:", modal);
   backdrop.appendChild(modal);
   document.body.appendChild(backdrop);
 

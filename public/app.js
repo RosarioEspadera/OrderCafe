@@ -96,9 +96,9 @@ modal.setAttribute("aria-labelledby", "modal-title");
   });
 
   // 🌀 Animate size options
+// 🌀 Animate size options
 sizeButtons.forEach((btn, i) => {
   setTimeout(() => btn.classList.add("option-animate"), i * 100);
-
 
   btn.addEventListener("click", () => {
     sizeButtons.forEach(b => {
@@ -106,16 +106,18 @@ sizeButtons.forEach((btn, i) => {
       b.textContent = b.getAttribute("data-size");
     });
 
+      // ← This inner click() is nested inside the outer one, 
+      //     and you never close its parentheses properly:
       btn.addEventListener("click", () => {
-     // … your click logic …
-     confirmBtn.addEventListener("animationend", () => {
-       confirmSection.classList.remove("confirm-animate");
-     }, { once: true });
-   });  // ← closes btn.addEventListener
- }); // ← closes sizeButtons.forEach
- }   // ← now correctly closes showSizeOptions
+        confirmBtn.addEventListener("animationend", () => {
+          confirmSection.classList.remove("confirm-animate");
+        }, { once: true });
+      });  
+  });  // ← closes outer btn.addEventListener
+});    // ← closes forEach
 
-                    }
+}      // ← closes showSizeOptions
+
 // 🛒 Order Logic
 function addToOrder(item, price, size = null) {
   orders.push({ name: item, price, size });

@@ -507,7 +507,11 @@ h1, h2 {
 #useLocationBtn:hover {
   filter: brightness(1.1);
 }
- 
+ input.autofilled {
+  background-color: #f0f8ff;
+  font-style: italic;
+}
+
    
 /* ==========================
    11. Utility Helpers

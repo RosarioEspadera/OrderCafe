@@ -60,7 +60,15 @@ function showSizeOptions(item, price) {
  modal.querySelector(".close-btn").addEventListener("click", () => {
   modal.remove();
 });
+const backdrop = document.createElement("div");
+backdrop.className = "size-backdrop";
+backdrop.appendChild(modal);
+document.body.appendChild(backdrop);
 
+// Close when clicking outside the modal
+backdrop.addEventListener("click", e => {
+  if (e.target === backdrop) backdrop.remove();
+});
 
   let selectedSize = null;
   let modifiedPrice = price;

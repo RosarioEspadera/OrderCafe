@@ -88,7 +88,6 @@ document.body.appendChild(backdrop);
 backdrop.addEventListener("click", e => {
   if (e.target === backdrop) {
     selectedSize = null;
-    backdrop.remove();
   }
 });
 

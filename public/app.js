@@ -1,10 +1,9 @@
 function initializeOrder() {
-  document.addEventListener("DOMContentLoaded", () => {
-    if (typeof emailjs !== "undefined") {
-      emailjs.init("AqvkFhQnxowOJda9J");
-    } else {
-      console.error("EmailJS library is not loaded.");
-    }
+  if (typeof emailjs !== "undefined") {
+    emailjs.init("AqvkFhQnxowOJda9J");
+  } else {
+    console.error("EmailJS library is not loaded.");
+  }
   
     const sendOrderBtn = document.getElementById("sendOrderBtn");
     if (sendOrderBtn) {
@@ -63,8 +62,11 @@ if (addressInput) {
 
 
 function showSizeOptions(item, price) {
-  const modal = document.createElement("div");
-  modal.className = "size-modal";
+  const backdrop = document.createElement("div");
+backdrop.className = "size-backdrop";
+
+const modal = document.createElement("div");
+modal.className = "size-modal";
   modal.innerHTML = `
     <button class="close-btn">×</button>
     <h2>Select Size for ${item}</h2>
@@ -78,14 +80,9 @@ function showSizeOptions(item, price) {
     </div>
   `;
 
-  document.body.appendChild(modal);
-
-
- modal.querySelector(".close-btn").addEventListener("click", () => {
-  modal.remove();
+modal.querySelector(".close-btn").addEventListener("click", () => {
+  backdrop.remove(); // ✅ Close via backdrop (not just modal)
 });
-const backdrop = document.createElement("div");
-backdrop.className = "size-backdrop";
 backdrop.appendChild(modal);
 document.body.appendChild(backdrop);
 
@@ -93,6 +90,7 @@ document.body.appendChild(backdrop);
 backdrop.addEventListener("click", e => {
   if (e.target === backdrop) {
     selectedSize = null;
+    backdrop.remove();
   }
 });
 

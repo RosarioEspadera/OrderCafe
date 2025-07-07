@@ -8,11 +8,8 @@
   <link rel="stylesheet" href="styles/main.css?v=2.0">
   <link href="https://fonts.googleapis.com/css2?family=Lora&family=Pacifico&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="carousel.js" defer></script>
-
 
   
-
 
   <title>Rio's Cafe - Order Confirmation</title>
   
@@ -26,10 +23,12 @@
     <h1>Welcome to Rio's Cafe</h1>
     <p>Select your order:</p>
     <!-- Menu Items -->
-<section class="accordion-section">
-  <button class="accordion-toggle">Desserts</button>
-  <div class="accordion-content">
-    <div class="menu-carousel">
+ <main class="container">
+    <!-- Desserts Accordion -->
+    <section class="accordion-section">
+      <button class="accordion-toggle">Desserts</button>
+      <div class="accordion-content">
+        <div class="menu-carousel">
       <button type="button" class="menu-button tooltip" data-title="AppleCrisp" data-size="true">
         <div class="menu-content">
           <img src="images/AppleCrisp.png" alt="Apple Crisp" class="menu-image">
@@ -64,10 +63,10 @@
   </div>
 </section>
 
-<section class="accordion-section">
-  <button class="accordion-toggle">Coffee</button>
-  <div class="accordion-content">
-    <div class="menu-carousel">
+ <section class="accordion-section">
+      <button class="accordion-toggle">Coffee</button>
+      <div class="accordion-content">
+        <div class="menu-carousel">
       <button type="button" class="menu-button tooltip" data-title="CaffeMacchiato" data-size="true">
         <div class="menu-content">
           <img src="images/CaffeMacchiato.png" alt="Caffè Macchiato" class="menu-image">
@@ -102,10 +101,10 @@
   </div>
 </section>
 
-<section class="accordion-section">
-  <button class="accordion-toggle">Meals</button>
-  <div class="accordion-content">
-    <div class="menu-carousel">
+ <section class="accordion-section">
+      <button class="accordion-toggle">Meals</button>
+      <div class="accordion-content">
+        <div class="menu-carousel">
       <button type="button" class="menu-button tooltip" data-title="Adobo" data-size="true">
         <div class="menu-content">
           <img src="images/Adobo.png" alt="Adobo" class="menu-image">
@@ -140,10 +139,10 @@
   </div>
 </section>
 
-<section class="accordion-section">
-  <button class="accordion-toggle">Drinks</button>
-  <div class="accordion-content">
-    <div class="menu-carousel">
+ <section class="accordion-section">
+      <button class="accordion-toggle">Drinks</button>
+      <div class="accordion-content">
+        <div class="menu-carousel">
       <button type="button" class="menu-button tooltip" data-title="Beer" data-size="true">
         <div class="menu-content">
           <img src="images/Beer.png" alt="Beer" class="menu-image">
@@ -179,14 +178,17 @@
 </section>
 
 <div id="orderSummary">
-  <ul id="orderList"></ul>
-</div>
-
-<div id="confirm-section" style="margin-top:1em; display:none;"></div>
-
-<div>
-  Total: $<span id="orderTotal">0.00</span>
-</div>
+      <ul id="orderList"></ul>
+      <div>
+        Total: $<span id="orderTotal">0.00</span>
+      </div>
+      <div id="confirm-section" style="margin-top:1em; display:none;">
+        <button id="confirmOrder" class="confirm-button">
+          Confirm Order
+        </button>
+      </div>
+    </div>
+  </main>
   
     <h2>Order Details</h2>
   <form id="order-form">
@@ -222,8 +224,8 @@
 
 </form>
 <!-- Load JavaScript file first -->
-<script src="app.js"></script>
-
+<script defer src="carousel.js"></script>
+  <script defer src="app.js"></script>
 </body>
   
 

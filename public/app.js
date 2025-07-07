@@ -122,21 +122,16 @@ function showSizeOptions(item, price) {
     </div>
   `;
   // Apply classes & accessibility
-  modal.classList.add("modal-box");
-  backdrop.classList.add("backdrop-overlay");
-  backdrop.classList.add("active");
-  modal.setAttribute("role", "dialog");
-  modal.setAttribute("aria-labelledby", "modal-title");
+modal.classList.add("modal-box");
+backdrop.classList.add("backdrop-overlay");
+backdrop.classList.add("active");
+modal.setAttribute("role", "dialog");
+modal.setAttribute("aria-labelledby", "modal-title");
 
-  // Close button
-  modal.querySelector(".close-btn").addEventListener("click", () => {
-    backdrop.remove();
-  });
+// Mount to DOM
+backdrop.appendChild(modal);
+document.body.appendChild(backdrop);
 
-  // Mount to DOM
-  console.log("Appending modal:", modal);
-  backdrop.appendChild(modal);
-  document.body.appendChild(backdrop);
 
   // Grab the buttons
   const sizeBtns      = modal.querySelectorAll(".size-options button");

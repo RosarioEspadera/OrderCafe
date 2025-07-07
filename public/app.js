@@ -121,8 +121,6 @@ function showSizeOptions(item, price) {
       <button class="modal-confirm-btn">Confirm</button>
     </div>
   `;
-  sizeButtons = sizeBtns;
-
   // Apply classes & accessibility
   modal.classList.add("modal-box");
   backdrop.classList.add("backdrop-overlay");
@@ -140,6 +138,7 @@ function showSizeOptions(item, price) {
 
   // Grab the buttons
   const sizeBtns      = modal.querySelectorAll(".size-options button");
+  sizeButtons = sizeBtns;
   const confirmWrap   = modal.querySelector(".size-confirm-wrap");
   const confirmBtn    = modal.querySelector(".modal-confirm-btn");
  

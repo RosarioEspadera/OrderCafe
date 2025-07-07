@@ -89,6 +89,18 @@ h1, h2 {
   cursor: pointer;
   transition: background var(--transition-speed);
 }
+/* Collapsed by default */
+.accordion-section .accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+/* Expanded when .expanded is applied */
+.accordion-section.expanded .accordion-content {
+  max-height: 800px; /* adjust to comfortably fit your carousel */
+}
+
 .accordion-section.expanded .accordion-toggle::after {
   content: "▾";
   position: absolute;

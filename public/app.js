@@ -1,72 +1,64 @@
+// 🌟 Global state
+const orders = [];
+
+// ✅ Initialization
 function initializeOrder() {
   if (typeof emailjs !== "undefined") {
     emailjs.init("AqvkFhQnxowOJda9J");
   } else {
     console.error("EmailJS library is not loaded.");
   }
-  
-    const sendOrderBtn = document.getElementById("sendOrderBtn");
-    if (sendOrderBtn) {
-      sendOrderBtn.addEventListener("click", sendOrder);
-    } else {
-      console.error("sendOrderBtn not found in the DOM");
-    }
 
-   document.querySelectorAll(".accordion-toggle").forEach(toggle => {
-  toggle.addEventListener("click", () => {
-    const section = toggle.parentElement;
-    section.classList.toggle("expanded");
-    console.log("Toggled:", section); // ✅ Debug output
-  });
-});
-
-
- document.querySelectorAll(".menu-button").forEach(button => {
-      button.addEventListener("click", () => {
-        const item = button.getAttribute("data-title");
-        const price = parseFloat(button.querySelector(".price").textContent.replace("$", ""));
-        const hasSize = button.getAttribute("data-size") === "true";
-
-        if (hasSize) {
-          showSizeOptions(item, price);
-        } else {
-          addToOrder(item, price);
-        }
-      });
+  // Accordion toggle logic
+  document.querySelectorAll(".accordion-toggle").forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      toggle.parentElement.classList.toggle("expanded");
     });
+  });
 
-   const addressInput = document.getElementById("address");
-if (addressInput) {
-  let isFetchingAddress = false;
+  // Menu button handler
+  document.querySelectorAll(".menu-button").forEach(button => {
+    button.addEventListener("click", () => {
+      const item = button.getAttribute("data-title");
+      const price = parseFloat(button.querySelector(".price").textContent.replace("$", ""));
+      const hasSize = button.getAttribute("data-size") === "true";
+      hasSize ? showSizeOptions(item, price) : addToOrder(item, price);
+    });
+  });
 
-  addressInput.addEventListener("click", () => {
-    if (isFetchingAddress) return;
-    isFetchingAddress = true;
+  // Send order
+  const sendOrderBtn = document.getElementById("sendOrderBtn");
+  if (sendOrderBtn) {
+    sendOrderBtn.addEventListener("click", sendOrder);
+  }
 
-    if (navigator.geolocation) {
+  // Auto-fill address from geolocation
+  const addressInput = document.getElementById("address");
+  if (addressInput && navigator.geolocation) {
+    let isFetchingAddress = false;
+    addressInput.addEventListener("click", () => {
+      if (isFetchingAddress) return;
+      isFetchingAddress = true;
       navigator.geolocation.getCurrentPosition(position => {
         fetchAddressFromCoords(position.coords.latitude, position.coords.longitude, addressInput);
-        setTimeout(() => {
-          isFetchingAddress = false;
-        }, 3000);
+        setTimeout(() => { isFetchingAddress = false }, 3000);
       });
-    }
-  });
-} // ✅ Close the conditional block here
-  });
-} 
+    });
+  }
+}
 
+document.addEventListener("DOMContentLoaded", initializeOrder);
 
-
-
-
-
+// 🧾 Size Selection Modal
 function showSizeOptions(item, price) {
-  const backdrop = document.createElement("div");
-backdrop.className = "size-backdrop";
+  let selectedSize = null;
+  let modifiedPrice = price;
 
-const modal = document.createElement("div");
-modal.className = "size-modal";
+  const backdrop = document.createElement("div");
+  backdrop.className = "size-backdrop";
+
+  const modal = document.createElement("div");
+  modal.className = "size-modal";
   modal.innerHTML = `
     <button class="close-btn">×</button>
     <h2>Select Size for ${item}</h2>
@@ -80,187 +72,136 @@ modal.className = "size-modal";
     </div>
   `;
 
-modal.querySelector(".close-btn").addEventListener("click", () => {
-  backdrop.remove(); // ✅ Close via backdrop (not just modal)
-});
-backdrop.appendChild(modal);
-document.body.appendChild(backdrop);
+  backdrop.appendChild(modal);
+  document.body.appendChild(backdrop);
 
-// Close when clicking outside the modal
-backdrop.addEventListener("click", e => {
-  if (e.target === backdrop) {
-    selectedSize = null;
-    backdrop.remove();
-  }
-});
-
-
-  let selectedSize = null;
-  let modifiedPrice = price;
-
-  
-const confirmButton = modal.querySelector("#confirm-size-btn");
-
-confirmButton.addEventListener("click", function () {
-  if (selectedSize) {
-    // Add item to the order
-    addToOrder(item, modifiedPrice, selectedSize);
-
-    // Remove the entire backdrop to clear blur + modal
-    modal.closest(".size-backdrop")?.remove();
-  }
-});
-
-  
-    const confirmSection = modal.querySelector("#confirm-section");
-    const sizeButtons = modal.querySelectorAll(".size-options button");
-sizeButtons.forEach((btn, i) => {
-  setTimeout(() => {
-    btn.classList.add("option-animate");
-  }, i * 100);
-
-  btn.addEventListener("click", function () {
-    confirmSection.style.display = "block";
-    confirmSection.classList.add("show");
-
-    sizeButtons.forEach(b => {
-      b.classList.remove("selected-size");
-      b.textContent = b.getAttribute("data-size");
-    });
-
-    btn.classList.add("selected-size");
-    btn.textContent = `✓ ${btn.getAttribute("data-size")}`;
-    selectedSize = btn.getAttribute("data-size");
-
-    modifiedPrice = price;
-    if (selectedSize === "Small") modifiedPrice = price * 0.9;
-    else if (selectedSize === "Large") modifiedPrice = price * 1.1;
-    modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
+  // Close modal via button or backdrop
+  modal.querySelector(".close-btn").addEventListener("click", () => backdrop.remove());
+  backdrop.addEventListener("click", e => {
+    if (e.target === backdrop) {
+      selectedSize = null;
+      backdrop.remove();
+    }
   });
-});
 
-  
-  modal.querySelector("#confirm-size-btn").addEventListener("click", function () {
+  // Animate size options
+  const sizeButtons = modal.querySelectorAll(".size-options button");
+  const confirmSection = modal.querySelector("#confirm-section");
+  sizeButtons.forEach((btn, i) => {
+    setTimeout(() => btn.classList.add("option-animate"), i * 100);
+    btn.addEventListener("click", () => {
+      sizeButtons.forEach(b => {
+        b.classList.remove("selected-size");
+        b.textContent = b.getAttribute("data-size");
+      });
+      btn.classList.add("selected-size");
+      btn.textContent = `✓ ${btn.getAttribute("data-size")}`;
+      selectedSize = btn.getAttribute("data-size");
+
+      // Adjust price based on size
+      if (selectedSize === "Small") modifiedPrice = price * 0.9;
+      else if (selectedSize === "Large") modifiedPrice = price * 1.1;
+
+      modifiedPrice = parseFloat(modifiedPrice.toFixed(2));
+      confirmSection.style.display = "block";
+      confirmSection.classList.add("show");
+    });
+  });
+
+  modal.querySelector("#confirm-size-btn").addEventListener("click", () => {
     if (selectedSize) {
       addToOrder(item, modifiedPrice, selectedSize);
-      modal.remove();
+      backdrop.remove();
+    } else {
+      alert("Please select a size first.");
     }
   });
 }
 
+// 🛒 Order Logic
+function addToOrder(item, price, size = null) {
+  orders.push({ name: item, price, size });
+  updateOrderSummary();
+}
 
-  const orders = [];
+function updateOrderSummary() {
+  const listEl = document.getElementById("orderList");
+  const totalEl = document.getElementById("orderTotal");
 
+  if (!listEl || !totalEl) return;
 
-  function addToOrder(item, price, size) {
-    orders.push({ name: item, price: price, size: size });
-    updateOrderSummary();
+  listEl.innerHTML = "";
+  orders.forEach(order => {
+    const sizeText = order.size ? ` (${order.size})` : "";
+    const li = document.createElement("li");
+    li.textContent = `${order.name}${sizeText} - $${order.price.toFixed(2)}`;
+    listEl.appendChild(li);
+  });
 
-  }
+  totalEl.innerText = calculateTotal().toFixed(2);
+  document.getElementById("confirm-section").style.display = "block";
+}
 
+function calculateTotal() {
+  return orders.reduce((sum, order) => sum + order.price, 0);
+}
 
-  function calculateTotal() {
-    return orders.reduce((total, order) => total + order.price, 0);
-  }
-
- 
-  function updateOrderSummary() {
-    const orderListElem = document.getElementById("orderList");
-    if (!orderListElem) return;
-    orderListElem.innerHTML = "";
-
-    orders.forEach(order => {
-      const li = document.createElement("li");
-      const sizeText = order.size ? ` (${order.size})` : "";
-      li.textContent = `${order.name}${sizeText} - $${order.price.toFixed(2)}`;
-      orderListElem.appendChild(li);
-    });
-
-    const orderTotalElem = document.getElementById("orderTotal");
-    if (orderTotalElem) {
-      orderTotalElem.innerText = calculateTotal().toFixed(2);
-    }
-  }
-function fetchAddressFromCoords(lat, lng, addressInput) {
+// 📍 Address Auto-fill
+function fetchAddressFromCoords(lat, lng, input) {
   const apiKey = "432acce8c24a4f58ac8576dc40dd5525";
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`;
 
   fetch(url)
-    .then(response => response.json())
+    .then(res => res.json())
     .then(data => {
       if (data.results?.length) {
-        const address = data.results[0].formatted;
-        addressInput.value = address;
-        addressInput.classList.add("autofilled");
-      } else {
-        console.warn("No address found.");
+        input.value = data.results[0].formatted;
+        input.classList.add("autofilled");
       }
     })
-    .catch(error => {
-      console.error("Reverse geocoding failed:", error);
-    });
+    .catch(err => console.error("Reverse geocoding failed:", err));
 }
 
+// ✉️ Order Submission
+function sendOrder() {
+  const name = document.getElementById("name")?.value.trim();
+  const address = document.getElementById("address")?.value.trim();
+  const time = document.getElementById("time")?.value;
+  const email = document.getElementById("email")?.value.trim();
 
-// ✅ Now place this after initializeOrder()
-function displayConfirmation(details) {
-  document.getElementById("confirmOrderDetails").innerText = details.orderDetails;
-  document.getElementById("confirmOrders").innerText = details.orders;
-  document.getElementById("confirmName").innerText = details.name;
-  document.getElementById("confirmAddress").innerText = details.address;
-  document.getElementById("confirmTime").innerText = details.time;
-  document.getElementById("confirmEmail").innerText = details.email;
-  document.getElementById("confirmTotalPrice").innerText = "$" + details.totalPrice;
-  document.getElementById("orderConfirmationPreview").style.display = "block";
-}
-
- 
- function sendOrder() {
-  if (orders.length === 0) {
-    alert("No items in your order!");
-    return;
-  }
-  const name = document.getElementById("name").value.trim();
-  const address = document.getElementById("address").value.trim();
-  const time = document.getElementById("time").value;
-  const emailRecipient = document.getElementById("email").value.trim();
-
-  if (!name || !address || !time || !emailRecipient) {
-    alert("Please fill in all the details!");
+  if (!name || !address || !time || !email || orders.length === 0) {
+    alert("Please complete all fields and add at least one item.");
     return;
   }
 
-const details = {
+  const details = {
     orderDetails: "Your order has been received",
-    orders: orders.map(order => `${order.name} ($${order.price.toFixed(2)})`).join(", "),
+    orders: orders.map(o => `${o.name} ($${o.price.toFixed(2)})`).join(", "),
     name,
     address,
     time,
-    email: emailRecipient,
+    email,
     totalPrice: calculateTotal().toFixed(2)
   };
 
- emailjs
-    .send("service_epydqmi", "template_vzuexod", details)
+  emailjs.send("service_epydqmi", "template_vzuexod", details)
     .then(response => {
-      console.log("SUCCESS!", response.status, response.text);
+      console.log("Order sent!", response.status, response.text);
       const msg = document.getElementById("orderSuccessMsg");
       if (msg) {
         msg.style.display = "block";
         msg.classList.add("animated");
-        setTimeout(() => {
-          msg.style.display = "none";
-          msg.classList.remove("animated");
-        }, 2500);
+        setTimeout(() => msg.classList.remove("animated"), 2500);
       }
+
+      // Reset form & state
+      document.getElementById("order-form")?.reset();
+      orders.length = 0;
+      updateOrderSummary();
+      document.getElementById("confirm-section").style.display = "none";
     })
     .catch(error => {
-      console.error("EmailJS Error:", error);
+      console.error("EmailJS error:", error);
       alert(`Failed to send order: ${error.text || "Unknown error"}`);
     });
 }
-document.addEventListener("DOMContentLoaded", () => {
-  initializeOrder();
-});
-
-

@@ -9,7 +9,7 @@ function initializeOrder() {
     console.error("EmailJS library is not loaded.");
   }
 
-  // Accordion toggle logic
+  
   document.querySelectorAll(".accordion-toggle").forEach(toggle => {
     toggle.addEventListener("click", () => {
       toggle.parentElement.classList.toggle("expanded");
@@ -100,20 +100,24 @@ sizeButtons.forEach((btn, i) => {
   setTimeout(() => btn.classList.add("option-animate"), i * 100);
 
   btn.addEventListener("click", () => {
-    // Deselect others
-    sizeButtons.forEach(b => {
-      b.classList.remove("selected-size");
-      b.textContent = b.getAttribute("data-size");
-    });
-
-    // Select this one
-    btn.classList.add("selected-size");
-    selectedSize = btn.getAttribute("data-size");
-
-    // Reveal confirm button
-    confirmSection.style.display = 'block';
-    confirmSection.classList.add("confirm-animate");
+  // Deselect others
+  sizeButtons.forEach(b => {
+    b.classList.remove("selected-size");
+    b.textContent = b.getAttribute("data-size");
   });
+
+  // Select this one
+  btn.classList.add("selected-size");
+  selectedSize = btn.getAttribute("data-size");
+
+  // Reveal confirm button
+  confirmSection.style.display = "block";
+  confirmSection.classList.add("confirm-animate");
+
+  // 🔥 Animate the Confirm button
+  confirmBtn.classList.add("show");
+});
+
 });  // <-- closes forEach
 
 }  // <-- closes showSizeOptions

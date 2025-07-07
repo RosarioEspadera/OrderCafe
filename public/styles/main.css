@@ -48,6 +48,9 @@ ul {
   margin: 0 auto;
   padding: 1rem;
 }
+.backdrop {
+  display: none; /* Or hidden when not in use */
+}
 
 /* ==========================
    4. Header & Title

@@ -177,30 +177,32 @@ function fetchAddressFromCoords(lat, lng) {
     });
 }
 function initializeOrder() {
-  document.addEventListener("DOMContentLoaded", () => {
-    const addressInput = document.getElementById("address");
-    if (addressInput) {
-      addressInput.addEventListener("click", () => {
-        if ("geolocation" in navigator) {
-          navigator.geolocation.getCurrentPosition(
-            position => {
-              const { latitude, longitude } = position.coords;
-              fetchAddressFromCoords(latitude, longitude);
-            },
-            error => {
-              alert("Location access denied or unavailable.");
-              console.warn("Geolocation error:", error);
-            }
-          );
-        } else {
-          alert("Geolocation not supported by your browser.");
+document.addEventListener("DOMContentLoaded", () => {
+  const addressInput = document.getElementById("address");
+  if (addressInput) {
+    addressInput.addEventListener("click", () => {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const { latitude, longitude } = position.coords;
+
+          fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+            .then(res => res.json())
+            .then(data => {
+              const addressInput = document.getElementById('address');
+              if (addressInput && data.address) {
+                addressInput.value = `${data.address.road || ''}, ${data.address.city || data.address.town || ''}`;
+                addressInput.classList.add('autofilled');
+              }
+            })
+            .catch(err => console.error('Geocode error:', err));
+       });
         }
       });
     }
+  }); // ✅ closes DOMContentLoaded
+} // ✅ closes initializeOrder
 
-    // Other initialization logic (sendOrderBtn, accordions, etc.)
-  });
-}
+
 
 // ✅ Now place this after initializeOrder()
 function displayConfirmation(details) {

@@ -97,6 +97,8 @@ function initializeOrder() {
 document.addEventListener("DOMContentLoaded", initializeOrder);
 
 // 🧾 Size Selection Modal
+let sizeButtons = [];
+
 function showSizeOptions(item, price) {
   // Create nodes
   const modal    = document.createElement("div");
@@ -119,6 +121,7 @@ function showSizeOptions(item, price) {
       <button class="modal-confirm-btn">Confirm</button>
     </div>
   `;
+  sizeButtons = sizeBtns;
 
   // Apply classes & accessibility
   modal.classList.add("modal-box");
@@ -139,6 +142,7 @@ function showSizeOptions(item, price) {
   const sizeBtns      = modal.querySelectorAll(".size-options button");
   const confirmWrap   = modal.querySelector(".size-confirm-wrap");
   const confirmBtn    = modal.querySelector(".modal-confirm-btn");
+ 
 
   // 1) Size‐click handler: mark & adjust price
   sizeBtns.forEach(btn => {

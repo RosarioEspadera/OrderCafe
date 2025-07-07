@@ -203,7 +203,6 @@ sizeButtons.forEach((btn, i) => {
 
 });  // <-- closes forEach
 
-}  // <-- closes showSizeOptions
 
 // 🛒 Order Logic
 function addToOrder(item, price, size = null) {

@@ -48,7 +48,7 @@ modal.innerHTML = `
       <button data-size="Medium">Medium</button>
       <button data-size="Large">Large</button>
     </div>
-    <div class="confirm-wrap">
+    <div id="confirm-section" style="display: none;">
       <button id="confirm-size-btn">Confirm</button>
     </div>
   </div>

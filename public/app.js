@@ -34,18 +34,27 @@ function initializeOrder() {
       });
     });
 
-    const addressInput = document.getElementById("address");
-    if (addressInput) {
-      addressInput.addEventListener("click", () => {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(position => {
-            fetchAddressFromCoords(position.coords.latitude, position.coords.longitude, addressInput);
-          });
-        }
+   const addressInput = document.getElementById("address");
+if (addressInput) {
+  let isFetchingAddress = false;
+
+  addressInput.addEventListener("click", () => {
+    if (isFetchingAddress) return;
+    isFetchingAddress = true;
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        fetchAddressFromCoords(position.coords.latitude, position.coords.longitude, addressInput);
+        setTimeout(() => {
+          isFetchingAddress = false;
+        }, 3000);
       });
     }
   });
-}
+} // ✅ Close the conditional block here
+
+
+
 
 
 

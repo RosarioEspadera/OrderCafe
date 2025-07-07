@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize EmailJS (ensure the library is loaded via a separate <script> tag)
   if (typeof emailjs !== "undefined") {
     emailjs.init("AqvkFhQnxowOJda9J");
   } else {
@@ -13,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     console.error("sendOrderBtn not found in the DOM");
   }
 
-  // Attach event listeners for all menu buttons
-// Expand/collapse accordion sections (once)
 document.querySelectorAll(".accordion-toggle").forEach(toggle => {
   toggle.addEventListener("click", () => {
     const section = toggle.parentElement;
@@ -22,7 +19,6 @@ document.querySelectorAll(".accordion-toggle").forEach(toggle => {
   });
 });
 
-// Handle clicks on menu items (once)
 document.querySelectorAll(".menu-button").forEach(button => {
   button.addEventListener("click", () => {
     const item = button.getAttribute("data-title");
@@ -39,7 +35,7 @@ document.querySelectorAll(".menu-button").forEach(button => {
 
 
 
-  // Function to display the size options modal
+
 function showSizeOptions(item, price) {
   const modal = document.createElement("div");
   modal.className = "size-modal";
@@ -60,7 +56,7 @@ modal.innerHTML = `
 
   document.body.appendChild(modal);
 
-  // Close modal handler
+
  modal.querySelector(".close-btn").addEventListener("click", () => {
   modal.remove();
 });
@@ -69,7 +65,7 @@ modal.innerHTML = `
   let selectedSize = null;
   let modifiedPrice = price;
 
-  // Show confirm button after size selected
+  
 modal.querySelectorAll(".size-options button").forEach(button => {
   button.addEventListener("click", function () {
     modal.querySelectorAll(".size-options button").forEach(btn => {
@@ -90,7 +86,7 @@ modal.querySelectorAll(".size-options button").forEach(button => {
 });
 
 
-  // Confirm handler
+  
   modal.querySelector("#confirm-size-btn").addEventListener("click", function () {
     if (selectedSize) {
       addToOrder(item, modifiedPrice, selectedSize);
@@ -99,24 +95,22 @@ modal.querySelectorAll(".size-options button").forEach(button => {
   });
 }
 
-  // ---------- Global Variables & Order Functions ----------
 
-  // Global array to store order items
   const orders = [];
 
-  // Function to add an item to the order (alert removed)
+
   function addToOrder(item, price, size) {
     orders.push({ name: item, price: price, size: size });
     updateOrderSummary();
-    // No alert needed
+
   }
 
-  // Function to calculate the total price of the order
+
   function calculateTotal() {
     return orders.reduce((total, order) => total + order.price, 0);
   }
 
-  // Function to update the order summary display on the page
+ 
   function updateOrderSummary() {
     const orderListElem = document.getElementById("orderList");
     if (!orderListElem) return;
@@ -135,9 +129,7 @@ modal.querySelectorAll(".size-options button").forEach(button => {
     }
   }
 
-  // ---------- Display & Sending Order Functions ----------
 
-  // Function to display a confirmation preview with dynamic placeholders
   function displayConfirmation(details) {
     document.getElementById("confirmOrderDetails").innerText = details.orderDetails;
     document.getElementById("confirmOrders").innerText = details.orders;
@@ -149,7 +141,7 @@ modal.querySelectorAll(".size-options button").forEach(button => {
     document.getElementById("orderConfirmationPreview").style.display = "block";
   }
 
-  // Function to send the order details via EmailJS
+ 
   function sendOrder() {
     if (orders.length === 0) {
       alert("No items in your order!");
@@ -177,10 +169,18 @@ modal.querySelectorAll(".size-options button").forEach(button => {
 
     emailjs
       .send("service_epydqmi", "template_vzuexod", details)
-      .then(response => {
-        console.log("SUCCESS!", response.status, response.text);
-        alert("Order sent successfully!");
-      })
+.then(response => {
+  console.log("SUCCESS!", response.status, response.text);
+
+  const msg = document.getElementById("orderSuccessMsg");
+  msg.style.display = "block";
+  msg.classList.add("animated"); // optional if you're using CSS animations
+
+  setTimeout(() => {
+    msg.style.display = "none";
+    msg.classList.remove("animated");
+  }, 2500);
+})
       .catch(error => {
         console.error("EmailJS Error:", error);
         alert(`Failed to send order: ${error.text || "Unknown error"}`);

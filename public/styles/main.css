@@ -345,12 +345,20 @@ form input:focus {
 @keyframes fadeSlide {
   0% {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
+  }
+  60% {
+    opacity: 0.6;
+    transform: translateY(4px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.option-animate {
+  animation: fadeSlide 0.5s ease-out forwards;
 }
 
 .size-options button {

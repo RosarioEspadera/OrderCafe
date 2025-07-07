@@ -320,6 +320,7 @@ form input:focus {
   color: #7b4f2c;
   box-shadow: 0 5px 20px rgba(160, 82, 45, 0.15);
   z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .close-btn {

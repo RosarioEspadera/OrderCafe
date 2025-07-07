@@ -482,7 +482,32 @@ h1, h2 {
   pointer-events: none;
   font-size: 1.2rem;
 }
-   
+  .geo-input {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.geo-input input {
+  flex: 1;
+}
+
+#useLocationBtn {
+  background: var(--brand-color);
+  color: var(--light-bg);
+  border: none;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: filter var(--transition-speed);
+}
+
+#useLocationBtn:hover {
+  filter: brightness(1.1);
+}
+ 
    
 /* ==========================
    11. Utility Helpers

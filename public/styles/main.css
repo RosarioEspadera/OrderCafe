@@ -8,6 +8,8 @@
   --overlay-bg: rgba(0, 0, 0, 0.5);
   --transition-speed: 0.3s;
   --radius: 4px;
+   --font-heading: 'Dancing Script', cursive;
+  --font-body:    'Cormorant Garamond', serif;
 }
 
 /* ==========================

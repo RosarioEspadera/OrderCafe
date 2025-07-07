@@ -55,10 +55,7 @@ function showSizeOptions(item, price) {
   let modifiedPrice = price;
 
   const backdrop = document.createElement("div");
-  backdrop.className = "size-backdrop";
-
   const modal = document.createElement("div");
-  modal.className = "size-modal";
   modal.innerHTML = `
   <button class="close-btn">×</button>
   <h2>Select Size for ${item}</h2>
@@ -73,22 +70,24 @@ function showSizeOptions(item, price) {
 `;
 
 
-  backdrop.appendChild(modal);
+backdrop.appendChild(modal);
   document.body.appendChild(backdrop);
 
-  // Close modal via button or backdrop
-  modal.querySelector(".close-btn").addEventListener("click", () => backdrop.remove());
-  backdrop.addEventListener("click", e => {
-    if (e.target === backdrop) {
-      selectedSize = null;
+  // Your confirm logic stays right here:
+  const confirmBtn = modal.querySelector(".modal-confirm-btn");
+  confirmBtn.addEventListener("click", () => {
+    if (selectedSize) {
+      addToOrder(item, modifiedPrice, selectedSize);
       backdrop.remove();
+    } else {
+      alert("Please select a size first.");
     }
   });
+}
 
   // Animate size options
   const sizeButtons = modal.querySelectorAll(".size-options button");
   const confirmSection = modal.querySelector(".size-confirm-wrap");
-const confirmBtn = modal.querySelector(".modal-confirm-btn");
   sizeButtons.forEach((btn, i) => {
     setTimeout(() => btn.classList.add("option-animate"), i * 100);
     btn.addEventListener("click", () => {
@@ -110,15 +109,7 @@ const confirmBtn = modal.querySelector(".modal-confirm-btn");
     });
   });
 
-  modal.querySelector(".modal-confirm-btn").addEventListener("click", () => {
-    if (selectedSize) {
-      addToOrder(item, modifiedPrice, selectedSize);
-      backdrop.remove();
-    } else {
-      alert("Please select a size first.");
-    }
-  });
-}
+
 
 // 🛒 Order Logic
 function addToOrder(item, price, size = null) {

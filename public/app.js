@@ -32,17 +32,30 @@ function initializeOrder() {
     sendOrderBtn.addEventListener("click", sendOrder);
   }
 
-  // Auto-fill address from geolocation
+  const geoBtn       = document.getElementById("useLocationBtn");
   const addressInput = document.getElementById("address");
-  if (addressInput && navigator.geolocation) {
-    let isFetchingAddress = false;
-    addressInput.addEventListener("click", () => {
-      if (isFetchingAddress) return;
-      isFetchingAddress = true;
-      navigator.geolocation.getCurrentPosition(position => {
-        fetchAddressFromCoords(position.coords.latitude, position.coords.longitude, addressInput);
-        setTimeout(() => { isFetchingAddress = false }, 3000);
-      });
+  if (geoBtn && addressInput && navigator.geolocation) {
+    geoBtn.addEventListener("click", () => {
+      geoBtn.disabled   = true;
+      geoBtn.textContent = "…";
+
+      navigator.geolocation.getCurrentPosition(
+        async ({ coords }) => {
+          await fetchAddressFromCoords(
+            coords.latitude,
+            coords.longitude,
+            addressInput
+          );
+          geoBtn.disabled   = false;
+          geoBtn.textContent = "📍";
+        },
+        () => {
+          alert("Permission denied or unavailable.");
+          geoBtn.disabled   = false;
+          geoBtn.textContent = "📍";
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
     });
   }
 }

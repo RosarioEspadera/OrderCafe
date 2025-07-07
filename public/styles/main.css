@@ -440,6 +440,7 @@ form input:focus {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 9999;
   animation: fadeBounce 1.2s ease forwards;
+  display: none;
 }
 
 @keyframes fadeBounce {

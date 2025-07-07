@@ -95,7 +95,6 @@ modal.setAttribute("aria-labelledby", "modal-title");
     }
   });
 
-  // 🌀 Animate size options
 // 🌀 Animate size options
 sizeButtons.forEach((btn, i) => {
   setTimeout(() => btn.classList.add("option-animate"), i * 100);
@@ -112,7 +111,6 @@ sizeButtons.forEach((btn, i) => {
         confirmBtn.addEventListener("animationend", () => {
           confirmSection.classList.remove("confirm-animate");
         }, { once: true });
-      });  
   });  // ← closes outer btn.addEventListener
 });    // ← closes forEach
 

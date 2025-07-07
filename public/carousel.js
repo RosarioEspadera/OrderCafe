@@ -23,7 +23,6 @@ function startAutoScroll() {
 
 // 🚀 Wait for DOM before running scripts
 document.addEventListener('DOMContentLoaded', () => {
-  initializeOrder();       // 🍽️ Custom order setup
   initMenuCarousel();      // 🎡 Now safely defined
   startAutoScroll();       // 🕒 Begin the loop
 });

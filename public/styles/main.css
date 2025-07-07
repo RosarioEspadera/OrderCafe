@@ -10,6 +10,12 @@
   --radius:        4px;
   --font-heading:  'Dancing Script', cursive;
   --font-body:     'Cormorant Garamond', serif;
+   --color-desserts:  #EED6C4; /* soft peach */
+  --color-coffee:    #8B5E3C; /* rich mocha */
+  --color-meals:     #A3B18A; /* muted olive */
+  --color-drinks:    #76C7C0; /* gentle teal */
+  --text-light:      #ffffff;
+  --text-dark:       #333333;
 }
 /* ==========================
    2. Global Resets & Base

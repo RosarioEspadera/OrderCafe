@@ -20,7 +20,7 @@ function initializeOrder() {
       });
     });
 
-document.querySelectorAll(".menu-button").forEach(button => {
+ document.querySelectorAll(".menu-button").forEach(button => {
       button.addEventListener("click", () => {
         const item = button.getAttribute("data-title");
         const price = parseFloat(button.querySelector(".price").textContent.replace("$", ""));
@@ -33,21 +33,13 @@ document.querySelectorAll(".menu-button").forEach(button => {
         }
       });
     });
- const addressInput = document.getElementById("address");
+
+    const addressInput = document.getElementById("address");
     if (addressInput) {
       addressInput.addEventListener("click", () => {
-        if ("geolocation" in navigator) {
+        if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(position => {
-            const { latitude, longitude } = position.coords;
-            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
-              .then(res => res.json())
-              .then(data => {
-                if (addressInput && data.address) {
-                  addressInput.value = `${data.address.road || ''}, ${data.address.city || data.address.town || ''}`;
-                  addressInput.classList.add("autofilled");
-                }
-              })
-              .catch(err => console.error("Geocode error:", err));
+            fetchAddressFromCoords(position.coords.latitude, position.coords.longitude, addressInput);
           });
         }
       });
@@ -178,17 +170,20 @@ sizeButtons.forEach((btn, i) => {
       orderTotalElem.innerText = calculateTotal().toFixed(2);
     }
   }
-function fetchAddressFromCoords(lat, lng) {
-  const apiKey = "432acce8c24a4f58ac8576dc40dd5525"; // Replace with actual OpenCage key
+function fetchAddressFromCoords(lat, lng, addressInput) {
+  const apiKey = "YOUR_API_KEY";
   const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`;
 
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      const address = data.results[0].formatted;
-      const addressInput = document.getElementById("address");
-      addressInput.value = address;
-      addressInput.classList.add("autofilled");
+      if (data.results?.length) {
+        const address = data.results[0].formatted;
+        addressInput.value = address;
+        addressInput.classList.add("autofilled");
+      } else {
+        console.warn("No address found.");
+      }
     })
     .catch(error => {
       console.error("Reverse geocoding failed:", error);

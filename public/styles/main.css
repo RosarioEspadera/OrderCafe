@@ -109,6 +109,33 @@ a {
 .panel {
   margin-bottom: 2rem; /* Creates space between stacked sections */
 }
+.accordion-section.desserts {
+  background-color: #fff8f4; /* light vanilla-pink for desserts */
+  border: 1px solid #f3e0db;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Accordion button styling */
+.accordion-toggle {
+  background-color: #d88b6c; /* warm caramel tone */
+  color: #fff;
+  border: none;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background 0.3s ease;
+}
+
+.accordion-toggle:hover {
+  background-color: #c77456; /* slightly deeper on hover */
+}
 
 
 /* -------------------- 3. MODAL STYLES -------------------- */

@@ -438,14 +438,12 @@ body.modal-open {
 }
 .success-msg {
   position: relative;
-  z-index: 99;
-  padding: 1rem;
-  font-weight: 600;
-  text-align: center;
-  background-color: #f1e8dc;
-  color: #5b4030;
-  border-radius: 8px;
+  z-index: 100;
   margin-top: 1rem;
+  text-align: center;
+  visibility: visible;
+  opacity: 1;
 }
+
 
 

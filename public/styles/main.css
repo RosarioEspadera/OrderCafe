@@ -318,18 +318,6 @@ dialog::backdrop {
 }
 
 
-.modal-box {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  max-width: 420px;
-  width: 90%;
-  position: relative;
-  text-align: center;
-  animation: popIn 0.4s ease-out forwards;
-  z-index: 1001;
-}
 
 @keyframes popIn {
   0% { opacity: 0; transform: scale(0.9); }

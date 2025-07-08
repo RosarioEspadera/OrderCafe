@@ -117,6 +117,70 @@ a {
   margin-bottom: 1.5rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
+.accordion-section.coffee {
+  background-color: #fef6f2;
+  border: 1px solid #e5d5ca;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.accordion-section.coffee .accordion-toggle {
+  background-color: #855E42; /* classic roast */
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.accordion-section.meals {
+  background-color: #fdfaf7;
+  border: 1px solid #e3dad4;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.accordion-section.meals .accordion-toggle {
+  background-color: #C3B091; /* oat beige */
+  color: #3E2A1E;
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.accordion-section.drinks {
+  background-color: #f4f9f7;
+  border: 1px solid #cfe5dd;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+.accordion-section.drinks .accordion-toggle {
+  background-color: #ADC6B2; /* muted matcha */
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
 
 /* Accordion button styling */
 .accordion-toggle {
@@ -137,6 +201,15 @@ a {
   background-color: #c77456; /* slightly deeper on hover */
 }
 
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.accordion-content.active {
+  max-height: 1000px; /* or fit-content if you're using that */
+}
 
 /* -------------------- 3. MODAL STYLES -------------------- */
 .menu-carousel {

@@ -676,7 +676,6 @@ body.modal-open {
   text-align: center;
   margin-bottom: 2em;
   padding: 0.5em;
-  background-color: rgba(255, 248, 232, 0.5); /* soft parchment glow */
   border-radius: 12px;
 }
 

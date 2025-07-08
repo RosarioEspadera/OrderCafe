@@ -130,3 +130,32 @@ body.modal-open {
 @keyframes fadeUp {
   to { opacity: 1; transform: translateY(0); }
 }
+@media (max-width: 480px) {
+  dialog.modal-box {
+    width: 95%;
+    max-width: none;
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+
+  .size-options button,
+  .modal-confirm-btn {
+    font-size: 0.95rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .modal-box h2 {
+    font-size: 1.2rem;
+  }
+
+  .modal-box .close-btn {
+    font-size: 1.25rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .size-confirm-wrap {
+    margin-top: 1rem;
+  }
+}
+

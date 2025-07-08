@@ -220,32 +220,38 @@ function sendOrder() {
     totalPrice: calculateTotal().toFixed(2)
   };
   
-  emailjs.send("service_epydqmi", "template_vzuexod", details)
-    .then(response => {
-      console.log("Order sent!", response.status, response.text);
-      console.log("Name in success:", name);
-      const msg = document.getElementById("orderSuccessMsg");
-if (msg) {
-  msg.style.removeProperty("display"); // Clears inline display: none
-  msg.textContent = `🎉 Order for ${name} sent successfully! Thank you!`;
-  msg.classList.add("animated");
-  setTimeout(() => msg.classList.remove("animated"), 2500);
-}
+ emailjs.send("service_epydqmi", "template_vzuexod", details)
+  .then(response => {
+    console.log("Order sent!", response.status, response.text);
+    console.log("Name in success:", name);
 
-      // Reset form & state
-      document.getElementById("order-form")?.reset();
-      orders.length = 0;
-      updateOrderSummary();
-      document.getElementById("confirm-section").style.display = "none";
-    })
-   .catch(error => {
-  console.error("Full EmailJS error object:", error);
+    const msg = document.getElementById("orderSuccessMsg");
+    if (msg) {
+      msg.style.display = ""; // Removes inline display property (shows the element)
+      msg.textContent = `🎉 Order for ${name} sent successfully! Thank you!`;
+      msg.classList.add("animated");
+      setTimeout(() => msg.classList.remove("animated"), 2500);
+    }
 
-  // Try to surface useful fields
-  const errorMsg =
-    error?.text || error?.message || JSON.stringify(error, null, 2);
+    // Reset form and state
+    const form = document.getElementById("order-form");
+    if (form) form.reset();
 
-  alert(`❌ Failed to send order: ${errorMsg}`);
-});
+    orders.length = 0;
+    if (typeof updateOrderSummary === "function") updateOrderSummary();
+
+    const confirmSection = document.getElementById("confirm-section");
+    if (confirmSection) confirmSection.style.display = "none";
+  })
+  .catch(error => {
+    console.error("Full EmailJS error object:", error);
+
+    let errorMsg = "Unknown error";
+    if (error) {
+      errorMsg = error.text || error.message || JSON.stringify(error, null, 2);
+    }
+
+    alert(`❌ Failed to send order: ${errorMsg}`);
+  });
 
 document.addEventListener("DOMContentLoaded", initializeOrder);

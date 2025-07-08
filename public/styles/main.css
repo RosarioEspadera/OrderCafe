@@ -34,6 +34,16 @@ a {
   color: var(--brand-color);
   text-decoration: none;
 }
+.order-details {
+  width: 100%;
+  max-width: 460px; /* control panel width */
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--light-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
 
 /* -------------------- 3. MODAL STYLES -------------------- */
 .menu-carousel {
@@ -237,4 +247,16 @@ body.modal-open {
     margin-top: 1rem;
   }
 }
+@media (max-width: 480px) {
+  .order-details {
+    padding: 1rem;
+    max-width: 95%;
+  }
+
+  .order-details input {
+    font-size: 0.85rem;
+    padding: 0.4rem;
+  }
+}
+
 

@@ -555,33 +555,92 @@ body.modal-open {
   pointer-events: auto;
 }
 /* Core styling for the modal */
+/* Dialog container */
 #signInModal {
-  width: 300px;
-  padding: 1.5em;
+  width: 320px;
+  padding: 2em;
   border: none;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
   transform: scale(0.95);
   opacity: 0;
   transition: opacity 300ms ease, transform 300ms ease;
   pointer-events: none;
-  overflow: hidden;
 }
 
-/* When modal is animated in */
+/* Show animation */
 #signInModal.visible {
   transform: scale(1);
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Optional backdrop styling for focus */
-::backdrop {
-  background: rgba(0, 0, 0, 0.4);
+/* Input fields */
+#signInForm input {
+  display: block;
+  width: 100%;
+  padding: 0.75em;
+  margin-top: 0.5em;
+  margin-bottom: 1.2em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 1em;
+  transition: border-color 200ms;
 }
 
-/* Shake animation for validation failure */
+#signInForm input:focus {
+  border-color: #00bfa6;
+  outline: none;
+}
+
+/* Label styling */
+#signInForm label {
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+/* Buttons */
+#signInForm menu {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+#signInForm button {
+  flex: 1;
+  padding: 0.7em;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+#signInBtn {
+  background-color: #00bfa6;
+  color: white;
+}
+
+#signInBtn:hover {
+  background-color: #00a48f;
+}
+
+#closeBtn {
+  background-color: #eee;
+  color: #333;
+}
+
+#closeBtn:hover {
+  background-color: #ddd;
+}
+
+/* Shake animation for invalid input */
 @keyframes shake {
   0% { transform: translateX(0); }
   25% { transform: translateX(-6px); }
@@ -594,12 +653,18 @@ body.modal-open {
   animation: shake 0.3s ease;
 }
 
-/* Transition for main content visibility */
+/* Main content visibility */
 #mainContent.hidden {
   display: none;
 }
 #mainContent.visible {
   display: block;
 }
+
+/* Backdrop styling */
+::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
 
 

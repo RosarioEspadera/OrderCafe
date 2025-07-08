@@ -1,13 +1,21 @@
 /* -------------------- 1. VARIABLES -------------------- */
 :root {
-  --brand-color: #8b4513;
-  --light-bg: #fff;
-  --dark-text: #333;
-  --overlay-bg: rgba(0, 0, 0, 0.5);
-  --radius: 12px;
+  --brand-color: #7C4A2D;       /* rustic cinnamon */
+  --light-bg: #FAF3E0;          /* creamy parchment */
+  --dark-bg: #3E2A1E;           /* cozy espresso */
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+  --radius: 10px;
   --transition-speed: 0.3s;
-  --font-heading: 'Pacifico', cursive;
-  --font-body: 'Lora', serif;
+
+  --font-heading: 'Quicksand', sans-serif;         /* soft and round */
+  --font-body: 'Merriweather', serif;              /* elegant and warm */
+
+  --color-desserts: #F9D5A7;    /* warm caramel */
+  --color-coffee: #855E42;      /* classic roast */
+  --color-meals: #C3B091;       /* oat beige */
+  --color-drinks: #ADC6B2;      /* muted matcha */
+  --text-light: #fff;
+  --text-dark: #2c1f17;
 }
 
 /* -------------------- 2. GLOBAL RESET -------------------- */

@@ -561,46 +561,51 @@ body.modal-open {
   padding: 2em;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, #fff 0%, #f8f8f8 100%);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-  font-family: 'Segoe UI', sans-serif;
-  color: #333;
+  background: linear-gradient(135deg, #fefae0, #f6f1e1); /* warm parchment tones */
+  box-shadow: 0 15px 30px rgba(73, 53, 21, 0.3); /* rich espresso shadow */
+  font-family: 'Georgia', serif;
+  color: #4b3d2d; /* coffee bean brown */
   transform: scale(0.95);
   opacity: 0;
   transition: opacity 300ms ease, transform 300ms ease;
   pointer-events: none;
 }
 
-/* Show animation */
 #signInModal.visible {
   transform: scale(1);
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Input fields */
+::backdrop {
+  background: rgba(0, 0, 0, 0.45); /* warm dusk overlay */
+}
+
+/* Form Inputs */
 #signInForm input {
   display: block;
   width: 100%;
   padding: 0.75em;
   margin-top: 0.5em;
   margin-bottom: 1.2em;
-  border: 1px solid #ccc;
+  border: 1px solid #bfa87f; /* latte edge */
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #fffaf2;
   font-size: 1em;
+  color: #3f3224;
   transition: border-color 200ms;
 }
 
 #signInForm input:focus {
-  border-color: #00bfa6;
+  border-color: #a8825f; /* mocha accent */
   outline: none;
 }
 
-/* Label styling */
+/* Labels */
 #signInForm label {
   font-weight: 600;
   font-size: 0.95em;
+  color: #5a4633;
 }
 
 /* Buttons */
@@ -622,24 +627,25 @@ body.modal-open {
   transition: background-color 200ms ease;
 }
 
+/* Sign In Button – Café Emerald */
 #signInBtn {
-  background-color: #00bfa6;
-  color: white;
+  background-color: #6b8e23; /* olive latte */
+  color: #fff;
 }
 
 #signInBtn:hover {
-  background-color: #00a48f;
+  background-color: #5e7c1e;
 }
 
+/* Cancel Button – Sugar Beige */
 #closeBtn {
-  background-color: #eee;
-  color: #333;
+  background-color: #e9ddc7;
+  color: #3c2e21;
 }
 
 #closeBtn:hover {
-  background-color: #ddd;
+  background-color: #d9cfbb;
 }
-
 /* Shake animation for invalid input */
 @keyframes shake {
   0% { transform: translateX(0); }
@@ -664,6 +670,32 @@ body.modal-open {
 /* Backdrop styling */
 ::backdrop {
   background: rgba(0, 0, 0, 0.4);
+}
+/* Branding inside modal */
+.modal-branding {
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+.brand-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.6em;
+}
+
+.modal-branding h2 {
+  margin: 0.2em 0;
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-branding p {
+  font-size: 0.9em;
+  color: #666;
 }
 
 

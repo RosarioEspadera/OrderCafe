@@ -135,35 +135,33 @@ document.body.appendChild(backdrop);
   sizeButtons = sizeBtns;
   const confirmWrap   = modal.querySelector(".size-confirm-wrap");
   const confirmBtn    = modal.querySelector(".modal-confirm-btn");
- 
+ const confirmSection = document.querySelector(".size-confirm-wrap");
+
 
   // 1) Size‐click handler: mark & adjust price
-  sizeBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      // deselect all
-      sizeBtns.forEach(b => b.classList.remove("selected-size"));
+  sizeButtons.forEach((btn, i) => {
+  setTimeout(() => btn.classList.add("option-animate"), i * 100);
 
-      // select this one
-      btn.classList.add("selected-size");
-      selectedSize = btn.dataset.size;
-
-      // price logic (tweak as you like)
-      switch (selectedSize) {
-        case "Small":
-          modifiedPrice = +(price * 0.9).toFixed(2);  // 10% off
-          break;
-        case "Medium":
-          modifiedPrice = price;                      // base price
-          break;
-        case "Large":
-          modifiedPrice = +(price * 1.2).toFixed(2);  // 20% upcharge
-          break;
-      }
-
-      // reveal Confirm
-      confirmWrap.style.display = "block";
+  btn.addEventListener("click", () => {
+    // Deselect others
+    sizeButtons.forEach(b => {
+      b.classList.remove("selected-size");
+      b.textContent = b.getAttribute("data-size");
     });
+
+    // Select this one
+    btn.classList.add("selected-size");
+    selectedSize = btn.getAttribute("data-size");
+
+    // Reveal confirm button
+    confirmSection.style.display = "block";
+    confirmSection.classList.add("confirm-animate");
+
+    // 🔥 Animate the Confirm button
+    confirmBtn.classList.add("show");
   });
+});
+
 // Handle close button
 const closeBtn = modal.querySelector(".close-btn");
 closeBtn.addEventListener("click", () => {
@@ -181,35 +179,28 @@ closeBtn.addEventListener("click", () => {
 }
 
 // 🌀 Animate size options
-sizeButtons.forEach((btn, i) => {
+sizeBtns.forEach((btn, i) => {
   setTimeout(() => btn.classList.add("option-animate"), i * 100);
 
   btn.addEventListener("click", () => {
-  // Deselect others
-  sizeButtons.forEach(b => {
-    b.classList.remove("selected-size");
-    b.textContent = b.getAttribute("data-size");
+    sizeBtns.forEach(b => {
+      b.classList.remove("selected-size");
+      b.textContent = b.getAttribute("data-size");
+    });
+    btn.classList.add("selected-size");
+    selectedSize = btn.getAttribute("data-size");
+
+    confirmWrap.style.display = "block";
+    confirmWrap.classList.add("confirm-animate");
+    confirmBtn.classList.add("show");
   });
-
-  // Select this one
-  btn.classList.add("selected-size");
-  selectedSize = btn.getAttribute("data-size");
-
-  // Reveal confirm button
-  confirmSection.style.display = "block";
-  confirmSection.classList.add("confirm-animate");
-
-  // 🔥 Animate the Confirm button
-  confirmBtn.classList.add("show");
 });
-
-});  // <-- closes forEach
 
 
 // 🛒 Order Logic
-function addToOrder(item, price, size = null) {
- orders.push({ item, price, size });
-updateOrderSummary(); // or whatever function updates the DOM
+function addToOrder(name, price, size = null) {
+  orders.push({ name, price, size });
+  updateOrderSummary();
 }
 
 function updateOrderSummary() {

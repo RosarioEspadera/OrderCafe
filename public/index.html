@@ -18,25 +18,23 @@
 <body>
 
 <!-- Sign In Button -->
-<button id="signInBtn">Sign In</button>
-
-<!-- Sign In Modal -->
 <dialog id="signInModal" aria-modal="true" aria-labelledby="signInTitle">
   <form id="signInForm" class="sign-in-form" autocomplete="on">
     <h2 id="signInTitle">Sign In</h2>
 
     <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required autocomplete="username" autofocus />
+    <input type="text" id="username" name="username" required />
 
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required autocomplete="current-password" />
+    <input type="password" id="password" name="password" required />
 
     <menu>
-      <button type="button" id="closeBtn" value="cancel">Cancel</button>
-      <button type="submit" value="default">Sign In</button>
+      <button type="button" id="closeBtn">Cancel</button>
+      <button type="submit">Sign In</button>
     </menu>
   </form>
 </dialog>
+
 
   <div id="mainContent" class="hidden">
   <div id="app">

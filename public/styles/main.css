@@ -282,6 +282,25 @@ h1, h2 {
 /* ==========================
    6. Modal & Backdrop
    ========================== */
+dialog.modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 2rem;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  z-index: 1001;
+  animation: popIn 0.4s ease-out forwards;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
 .backdrop-overlay {
   position: fixed;
   inset: 0;                   /* shorthand for top:0; right:0; bottom:0; left:0 */

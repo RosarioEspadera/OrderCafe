@@ -41,15 +41,14 @@ function initializeOrder() {
 
   // Menu-item buttons
   document.querySelectorAll(".menu-button").forEach(button => {
-    button.addEventListener("click", () => {
-      const item     = button.dataset.title;
-      const price    = parseFloat(
-        button.querySelector(".price").textContent.replace("$", "")
-      );
-      const hasSize  = button.dataset.size === "true";
-      hasSize ? showSizeOptions(item, price) : addToOrder(item, price);
-    });
+  button.addEventListener("click", () => {
+    const item = button.dataset.title;
+    const price = parseFloat(button.querySelector(".price").textContent.replace("$", ""));
+    const hasSize = button.dataset.size === "true";
+    hasSize ? showSizeOptions(item, price) : addToOrder(item, price);
   });
+});
+
 
   // Send order button
   const sendOrderBtn = document.getElementById("sendOrderBtn");
@@ -122,8 +121,7 @@ function showSizeOptions(item, price) {
     </div>
   `;
   // Apply classes & accessibility
-modal.classList.add("modal-box");
-backdrop.classList.add("backdrop-overlay");
+modal.classList.add("modal-box", "fade-in");
 backdrop.classList.add("backdrop-overlay", "active");
 modal.setAttribute("role", "dialog");
 modal.setAttribute("aria-labelledby", "modal-title");
@@ -131,7 +129,6 @@ modal.setAttribute("aria-labelledby", "modal-title");
 // Mount to DOM
 backdrop.appendChild(modal);
 document.body.appendChild(backdrop);
-
 
   // Grab the buttons
   const sizeBtns      = modal.querySelectorAll(".size-options button");
@@ -167,6 +164,11 @@ document.body.appendChild(backdrop);
       confirmWrap.style.display = "block";
     });
   });
+// Handle close button
+const closeBtn = modal.querySelector(".close-btn");
+closeBtn.addEventListener("click", () => {
+  backdrop.remove();
+});
 
   // 2) Confirm: add to order & teardown
   confirmBtn.addEventListener("click", () => {

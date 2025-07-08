@@ -93,16 +93,12 @@ function showSizeOptions(item, price) {
   if (isModalOpen) return;
 
   // 2) Create your backdrop + modal elements
-  const backdrop = document.createElement("div");
-  backdrop.classList.add("backdrop-overlay", "active");
+   const dialogEl = document.createElement("dialog");
+  dialogEl.classList.add("modal-box");
+  dialogEl.setAttribute("aria-labelledby", "modal-title");
 
-  const modalEl = document.createElement("div");
-  modalEl.classList.add("modal-box");
-  modalEl.setAttribute("role", "dialog");
-  modalEl.setAttribute("aria-labelledby", "modal-title");
-
-  // 3) Inject the HTML you want
-  modalEl.innerHTML = `
+  // Inject modal content
+  dialogEl.innerHTML = `
     <button class="close-btn" aria-label="Close">×</button>
     <h2 id="modal-title">Select Size for ${item}</h2>
     <div class="size-options">
@@ -115,65 +111,58 @@ function showSizeOptions(item, price) {
     </div>
   `;
 
-  // 4) Assemble in the DOM
-  backdrop.appendChild(modalEl);
-  document.body.appendChild(backdrop);
-
-  // 5) Lock scroll on body
+  // Append to body and open modal
+  document.body.appendChild(dialogEl);
+  dialogEl.showModal();
   document.body.classList.add("modal-open");
   isModalOpen = true;
 
-  // 6) Grab your buttons *from the created modalEl*
-  const sizeButtons   = modalEl.querySelectorAll(".size-options button");
-  const confirmWrap   = modalEl.querySelector(".size-confirm-wrap");
-  const confirmBtn    = modalEl.querySelector(".modal-confirm-btn");
-  let   selectedSize  = null;
-  let   modifiedPrice = price;
+  // Grab buttons from dialogEl
+  const sizeButtons  = dialogEl.querySelectorAll(".size-options button");
+  const confirmWrap  = dialogEl.querySelector(".size-confirm-wrap");
+  const confirmBtn   = dialogEl.querySelector(".modal-confirm-btn");
+  const closeBtn     = dialogEl.querySelector(".close-btn");
+  let selectedSize   = null;
+  let modifiedPrice  = price;
 
-  // 7) Animate & attach size-click handlers
+  // Animate + size select logic
   sizeButtons.forEach((btn, i) => {
     setTimeout(() => btn.classList.add("option-animate"), i * 100);
 
     btn.addEventListener("click", () => {
-      // clear previous selection
       sizeButtons.forEach(b => {
         b.classList.remove("selected-size");
         b.textContent = b.getAttribute("data-size");
       });
 
-      // mark this one
       btn.classList.add("selected-size");
       selectedSize = btn.getAttribute("data-size");
 
-      // recalc price
       switch (selectedSize) {
-        case "Small":  modifiedPrice = +(price * 0.9).toFixed(2); break;
-        case "Large":  modifiedPrice = +(price * 1.2).toFixed(2); break;
-        default:       modifiedPrice = price;
+        case "Small": modifiedPrice = +(price * 0.9).toFixed(2); break;
+        case "Large": modifiedPrice = +(price * 1.2).toFixed(2); break;
+        default:      modifiedPrice = price;
       }
 
-      // show confirm
       confirmWrap.style.display = "block";
       confirmWrap.classList.add("confirm-animate");
       confirmBtn.classList.add("show");
     });
   });
 
-  // 8) Close-modal logic
+  // Close modal function
   function closeModal() {
-    backdrop.remove();                   // remove from DOM
+    dialogEl.close();
+    dialogEl.remove();
     document.body.classList.remove("modal-open");
     isModalOpen = false;
   }
 
-  modalEl.querySelector(".close-btn")
-         .addEventListener("click", closeModal);
+  // Close and Confirm handlers
+  closeBtn.addEventListener("click", closeModal);
 
-  // 9) Confirm-click logic
   confirmBtn.addEventListener("click", () => {
-    if (!selectedSize) {
-      return alert("Please select a size first.");
-    }
+    if (!selectedSize) return alert("Please select a size first.");
     addToOrder(item, modifiedPrice, selectedSize);
     closeModal();
   });

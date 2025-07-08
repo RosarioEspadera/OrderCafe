@@ -542,4 +542,16 @@ body.modal-open {
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
+/* Hide by default */
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+/* Fade in when ready */
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
 

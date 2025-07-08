@@ -80,7 +80,7 @@ dialog.modal-box {
   border-radius: var(--radius);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   width: 90%;
-  max-width: 420px;
+  max-width: fit-content;
   text-align: center;
   z-index: 1001;
   animation: popIn 0.4s ease-out forwards;

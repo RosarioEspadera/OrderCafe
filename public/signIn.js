@@ -1,69 +1,81 @@
-// Inside app.js
-// Element references
+// 🌐 Element references
 const signInModal = document.getElementById("signInModal");
-const openBtn = document.getElementById("signInBtn");
+const signInBtn = document.getElementById("signInBtn");
 const closeBtn = document.getElementById("closeSignIn");
 const loginMessage = document.getElementById("loginMessage");
+const mainContent = document.getElementById("mainContent");
 
-// 🚪 Auto-show modal on page load if not logged in
+// 🚪 Show modal & hide UI on page load if not logged in
 window.addEventListener("DOMContentLoaded", () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
   if (!isLoggedIn) {
     signInModal.showModal();
     document.body.classList.add("modal-open");
-    document.getElementById("mainContent").style.display = "none";
+    mainContent.style.display = "none";
   } else {
-    document.getElementById("mainContent").style.display = "block";
+    mainContent.style.display = "block";
+    signInBtn.style.display = "none"; // hide button after login
   }
 });
 
-
-
-openBtn.addEventListener("click", () => {
+// 📌 Open Sign-In modal manually (optional)
+signInBtn.addEventListener("click", () => {
   signInModal.showModal();
   document.body.classList.add("modal-open");
 });
 
+// 🖱️ Close modal when clicking outside
 signInModal.addEventListener("click", (e) => {
   const rect = signInModal.getBoundingClientRect();
-  const clickedInside = (
+  const clickedInside =
     e.clientX >= rect.left &&
     e.clientX <= rect.right &&
     e.clientY >= rect.top &&
-    e.clientY <= rect.bottom
-  );
+    e.clientY <= rect.bottom;
+
   if (!clickedInside) {
     signInModal.close();
     document.body.classList.remove("modal-open");
   }
 });
+
+// 🔐 Handle Sign-In logic
 document.getElementById("signInForm").addEventListener("submit", function (e) {
-  e.preventDefault(); // stop page refresh
+  e.preventDefault();
 
   const emailInput = document.getElementById("signInEmail").value.trim();
   const passwordInput = document.getElementById("signInPassword").value.trim();
 
-  // Sample dummy credentials (customize or replace later with real auth)
   const validEmail = "admin@ordercafe.com";
   const validPassword = "coffee123";
 
   if (emailInput === validEmail && passwordInput === validPassword) {
-  localStorage.setItem("isLoggedIn", "true");
-  loginMessage.textContent = "Welcome back, admin!";
-  loginMessage.style.color = "#4B3F2F"; // your brand color
-    
-    document.getElementById("mainContent").style.display = "block";
-    // Optional: Close modal after login
+    localStorage.setItem("isLoggedIn", "true");
+    loginMessage.textContent = "Welcome back, admin!";
+    loginMessage.style.color = "#4B3F2F";
+
+    mainContent.style.display = "block";
+    signInBtn.style.display = "none";
+
     setTimeout(() => {
-      document.getElementById("signInModal").close();
+      signInModal.close();
       loginMessage.textContent = "";
     }, 1500);
   } else {
     loginMessage.textContent = "Invalid credentials. Try again ☕";
-    loginMessage.style.color = "#C0392B"; // error red
+    loginMessage.style.color = "#C0392B";
   }
 });
+
+// ❌ Manual modal close and form reset
+closeBtn.addEventListener("click", () => {
+  signInModal.close();
+  document.body.classList.remove("modal-open");
+  document.getElementById("signInForm").reset();
+  loginMessage.textContent = "";
+});
+
 closeBtn.addEventListener("click", () => {
   signInModal.close();
   document.body.classList.remove("modal-open");

@@ -351,14 +351,16 @@ h1, h2 {
 }
 
 .size-options button {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #bbb;
-  border-radius: var(--radius);
-  background: #fafafa;
-  cursor: pointer;
-  transition: background var(--transition-speed);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease-out;
 }
+
+.size-options button.option-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
 
 .size-options button:hover,
 .size-options .selected-size {

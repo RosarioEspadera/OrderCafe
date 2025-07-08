@@ -16,11 +16,45 @@
   
 </head>
 <body>
+ <button id="signInBtn" type="button">Sign In</button>
+
+  <!-- Sign In Modal -->
+  <dialog id="signInModal" aria-modal="true" aria-labelledby="signInTitle">
+    <form id="signInForm" class="sign-in-form" autocomplete="on">
+      <h2 id="signInTitle">Sign In</h2>
+      <label for="username">Username:</label>
+      <input 
+        type="text" 
+        id="username" 
+        name="username" 
+        required 
+        autocomplete="username"
+        autofocus 
+      />
+
+      <label for="password">Password:</label>
+      <input 
+        type="password" 
+        id="password" 
+        name="password" 
+        required 
+        autocomplete="current-password"
+      />
+
+      <menu>
+        <button type="button" id="closeSignIn" value="cancel">Cancel</button>
+        <button type="submit" value="default">Sign In</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <!-- Login feedback message -->
+  <div id="loginMessage" role="alert" style="min-height:1.5em; margin-top:1em;"></div>
+   <div id="mainContent">
   <div id="app">
     <div class="logo">
   <img src="images/rios-cafe-logo.png" alt="Rio's Cafe Logo">
 </div>
-     <div id="mainContent">
     <h1>Rio's Cafe</h1>
     <p>Select your order:</p>
     <!-- Menu Items -->
@@ -271,23 +305,6 @@
 
  </main>
 </div>
-    <!-- 🔐 Sign-In Modal Section -->
-<dialog id="signInModal">
-  <form id="signInForm" method="dialog" class="sign-in-form">
-    <h2>Sign In</h2>
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required />
-    
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required />
-    
-    <menu>
-      <button value="cancel">Cancel</button>
-      <button id="submitBtn" value="default">Sign In</button>
-    </menu>
-  </form>
-</dialog>
-
     
     <script defer src="app.js"></script>
     <script defer src="signIn.js"></script>

@@ -436,5 +436,16 @@ body.modal-open {
     max-width: 140px;
   }
 }
+.success-msg {
+  position: relative;
+  z-index: 99;
+  padding: 1rem;
+  font-weight: 600;
+  text-align: center;
+  background-color: #f1e8dc;
+  color: #5b4030;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
 
 

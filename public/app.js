@@ -178,9 +178,8 @@ closeBtn.addEventListener("click", () => {
 
 
 // 🛒 Order Logic
-function addToOrder(name, price, size = null) {
-  orders.push({ name, price, size });
-  updateOrderSummary();
+function addToOrder(item, price, size = null) {
+  orders.push({ name: item, price, size });
 }
 
 function updateOrderSummary() {

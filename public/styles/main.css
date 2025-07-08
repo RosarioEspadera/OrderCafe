@@ -36,6 +36,31 @@ a {
 }
 
 /* -------------------- 3. MODAL STYLES -------------------- */
+.menu-carousel {
+  overflow: hidden;
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.menu-track {
+  display: flex;
+  gap: 1rem;
+  padding-left: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.menu-track::-webkit-scrollbar {
+  display: none; /* Chrome & Safari */
+}
+
+.menu-button {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
 .menu-carousel .menu-button {
   padding: 0.5rem;
   background: transparent;

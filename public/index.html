@@ -18,19 +18,17 @@
 <body>
 
 <!-- Sign In Button -->
-<dialog id="signInModal" aria-modal="true" aria-labelledby="signInTitle">
-  <form id="signInForm" class="sign-in-form" autocomplete="on">
-    <h2 id="signInTitle">Sign In</h2>
+<dialog id="signInModal">
+  <form method="dialog" id="signInForm">
+    <label for="username">Username</label>
+    <input type="text" id="username" />
 
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required />
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required />
+    <label for="password">Password</label>
+    <input type="password" id="password" />
 
     <menu>
+      <button type="submit" id="signInBtn">Sign In</button>
       <button type="button" id="closeBtn">Cancel</button>
-      <button id="signInBtn">Sign In</button>
     </menu>
   </form>
 </dialog>

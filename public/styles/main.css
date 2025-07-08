@@ -87,12 +87,15 @@ h1, h2 {
    5. Menu & Accordion
    ========================== */
 .accordion-toggle {
-   position: relative;
-  padding-right: 1.5rem;
-  display: block;
+  position: relative;
+  display: flex;                /* Lay out label and icon side by side */
+  justify-content: space-between; 
+  align-items: center;
   width: 100%;
-  background: var(--brand-color);
+  background-color: var(--brand-color);
   color: var(--light-bg);
+  font-size: 1rem;
+  font-family: var(--font-body);
   padding: 0.75rem 1rem;
   border: none;
   border-radius: var(--radius);
@@ -125,13 +128,11 @@ h1, h2 {
 
 .accordion-section.expanded .accordion-toggle::after {
   content: "▾";
-  position: absolute;
-  right: 0.5rem;
 }
 .accordion-toggle::after {
-  content: "▸";
-  position: absolute;
-  right: 0.5rem;
+  content: "▸"; /* collapsed state */
+  font-size: 1.25rem;
+  margin-left: 1rem;
 }
 .accordion-toggle:hover {
   background: darken(var(--brand-color), 10%);

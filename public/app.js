@@ -219,8 +219,6 @@ function sendOrder() {
     email,
     totalPrice: calculateTotal().toFixed(2)
   };
-  // 🪵 Debug the payload before sending
-  console.log("Sending order details:", details);
   
   emailjs.send("service_epydqmi", "template_vzuexod", details)
     .then(response => {

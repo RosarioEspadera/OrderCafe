@@ -23,80 +23,67 @@ async function fetchAddressFromCoords(lat, lng, input) {
   }
 }
 
-// ✅ Initialization: attach all your handlers
+// 🚀 Initialization
 function initializeOrder() {
-  // EmailJS init
+  // EmailJS setup
   if (typeof emailjs !== "undefined") {
     emailjs.init("AqvkFhQnxowOJda9J");
   } else {
     console.error("EmailJS library is not loaded.");
   }
 
-  // Accordion toggles
-  document.querySelectorAll(".accordion-toggle").forEach(toggle => {
-    toggle.addEventListener("click", () => {
-      toggle.parentElement.classList.toggle("expanded");
+  // Menu button logic
+  document.querySelectorAll(".menu-button").forEach(button => {
+    button.addEventListener("click", () => {
+      const item = button.dataset.title;
+      const price = parseFloat(button.querySelector(".price").textContent.replace("$", ""));
+      const hasSize = button.dataset.size === "true";
+      hasSize ? showSizeOptions(item, price) : addToOrder(item, price);
     });
   });
 
-  // Menu-item buttons
-  document.querySelectorAll(".menu-button").forEach(button => {
-  button.addEventListener("click", () => {
-    const item = button.dataset.title;
-    const price = parseFloat(button.querySelector(".price").textContent.replace("$", ""));
-    const hasSize = button.dataset.size === "true";
-    hasSize ? showSizeOptions(item, price) : addToOrder(item, price);
+  // Accordion toggles
+  document.querySelectorAll(".accordion-toggle").forEach(toggle => {
+    toggle.addEventListener("click", () =>
+      toggle.parentElement.classList.toggle("expanded")
+    );
   });
-});
 
+  // Submit order
+  document.getElementById("sendOrderBtn")?.addEventListener("click", sendOrder);
 
-  // Send order button
-  const sendOrderBtn = document.getElementById("sendOrderBtn");
-  if (sendOrderBtn) {
-    sendOrderBtn.addEventListener("click", sendOrder);
-  }
-
-  // 📍 “Use My Location” button handler
-  const geoBtn       = document.getElementById("useLocationBtn");
+  // 📍 Use My Location
+  const geoBtn = document.getElementById("useLocationBtn");
   const addressInput = document.getElementById("custAddress");
-
   if (geoBtn && addressInput && navigator.geolocation) {
     geoBtn.addEventListener("click", async () => {
-      geoBtn.disabled    = true;
+      geoBtn.disabled = true;
       geoBtn.textContent = "…";
-
       try {
-        // 1) get coords
         const position = await new Promise((res, rej) =>
           navigator.geolocation.getCurrentPosition(res, rej, {
             enableHighAccuracy: true,
             timeout: 10000
           })
         );
-
-        // 2) reverse-geocode into the input
         await fetchAddressFromCoords(
           position.coords.latitude,
           position.coords.longitude,
           addressInput
         );
-      }
-      catch (err) {
+      } catch (err) {
         alert("Couldn’t auto-fill your address. Please enter it manually.");
-      }
-      finally {
-        geoBtn.disabled    = false;
+      } finally {
+        geoBtn.disabled = false;
         geoBtn.textContent = "📍";
       }
     });
   }
 }
 
+
 // Kick everything off
 document.addEventListener("DOMContentLoaded", initializeOrder);
-
-// 🧾 Size Selection Modal
-let sizeButtons = [];
 
 function showSizeOptions(item, price) {
   // Create nodes
@@ -150,6 +137,11 @@ document.body.appendChild(backdrop);
     // Select this one
     btn.classList.add("selected-size");
     selectedSize = btn.getAttribute("data-size");
+    switch (selectedSize) {
+        case "Small":  modifiedPrice = +(price * 0.9).toFixed(2); break;
+        case "Large":  modifiedPrice = +(price * 1.2).toFixed(2); break;
+        default:       modifiedPrice = price;
+      }
 
     // Reveal confirm button
     confirmWrap.style.display = "block";
@@ -161,23 +153,15 @@ document.body.appendChild(backdrop);
 });
 
 // Handle close button
-const closeBtn = modal.querySelector(".close-btn");
-closeBtn.addEventListener("click", () => {
-  backdrop.remove();
-});
+modal.querySelector(".close-btn").addEventListener("click", () => backdrop.remove());
 
-  // 2) Confirm: add to order & teardown
   confirmBtn.addEventListener("click", () => {
-    if (!selectedSize) {
-      return alert("Please select a size first.");
-    }
+    if (!selectedSize) return alert("Please select a size first.");
     addToOrder(item, modifiedPrice, selectedSize);
     backdrop.remove();
   });
 }
-
-
-// 🛒 Order Logic
+// 🛒 Add item to order
 function addToOrder(item, price, size = null) {
   orders.push({ name: item, price, size });
   updateOrderSummary();
@@ -207,11 +191,12 @@ function calculateTotal() {
 
 
 // ✉️ Order Submission
+// ✉️ Submit order
 function sendOrder() {
-  const name = document.getElementById("name")?.value.trim();
+  const name    = document.getElementById("name")?.value.trim();
   const address = document.getElementById("custAddress")?.value.trim();
-  const time = document.getElementById("time")?.value;
-  const email = document.getElementById("email")?.value.trim();
+  const time    = document.getElementById("time")?.value;
+  const email   = document.getElementById("email")?.value.trim();
 
   if (!name || !address || !time || !email || orders.length === 0) {
     alert("Please complete all fields and add at least one item.");
@@ -251,3 +236,4 @@ function sendOrder() {
       alert(`Failed to send order: ${error.text || "Unknown error"}`);
     });
 }
+document.addEventListener("DOMContentLoaded", initializeOrder);

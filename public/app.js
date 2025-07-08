@@ -209,7 +209,7 @@ function calculateTotal() {
 // ✉️ Order Submission
 function sendOrder() {
   const name = document.getElementById("name")?.value.trim();
-  const address = document.getElementById("address")?.value.trim();
+  const address = document.getElementById("custAddress")?.value.trim();
   const time = document.getElementById("time")?.value;
   const email = document.getElementById("email")?.value.trim();
 

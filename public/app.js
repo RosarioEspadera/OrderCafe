@@ -116,6 +116,10 @@ modal.setAttribute("aria-labelledby", "modal-title");
 backdrop.classList.add("backdrop-overlay", "active");
 backdrop.appendChild(modal);
 document.body.appendChild(backdrop);
+  document.body.classList.add('modal-open');
+  document.body.classList.remove('modal-open');
+
+
 
   // Grab the buttons
   const sizeBtns      = modal.querySelectorAll(".size-options button");

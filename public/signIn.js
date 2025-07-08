@@ -1,11 +1,11 @@
 // 🌐 Element references
-const signInModal = document.getElementById("signInModal");
-const signInBtn = document.getElementById("signInBtn");
-const closeBtn = document.getElementById("closeSignIn");
-const loginMessage = document.getElementById("loginMessage");
-const mainContent = document.getElementById("mainContent");
+const signInModal = document.getElementById("signInModal");     // Native <dialog> for sign-in
+const signInBtn = document.getElementById("signInBtn");         // Entry trigger button
+const closeBtn = document.getElementById("closeSignIn");        // Manual close button (✖)
+const loginMessage = document.getElementById("loginMessage");   // Status feedback
+const mainContent = document.getElementById("mainContent");     // App view post-login
 
-// 🚪 Show modal & hide UI on page load if not logged in
+// 🚪 Show modal & hide main UI if not logged in
 window.addEventListener("DOMContentLoaded", () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
@@ -15,17 +15,17 @@ window.addEventListener("DOMContentLoaded", () => {
     mainContent.style.display = "none";
   } else {
     mainContent.style.display = "block";
-    signInBtn.style.display = "none"; // hide button after login
+    signInBtn.style.display = "none"; // Hide re-login button
   }
 });
 
-// 📌 Open Sign-In modal manually (optional)
+// 🧭 Manual trigger for Sign-In modal
 signInBtn.addEventListener("click", () => {
   signInModal.showModal();
   document.body.classList.add("modal-open");
 });
 
-// 🖱️ Close modal when clicking outside
+// 🖱️ Close modal when clicking outside the dialog boundary
 signInModal.addEventListener("click", (e) => {
   const rect = signInModal.getBoundingClientRect();
   const clickedInside =
@@ -40,8 +40,8 @@ signInModal.addEventListener("click", (e) => {
   }
 });
 
-// 🔐 Handle Sign-In logic
-document.getElementById("signInForm").addEventListener("submit", function (e) {
+// 🔐 Validate Sign-In credentials
+document.getElementById("signInForm").addEventListener("submit", (e) => {
   e.preventDefault();
 
   const emailInput = document.getElementById("signInEmail").value.trim();
@@ -68,19 +68,10 @@ document.getElementById("signInForm").addEventListener("submit", function (e) {
   }
 });
 
-// ❌ Manual modal close and form reset
+// ❌ Manual close & cleanup
 closeBtn.addEventListener("click", () => {
   signInModal.close();
   document.body.classList.remove("modal-open");
   document.getElementById("signInForm").reset();
   loginMessage.textContent = "";
 });
-
-closeBtn.addEventListener("click", () => {
-  signInModal.close();
-  document.body.classList.remove("modal-open");
-  document.getElementById("signInForm").reset();
-  document.getElementById("loginMessage").textContent = "";
-});
-
-

@@ -334,6 +334,10 @@ h1, h2 {
 .modal-confirm-btn {
     width: 100%;
   }
+   body.modal-open {
+  overflow: hidden;
+}
+
 /* ==========================
    7. Size Options
    ========================== */

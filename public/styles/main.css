@@ -429,11 +429,22 @@ h1, h2 {
 }
 .confirm-button.full-width:hover {
   transform: scale(1.02);
+}.confirm-animate {
+  opacity: 0;
+  animation: fadeInConfirm 0.4s ease-out forwards;
 }
+
+
+
 
 /* ==========================
    9. Animations
    ========================== */
+@keyframes fadeInConfirm {
+  to {
+    opacity: 1;
+  }
+}
 @keyframes fadeInUp {
   from {
     opacity: 0;

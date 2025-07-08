@@ -238,9 +238,14 @@ if (msg) {
       updateOrderSummary();
       document.getElementById("confirm-section").style.display = "none";
     })
-    .catch(error => {
-      console.error("EmailJS error:", error);
-      alert(`Failed to send order: ${error.text || "Unknown error"}`);
-    });
-}
+   .catch(error => {
+  console.error("Full EmailJS error object:", error);
+
+  // Try to surface useful fields
+  const errorMsg =
+    error?.text || error?.message || JSON.stringify(error, null, 2);
+
+  alert(`❌ Failed to send order: ${errorMsg}`);
+});
+
 document.addEventListener("DOMContentLoaded", initializeOrder);

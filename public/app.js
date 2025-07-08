@@ -135,8 +135,6 @@ document.body.appendChild(backdrop);
   sizeButtons = sizeBtns;
   const confirmWrap   = modal.querySelector(".size-confirm-wrap");
   const confirmBtn    = modal.querySelector(".modal-confirm-btn");
- const confirmSection = document.querySelector(".size-confirm-wrap");
-
 
   // 1) Size‐click handler: mark & adjust price
   sizeButtons.forEach((btn, i) => {
@@ -154,8 +152,8 @@ document.body.appendChild(backdrop);
     selectedSize = btn.getAttribute("data-size");
 
     // Reveal confirm button
-    confirmSection.style.display = "block";
-    confirmSection.classList.add("confirm-animate");
+    confirmWrap.style.display = "block";
+    confirmWrap.classList.add("confirm-animate");
 
     // 🔥 Animate the Confirm button
     confirmBtn.classList.add("show");

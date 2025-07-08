@@ -508,4 +508,38 @@ body.modal-open {
   text-align: center;
   margin-top: 0.5rem;
 }
+#introScreen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #f3e5ab, #d2b48c);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 1s ease;
+}
+
+#introScreen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#startBtn {
+  font-size: 1.5rem;
+  padding: 1em 2em;
+  border: none;
+  border-radius: 8px;
+  background-color: #4B3F2F;
+  color: white;
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
 

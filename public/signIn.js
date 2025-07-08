@@ -1,77 +1,50 @@
-window.addEventListener("DOMContentLoaded", () => {
-  // Element selectors
-  const signInModal = document.getElementById("signInModal");
+document.addEventListener("DOMContentLoaded", () => {
   const signInBtn = document.getElementById("signInBtn");
+  const signInModal = document.getElementById("signInModal");
   const closeBtn = document.getElementById("closeSignIn");
-  const loginMessage = document.getElementById("loginMessage");
-  const mainContent = document.getElementById("mainContent");
   const signInForm = document.getElementById("signInForm");
-  const usernameInput = document.getElementById("username");
-  const passwordInput = document.getElementById("password");
+  const loginMessage = document.getElementById("loginMessage");
 
-  // Safety checks
-  if (!signInModal || !signInBtn || !closeBtn || !loginMessage || !mainContent || !signInForm || !usernameInput || !passwordInput) {
-    console.error("One or more required elements are missing in the DOM.");
+  // Safety check to prevent runtime errors
+  if (!signInBtn || !signInModal || !closeBtn || !signInForm || !loginMessage) {
+    console.warn("Missing one or more required elements.");
     return;
   }
 
-  // Check login status
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-  if (!isLoggedIn) {
-    signInModal.showModal();
-    document.body.classList.add("modal-open");
-    mainContent.style.display = "none";
-    signInBtn.style.display = "block";
-  } else {
-    mainContent.style.display = "block";
-    signInBtn.style.display = "none";
-  }
-
-  // Open modal on Sign In button click
+  // Show modal on button click
   signInBtn.addEventListener("click", () => {
     signInModal.showModal();
     document.body.classList.add("modal-open");
   });
 
-  // Close modal when clicking outside form
+  // Close modal when clicking outside
   signInModal.addEventListener("click", (e) => {
-    if (e.target === signInModal) {
+    const rect = signInModal.getBoundingClientRect();
+    const clickedInside = e.clientX >= rect.left &&
+                          e.clientX <= rect.right &&
+                          e.clientY >= rect.top &&
+                          e.clientY <= rect.bottom;
+    if (!clickedInside) {
       signInModal.close();
       document.body.classList.remove("modal-open");
     }
   });
 
-  // Handle sign-in form submission
+  // Simulate sign-in (purely aesthetic)
   signInForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
+    loginMessage.textContent = "Welcome! ☕ This is just for fun — enjoy exploring freely!";
+    loginMessage.style.color = "#4B3F2F";
 
-    // Update credentials here if needed
-    const validUsername = "admin@ordercafe.com";
-    const validPassword = "coffee123";
-
-    if (username === validUsername && password === validPassword) {
-      localStorage.setItem("isLoggedIn", "true");
-      loginMessage.textContent = "Welcome back, admin!";
-      loginMessage.style.color = "#4B3F2F";
-      mainContent.style.display = "block";
-      signInBtn.style.display = "none";
-
-      setTimeout(() => {
-        signInModal.close();
-        document.body.classList.remove("modal-open");
-        loginMessage.textContent = "";
-        signInForm.reset();
-      }, 1500);
-    } else {
-      loginMessage.textContent = "Invalid credentials. Try again ☕";
-      loginMessage.style.color = "#C0392B";
-    }
+    setTimeout(() => {
+      loginMessage.textContent = "";
+      signInModal.close();
+      document.body.classList.remove("modal-open");
+      signInForm.reset();
+    }, 1500);
   });
 
-  // Close modal on close button click
+  // Close modal via close button
   closeBtn.addEventListener("click", () => {
     signInModal.close();
     document.body.classList.remove("modal-open");
@@ -79,3 +52,4 @@ window.addEventListener("DOMContentLoaded", () => {
     loginMessage.textContent = "";
   });
 });
+

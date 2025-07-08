@@ -223,12 +223,15 @@ function sendOrder() {
   emailjs.send("service_epydqmi", "template_vzuexod", details)
     .then(response => {
       console.log("Order sent!", response.status, response.text);
+      console.log("Name in success:", name);
       const msg = document.getElementById("orderSuccessMsg");
+      
       if (msg) {
-        msg.style.display = "block";
-        msg.classList.add("animated");
-        setTimeout(() => msg.classList.remove("animated"), 2500);
-      }
+       msg.textContent = `🎉 Order for ${name} sent successfully! Thank you!`;
+      msg.style.display = "block";
+      msg.classList.add("animated");
+      setTimeout(() => msg.classList.remove("animated"), 2500);
+    }
 
       // Reset form & state
       document.getElementById("order-form")?.reset();

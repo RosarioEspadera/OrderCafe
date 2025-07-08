@@ -35,15 +35,49 @@ a {
   text-decoration: none;
 }
 .order-details {
-  width: 100%;
-  max-width: 460px; /* control panel width */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 480px;
   margin: 2rem auto;
   padding: 1.5rem;
   background: var(--light-bg);
   border-radius: var(--radius);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.order-details .form-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
+/* Labels */
+.order-details .form-row label {
+  min-width: 100px;
+  font-weight: bold;
+  font-size: 1.05rem;
+  color: var(--dark-bg);
+}
+
+/* Inputs */
+.order-details .form-row input {
+  flex: 1;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+  width: 100%;
+}
+.logo img {
+  max-width: 180px;
+  height: auto;
+}
 
 /* -------------------- 3. MODAL STYLES -------------------- */
 .menu-carousel {
@@ -125,7 +159,14 @@ dialog::backdrop {
 }
 body.modal-open {
   overflow: hidden;
+  position: fixed;
+  width: 100%;
+  touch-action: none;
+  overscroll-behavior: contain;
 }
+
+
+
 .modal-box h2 {
   font-family: var(--font-heading);
   font-size: 1.4rem;
@@ -256,6 +297,11 @@ body.modal-open {
   .order-details input {
     font-size: 0.85rem;
     padding: 0.4rem;
+  }
+}
+@media (max-width: 480px) {
+  .logo img {
+    max-width: 140px;
   }
 }
 

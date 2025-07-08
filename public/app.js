@@ -176,24 +176,6 @@ closeBtn.addEventListener("click", () => {
   });
 }
 
-// 🌀 Animate size options
-sizeBtns.forEach((btn, i) => {
-  setTimeout(() => btn.classList.add("option-animate"), i * 100);
-
-  btn.addEventListener("click", () => {
-    sizeBtns.forEach(b => {
-      b.classList.remove("selected-size");
-      b.textContent = b.getAttribute("data-size");
-    });
-    btn.classList.add("selected-size");
-    selectedSize = btn.getAttribute("data-size");
-
-    confirmWrap.style.display = "block";
-    confirmWrap.classList.add("confirm-animate");
-    confirmBtn.classList.add("show");
-  });
-});
-
 
 // 🛒 Order Logic
 function addToOrder(name, price, size = null) {

@@ -461,3 +461,51 @@ body.modal-open {
   60%  { transform: scale(1.05); opacity: 1; }
   100% { transform: scale(1); }
 }
+/* -------------------- SIGN-IN FORM DESIGN -------------------- */
+
+.modal-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-box input[type="email"],
+.modal-box input[type="password"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color, #ccc);
+  background-color: var(--light-bg);
+  font-family: var(--font-body);
+}
+
+.modal-box input:focus {
+  border-color: var(--brand-color);
+  outline: none;
+}
+
+.modal-box button[type="submit"] {
+  padding: 0.8rem;
+  font-size: 1rem;
+  background-color: var(--brand-color);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.modal-box button[type="submit"]:hover {
+  background-color: var(--accent-color, #6E4B2E);
+}
+
+#loginMessage {
+  font-size: 0.9rem;
+  color: var(--brand-color);
+  font-style: italic;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+

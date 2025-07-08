@@ -307,7 +307,14 @@ h1, h2 {
   position: relative;
   text-align: center;
   animation: popIn 0.4s ease-out forwards;
+  z-index: 1001;
 }
+
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 
 .modal-box h2 {
     font-size: 1.2rem;
@@ -325,15 +332,14 @@ h1, h2 {
   color: #666;
   transition: color 0.2s;
 }
-.modal-confirm-btn {
-    width: 100%;
-  }
+
 .modal-box .close-btn:hover {
   color: #000;
 }
-  body.modal-open {
-  overflow: hidden;
-}
+
+.modal-confirm-btn {
+    width: 100%;
+  }
 
 /* ==========================
    7. Size Options
@@ -355,20 +361,22 @@ h1, h2 {
 }
 
 .size-options button.option-animate {
-  /* apply any entrance animation you like */
   opacity: 0;
   transform: translateY(10px);
   animation: fadeUp 0.4s forwards;
 }
+
 @keyframes fadeUp {
   to { opacity: 1; transform: translateY(0); }
 }
+
 .size-options button.selected-size,
 .size-options button:hover {
   background: #8b4513;
   color: #fff;
   transform: scale(1.05);
 }
+
 
 
 /* ==========================
@@ -382,11 +390,11 @@ h1, h2 {
   text-align: center;
   margin-top: 1rem;
 }
+
 .size-confirm-wrap.confirm-animate {
   animation: fadeUp 0.3s forwards;
 }
 
-/* Confirm button default state */
 .modal-confirm-btn {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -395,7 +403,9 @@ h1, h2 {
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
+  width: 100%;
 }
+
 
 /* When visible */
 .modal-confirm-btn.show {
@@ -627,6 +637,10 @@ h1, h2 {
 .success-msg.animated {
   animation: successPulse 0.6s ease forwards;
 }
+body.modal-open {
+  overflow: hidden;
+}
+
 
 
 

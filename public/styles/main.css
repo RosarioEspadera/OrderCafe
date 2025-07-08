@@ -557,23 +557,30 @@ body.modal-open {
 /* Core styling for the modal */
 /* Dialog container */
 #signInModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90vw;
   width: 320px;
   padding: 2em;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, #fefae0, #f6f1e1); /* warm parchment tones */
-  box-shadow: 0 15px 30px rgba(73, 53, 21, 0.3); /* rich espresso shadow */
+  background: linear-gradient(135deg, #fefae0, #f6f1e1);
+  box-shadow: 0 15px 30px rgba(73, 53, 21, 0.3);
   font-family: 'Georgia', serif;
-  color: #4b3d2d; /* coffee bean brown */
-  transform: scale(0.95);
-  opacity: 0;
+  color: #4b3d2d;
+  transform-origin: center center;
   transition: opacity 300ms ease, transform 300ms ease;
+  z-index: 1000;
+  opacity: 0;
   pointer-events: none;
 }
 
+/* Show transition */
 #signInModal.visible {
-  transform: scale(1);
   opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
   pointer-events: auto;
 }
 
@@ -583,31 +590,26 @@ body.modal-open {
 
 /* Form Inputs */
 #signInForm input {
-  display: block;
   width: 100%;
   padding: 0.75em;
-  margin-top: 0.5em;
-  margin-bottom: 1.2em;
-  border: 1px solid #bfa87f; /* latte edge */
-  border-radius: 8px;
-  background-color: #fffaf2;
   font-size: 1em;
-  color: #3f3224;
-  transition: border-color 200ms;
+  margin-bottom: 1em;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
-#signInForm input:focus {
-  border-color: #a8825f; /* mocha accent */
-  outline: none;
+#signInForm menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
 }
-
 /* Labels */
-#signInForm label {
-  font-weight: 600;
-  font-size: 0.95em;
-  color: #5a4633;
+#signInForm button {
+  padding: 0.75em;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: bold;
 }
-
 /* Buttons */
 #signInForm menu {
   display: flex;
@@ -635,6 +637,21 @@ body.modal-open {
 
 #signInBtn:hover {
   background-color: #5e7c1e;
+}
+/* Media query for tighter spaces */
+@media (max-width: 400px) {
+  #signInModal {
+    width: 90vw;
+    padding: 1.5em;
+  }
+
+  .modal-branding h2 {
+    font-size: 1.3rem;
+  }
+
+  .modal-branding p {
+    font-size: 1rem;
+  }
 }
 
 /* Cancel Button – Sugar Beige */

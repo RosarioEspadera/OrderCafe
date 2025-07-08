@@ -436,14 +436,31 @@ body.modal-open {
     max-width: 140px;
   }
 }
-.success-msg {
-  position: relative;
-  z-index: 100;
-  margin-top: 1rem;
+
+#orderSuccessMsg {
+  display: none;            /* Hide by default, shown by JS */
+  background: #e6ffe6;      /* Light green background */
+  color: #2e7d32;           /* Dark green text */
+  border: 1px solid #b2dfdb;
+  padding: 1rem 2rem;
+  margin: 1rem auto;
+  border-radius: 8px;
+  font-size: 1.1rem;
   text-align: center;
-  visibility: visible;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: opacity 0.4s;
   opacity: 1;
+  z-index: 1000;
+}
+#orderSuccessMsg.animated {
+  animation: successPop 0.7s;
 }
 
+@keyframes successPop {
+  0%   { transform: scale(0.85); opacity: 0; }
+  60%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
 
 

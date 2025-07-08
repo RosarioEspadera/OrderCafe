@@ -674,28 +674,36 @@ body.modal-open {
 /* Branding inside modal */
 .modal-branding {
   text-align: center;
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
+  padding: 0.5em;
+  background-color: rgba(255, 248, 232, 0.5); /* soft parchment glow */
+  border-radius: 12px;
 }
 
 .brand-logo {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   object-fit: contain;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0.6em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1em;
 }
 
 .modal-branding h2 {
-  margin: 0.2em 0;
-  font-size: 1.25em;
-  font-weight: bold;
-  color: #333;
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-family: var(--font-heading, 'Quicksand', sans-serif);
+  color: var(--brand-color, #7C4A2D); /* rustic cinnamon */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  margin-bottom: 0.4em;
 }
 
 .modal-branding p {
-  font-size: 0.9em;
-  color: #666;
+  font-size: 1.05rem;
+  color: #5f4431; /* espresso accent */
+  font-style: italic;
+  font-weight: 500;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 }
 
 

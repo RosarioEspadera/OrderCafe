@@ -109,11 +109,11 @@ function showSizeOptions(item, price) {
   `;
   // Apply classes & accessibility
 modal.classList.add("modal-box", "fade-in");
-backdrop.classList.add("backdrop-overlay", "active");
 modal.setAttribute("role", "dialog");
 modal.setAttribute("aria-labelledby", "modal-title");
 
 // Mount to DOM
+backdrop.classList.add("backdrop-overlay", "active");
 backdrop.appendChild(modal);
 document.body.appendChild(backdrop);
 

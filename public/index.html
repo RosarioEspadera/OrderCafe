@@ -200,8 +200,9 @@
 <section id="order-details" class="panel">
   <h2>Order Details</h2>
   <form id="order-form" class="order-form-grid">
-  
+  <div class="order-details">
     <!-- Name -->
+      <div class="form-row">
     <div class="form-group">
       <label for="name">Name</label>
       <input
@@ -212,26 +213,28 @@
         required
       />
     </div>
-  
+    </div>
     <!-- Serving Time (clock picker) -->
+    <div class="form-row">
     <div class="form-group time-group">
       <label for="time">Serving Time</label>
       <input
         type="time"
         id="time"
-        name="time"
         required
       />
     </div>
+    </div>
+      
   
     <!-- Address (full width) -->
+     <div class="form-row">
    <div class="form-group geo-group">
   <label for="custAddress">Address</label>
   <div class="geo-input">
     <input
       type="text"
       id="custAddress"
-      name="custAddress"
       placeholder="Enter your address"
       required
     />
@@ -243,28 +246,33 @@
       📍
     </button>
   </div>
+   </div>
 </div>
+       
 
   
     <!-- Email (full width) -->
+      <div class="form-row">
     <div class="form-group full-width">
       <label for="email">Email Address</label>
       <input
         type="email"
         id="email"
-        name="email"
         placeholder="Enter your email"
         required
       />
     </div>
+      </div>
   
     <!-- Submit -->
+      <div class="form-row">
    <section id="confirm-section" style="display: none;">
   <button id="sendOrderBtn">Send Order</button>
 </section>
     <div id="orderSuccessMsg" class="success-msg" style="display: none;">
   🎉 Your order was sent successfully! Thank you!
 </div>
+      </div>
 
 
   </form>

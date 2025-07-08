@@ -16,42 +16,32 @@
   
 </head>
 <body>
-<div id="introScreen">
-  <button id="startBtn">Sign In</button>
-</div>
 
   <!-- Sign In Modal -->
-  <dialog id="signInModal" aria-modal="true" aria-labelledby="signInTitle">
-    <form id="signInForm" class="sign-in-form" autocomplete="on">
-      <h2 id="signInTitle">Sign In</h2>
-      <label for="username">Username:</label>
-      <input 
-        type="text" 
-        id="username" 
-        name="username" 
-        required 
-        autocomplete="username"
-        autofocus 
-      />
+ <!-- Sign In Button -->
+<button id="signInBtn">Sign In</button>
 
-      <label for="password">Password:</label>
-      <input 
-        type="password" 
-        id="password" 
-        name="password" 
-        required 
-        autocomplete="current-password"
-      />
+<!-- Sign In Modal -->
+<dialog id="signInModal" aria-modal="true" aria-labelledby="signInTitle">
+  <form id="signInForm" class="sign-in-form" autocomplete="on">
+    <h2 id="signInTitle">Sign In</h2>
+    
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required autocomplete="username" autofocus />
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required autocomplete="current-password" />
+    
+    <menu>
+      <button type="button" id="closeBtn" value="cancel">Cancel</button>
+      <button type="submit" value="default">Sign In</button>
+    </menu>
+  </form>
+</dialog>
 
-      <menu>
-        <button type="button" id="closeSignIn" value="cancel">Cancel</button>
-        <button type="submit" value="default">Sign In</button>
-      </menu>
-    </form>
-  </dialog>
+<!-- Login feedback message -->
+<div id="loginMessage" role="alert" style="min-height:1.5em; margin-top:1em;"></div>
 
-  <!-- Login feedback message -->
-  <div id="loginMessage" role="alert" style="min-height:1.5em; margin-top:1em;"></div>
    <div id="mainContent">
   <div id="app">
     <div class="logo">

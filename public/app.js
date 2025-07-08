@@ -180,6 +180,7 @@ closeBtn.addEventListener("click", () => {
 // 🛒 Order Logic
 function addToOrder(item, price, size = null) {
   orders.push({ name: item, price, size });
+  updateOrderSummary();
 }
 
 function updateOrderSummary() {

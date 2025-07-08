@@ -227,7 +227,7 @@ function sendOrder() {
 
     const msg = document.getElementById("orderSuccessMsg");
     if (msg) {
-      msg.style.display = ""; // Removes inline display property (shows the element)
+      msg.style.display = "block";
       msg.textContent = `🎉 Order for ${name} sent successfully! Thank you!`;
       msg.classList.add("animated");
       setTimeout(() => msg.classList.remove("animated"), 2500);

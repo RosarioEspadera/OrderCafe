@@ -253,5 +253,5 @@ function sendOrder() {
 
     alert(`❌ Failed to send order: ${errorMsg}`);
   });
-
+}
 document.addEventListener("DOMContentLoaded", initializeOrder);

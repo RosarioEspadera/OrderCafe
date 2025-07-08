@@ -87,7 +87,8 @@ document.addEventListener("DOMContentLoaded", initializeOrder);
 
 function showSizeOptions(item, price) {
   // Create nodes
-  const modal    = document.createElement("div");
+  const modal = document.createElement("div");
+  modal.classList.add("modal-box");
   const backdrop = document.createElement("div");
   
   // Track selection + adjusted price
@@ -108,7 +109,6 @@ function showSizeOptions(item, price) {
     </div>
   `;
   // Apply classes & accessibility
-modal.classList.add("modal-box", "fade-in");
 modal.setAttribute("role", "dialog");
 modal.setAttribute("aria-labelledby", "modal-title");
 

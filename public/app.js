@@ -85,7 +85,10 @@ function initializeOrder() {
 // Kick everything off
 document.addEventListener("DOMContentLoaded", initializeOrder);
 
+let modal = false;
+
 function showSizeOptions(item, price) {
+  if (modal) return; 
   // Create nodes
   const modal = document.createElement("div");
   modal.classList.add("modal-box");
@@ -118,6 +121,14 @@ backdrop.appendChild(modal);
 document.body.appendChild(backdrop);
   document.body.classList.add('modal-open');
   document.body.classList.remove('modal-open');
+   modal = true;            // LAST: flip the flag on
+}
+
+function closeModal() {
+  document.querySelector('.backdrop-overlay').remove();
+  document.body.classList.remove('modal-open');
+  modal = false;           // reset when closed
+}
 
 
 

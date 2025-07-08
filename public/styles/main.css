@@ -306,26 +306,23 @@ h1, h2 {
 
 
 
-
 .modal-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1000; /* Make sure it stacks above the rest */
-  max-width: 90%;
-  background-color: white; /* Optional for visibility */
-  padding: 1rem; /* Adjust as needed */
-  border-radius: 8px; /* Optional: for a softer design */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Optional: adds depth */
+  position: relative; /* Within flex-centered backdrop */
+  width: 100%;
+  max-width: 420px;
+  margin: 1rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 
 
 .modal-box h2 {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
+    font-size: 1.2rem;
+    text-align: center;
+  }
 
 .modal-box .close-btn {
   position: absolute;
@@ -336,15 +333,16 @@ h1, h2 {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
+.modal-confirm-btn {
+    width: 100%;
+  }
 /* ==========================
    7. Size Options
    ========================== */
 .size-options {
-  display: flex;
-  gap: 0.5rem;
-  margin: 1rem 0;
-}
+    flex-direction: column;
+    align-items: center;
+  }
 
 .size-options button {
   opacity: 0;
@@ -373,28 +371,28 @@ h1, h2 {
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-top: 1rem;
 }
 
+/* Confirm button default state */
 .modal-confirm-btn {
-  background: var(--brand-color);
-  color: var(--light-bg);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius);
-  cursor: pointer;
   opacity: 0;
-  transform: scale(0.5);
-  transition: opacity var(--transition-speed),
-              transform var(--transition-speed);
+  transform: scale(0.95);
+  transition: all 0.3s ease;
 }
+
+/* When visible */
 .modal-confirm-btn.show {
   opacity: 1;
   transform: scale(1);
 }
 
+/* Pop-in animation */
 .modal-confirm-btn.confirm-animate {
   animation: popIn 0.4s ease-out forwards;
 }
+
+/* Core confirm button styling */
 .confirm-button {
   background-color: #6c3f99;
   color: white;
@@ -402,11 +400,12 @@ h1, h2 {
   padding: 0.8rem 1.4rem;
   border: none;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
+/* Hover & Active interactions */
 .confirm-button:hover {
   transform: scale(1.05);
 }
@@ -414,25 +413,21 @@ h1, h2 {
 .confirm-button:active {
   transform: scale(0.97);
 }
+
+/* Full-width variant */
 .confirm-button.full-width {
   width: 100%;
   padding: 0.75rem;
-  border: none;
   background: var(--brand-color);
   color: var(--light-bg);
   border-radius: var(--radius);
   font-size: 1rem;
-  cursor: pointer;
   transition: transform 0.2s ease;
 }
+
 .confirm-button.full-width:hover {
   transform: scale(1.02);
-}.confirm-animate {
-  opacity: 0;
-  animation: fadeInConfirm 0.4s ease-out forwards;
 }
-
-
 
 
 /* ==========================
@@ -455,17 +450,18 @@ h1, h2 {
 }
 
 
+
+/* Pop-in keyframe */
 @keyframes popIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.8);
   }
   to {
     opacity: 1;
     transform: scale(1);
   }
 }
-
 
 
 @keyframes slideFadeIn {

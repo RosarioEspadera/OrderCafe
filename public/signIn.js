@@ -9,38 +9,65 @@ document.addEventListener("DOMContentLoaded", () => {
   const passwordInput = document.getElementById("password");
 
   // Safety check: Are all key elements present?
-  if (!signInModal || !signInForm || !signInBtn || !mainContent || !closeBtn || !usernameInput || !passwordInput) {
+  if (
+    !signInModal || !signInForm || !signInBtn ||
+    !mainContent || !closeBtn || !usernameInput || !passwordInput
+  ) {
     console.error("Missing essential sign-in elements.");
     return;
   }
 
-  // Show modal immediately when the page loads
+  // Animate modal on first load
   signInModal.showModal();
+  requestAnimationFrame(() => {
+    signInModal.classList.add("visible");
+  });
+
+  // Close modal with smooth transition
+  function hideModalWithTransition(modal) {
+    modal.classList.remove("visible");
+    modal.addEventListener("transitionend", () => {
+      modal.close();
+    }, { once: true });
+  }
+
+  // Handle cancel button
+  closeBtn.addEventListener("click", () => {
+    hideModalWithTransition(signInModal);
+  });
 
   // Handle form submission
   signInForm.addEventListener("submit", (e) => {
-    e.preventDefault(); // Prevent actual form submission
+    e.preventDefault();
 
     const username = usernameInput.value.trim();
     const password = passwordInput.value.trim();
 
     if (!username || !password) {
       alert("Please enter both username and password.");
+
+      // Optional: Add shake animation on validation failure
+      signInModal.classList.add("shake");
+      signInModal.addEventListener("animationend", () => {
+        signInModal.classList.remove("shake");
+      }, { once: true });
+
       return;
     }
 
-    // You could add more logic here for validation/authentication
-
-    // Close modal and reveal main content
-    signInModal.close();
+    hideModalWithTransition(signInModal);
     signInBtn.style.display = "none";
     mainContent.classList.remove("hidden");
     mainContent.classList.add("visible");
   });
 
-  // Allow closing the modal with the cancel button
-  closeBtn.addEventListener("click", () => {
-    signInModal.close();
+  // Allow closing modal with Escape key for accessibility
+  signInModal.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      hideModalWithTransition(signInModal);
+    }
   });
 });
+
+
 

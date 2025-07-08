@@ -287,6 +287,7 @@ dialog.modal-box {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  margin: 0; /* prevent default browser margins */
   background: #fff;
   padding: 2rem;
   border: none;
@@ -295,9 +296,10 @@ dialog.modal-box {
   max-width: 420px;
   width: 90%;
   text-align: center;
-  z-index: 1001;
   animation: popIn 0.4s ease-out forwards;
+  z-index: 1001;
 }
+
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.5);
 }

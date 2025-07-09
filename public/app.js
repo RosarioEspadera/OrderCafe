@@ -46,10 +46,14 @@ function initializeOrder() {
 document.querySelectorAll('.accordion-toggle').forEach(button => {
   button.addEventListener('click', () => {
     const content = button.nextElementSibling;
+    
+    // Toggle visibility
     if (content.style.maxHeight && content.style.maxHeight !== '0px') {
       content.style.maxHeight = '0';
+      button.classList.remove('active'); // remove active when closing
     } else {
       content.style.maxHeight = content.scrollHeight + 'px';
+      button.classList.add('active'); // add active when opening
     }
   });
 });

@@ -43,8 +43,11 @@ function initializeOrder() {
   });
 
   // Accordion toggles
- document.querySelectorAll('.accordion-header').forEach(header => {
+document.querySelectorAll('.accordion-header').forEach(header => {
   header.addEventListener('click', () => {
+    document.querySelectorAll('.accordion-section').forEach(section =>
+      section.classList.remove('open')
+    );
     header.parentElement.classList.toggle('open');
   });
 });

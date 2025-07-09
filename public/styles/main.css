@@ -294,6 +294,23 @@ a {
 .menu-button.tooltip:hover::after {
   animation: floatSteam 1.5s ease-in-out;
 }
+.menu-description {
+  font-size: 0.9rem;
+  color: #5c4033; /* cozy espresso-brown tone */
+  background-color: #fff8f1; /* light, warm backdrop */
+  margin-top: 8px;
+  padding: 10px 15px;
+  border-left: 4px solid #dba27b; /* subtle accent strip */
+  border-radius: 6px;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.menu-button:hover .menu-description {
+  opacity: 1;
+  transform: translateY(2px);
+}
+
 
 @keyframes floatSteam {
   0% {

@@ -143,7 +143,16 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
-
+.accordion-section {
+  width: 90%;
+  max-width: 700px;
+  margin: 20px auto;
+  background: rgba(255, 248, 240, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+}
 /* Header styling */
 .accordion-header, .accordion-toggle {
   font-family: var(--font-heading);
@@ -158,7 +167,15 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   border: none;
 }
-
+.accordion-header {
+  background-color: #d8bfa2;
+  color: #fffaf2;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
 .accordion-header:hover, .accordion-toggle:hover {
   background-color: #fdebd2;
 }
@@ -167,14 +184,15 @@ h1, h2, h3, h4, h5, h6 {
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease;
-  background-color: #fff7f0;
-  padding-left: 15px;
-  border-radius: 0 0 8px 8px;
+  background-color: #fffaf2;
+  color: #4a3f35;
+  padding: 0 1.2rem;
+  transition: max-height 0.6s ease, padding 0.3s ease;
 }
 
 .accordion.open .accordion-content {
   max-height: 500px; /* Adjust this height based on content */
+  padding: 1rem 1.2rem;
 }
 
 /* List styling inside accordion */

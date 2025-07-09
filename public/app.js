@@ -43,11 +43,12 @@ function initializeOrder() {
   });
 
   // Accordion toggles
-  document.querySelectorAll(".accordion-toggle").forEach(toggle => {
-    toggle.addEventListener("click", () =>
-      toggle.parentElement.classList.toggle("expanded")
-    );
+ document.querySelectorAll('.accordion-header').forEach(header => {
+  header.addEventListener('click', () => {
+    header.parentElement.classList.toggle('open');
   });
+});
+
 
   // Submit order
   document.getElementById("sendOrderBtn")?.addEventListener("click", sendOrder);

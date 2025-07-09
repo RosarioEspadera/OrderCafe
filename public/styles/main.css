@@ -294,24 +294,26 @@ a {
 .menu-button.tooltip::after {
   content: attr(data-title);
   position: absolute;
-  top: 100%;
+  bottom: 100%; /* 👆 places it above the button */
   left: 50%;
-  transform: translateX(-50%);
-  margin-top: 8px;
-  background: var(--dark-bg);
+  transform: translateX(-50%) translateY(-6px);
+  background: rgba(62, 42, 30, 0.95); /* espresso tone with opacity */
   color: var(--text-light);
-  padding: 4px 10px;
+  padding: 6px 12px;
   font-size: 0.8rem;
-  border-radius: 6px;
+  border-radius: 8px;
   white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  display: none;
-  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 15;
 }
 
 .menu-button.tooltip:hover::after {
-  display: block;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px); /* gentle float up */
 }
+
 .menu-button.tooltip::after {
   transition: opacity 0.3s ease, transform 0.3s ease;
   opacity: 0;

@@ -33,13 +33,13 @@ function initializeOrder() {
   }
 
   // Menu button logic
- document.querySelectorAll('.menu-button').forEach(button => {
- button.addEventListener('click', () => {
-  const title = button.getAttribute('data-title');
-  const price = parseFloat(button.querySelector('.price').textContent.replace('$', ''));
-
-  showSizeOptions(title, price); // 👈 This triggers the modal
-});
+document.querySelectorAll('.menu-button').forEach(button => {
+  button.addEventListener('click', () => {
+    const title = button.getAttribute('data-title');
+    const price = parseFloat(button.querySelector('.price').textContent.replace('$', ''));
+    showSizeOptions(title, price); // 👈 This triggers the modal
+  });
+}); // ← Add this to close the forEach
 
 
 

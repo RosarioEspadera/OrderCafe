@@ -227,7 +227,8 @@ a {
 
 .accordion-content.active {
   max-height: fit-content;
-} /* or fit-content if you're using that */
+  overflow: visible;
+}
 
 /* -------------------- 3. MODAL STYLES -------------------- */
 .menu-carousel {
@@ -288,31 +289,34 @@ a {
 }
 .menu-button.tooltip {
   position: relative;
-  z-index: 20; /* Ensures it floats above accordion sections */
+  z-index: 5; /* keeps tooltip above other elements */
+  overflow: visible; /* ensures tooltip isn't cut off */
 }
 
 .menu-button.tooltip::after {
   content: attr(data-title);
-  position: fixed; /* 🪄 lets it float outside containers */
+  position: absolute;
+  top: calc(100% + 8px); /* places tooltip just below button */
   left: 50%;
-  top: auto;
-  transform: translateX(-50%) translateY(-20px);
-  background: rgba(62, 42, 30, 0.95); /* Café espresso glow */
+  transform: translateX(-50%);
+  background: rgba(62, 42, 30, 0.95); /* cozy espresso */
   color: #fffaf0;
   padding: 6px 12px;
   font-size: 0.85rem;
   border-radius: 8px;
   white-space: nowrap;
-  pointer-events: none;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  z-index: 25;
 }
 
 .menu-button.tooltip:hover::after {
   opacity: 1;
-  transform: translateX(-50%) translateY(-28px);
+  transform: translateX(-50%) translateY(4px); /* gentle float effect */
 }
+
 
 dialog.modal-box {
   position: fixed;

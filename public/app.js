@@ -199,11 +199,16 @@ function calculateTotal() {
 
 // ✉️ Order Submission
 // ✉️ Submit order
-function sendOrder() {
-  const name    = document.getElementById("name")?.value.trim();
+function sendOrder(event) {
+  // Prevent page reload
+  if (event && typeof event.preventDefault === "function") {
+    event.preventDefault();
+  }
+
+  const name = document.getElementById("name")?.value.trim();
   const address = document.getElementById("custAddress")?.value.trim();
-  const time    = document.getElementById("time")?.value;
-  const email   = document.getElementById("email")?.value.trim();
+  const time = document.getElementById("time")?.value;
+  const email = document.getElementById("email")?.value.trim();
 
   if (!name || !address || !time || !email || orders.length === 0) {
     alert("Please complete all fields and add at least one item.");
@@ -213,45 +218,35 @@ function sendOrder() {
   const details = {
     orderDetails: "Your order has been received",
     orders: orders.map(o => `${o.name} ($${o.price.toFixed(2)})`).join(", "),
-    name,
-    address,
-    time,
-    email,
+    name, address, time, email,
     totalPrice: calculateTotal().toFixed(2)
   };
-  
- emailjs.send("service_epydqmi", "template_vzuexod", details)
-  .then(response => {
-    console.log("Order sent!", response.status, response.text);
-    console.log("Name in success:", name);
 
-    const msg = document.getElementById("orderSuccessMsg");
-    if (msg) {
-      msg.style.display = "block";
-      msg.textContent = `🎉 Order for ${name} sent successfully! Thank you!`;
-      msg.classList.add("animated");
-      setTimeout(() => msg.classList.remove("animated"), 2500);
-    }
+  emailjs.send("service_epydqmi", "template_vzuexod", details)
+    .then(response => {
+      console.log("Order sent!", response.status, response.text);
+      const msg = document.getElementById("orderSuccessMsg");
+      if (msg) {
+        msg.style.display = "block";
+        msg.textContent = `🎉 Order for ${name} sent successfully! Thank you!`;
+        msg.classList.add("animated");
+        setTimeout(() => msg.classList.remove("animated"), 2500);
+      }
 
-    // Reset form and state
-    const form = document.getElementById("order-form");
-    if (form) form.reset();
-
-    orders.length = 0;
-    if (typeof updateOrderSummary === "function") updateOrderSummary();
-
-    const confirmSection = document.getElementById("confirm-section");
-    if (confirmSection) confirmSection.style.display = "none";
-  })
-  .catch(error => {
-    console.error("Full EmailJS error object:", error);
-
-    let errorMsg = "Unknown error";
-    if (error) {
-      errorMsg = error.text || error.message || JSON.stringify(error, null, 2);
-    }
-
-    alert(`❌ Failed to send order: ${errorMsg}`);
-  });
+      // ✅ Reset form without reload
+      const form = document.getElementById("order-form");
+      if (form) form.reset();
+      orders.length = 0;
+      updateOrderSummary();
+      document.getElementById("confirm-section").style.display = "none";
+    })
+    .catch(error => {
+      console.error("Full EmailJS error object:", error);
+      const errorMsg = error.text || error.message || "Unknown error";
+      alert(`❌ Failed to send order: ${errorMsg}`);
+    });
 }
-document.addEventListener("DOMContentLoaded", initializeOrder);
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("sendOrderBtn")?.addEventListener("click", (e) => sendOrder(e));
+});

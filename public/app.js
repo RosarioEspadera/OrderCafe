@@ -236,11 +236,20 @@ function sendOrder(event) {
       console.log("Order sent!", response.status, response.text);
       const msg = document.getElementById("orderSuccessMsg");
       if (msg) {
-        msg.style.display = "block";
-        msg.textContent = `🎉 Order for ${name} sent successfully! Thank you!`;
-        msg.classList.add("animated");
-        setTimeout(() => msg.classList.remove("animated"), 2500);
-      }
+  msg.style.display = "block";
+  msg.textContent = `🎉 Order for ${name} sent successfully! Thank you!`;
+  msg.classList.add("animated");
+
+  setTimeout(() => {
+    msg.classList.remove("animated");
+    msg.style.opacity = "0"; // Optional fade effect
+    setTimeout(() => {
+      msg.style.display = "none";
+      msg.style.opacity = "1"; // Reset for next time it’s shown
+    }, 500); // Allow fade-out to finish
+  }, 5000); // Show for 5 seconds
+}
+
 
       // ✅ Reset form without reload
       const form = document.getElementById("order-form");

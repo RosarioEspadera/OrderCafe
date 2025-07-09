@@ -198,7 +198,9 @@ a {
 }
 .accordion-toggle.active {
   background-color: #fdebd2;
+  font-weight: bold;
 }
+
 
 
 /* -------------------- 3. MODAL STYLES -------------------- */

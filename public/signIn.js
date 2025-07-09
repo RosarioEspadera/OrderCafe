@@ -60,6 +60,11 @@ if (audio) {
   audio.play();          // play the sound
 }
 
+const puff = document.getElementById("steamPuff");
+if (puff) {
+  puff.classList.add("animate");
+  setTimeout(() => puff.classList.remove("animate"), 1200); // reset after animation
+}
 
     hideModalWithTransition(signInModal);
     signInBtn.style.display = "none";

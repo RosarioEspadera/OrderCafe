@@ -72,6 +72,24 @@ a {
   border-radius: 6px;
   border: 1px solid #ccc;
 }
+[data-title]::after {
+  content: attr(data-title);
+  display: none;
+  position: absolute;
+  background: var(--dark-bg);
+  color: var(--text-light);
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  top: 100%;
+  left: 0;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+[data-title]:hover::after {
+  display: block;
+}
+
 .logo {
   display: flex;
   justify-content: center;

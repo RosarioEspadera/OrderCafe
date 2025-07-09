@@ -200,6 +200,14 @@ a {
   background-color: #fdebd2;
   font-weight: bold;
 }
+.accordion-toggle .icon {
+  float: right;
+  transition: transform 0.3s ease;
+}
+
+.accordion-toggle.active .icon {
+  transform: rotate(180deg); /* Flip upward */
+}
 
 
 

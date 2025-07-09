@@ -805,7 +805,7 @@ body.modal-open {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-.steam-puff {
+#steamPuff {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -817,11 +817,9 @@ body.modal-open {
   opacity: 0;
   pointer-events: none;
   z-index: 999;
-  background: radial-gradient(circle, rgba(255,255,255,0.6), rgba(255,235,205,0));
-
 }
 
-.steam-puff.animate {
+#steamPuff.animate {
   animation: steamRise 1.2s ease-out forwards;
 }
 

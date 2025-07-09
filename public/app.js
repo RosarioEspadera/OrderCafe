@@ -262,7 +262,7 @@ function sendOrder(event) {
       if (form) form.reset();
       orders.length = 0;
       updateOrderSummary();
-      document.getElementById("confirm-section").style.display = "none";
+      document.getElementById('confirm-section').style.display = 'block';
     })
     .catch(error => {
       console.error("Full EmailJS error object:", error);

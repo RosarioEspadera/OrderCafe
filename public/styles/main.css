@@ -219,12 +219,6 @@ a {
   background-color: #c77456; /* slightly deeper on hover */
 }
 
-.accordion-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-}
-
 .accordion.open .accordion-content {
   max-height: 500px; /* Adjust to fit content height */
 }
@@ -233,6 +227,39 @@ a {
   overflow: visible;
 }
 
+.accordion {
+  border-bottom: 1px solid #d2a679;
+  margin-bottom: 10px;
+}
+
+.accordion-header {
+  font-family: 'Merriweather', serif;
+  font-size: 1.2rem;
+  background-color: #fef6f0;
+  cursor: pointer;
+  padding: 10px;
+  color: #5c4033;
+  transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+  background-color: #fdebd2;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  background-color: #fff7f0;
+  padding-left: 15px;
+}
+
+.accordion-content ul {
+  padding: 10px 0;
+  list-style: none;
+  font-family: 'Open Sans', sans-serif;
+  color: #3e2c20;
+}
 
 /* -------------------- 3. MODAL STYLES -------------------- */
 .menu-carousel {

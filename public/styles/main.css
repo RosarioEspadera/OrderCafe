@@ -226,8 +226,8 @@ a {
 }
 
 .accordion-content.active {
-  max-height: 1000px; /* or fit-content if you're using that */
-}
+  max-height: fit-content;
+} /* or fit-content if you're using that */
 
 /* -------------------- 3. MODAL STYLES -------------------- */
 .menu-carousel {

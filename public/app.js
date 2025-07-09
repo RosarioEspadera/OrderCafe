@@ -33,14 +33,29 @@ function initializeOrder() {
   }
 
   // Menu button logic
-  document.querySelectorAll(".menu-button").forEach(button => {
-    button.addEventListener("click", () => {
-      const item = button.dataset.title;
-      const price = parseFloat(button.querySelector(".price").textContent.replace("$", ""));
-      const hasSize = button.dataset.size === "true";
-      hasSize ? showSizeOptions(item, price) : addToOrder(item, price);
-    });
+ document.querySelectorAll('.menu-button').forEach(button => {
+  button.addEventListener('click', () => {
+    const title = button.getAttribute('data-title');
+    const priceEl = button.querySelector('.price');
+    const descriptionEl = button.querySelector('.menu-description');
+
+    const orderItem = document.createElement('li');
+    orderItem.innerHTML = `
+      <strong>${title}</strong> - ${priceEl.textContent}<br>
+      <small>${descriptionEl.textContent}</small>
+    `;
+
+    document.getElementById('orderList').appendChild(orderItem);
+
+    // Optional: Update total price
+    const priceValue = parseFloat(priceEl.textContent.replace('$', ''));
+    const totalEl = document.getElementById('orderTotal');
+    const currentTotal = parseFloat(totalEl.textContent);
+    totalEl.textContent = (currentTotal + priceValue).toFixed(2);
   });
+});
+
+
 
   // Accordion toggles
 document.querySelectorAll('.accordion-toggle').forEach(button => {

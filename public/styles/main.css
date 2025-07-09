@@ -196,6 +196,9 @@ a {
 .accordion-section.drinks {
   background-color: var(--color-drinks);
 }
+.accordion-toggle.active {
+  background-color: #fdebd2;
+}
 
 
 /* -------------------- 3. MODAL STYLES -------------------- */

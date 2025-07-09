@@ -249,6 +249,14 @@ p {
   line-height: 1.6;         /* Improves readability */
   text-align: center;       /* Optional: centers the text */
 }
+.menu-image {
+  width: 220px;           /* increase from default, adjust as you like */
+  height: auto;           /* keeps the image proportional */
+  border-radius: 10px;    /* soft rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* depth for visual pop */
+  transition: transform 0.3s ease;
+  transform: scale(1.05);
+}
 
 .menu-carousel {
   overflow: hidden;
@@ -290,7 +298,7 @@ p {
 }
 
 .menu-carousel .menu-image {
-  width: 120px;
+  width: 220px;
   height: auto;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

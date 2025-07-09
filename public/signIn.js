@@ -54,6 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return;
     }
+    const audio = document.getElementById("signInAudio");
+if (audio) {
+  audio.currentTime = 0; // rewind to start
+  audio.play();          // play the sound
+}
+
 
     hideModalWithTransition(signInModal);
     signInBtn.style.display = "none";

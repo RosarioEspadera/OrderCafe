@@ -313,8 +313,22 @@ a {
 }
 
 .menu-button.tooltip:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(4px); /* gentle float effect */
+  animation: floatSteam 1.5s ease-in-out;
+}
+
+@keyframes floatSteam {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(0px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-6px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-12px);
+  }
 }
 
 

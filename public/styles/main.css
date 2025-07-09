@@ -125,141 +125,78 @@ a {
   line-height: 1.6;
 }
 .panel {
-  margin-bottom: 2rem; /* Creates space between stacked sections */
+  margin-bottom: 2rem; 
 }
-.accordion-section.desserts {
-  background-color: #fff8f4; /* light vanilla-pink for desserts */
-  border: 1px solid #f3e0db;
-  border-radius: 12px;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-.accordion-section.coffee {
-  background-color: #fef6f2;
-  border: 1px solid #e5d5ca;
-  border-radius: 12px;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-}
-
-.accordion-section.coffee .accordion-toggle {
-  background-color: #855E42; /* classic roast */
-  color: #fff;
-  font-size: 1.2rem;
-  font-family: var(--font-heading);
-  border: none;
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-}
-.accordion-section.meals {
-  background-color: #fdfaf7;
-  border: 1px solid #e3dad4;
-  border-radius: 12px;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-}
-
-.accordion-section.meals .accordion-toggle {
-  background-color: #C3B091; /* oat beige */
-  color: #3E2A1E;
-  font-size: 1.2rem;
-  font-family: var(--font-heading);
-  border: none;
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-}
-.accordion-section.drinks {
-  background-color: #f4f9f7;
-  border: 1px solid #cfe5dd;
-  border-radius: 12px;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-}
-
-.accordion-section.drinks .accordion-toggle {
-  background-color: #ADC6B2; /* muted matcha */
-  color: #fff;
-  font-size: 1.2rem;
-  font-family: var(--font-heading);
-  border: none;
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-}
-
-
-/* Accordion button styling */
-.accordion-toggle {
-  background-color: #d88b6c; /* warm caramel tone */
-  color: #fff;
-  border: none;
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  padding: 0.75rem 1.25rem;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  transition: background 0.3s ease;
-}
-
-.accordion-toggle:hover {
-  background-color: #c77456; /* slightly deeper on hover */
-}
-
-.accordion.open .accordion-content {
-  max-height: 500px; /* Adjust to fit content height */
-}
-
-.accordion-content.active {
-  overflow: visible;
-}
-
 .accordion {
   border-bottom: 1px solid #d2a679;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-.accordion-header {
-  font-family: 'Merriweather', serif;
-  font-size: 1.2rem;
+/* Header styling */
+.accordion-header, .accordion-toggle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
   background-color: #fef6f0;
-  cursor: pointer;
-  padding: 10px;
   color: #5c4033;
+  padding: 0.85rem 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
   transition: background-color 0.3s ease;
+  width: 100%;
+  border: none;
 }
 
-.accordion-header:hover {
+.accordion-header:hover, .accordion-toggle:hover {
   background-color: #fdebd2;
 }
 
+/* Accordion content styling */
 .accordion-content {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.5s ease;
   background-color: #fff7f0;
   padding-left: 15px;
+  border-radius: 0 0 8px 8px;
 }
 
+.accordion.open .accordion-content {
+  max-height: 500px; /* Adjust this height based on content */
+}
+
+/* List styling inside accordion */
 .accordion-content ul {
-  padding: 10px 0;
   list-style: none;
+  padding: 1rem 0;
   font-family: 'Open Sans', sans-serif;
   color: #3e2c20;
 }
+
+.accordion-content ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed #d2a679;
+}
+
+/* Section-specific themes */
+.accordion-section.desserts {
+  background-color: var(--color-desserts);
+}
+
+.accordion-section.coffee {
+  background-color: var(--color-coffee);
+  color: var(--text-light);
+}
+
+.accordion-section.meals {
+  background-color: var(--color-meals);
+}
+
+.accordion-section.drinks {
+  background-color: var(--color-drinks);
+}
+
 
 /* -------------------- 3. MODAL STYLES -------------------- */
 .menu-carousel {

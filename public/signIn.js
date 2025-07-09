@@ -54,11 +54,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return;
     }
+    
     const puff = document.getElementById("steamPuff");
 if (puff) {
   puff.classList.add("animate");
   setTimeout(() => puff.classList.remove("animate"), 1200); // reset after animation
 }
+    const smoke = document.getElementById("smokeTrail");
+if (smoke) {
+  smoke.classList.add("animate");
+  setTimeout(() => smoke.classList.remove("animate"), 4000);
+}
+
     const audio = document.getElementById("signInAudio");
 if (audio) {
   audio.currentTime = 0; // rewind to start

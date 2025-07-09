@@ -43,20 +43,16 @@ function initializeOrder() {
 
 
 
-  // Accordion toggles
-document.querySelectorAll('.accordion-toggle').forEach(toggle => {
-  toggle.addEventListener('click', () => {
-    const content = toggle.nextElementSibling;
+ document.querySelectorAll('.accordion-section').forEach(section => {
+  const toggleBtn = section.querySelector('.accordion-toggle');
+  const content = section.querySelector('.accordion-content');
 
-    if (!content || !content.classList.contains('accordion-content')) return;
-
+  toggleBtn.addEventListener('click', () => {
     const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
     content.style.maxHeight = isOpen ? '0px' : content.scrollHeight + 'px';
-    toggle.classList.toggle('active', !isOpen);
+    toggleBtn.classList.toggle('active', !isOpen);
   });
 });
-
-
 
 
   // Submit order

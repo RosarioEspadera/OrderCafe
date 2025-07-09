@@ -288,40 +288,30 @@ a {
 }
 .menu-button.tooltip {
   position: relative;
-  display: inline-block;
+  z-index: 20; /* Ensures it floats above accordion sections */
 }
 
 .menu-button.tooltip::after {
   content: attr(data-title);
-  position: absolute;
-  bottom: 100%; /* 👆 places it above the button */
+  position: fixed; /* 🪄 lets it float outside containers */
   left: 50%;
-  transform: translateX(-50%) translateY(-6px);
-  background: rgba(62, 42, 30, 0.95); /* espresso tone with opacity */
-  color: var(--text-light);
+  top: auto;
+  transform: translateX(-50%) translateY(-20px);
+  background: rgba(62, 42, 30, 0.95); /* Café espresso glow */
+  color: #fffaf0;
   padding: 6px 12px;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   border-radius: 8px;
   white-space: nowrap;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+  pointer-events: none;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 15;
 }
 
 .menu-button.tooltip:hover::after {
   opacity: 1;
-  transform: translateX(-50%) translateY(-10px); /* gentle float up */
-}
-
-.menu-button.tooltip::after {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-}
-
-.menu-button.tooltip:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(4px);
+  transform: translateX(-50%) translateY(-28px);
 }
 
 dialog.modal-box {

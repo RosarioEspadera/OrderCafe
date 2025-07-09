@@ -212,6 +212,13 @@ a {
 
 
 /* -------------------- 3. MODAL STYLES -------------------- */
+p {
+  max-width: 600px;         /* Limits to 600 pixels */
+  margin: 0 auto;           /* Centers it horizontally */
+  line-height: 1.6;         /* Improves readability */
+  text-align: center;       /* Optional: centers the text */
+}
+
 .menu-carousel {
   overflow: hidden;
   width: 100%;

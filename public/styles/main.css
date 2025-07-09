@@ -237,7 +237,9 @@ h1, h2, h3, h4, h5, h6 {
 .accordion-toggle.active .icon {
   transform: rotate(180deg); /* Flip upward */
 }
-
+.accordion-content.open {
+  max-height: 700px; /* adjust this height as needed */
+}
 
 
 /* -------------------- 3. MODAL STYLES -------------------- */

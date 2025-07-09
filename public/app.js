@@ -37,24 +37,19 @@ function initializeOrder() {
   button.addEventListener('click', () => {
     const title = button.getAttribute('data-title');
     const priceEl = button.querySelector('.price');
-    const descriptionEl = button.querySelector('.menu-description');
 
     const orderItem = document.createElement('li');
-    orderItem.innerHTML = `
-      <strong>${title}</strong> - ${priceEl.textContent}<br>
-      <small>${descriptionEl.textContent}</small>
-    `;
+    orderItem.innerHTML = `<strong>${title}</strong> - ${priceEl.textContent}`;
 
     document.getElementById('orderList').appendChild(orderItem);
 
-    // Optional: Update total price
+    // ✅ Optional: Update total price
     const priceValue = parseFloat(priceEl.textContent.replace('$', ''));
     const totalEl = document.getElementById('orderTotal');
     const currentTotal = parseFloat(totalEl.textContent);
     totalEl.textContent = (currentTotal + priceValue).toFixed(2);
   });
 });
-
 
 
   // Accordion toggles

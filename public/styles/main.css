@@ -286,6 +286,41 @@ a {
   color: var(--brand-color);
   font-weight: bold;
 }
+.menu-button.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.menu-button.tooltip::after {
+  content: attr(data-title);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px;
+  background: var(--dark-bg);
+  color: var(--text-light);
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 10;
+}
+
+.menu-button.tooltip:hover::after {
+  display: block;
+}
+.menu-button.tooltip::after {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+}
+
+.menu-button.tooltip:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(4px);
+}
 
 dialog.modal-box {
   position: fixed;

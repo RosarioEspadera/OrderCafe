@@ -43,14 +43,17 @@ function initializeOrder() {
   });
 
   // Accordion toggles
-document.querySelectorAll('.accordion-header').forEach(header => {
-  header.addEventListener('click', () => {
-    document.querySelectorAll('.accordion-section').forEach(section =>
-      section.classList.remove('open')
-    );
-    header.parentElement.classList.toggle('open');
+document.querySelectorAll('.accordion-toggle').forEach(button => {
+  button.addEventListener('click', () => {
+    const content = button.nextElementSibling;
+    if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+      content.style.maxHeight = '0';
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px';
+    }
   });
 });
+
 
 
   // Submit order

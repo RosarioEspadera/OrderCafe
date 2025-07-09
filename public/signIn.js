@@ -54,17 +54,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       return;
     }
+    const puff = document.getElementById("steamPuff");
+if (puff) {
+  puff.classList.add("animate");
+  setTimeout(() => puff.classList.remove("animate"), 1200); // reset after animation
+}
     const audio = document.getElementById("signInAudio");
 if (audio) {
   audio.currentTime = 0; // rewind to start
   audio.play();          // play the sound
 }
 
-const puff = document.getElementById("steamPuff");
-if (puff) {
-  puff.classList.add("animate");
-  setTimeout(() => puff.classList.remove("animate"), 1200); // reset after animation
-}
 
     hideModalWithTransition(signInModal);
     signInBtn.style.display = "none";

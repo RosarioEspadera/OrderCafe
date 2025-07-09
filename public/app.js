@@ -204,7 +204,9 @@ function sendOrder(event) {
   if (event && typeof event.preventDefault === "function") {
     event.preventDefault();
   }
-
+  const loader = document.getElementById("orderLoader");
+  if (loader) loader.style.display = "block";
+  
   const name = document.getElementById("name")?.value.trim();
   const address = document.getElementById("custAddress")?.value.trim();
   const time = document.getElementById("time")?.value;
@@ -212,6 +214,7 @@ function sendOrder(event) {
 
   if (!name || !address || !time || !email || orders.length === 0) {
     alert("Please complete all fields and add at least one item.");
+    if (loader) loader.style.display = "none";
     return;
   }
 
@@ -244,6 +247,9 @@ function sendOrder(event) {
       console.error("Full EmailJS error object:", error);
       const errorMsg = error.text || error.message || "Unknown error";
       alert(`❌ Failed to send order: ${errorMsg}`);
+      })
+    .finally(() => {
+      if (loader) loader.style.display = "none";
     });
 }
 

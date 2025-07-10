@@ -69,3 +69,21 @@
 #signUpCloseBtn:hover {
   background-color: #d0d0d0;
 }
+#signUpModal h2 {
+  font-size: 2rem;
+  font-family: 'Pacifico', cursive;
+  color: #6b4f2c;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  animation: fadeSlideIn 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* Keyframes for entrance */
+@keyframes fadeSlideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

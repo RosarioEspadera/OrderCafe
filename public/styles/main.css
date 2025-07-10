@@ -506,9 +506,9 @@ body.modal-open {
 @media (max-width: 480px) {
   .menu-carousel .menu-image,
   .menu-carousel .menu-description {
-    width: 120px; /* Bigger than 90px, but still mobile-friendly */
+   width: 220px;
     text-align: center;
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
   }
 
   .menu-carousel .price {

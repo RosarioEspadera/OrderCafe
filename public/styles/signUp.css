@@ -1,26 +1,40 @@
 /* signUp.css — Styling for Rio's Café account creation */
 
+/* Center and style signUpModal */
 #signUpModal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 400px;
-  padding: 2rem;
+  max-width: 90%;
+  padding: 2rem 2.5rem;
   background-color: #fff8f0;
-  border-radius: 12px;
   border: 2px solid #d6a75a;
-  box-shadow: 0 0 20px rgba(214, 167, 90, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(214, 167, 90, 0.2);
   font-family: 'Quicksand', sans-serif;
+  z-index: 1000;
   transition: opacity 0.5s ease, transform 0.5s ease;
-  z-index: 999;
 }
 
-
+/* Fade-in effect */
 #signUpModal.visible {
   opacity: 1;
-  transform: scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
+
+#signUpModal:not(.visible) {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* Optional backdrop style */
+::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
 
 #signUpModal:not(.visible) {
   opacity: 0;

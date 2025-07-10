@@ -8,16 +8,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const signUpModal = document.getElementById("signUpModal");
 
   // 🎯 Entrance animation for toggle
+if (signUpToggleBtn) {
   signUpToggleBtn.addEventListener("click", () => {
-  signInModal.close();
-  signUpModal.showModal();
-
-
-  requestAnimationFrame(() => {
-    signUpModal.classList.add("visible");
-    document.getElementById("newUsername").focus();
+    signInModal.close();
+    signUpModal.showModal();
+    requestAnimationFrame(() => {
+      signUpModal.classList.add("visible");
+      document.getElementById("newUsername").focus();
+    });
   });
-});
+} else {
+  console.warn("signUpToggleBtn not found in the DOM.");
+}
+
 
 
   // ✨ Smooth transition helper

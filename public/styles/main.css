@@ -296,6 +296,11 @@ p {
   align-items: center;
   gap: 0.5rem;
 }
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .menu-carousel .menu-image {
   width: 220px;
@@ -341,6 +346,7 @@ p {
   animation: floatSteam 1.5s ease-in-out;
 }
 .menu-description {
+  display: block;
   font-size: 0.9rem;
   color: #5c4033; /* cozy espresso-brown tone */
   background-color: #fff8f1; /* light, warm backdrop */
@@ -351,6 +357,9 @@ p {
   font-family: 'Segoe UI', sans-serif;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  max-width: 100%;
+  width: 220px; /* optional, can be adjusted */
+  text-align: center;
 }
 .menu-button:hover .menu-description {
   opacity: 1;

@@ -205,7 +205,7 @@ h1, h2, h3, h4, h5, h6 {
 .accordion-content {
   max-height: 0;
   overflow: hidden;
-  background-color: #fffaf2;
+  background-color: #00000000;
   color: #4a3f35;
   padding: 0 1.2rem;
   transition: max-height 0.6s ease, padding 0.3s ease;
@@ -231,20 +231,20 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Section-specific themes */
 .accordion-section.desserts {
-  background-color: var(--color-desserts);
+  background-color: transparent;
 }
 
 .accordion-section.coffee {
-  background-color: var(--color-coffee);
+  background-color: transparent;
   color: var(--text-light);
 }
 
 .accordion-section.meals {
-  background-color: var(--color-meals);
+  background-color: transparent;
 }
 
 .accordion-section.drinks {
-  background-color: var(--color-drinks);
+  background-color:transparent;
 }
 .accordion-toggle.active {
   background-color: #fdebd2;

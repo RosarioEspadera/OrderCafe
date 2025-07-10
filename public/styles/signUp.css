@@ -186,3 +186,20 @@
     transform: translateY(0) scale(1);
   }
 }
+#signUpToggleBtn.animate-in {
+  animation: bounceFadeIn 0.7s ease-out;
+}
+
+@keyframes bounceFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.03);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}

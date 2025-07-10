@@ -334,15 +334,16 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(62, 42, 30, 0.85);
+  background: rgba(62, 42, 30, 0.9);
   color: #fffaf0;
   padding: 8px 16px;
   border-radius: 6px;
-  white-space: nowrap;
   max-width: 260px;
-  box-sizing: border-box;
+  width: max-content;             /* fits background to content */
+  box-sizing: border-box;         /* includes padding in width */
   font-size: 0.9rem;
-  text-align: center; /* centers the tooltip text */
+  text-align: center;
+  white-space: normal;            /* allows wrapping if needed */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   z-index: 100;
   opacity: 0;

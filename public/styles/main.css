@@ -352,26 +352,27 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(40, 26, 20, 0.98); /* Rich dark roast */
-  color: #d7b899;                     /* Toasted almond text */
-  padding: 10px 14px;
+  background: rgba(40, 26, 20, 0.98);
+  background-size: 10px;
+  height: 20px;
+  color: #b8ada2;                     /* Toasted almond text */
+  padding: 20px 24px;
   border-radius: 8px;
   font-size: 0.95rem;
   text-align: center;
   box-sizing: border-box;
-  line-height: 1.4;
+  line-height: 0.1;
   width: fit-content;                /* Auto-resizes to fit text */
-  max-width: 90%;                   /* Responsive cap */
+  max-width: 100%;                   /* Responsive cap */
   min-width: max-content;           /* Ensures full text is visible */
   word-break: break-word;
   white-space: normal;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 16px rgb(5 0 0 / 91%);
   opacity: 0;
-  visibility: hidden;
+  visibility: visible;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   z-index: 100;
 }
-
 .menu-button.tooltip:hover::after {
   opacity: 1;
   visibility: visible;

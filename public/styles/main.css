@@ -344,6 +344,8 @@ p {
 }
 
 .menu-button.tooltip:hover::after {
+  opacity: 1;
+  pointer-events: auto;
   animation: floatSteam 1.5s ease-in-out;
 }
 .menu-description {

@@ -12,11 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   signInModal.close();
   signUpModal.showModal();
 
-  // Animate title
-  const signupTitle = document.querySelector("#signUpModal h2");
-  signupTitle.style.animation = "none";
-  void signupTitle.offsetWidth;
-  signupTitle.style.animation = "fadeSlideIn 0.8s ease-out forwards";
 
   requestAnimationFrame(() => {
     signUpModal.classList.add("visible");
@@ -32,20 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ☕ Reveal café interface
-  function revealMainContent(interactive = false) {
-    const puff = document.getElementById("steamPuff");
-    const smoke = document.getElementById("smokeTrail");
-    const audio = document.getElementById("signInAudio");
-
-    if (interactive && puff) {
-      puff.classList.add("animate");
-      setTimeout(() => puff.classList.remove("animate"), 1200);
-    }
-
-    if (interactive && smoke) {
-      smoke.classList.add("animate");
-      setTimeout(() => smoke.classList.remove("animate"), 4000);
-    }
+ function revealMainContent() {
+  hideModalWithTransition(signInModal);
+  document.getElementById("signInBtn").style.display = "none";
+  const mainContent = document.getElementById("mainContent");
+  mainContent.classList.remove("hidden");
+  mainContent.classList.add("visible");
+}
 
     hideModalWithTransition(signInModal);
     document.getElementById("signInBtn").style.display = "none";

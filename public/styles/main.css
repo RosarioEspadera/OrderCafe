@@ -503,18 +503,24 @@ body.modal-open {
     gap: 0.5rem;
   }
 }
-@media (max-width: 480px) {
-  .menu-carousel .menu-image,
+ @media (max-width: 480px) {
+  .menu-carousel .menu-image {
+    width: 240px;
+    transform: scale(1.05);
+  }
+
   .menu-carousel .menu-description {
-   width: 220px;
+    width: 240px;
     text-align: center;
     margin-top: 0.5rem;
+    font-size: 0.95rem; /* Optional: improves readability */
   }
 
   .menu-carousel .price {
-    font-size: 0.9rem; /* Slightly larger for better readability */
+    font-size: 0.9rem;
   }
 }
+
   .size-options button,
   .modal-confirm-btn {
     font-size: 0.95rem;

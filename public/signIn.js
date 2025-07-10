@@ -57,10 +57,22 @@ const savedUser = JSON.parse(localStorage.getItem("orderCafeUser"));
 if (savedUser?.username) {
   const userDisplay = document.getElementById("userNameDisplay");
   userDisplay.textContent = savedUser.username;
-  document.getElementById("welcomeBanner").classList.remove("hidden");
+  const banner = document.getElementById("welcomeBanner");
+  banner.classList.remove("hidden");
+  banner.classList.add("visible");
   revealMainContent();
-  return; // ✅ Skip login modal for returning users
+
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("orderCafeUser");
+      location.reload();
+    });
+  }
+
+  return;
 }
+
 
   // Safety check for sign-in flow only
   if (

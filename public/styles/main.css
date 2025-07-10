@@ -119,9 +119,6 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
   visibility: visible;
 }
-
-
-
 .logo {
   display: flex;
   justify-content: center;
@@ -133,14 +130,10 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 180px;
   height: auto;
 }
-.order-details label,
+.price, .order-details label,
 .modal-box h2 {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 }
-.price {
-  color: #d9c1aa; /* Soft vanilla latte */
-}
-
 #order-summary {
   color: #e9d6cf; /* warm almond */
   font-weight: 500;
@@ -342,7 +335,7 @@ p {
 
 .menu-carousel .price {
   font-size: 0.9rem;
-  color: var(--brand-color);
+  color: var(--text-light);
   font-weight: bold;
 }
 .menu-button.tooltip {

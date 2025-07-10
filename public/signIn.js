@@ -48,13 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent.classList.add("visible");
   }
 
-  // Guest entry bypasses form validation
-  if (guestAccessBtn) {
-    guestAccessBtn.addEventListener("click", () => {
-      revealMainContent();
-    });
-  }
-
   // Safety check for sign-in flow only
   if (
     !signInModal || !signInForm || !signInBtn ||
@@ -87,7 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     revealMainContent();
   });
-
+ if (guestAccessBtn) {
+    guestAccessBtn.addEventListener("click", () => {
+      revealMainContent();
+    });
+  }
   // Escape key listener
   signInModal.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {

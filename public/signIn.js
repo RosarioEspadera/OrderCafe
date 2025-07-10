@@ -139,6 +139,11 @@ if (savedUser?.username) {
 signUpToggleBtn.addEventListener("click", () => {
   signInModal.close();
   signUpModal.showModal();
+  const signupTitle = document.querySelector("#signUpModal h2");
+signupTitle.style.animation = "none"; // Reset
+void signupTitle.offsetWidth;         // Force reflow
+signupTitle.style.animation = "fadeSlideIn 0.8s ease-out forwards";
+
   requestAnimationFrame(() => {
     signUpModal.classList.add("visible");
     document.getElementById("newUsername").focus();

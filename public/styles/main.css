@@ -504,16 +504,17 @@ body.modal-open {
   }
 }
 @media (max-width: 480px) {
-  .menu-carousel .menu-image {
-    width: 90px;
+  .menu-carousel .menu-image,
+  .menu-carousel .menu-description {
+    width: 120px; /* Bigger than 90px, but still mobile-friendly */
+    text-align: center;
+    margin-top: 0.25rem;
   }
 
   .menu-carousel .price {
-    font-size: 0.8rem;
+    font-size: 0.9rem; /* Slightly larger for better readability */
   }
 }
-
-
   .size-options button,
   .modal-confirm-btn {
     font-size: 0.95rem;

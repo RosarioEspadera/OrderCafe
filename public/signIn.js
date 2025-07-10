@@ -72,26 +72,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     toggleLoader(true);
-    try {
-      await fetch("https://ordercafe-rio-hxxc.onrender.com/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: newUsername, password: newPassword }),
-      });
-
-      showToast("Account created — please sign in ☕");
-      hideModalWithTransition(signUpModal);
-      signInModal.showModal();
-      requestAnimationFrame(() => {
-        signInModal.classList.add("visible");
-        document.getElementById("username").focus();
-      });
-    } catch (error) {
-      showToast("Unable to sign up. Please try again.");
-    } finally {
-      toggleLoader(false);
-    }
+try {
+  const response = await fetch("https://ordercafe-rio-hxxc.onrender.com/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username: newUsername, password: newPassword }),
   });
+
+  if (response.ok) {
+    showToast("Account created — please sign in ☕");
+    hideModalWithTransition(signUpModal);
+    signInModal.showModal();
+    requestAnimationFrame(() => {
+      signInModal.classList.add("visible");
+      document.getElementById("username").focus();
+    });
+  } else {
+    const result = await response.json();
+    showToast(result.error || "Signup failed. Try a different username.");
+    signUpModal.classList.add("shake");
+    signUpModal.addEventListener("animationend", () => {
+      signUpModal.classList.remove("shake");
+    }, { once: true });
+  }
+} catch (err) {
+  console.error("Signup error:", err);
+  showToast("Network error. Please try again.");
+} finally {
+  toggleLoader(false);
+}
+
 
   // ❌ Close Sign-Up modal
   signUpCloseBtn?.addEventListener("click", () => {

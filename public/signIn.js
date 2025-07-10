@@ -5,9 +5,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const signUpToggleBtn = document.getElementById("signUpToggleBtn");
   const guestAccessBtn = document.getElementById("guestAccessBtn");
   const logoutBtn = document.getElementById("logoutBtn");
+  const signUpModal = document.getElementById("signUpModal");
 
   // 🎯 Entrance animation for toggle
-  signUpToggleBtn.classList.add("animate-in");
+  signUpToggleBtn.addEventListener("click", () => {
+  signInModal.close();
+  signUpModal.showModal();
+
+  // Animate title
+  const signupTitle = document.querySelector("#signUpModal h2");
+  signupTitle.style.animation = "none";
+  void signupTitle.offsetWidth;
+  signupTitle.style.animation = "fadeSlideIn 0.8s ease-out forwards";
+
+  requestAnimationFrame(() => {
+    signUpModal.classList.add("visible");
+    document.getElementById("newUsername").focus();
+  });
+});
+
 
   // ✨ Smooth transition helper
   function hideModalWithTransition(modal) {

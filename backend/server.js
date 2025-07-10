@@ -32,10 +32,10 @@ app.post('/login', async (req, res) => {
 });
 const path = require("path");
 
-app.use(express.static(path.join(__dirname, "public"))); // Adjust if needed
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
 const PORT = process.env.PORT || 3001;

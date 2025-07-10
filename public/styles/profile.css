@@ -1,23 +1,24 @@
 #profileOverlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #fff8f0;
-    z-index: 999;
-    padding: 40px;
-    display: none;
-    transition: opacity 0.3s ease;
-    overflow-y: auto;
-  }
-  
-  #profileOverlay.visible {
-    display: block;
-  }
-  
-  #profileOverlay.hidden {
-    display: none;
-  }
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff8f0;
+  z-index: 9999;
+  padding: 40px;
+  overflow-y: auto;
+  transition: opacity 0.3s ease;
+}
+
+#profileOverlay.visible {
+  display: block;
+  opacity: 1;
+}
+
+#profileOverlay.hidden {
+  display: none;
+}
   
   #closeProfile {
     position: absolute;

@@ -101,7 +101,7 @@ try {
 } finally {
   toggleLoader(false);
 }
-
+  });
 
   // ❌ Close Sign-Up modal
   signUpCloseBtn?.addEventListener("click", () => {

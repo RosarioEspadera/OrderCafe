@@ -955,25 +955,25 @@ body.modal-open {
   }
 }
 #guestAccessBtn {
-  display: inline-block;
-  margin: 16px auto 0;
+  display: block;
+  margin: 20px auto 0;                  /* Centers horizontally */
   padding: 12px 24px;
   font-size: 1rem;
-  font-family: 'Caveat', cursive; /* Optional for handwritten touch */
-  background: transparent;
-  border: 2px dashed #e8d2b8;
-  color: #e8d2b8;
+  font-family: 'Quicksand', sans-serif; /* Matches modal branding */
+  color: #42210e;                        /* Vanilla cream text – high contrast */
+  background-color: #d2a679;
+  border:  #f5e4d3;
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
-  transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 #guestAccessBtn:hover {
-  background: rgba(255, 248, 240, 0.08); /* Light froth overlay */
-  color: #f5e4d3;
-  border-color: #f5e4d3;
+  background-color: #c3a292;  /* Soft froth overlay */
+  color: #dddac2;
+  border-color: #fefae0;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 

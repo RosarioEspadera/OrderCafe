@@ -38,10 +38,10 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff8f0; /* vanilla-toned white */
 }
 .order-label {
-  color: #fffaf2;
+  color: #e0cba9;
   font-size: 1.2rem;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
-  border-bottom: 1px dashed #fff8e6;
+  border-bottom: 1px dashed #988a67;
   padding-bottom: 4px;
 }
 
@@ -52,28 +52,29 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 480px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background: var(--light-bg);
+  background: transparent;
   border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgb(116 32 32 / 10%);
 }
 .order-details .form-row {
   display: flex;
   align-items: center;
   gap: 1rem;
+  background: transparent;
 }
 .order-details label {
-  color: var(--text-dark);
+  color: #a8b6b6; 
   font-weight: 600;
 }
 
 .order-details input {
-  color: var(--text-dark);
+  color: var(--text-light);
 }
 /* Labels */
 .order-details .form-row label {
   font-size: 1rem;
   font-weight: bold;
-  color: var(--dark-bg);
+  color: var(--text-light);
 }
 
 /* Inputs */
@@ -81,7 +82,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1rem;
   padding: 0.6rem;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  background: transparent; 
+  border: 1px solid #ebdddd;
 }
 [data-title] {
   position: relative;

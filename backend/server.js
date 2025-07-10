@@ -2,6 +2,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
+
+// ✅ Optional reusable hash function
+async function hashPassword(password) {
+  const saltRounds = 10;
+  const hashed = await bcrypt.hash(password, saltRounds);
+  return hashed;
+}
+
+// Then in your /register route:
+const hash = await hashPassword(password);
 
 const app = express();
 app.use(bodyParser.json());

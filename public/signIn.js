@@ -89,6 +89,14 @@ try {
     });
   } else {
     const result = await response.json();
+    const usernameWarning = document.getElementById("usernameTakenWarning");
+
+if (result.error?.includes("Username already exists")) {
+  usernameWarning.style.display = "block";
+} else {
+  usernameWarning.style.display = "none";
+}
+
     showToast(result.error || "Signup failed. Try a different username.");
     signUpModal.classList.add("shake");
     signUpModal.addEventListener("animationend", () => {

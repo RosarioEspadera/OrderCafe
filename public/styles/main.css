@@ -83,25 +83,34 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 6px;
   border: 1px solid #ccc;
 }
+[data-title] {
+  position: relative; /* Anchor point for ::after */
+  z-index: 5;
+}
+
 [data-title]::after {
   content: attr(data-title);
-  display: none;
   position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
   background: var(--dark-bg);
   color: var(--text-light);
-  padding: 4px 8px;
+  padding: 6px 12px;
   border-radius: var(--radius);
-  bottom: 100%; /* Position it above */
-  left: 50%;
-  transform: translateX(-50%) translateY(-6px); /* Center and lift slightly */
   white-space: nowrap;
-  z-index: 10;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Optional for depth */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 [data-title]:hover::after {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
+
 .logo {
   display: flex;
   justify-content: center;

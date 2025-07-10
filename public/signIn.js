@@ -28,8 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // 🚪 Close button for sign-up modal
 const signUpCloseBtn = document.getElementById("signUpCloseBtn");
 signUpCloseBtn.addEventListener("click", () => {
-  hideModalWithTransition(signUpModal);
+  hideModalWithTransition(signUpModal); // fade-out
+  signInModal.showModal();              // bring back sign-in
+  requestAnimationFrame(() => {
+    signInModal.classList.add("visible");
+  });
 });
+
   // ☕ Reveal café interface
  function revealMainContent() {
   hideModalWithTransition(signInModal);

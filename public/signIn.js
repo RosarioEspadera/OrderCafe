@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const guestAccessBtn = document.getElementById("guestAccessBtn");
   const logoutBtn = document.getElementById("logoutBtn");
   const signUpModal = document.getElementById("signUpModal");
+  const signUpBtn = document.getElementById("signUpBtn");
 
   // 🎯 Entrance animation for toggle
 if (signUpToggleBtn) {
@@ -20,8 +21,44 @@ if (signUpToggleBtn) {
 } else {
   console.warn("signUpToggleBtn not found in the DOM.");
 }
+if (signUpBtn) {
+  signUpBtn.addEventListener("click", (e) => {
+    e.preventDefault();
 
+    const newUsername = document.getElementById("newUsername").value.trim();
+    const newPassword = document.getElementById("newPassword").value.trim();
 
+    if (!newUsername || !newPassword) {
+      alert("Please enter both username and password.");
+      signUpModal.classList.add("shake");
+      signUpModal.addEventListener("animationend", () => {
+        signUpModal.classList.remove("shake");
+      }, { once: true });
+      return;
+    }
+
+    // Example: Simulate successful sign-up
+    console.log("Creating account for:", newUsername);
+
+    // ✅ Transition to sign-in modal
+    hideModalWithTransition(signUpModal); // fade-out sign-up
+    signInModal.showModal();              // show sign-in
+    requestAnimationFrame(() => {
+      signInModal.classList.add("visible");
+      document.getElementById("username").focus(); // Optional: focus the sign-in field
+    });
+    // Proceed with form submission logic...
+    console.log("Sign-up details ready to be submitted:", { newUsername, newPassword });
+    // You could send it to your backend here
+  });
+}
+
+const toast = document.createElement("div");
+toast.textContent = "Account created — please sign in ☕";
+toast.className = "signup-toast";
+document.body.appendChild(toast);
+setTimeout(() => toast.classList.add("fade-out"), 2500);
+setTimeout(() => toast.remove(), 3500);
 
   // ✨ Smooth transition helper
   function hideModalWithTransition(modal) {

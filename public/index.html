@@ -26,10 +26,10 @@
 </div>
   <form method="dialog" id="signInForm">
     <label for="username">Username</label>
-    <input type="text" id="username" />
+<input type="text" id="username" name="username" autocomplete="username" required />
 
-    <label for="password">Password</label>
-    <input type="password" id="password" />
+<label for="password">Password</label>
+<input type="password" id="password" name="password" autocomplete="current-password" required />
 
     <menu>
       <button type="submit" id="signInBtn">Sign In</button>
@@ -50,8 +50,14 @@
   <img src="images/rios-cafe-logo.png" alt="Rio's Cafe Logo" />
 </div>
 
-    <h1>Rio's Cafe</h1>
-    <p class="order-label">Select your order:</p>
+   <header class="site-header">
+  <div class="intro">
+    <h1>Welcome to Rio's Café ☕</h1>
+    <p>Order your favorite meals and drinks, sign in for a personalized experience, or enter as a guest to browse our menu.</p>
+    <a href="https://ordercafe-rio-hxxc.onrender.com" target="_blank" class="backend-link">Visit Backend Server</a>
+  </div>
+</header>
+
     <!-- Menu Items -->
  <main class="container">
     <!-- Desserts Accordion -->
@@ -334,6 +340,9 @@
         fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-linecap="round" />
 </svg>
 
+<footer class="site-footer">
+  <p>&copy; 2025 Rio's Café. Built by Rosario Espadera. <a href="https://github.com/RosarioEspadera/OrderCafe" target="_blank">GitHub Repo</a></p>
+</footer>
 
 </body>
   

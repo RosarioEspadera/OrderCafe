@@ -20,6 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
     profileOverlay.classList.remove("hidden");
     profileOverlay.classList.add("visible");
   });
+const logoutFromProfile = document.getElementById("logoutFromProfile");
+
+logoutFromProfile?.addEventListener("click", () => {
+  localStorage.removeItem("orderCafeUser");
+  location.reload();
+});
 
   closeProfile.addEventListener("click", () => {
     profileOverlay.classList.remove("visible");

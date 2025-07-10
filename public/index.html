@@ -93,7 +93,8 @@
     <p>Join Rio's Café and start your order</p>
   </div>
   <form method="dialog" id="signUpForm" novalidate>
-    <input type="text" id="newUsername" placeholder="Choose a username" />
+     <label for="newUsername">Username</label>
+    <input type="text" id="newUsername" name="newUsername" autocomplete="username" required />
 <div id="usernameTakenWarning" style="
   display: none;
   margin-top: 6px;
@@ -103,11 +104,6 @@
 ">
   That username is already taken ☕ Please choose another.
 </div>
-
-
-    <label for="newUsername">Username</label>
-    <input type="text" id="newUsername" name="newUsername" autocomplete="username" required />
-
     <label for="newPassword">Password</label>
     <input type="password" id="newPassword" name="newPassword" autocomplete="new-password" required />
 

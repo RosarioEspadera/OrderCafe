@@ -34,5 +34,21 @@
     font-family: 'Poppins', sans-serif;
     color: #6f4e37;
   }
-  
+  #logoutFromProfile {
+  margin-top: 24px;
+  padding: 12px 20px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease;
+}
+
+#logoutFromProfile:hover {
+  background-color: #c0392b;
+}
+
   

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const signUpToggleBtn = document.getElementById("signUpToggleBtn");
   const signUpCloseBtn = document.getElementById("signUpCloseBtn");
 
+signUpToggleBtn.classList.add("animate-in");
 
   // Modal show animation
   signInModal.showModal();

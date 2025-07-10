@@ -2,17 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
-const bcrypt = require("bcryptjs");
 
 // ✅ Optional reusable hash function
-async function hashPassword(password) {
-  const saltRounds = 10;
-  const hashed = await bcrypt.hash(password, saltRounds);
-  return hashed;
-}
 
-// Then in your /register route:
-const hash = await hashPassword(password);
 
 const app = express();
 app.use(bodyParser.json());
@@ -38,5 +30,13 @@ app.post('/login', async (req, res) => {
   if (!valid) return res.status(400).json({ error: 'Invalid credentials' });
   res.json({ message: 'Login successful' });
 });
+const path = require("path");
 
-app.listen(3001, () => console.log('Server running on port 3001'));
+app.use(express.static(path.join(__dirname, "public"))); // Adjust if needed
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

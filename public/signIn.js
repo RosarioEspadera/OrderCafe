@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const result = await response.json();
 
     if (response.ok) {
+      localStorage.setItem("orderCafeUser", JSON.stringify({ username }));
       revealMainContent(); // 🎉 Show the café interface
     } else {
       alert(result.error || "Login failed.");

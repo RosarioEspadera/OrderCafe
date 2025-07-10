@@ -458,6 +458,7 @@ body.modal-open {
   margin-bottom: 1rem;
   letter-spacing: 0.5px;
   font-weight: 600;
+  color: rgb(96 69 57);
 }
 
 /* -------------------- 4. CLOSE BUTTON -------------------- */

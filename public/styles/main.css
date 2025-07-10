@@ -954,6 +954,29 @@ body.modal-open {
     transform: translate(-50%, -70%) scale(1.2) rotate(-2deg);
   }
 }
+#guestAccessBtn {
+  display: inline-block;
+  margin: 16px auto 0;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-family: 'Caveat', cursive; /* Optional for handwritten touch */
+  background: transparent;
+  border: 2px dashed #e8d2b8;
+  color: #e8d2b8;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#guestAccessBtn:hover {
+  background: rgba(255, 248, 240, 0.08); /* Light froth overlay */
+  color: #f5e4d3;
+  border-color: #f5e4d3;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
 .guest-toast {
   position: fixed;
   top: 20px;

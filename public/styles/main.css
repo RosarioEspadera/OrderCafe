@@ -322,32 +322,33 @@ p {
 }
 .menu-button.tooltip {
   position: relative;
-  z-index: 5; /* keeps tooltip above other elements */
-  overflow: visible; /* ensures tooltip isn't cut off */
+  z-index: 5;
+  overflow: visible;
 }
 
 .menu-button.tooltip::after {
   content: attr(data-title);
   position: absolute;
-  bottom: calc(100% + 12px); /* top of the button */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  background: rgba(62, 42, 30, 0.95);
+  transform: translate(-50%, -50%); /* centers within the button */
+  background: rgba(62, 42, 30, 0.85); /* warm coffee tone */
   color: #fffaf0;
   padding: 6px 12px;
-  border-radius: 8px;
+  border-radius: 6px;
   white-space: nowrap;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   opacity: 0;
   pointer-events: none;
-  z-index: 100;
+  z-index: 10;
 }
 
 .menu-button.tooltip:hover::after {
   opacity: 1;
   pointer-events: auto;
-  animation: floatSteam 1.5s ease-in-out;
+  animation: floatSteam 1.2s ease-in-out;
 }
+
 .menu-description {
   display: block;
   font-size: 0.9rem;

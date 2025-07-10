@@ -329,7 +329,7 @@ p {
 .menu-button.tooltip::after {
   content: attr(data-title);
   position: absolute;
-  top: calc(100% + 12px); /* below the button */
+  bottom: calc(100% + 12px); /* top of the button */
   left: 50%;
   transform: translateX(-50%);
   background: rgba(62, 42, 30, 0.95);

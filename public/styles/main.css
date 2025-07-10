@@ -954,5 +954,26 @@ body.modal-open {
     transform: translate(-50%, -70%) scale(1.2) rotate(-2deg);
   }
 }
+.guest-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(40, 26, 20, 0.95);
+  color: #e8d2b8;
+  font-family: 'Caveat', cursive; /* Optional handwritten touch */
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+  opacity: 1;
+  transition: opacity 1s ease-out;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.guest-toast.fade-out {
+  opacity: 0;
+}
 
 

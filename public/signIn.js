@@ -25,7 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.remove("visible");
     modal.addEventListener("transitionend", () => modal.close(), { once: true });
   }
-
+// 🚪 Close button for sign-up modal
+const signUpCloseBtn = document.getElementById("signUpCloseBtn");
+signUpCloseBtn.addEventListener("click", () => {
+  hideModalWithTransition(signUpModal);
+});
   // ☕ Reveal café interface
  function revealMainContent() {
   hideModalWithTransition(signInModal);

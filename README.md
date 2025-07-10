@@ -69,3 +69,5 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License.
+<h1>Welcome to OrderCafe ☕</h1>
+<p>Your login flow is powered by <code>bcryptjs</code> and Express.<br>For the full café experience, visit: <a href="https://ordercafe-rio-hxxc.onrender.com">backend live here</a></p>

@@ -1,0 +1,71 @@
+/* signUp.css — Styling for Rio's Café account creation */
+
+#signUpModal {
+  width: 400px;
+  padding: 2rem;
+  background-color: #fff8f0;
+  border-radius: 12px;
+  border: 2px solid #d6a75a;
+  box-shadow: 0 0 20px rgba(214, 167, 90, 0.3);
+  font-family: 'Quicksand', sans-serif;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#signUpModal.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#signUpModal:not(.visible) {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+#signUpForm label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #6b4f2c;
+}
+
+#signUpForm input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+#signUpForm menu {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+#signUpBtn,
+#signUpCloseBtn {
+  padding: 0.6rem 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#signUpBtn {
+  background-color: #d6a75a;
+  color: #fff;
+}
+
+#signUpBtn:hover {
+  background-color: #b6894f;
+}
+
+#signUpCloseBtn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+#signUpCloseBtn:hover {
+  background-color: #d0d0d0;
+}

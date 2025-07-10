@@ -7,9 +7,11 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="styles/main.css?v=2.0">
   <link rel="stylesheet" href="styles/signUp.css" />
+  <link rel="stylesheet" href="styles/profile.css" />
   <link href="https://fonts.googleapis.com/css2?family=Lora&family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@0;1&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="scripts/profile.js"></script>
 <style>
   #signUpToggleBtn {
     display: block;
@@ -121,6 +123,11 @@
 
 
   <div id="mainContent" class="hidden">
+    <div id="profileOverlay" class="overlay hidden">
+      <button id="closeProfile">✖</button>
+      <h2>Your Profile</h2>
+      <p>Welcome back, <span id="profileName"></span> ☕</p>
+    </div>    
   <div id="app">
     <div class="logo">
   <img src="images/rios-cafe-logo.png" alt="Rio's Cafe Logo" />

@@ -38,6 +38,27 @@
   </form>
    <button id="guestAccessBtn" class="guest-button">Enter without account</button>
 </dialog>
+  <button id="signUpToggleBtn" class="signup-button">Create Account</button>
+<dialog id="signUpModal">
+  <div class="modal-branding">
+    <img src="images/rios-cafe-logo.png" alt="OrderCafe Logo" class="brand-logo" />
+    <h2>Create an Account</h2>
+    <p>Join Rio's Café and start your order</p>
+  </div>
+  <form method="dialog" id="signUpForm">
+    <label for="newUsername">Username</label>
+    <input type="text" id="newUsername" name="newUsername" required />
+
+    <label for="newPassword">Password</label>
+    <input type="password" id="newPassword" name="newPassword" required />
+
+    <menu>
+      <button type="submit" id="signUpBtn">Sign Up</button>
+      <button type="button" id="signUpCloseBtn">Cancel</button>
+    </menu>
+  </form>
+</dialog>
+
 <div id="welcomeBanner" class="welcome-banner hidden">
   <p>Welcome back, <span id="userNameDisplay"></span>! ☕</p>
   <button id="logoutBtn">Logout</button>

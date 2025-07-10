@@ -34,14 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
   mainContent.classList.remove("hidden");
   mainContent.classList.add("visible");
 }
-
-    hideModalWithTransition(signInModal);
-    document.getElementById("signInBtn").style.display = "none";
-    const mainContent = document.getElementById("mainContent");
-    mainContent.classList.remove("hidden");
-    mainContent.classList.add("visible");
-  }
-
   // 🚀 Lightweight auto-login with delay
   setTimeout(() => {
     const savedUser = JSON.parse(localStorage.getItem("orderCafeUser"));

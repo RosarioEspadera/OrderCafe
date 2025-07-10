@@ -63,23 +63,45 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Handle form submission
-  signInForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+  signInForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value.trim();
+  const username = usernameInput.value.trim();
+  const password = passwordInput.value.trim();
 
-    if (!username || !password) {
-      alert("Please enter both username and password.");
+  if (!username || !password) {
+    alert("Please enter both username and password.");
+    signInModal.classList.add("shake");
+    signInModal.addEventListener("animationend", () => {
+      signInModal.classList.remove("shake");
+    }, { once: true });
+    return;
+  }
+
+  try {
+    const response = await fetch("https://ordercafe-rio-hxxc.onrender.com/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      revealMainContent(); // 🎉 Show the café interface
+    } else {
+      alert(result.error || "Login failed.");
       signInModal.classList.add("shake");
       signInModal.addEventListener("animationend", () => {
         signInModal.classList.remove("shake");
       }, { once: true });
-      return;
     }
+  } catch (err) {
+    console.error("Login error:", err);
+    alert("Something went wrong. Please try again.");
+  }
+});
 
-    revealMainContent();
-  });
  if (guestAccessBtn) {
     guestAccessBtn.addEventListener("click", () => {
       // Display temporary guest welcome toast

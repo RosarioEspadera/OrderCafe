@@ -351,28 +351,31 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(62, 42, 30, 0.9);
-  color: #fffaf0;
-  padding: 8px 16px;
-  border-radius: 6px;
-  max-width: 260px;
-  width: max-content;             /* fits background to content */
-  box-sizing: border-box;         /* includes padding in width */
-  font-size: 0.9rem;
+  background: rgba(40, 26, 20, 0.98); /* Rich dark roast */
+  color: #d7b899;                     /* Toasted almond text */
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.95rem;
   text-align: center;
-  white-space: normal;            /* allows wrapping if needed */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-  z-index: 100;
+  box-sizing: border-box;
+  line-height: 1.4;
+  width: fit-content;                /* Auto-resizes to fit text */
+  max-width: 90%;                   /* Responsive cap */
+  min-width: max-content;           /* Ensures full text is visible */
+  word-break: break-word;
+  white-space: normal;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
   opacity: 0;
-  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 100;
 }
-
 
 .menu-button.tooltip:hover::after {
   opacity: 1;
-  pointer-events: auto;
-  animation: floatSteam 1.2s ease-in-out;
+  visibility: visible;
 }
+
 
 .menu-description {
   display: block;

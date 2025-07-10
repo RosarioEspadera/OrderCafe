@@ -91,16 +91,17 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-light);
   padding: 4px 8px;
   border-radius: var(--radius);
-  top: 100%;
-  left: 0;
+  bottom: 100%; /* Position it above */
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px); /* Center and lift slightly */
   white-space: nowrap;
   z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Optional for depth */
 }
 
 [data-title]:hover::after {
   display: block;
 }
-
 .logo {
   display: flex;
   justify-content: center;

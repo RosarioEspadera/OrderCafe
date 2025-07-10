@@ -18,39 +18,40 @@
 <body>
 
 <!-- Sign In Button -->
-<dialog id="signInModal">
-   <div class="modal-branding">
-  <img src="images/rios-cafe-logo.png" alt="OrderCafe Logo" class="brand-logo" />
-  <h2>Welcome to Rio's Cafe</h2>
-  <p>Please sign in to start your order</p>
-</div>
-  <form method="dialog" id="signInForm">
+<dialog id="signInModal" class="modal">
+  <div class="modal-branding">
+    <img src="images/rios-cafe-logo.png" alt="OrderCafe Logo" class="brand-logo" />
+    <h2>Welcome to Rio's Cafe</h2>
+    <p>Please sign in to start your order</p>
+  </div>
+  <form method="dialog" id="signInForm" novalidate>
     <label for="username">Username</label>
-<input type="text" id="username" name="username" autocomplete="username" required />
+    <input type="text" id="username" name="username" autocomplete="username" required />
 
-<label for="password">Password</label>
-<input type="password" id="password" name="password" autocomplete="current-password" required />
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" autocomplete="current-password" required />
 
     <menu>
       <button type="submit" id="signInBtn">Sign In</button>
       <button type="button" id="closeBtn">Cancel</button>
     </menu>
   </form>
-   <button id="guestAccessBtn" class="guest-button">Enter without account</button>
-</dialog>
+  <button id="guestAccessBtn" class="guest-button">Enter without account</button>
   <button id="signUpToggleBtn" class="signup-button">Create Account</button>
-<dialog id="signUpModal">
+</dialog>
+
+<dialog id="signUpModal" class="modal">
   <div class="modal-branding">
     <img src="images/rios-cafe-logo.png" alt="OrderCafe Logo" class="brand-logo" />
     <h2>Create an Account</h2>
     <p>Join Rio's Café and start your order</p>
   </div>
-  <form method="dialog" id="signUpForm">
+  <form method="dialog" id="signUpForm" novalidate>
     <label for="newUsername">Username</label>
-    <input type="text" id="newUsername" name="newUsername" required />
+    <input type="text" id="newUsername" name="newUsername" autocomplete="username" required />
 
     <label for="newPassword">Password</label>
-    <input type="password" id="newPassword" name="newPassword" required />
+    <input type="password" id="newPassword" name="newPassword" autocomplete="new-password" required />
 
     <menu>
       <button type="submit" id="signUpBtn">Sign Up</button>

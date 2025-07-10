@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const usernameInput = document.getElementById("username");
   const passwordInput = document.getElementById("password");
   const guestAccessBtn = document.getElementById("guestAccessBtn"); // ❗ Kept outside safety check
+  const signUpModal = document.getElementById("signUpModal");
+  const signUpForm = document.getElementById("signUpForm");
+  const signUpBtn = document.getElementById("signUpBtn");
+  const signUpToggleBtn = document.getElementById("signUpToggleBtn");
+  const signUpCloseBtn = document.getElementById("signUpCloseBtn");
+
 
   // Modal show animation
   signInModal.showModal();
@@ -99,6 +105,50 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   } catch (err) {
     console.error("Login error:", err);
+    alert("Something went wrong. Please try again.");
+  }
+});
+signUpToggleBtn.addEventListener("click", () => {
+  signInModal.close();
+  signUpModal.showModal();
+  requestAnimationFrame(() => {
+    signUpModal.classList.add("visible");
+  });
+});
+
+signUpCloseBtn.addEventListener("click", () => {
+  signUpModal.classList.remove("visible");
+  signUpModal.addEventListener("transitionend", () => signUpModal.close(), { once: true });
+});
+
+signUpForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const newUsername = document.getElementById("newUsername").value.trim();
+  const newPassword = document.getElementById("newPassword").value.trim();
+
+  if (!newUsername || !newPassword) {
+    alert("Please fill in both fields.");
+    return;
+  }
+
+  try {
+    const res = await fetch("https://ordercafe-rio-hxxc.onrender.com/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: newUsername, password: newPassword }),
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      alert("Account created successfully. Please sign in.");
+      signUpModal.close();
+      signInModal.showModal();
+    } else {
+      alert(result.error || "Registration failed.");
+    }
+  } catch (err) {
+    console.error("Registration error:", err);
     alert("Something went wrong. Please try again.");
   }
 });

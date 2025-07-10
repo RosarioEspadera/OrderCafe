@@ -12,24 +12,26 @@ app.use(cors());
 
 const users = []; // In-memory storage, replace with a database in production!
 
-app.post('/register', async (req, res) => {
+app.post('/signup', async (req, res) => {
   const { username, password } = req.body;
   if (users.find(u => u.username === username)) {
     return res.status(400).json({ error: 'Username already exists' });
   }
   const hash = await bcrypt.hash(password, 10);
   users.push({ username, password: hash });
-  res.json({ message: 'Registration successful' });
+  res.json({ message: 'Signup successful' });
 });
 
-app.post('/login', async (req, res) => {
+
+app.post('/signin', async (req, res) => {
   const { username, password } = req.body;
   const user = users.find(u => u.username === username);
   if (!user) return res.status(400).json({ error: 'Invalid credentials' });
   const valid = await bcrypt.compare(password, user.password);
   if (!valid) return res.status(400).json({ error: 'Invalid credentials' });
-  res.json({ message: 'Login successful' });
+  res.json({ message: 'Signin successful' });
 });
+
 const path = require("path");
 
 app.use(express.static(path.join(__dirname, "../public")));

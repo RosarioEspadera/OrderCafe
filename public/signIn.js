@@ -82,6 +82,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
  if (guestAccessBtn) {
     guestAccessBtn.addEventListener("click", () => {
+      // Display temporary guest welcome toast
+const toast = document.createElement("div");
+toast.textContent = "Welcome, Guest ☕";
+toast.className = "guest-toast";
+
+mainContent.appendChild(toast);
+
+setTimeout(() => {
+  toast.classList.add("fade-out");
+}, 2500);
+
+setTimeout(() => {
+  toast.remove();
+}, 3500);
+
       revealMainContent();
     });
   }

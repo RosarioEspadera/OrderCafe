@@ -59,6 +59,7 @@ if (savedUser?.username) {
   userDisplay.textContent = savedUser.username;
   document.getElementById("welcomeBanner").classList.remove("hidden");
   revealMainContent();
+  return; // ✅ Skip login modal for returning users
 }
 
   // Safety check for sign-in flow only

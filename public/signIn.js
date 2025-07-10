@@ -53,6 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent.classList.remove("hidden");
     mainContent.classList.add("visible");
   }
+const savedUser = JSON.parse(localStorage.getItem("orderCafeUser"));
+if (savedUser?.username) {
+  const userDisplay = document.getElementById("userNameDisplay");
+  userDisplay.textContent = savedUser.username;
+  document.getElementById("welcomeBanner").classList.remove("hidden");
+  revealMainContent();
+}
 
   // Safety check for sign-in flow only
   if (
@@ -93,10 +100,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const result = await response.json();
 
-    if (response.ok) {
-      localStorage.setItem("orderCafeUser", JSON.stringify({ username }));
-      revealMainContent(); // 🎉 Show the café interface
-    } else {
+   if (response.ok) {
+  localStorage.setItem("orderCafeUser", JSON.stringify({ username }));
+
+  const userDisplay = document.getElementById("userNameDisplay");
+  if (userDisplay) {
+    userDisplay.textContent = username;
+    document.getElementById("welcomeBanner").classList.remove("hidden");
+  }
+
+  revealMainContent(); // 🎉 Show the café interface
+}
+ else {
       alert(result.error || "Login failed.");
       signInModal.classList.add("shake");
       signInModal.addEventListener("animationend", () => {
@@ -113,8 +128,10 @@ signUpToggleBtn.addEventListener("click", () => {
   signUpModal.showModal();
   requestAnimationFrame(() => {
     signUpModal.classList.add("visible");
+    document.getElementById("newUsername").focus();
   });
 });
+
 
 signUpCloseBtn.addEventListener("click", () => {
   signUpModal.classList.remove("visible");
@@ -139,6 +156,13 @@ signUpForm.addEventListener("submit", async (e) => {
     });
 
     const result = await res.json();
+    const toast = document.createElement("div");
+    toast.textContent = "Welcome to the café, " + newUsername + "!";
+    toast.className = "guest-toast";
+    mainContent.appendChild(toast);
+    setTimeout(() => toast.classList.add("fade-out"), 2500);
+    setTimeout(() => toast.remove(), 3500);
+
 
     if (res.ok) {
       alert("Account created successfully. Please sign in.");
@@ -173,6 +197,7 @@ setTimeout(() => {
       revealMainContent();
     });
   }
+  
   // Escape key listener
   signInModal.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {

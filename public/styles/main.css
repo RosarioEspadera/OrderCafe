@@ -333,13 +333,16 @@ p {
   position: absolute;
   top: 50%;
   left: 50%;
+  white-space: normal;
+  text-align: center;
   transform: translate(-50%, -50%); /* centers within the button */
   background: rgba(62, 42, 30, 0.85); /* warm coffee tone */
   color: #fffaf0;
-  padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 6px;
   white-space: nowrap;
-  max-width: 240px; /* Add this */
+  max-width: 260px; /* Add this */
+  box-sizing: border-box;
   overflow: visible; /* Ensure content isn't hidden */
   z-index: 9999;
   opacity: 0;

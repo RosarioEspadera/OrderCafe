@@ -84,8 +84,8 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid #ccc;
 }
 [data-title] {
-  position: relative; /* Anchor point for ::after */
-  z-index: 5;
+  position: relative;
+  z-index: 5; /* Ensure stacking above nearby content */
 }
 
 [data-title]::after {
@@ -93,12 +93,18 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   bottom: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(-6px);
+  transform: translate(-50%, -50%); /* Centers both axes */
   background: var(--dark-bg);
   color: var(--text-light);
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: var(--radius);
-  white-space: nowrap;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  text-align: center;
+  width: max-content;              /* Shrinks to fit text */
+  max-width: 260px;                /* Prevents it from being too wide */
+  box-sizing: border-box;          /* Includes padding in width calc */
+  white-space: normal;             /* Allows wrapping if needed */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   z-index: 100;
   opacity: 0;
@@ -110,6 +116,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
   visibility: visible;
 }
+
 
 .logo {
   display: flex;

@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const usernameDisplay = document.getElementById("usernameDisplay");
     if (usernameDisplay) {
-      usernameDisplay.textContent = JSON.parse(user).name || "Guest";
+     usernameDisplay.textContent = JSON.parse(user).username || "Guest";
     }
 
     const orderImages = document.getElementById("orderImages");

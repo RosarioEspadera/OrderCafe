@@ -32,6 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent?.classList.remove("hidden");
     signInModal?.classList.add("hidden");
     signInModal?.style.display = "none";
+    mainContent?.classList.remove("hidden");
+    mainContent?.style.display = "block";
+
 
     profileName.textContent = userData.username || "Guest";
     currentProfilePhoto.src = userData.profilePhoto || fallback;

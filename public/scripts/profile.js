@@ -50,14 +50,15 @@ profilePhotoUpload?.addEventListener("change", (event) => {
   };
   reader.readAsDataURL(file);
 });
-    function loadProfilePhoto() {
+   function loadProfilePhoto() {
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
-  if (userData?.profilePhoto) {
-    currentProfilePhoto.src = userData.profilePhoto;
-    currentProfilePhoto.classList.remove("hidden");
-    currentProfilePhoto.classList.add("visible");
-  }
+  const fallback = "/assets/default-avatar.png"; // or your favorite cozy cup icon
+
+  currentProfilePhoto.src = userData?.profilePhoto || fallback;
+  currentProfilePhoto.classList.remove("hidden");
+  currentProfilePhoto.classList.add("visible");
 }
+
 function generateOrderGallery() {
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
   const orders = userData?.orders || [];

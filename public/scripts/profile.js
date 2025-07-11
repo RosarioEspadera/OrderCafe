@@ -32,10 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent?.classList.remove("hidden");
     signInModal?.classList.add("hidden");
     signInModal?.style.display = "none";
-    mainContent?.classList.remove("hidden");
-    mainContent?.style.display = "block";
-
-
+    
     profileName.textContent = userData.username || "Guest";
     currentProfilePhoto.src = userData.profilePhoto || fallback;
     currentProfilePhoto.classList.remove("hidden");
@@ -73,14 +70,13 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => toast.remove(), 3000);
   }
 
-  // 🚪 Auto-login
+  // 🔓 Auto-login
   if (user && !isLoggedOut) updateUI(user);
-  if (guestBanner && isLoggedOut) guestBanner.classList.remove("hidden");
+  else if (guestBanner && isLoggedOut) guestBanner.classList.remove("hidden");
 
-  // 🧑‍💻 Manual sign-in simulation
+  // 👤 Manual sign-in
   signInForm?.addEventListener("submit", (e) => {
     e.preventDefault();
-
     const enteredUsername = usernameField?.value.trim();
     if (!enteredUsername) return alert("Please enter a username.");
 
@@ -98,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateUI(mockUser);
   });
 
-  // 🔒 Logout
+  // 🚪 Logout
   logoutBtn?.addEventListener("click", () => {
     localStorage.removeItem("orderCafeUser");
     localStorage.setItem("isLoggedOut", "true");
@@ -122,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     guestBanner?.classList.remove("hidden");
   });
 
-  // 🖼️ Preview photo
+  // 🖼️ Full photo preview
   currentProfilePhoto?.addEventListener("click", () => {
     const src = currentProfilePhoto.src;
     if (!src || src === fallback || src === window.location.href) return;
@@ -135,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     photoPreviewOverlay?.classList.add("hidden");
   });
 
-  // 📷 Upload photo
+  // 📸 Profile photo upload
   profilePhotoUpload?.addEventListener("change", function () {
     const file = this.files[0];
     if (!file || !file.type.startsWith("image/")) {
@@ -156,13 +152,12 @@ document.addEventListener("DOMContentLoaded", () => {
     reader.readAsDataURL(file);
   });
 
-  // 🎯 Profile button toggle
+  // 🧁 Activate profile overlay
   profileBtn?.addEventListener("click", () => {
     const userData = JSON.parse(localStorage.getItem("orderCafeUser")) || {};
     updateUI(userData);
   });
 
-  // ❎ Close overlay
   closeProfile?.addEventListener("click", () => {
     profileOverlay.classList.remove("visible");
     profileOverlay.classList.add("hidden");

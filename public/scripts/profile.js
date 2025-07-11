@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const isLoggedOut = localStorage.getItem("isLoggedOut") === "true";
   const rawUser = localStorage.getItem("orderCafeUser");
   const user = rawUser ? JSON.parse(rawUser) : null;
+  const fallback = "https://raw.githubusercontent.com/RosarioEspadera/OrderCafe/main/public/styles/images/bg.png";
+
   
 
   if (rememberMe) rememberMe.checked = isChecked;
@@ -28,6 +30,12 @@ if (user && isChecked) {
 
   const usernameDisplay = document.getElementById("usernameDisplay");
   if (usernameDisplay) {
+    if (currentProfilePhoto) {
+  currentProfilePhoto.src = user.profilePhoto || fallback;
+  currentProfilePhoto.classList.remove("hidden");
+  currentProfilePhoto.classList.add("visible");
+}
+
     usernameDisplay.textContent = user.username || "Guest";
   }
 

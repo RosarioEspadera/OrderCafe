@@ -1,3 +1,6 @@
+import { mockUser } from "./mog.js";
+console.log(mockUser.username); // Just for testing
+
 window.addEventListener("DOMContentLoaded", () => {
   const savedUser = localStorage.getItem("orderCafeUser");
   if (savedUser) {

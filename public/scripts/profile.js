@@ -132,17 +132,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 📷 Build order gallery
   function generateOrderGallery() {
-    const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
-    const orders = userData?.orders || [];
-    if (!orders.length) return "<p>No recent orders found ☕</p>";
+  const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
+  const orders = userData?.orders || [];
 
-    return orders.map(order => `
+  if (!orders.length) {
+    return "<p>No recent orders found ☕</p>";
+  }
+
+  let galleryHTML = "";
+  for (const order of orders) {
+    galleryHTML += `
       <div class="gallery-item">
         <img src="${order.image}" alt="${order.name}" />
         <p>${order.name} - $${order.price}</p>
       </div>
-    `).join("");
+    `;
   }
+  return galleryHTML;
+}
+
 
   // ☕ Profile button activates overlay
   document.addEventListener("click", (e) => {

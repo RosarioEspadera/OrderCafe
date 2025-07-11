@@ -58,9 +58,15 @@ profilePhotoUpload?.addEventListener("change", (event) => {
     currentProfilePhoto.classList.add("visible");
   }
 }
-  function renderUserGallery() {
+function renderUserGallery() {
   const orderImages = document.getElementById("orderImages");
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
+
+  if (!orderImages) {
+    console.warn("⚠️ orderImages element not found.");
+    return;
+  }
+
   orderImages.innerHTML = "";
 
   userData?.images?.forEach((imgUrl) => {
@@ -69,6 +75,7 @@ profilePhotoUpload?.addEventListener("change", (event) => {
     orderImages.appendChild(img);
   });
 }
+
   profileBtn.addEventListener("click", () => {
     console.log("Profile button clicked!");
 

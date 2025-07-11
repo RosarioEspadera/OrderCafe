@@ -101,13 +101,22 @@
   margin: 0 auto; /* centers inside container */
 }
 
-#currentProfilePhoto.visible {
-  display: block;
-}
-
 #currentProfilePhoto:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+#uploadLabel {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 50%;
+}
+
+#uploadLabel:hover {
+  transform: scale(1.05);
+}
+#currentProfilePhoto.visible {
+  display: block;
 }
 
   

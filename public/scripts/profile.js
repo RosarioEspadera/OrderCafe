@@ -62,8 +62,8 @@ function renderUserGallery() {
   const orderImages = document.getElementById("orderImages");
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
 
-  if (!orderImages) {
-    console.warn("⚠️ orderImages element not found.");
+  if (!orderImages || orderImages.offsetParent === null) {
+    console.warn("⚠️ orderImages is either not found or currently hidden.");
     return;
   }
 
@@ -76,23 +76,22 @@ function renderUserGallery() {
   });
 }
 
-  profileBtn.addEventListener("click", () => {
-    console.log("Profile button clicked!");
+profileBtn.addEventListener("click", () => {
+  console.log("Profile button clicked!");
 
-    const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
-    profileName.textContent = userData?.username || "Guest";
+  const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
+  profileName.textContent = userData?.username || "Guest";
 
-    profileOverlay.classList.remove("hidden");
-    profileOverlay.classList.add("visible");
-      
-    loadProfilePhoto();
-    renderUserGallery();
-  });
+  profileOverlay.classList.remove('hidden');
+  profileOverlay.classList.add('visible');
 
-  closeProfile.addEventListener("click", () => {
-    profileOverlay.classList.remove("visible");
-    profileOverlay.classList.add("hidden");
-  });
+  loadProfilePhoto();
+  renderUserGallery();
+});
+
+closeProfile.addEventListener("click", () => {
+  profileOverlay.classList.remove("visible");
+  profileOverlay.classList.add("hidden");
 });
 
   

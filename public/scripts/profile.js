@@ -33,9 +33,14 @@ function showProfile(user) {
   profileOverlay.classList.remove("hidden");
   profileOverlay.style.display = "block";
 
-  // If it's a dialog
+  // Close it first if already open (prevents errors)
+  if (profileOverlay.open) {
+    profileOverlay.close();
+  }
+
   profileOverlay.showModal?.();
 }
+
 
 
   // 🖼️ Photo preview

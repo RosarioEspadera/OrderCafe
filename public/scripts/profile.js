@@ -68,6 +68,11 @@ function showProfile(user) {
     };
     reader.readAsDataURL(file);
   });
+const closeProfileBtn = document.getElementById("closeProfile");
+closeProfileBtn?.addEventListener("click", () => {
+  profileOverlay.close?.();
+  profileOverlay.style.display = "none";
+});
 
   // 🚪 Logout
   logoutBtn?.addEventListener("click", () => {

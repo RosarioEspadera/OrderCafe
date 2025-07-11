@@ -1,3 +1,9 @@
+#profileBtn {
+  z-index: 10;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
 #profileOverlay {
   display: none;
   position: fixed;

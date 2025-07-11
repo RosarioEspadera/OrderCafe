@@ -1,27 +1,25 @@
 /* ==========================================================================
-   ☕ OrderCafe Profile View — Aesthetic Redesign by Rosario & Copilot
+   ☕ OrderCafe Profile Modal Redesign — Facebook-Inspired Mobile Layout
    ==========================================================================
+   Sections:
    1. Root Variables
    2. Global Reset
-   3. Fullscreen Modal Structure
-   4. Profile Content Container
-   ========================================================================== */
+   3. Fullscreen Modal Container
+   4. Modal Header & Profile Info Area
+   ==========================================================================
+*/
 
 /* 🌿 1. Root Variables */
 :root {
   --cafe-brown: #6f4e37;
   --cafe-cream: #fff8f0;
   --cafe-parchment: #fef6e4;
-  --cafe-foam: #f5dfcb;
   --cafe-accent: #d2a679;
-  --text-dark: #3a2c27;
   --text-muted: #7a5e4b;
-  --radius-lg: 16px;
+  --radius: 14px;
   --transition: 0.4s ease;
   --heading-font: 'Pacifico', cursive;
   --body-font: 'Poppins', sans-serif;
-  --shadow-md: 0 6px 20px rgba(0,0,0,0.08);
-  --shadow-lg: 0 12px 30px rgba(0,0,0,0.2);
 }
 
 /* 🔄 2. Global Reset */
@@ -35,68 +33,62 @@
 
 body {
   font-family: var(--body-font);
-  background: linear-gradient(145deg, var(--cafe-parchment), var(--cafe-foam));
-  color: var(--text-dark);
+  background-color: var(--cafe-parchment);
+  color: var(--cafe-brown);
   overflow-x: hidden;
 }
 
-/* 🪞 3. Fullscreen Modal */
+/* 🪞 3. Fullscreen Modal Container */
 #profileOverlay {
   position: fixed;
   inset: 0;
-  background: linear-gradient(to bottom right, var(--cafe-parchment), #f7e0c8);
+  background: linear-gradient(to bottom right, var(--cafe-parchment), #fce8d5);
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
   padding: 3rem 2rem;
-  z-index: 1000;
-  overflow-y: auto;
   animation: fadeSlideIn 0.6s ease-out;
+  overflow-y: auto;
 }
 
-/* 🌿 Modal Blur Accent */
-.profile-backdrop {
+/* ☁️ Ambient Blur Accent (Optional) */
+.profileBackdropLayer {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 30% 30%, #ffffff80 0%, transparent 70%);
   backdrop-filter: blur(8px);
+  background: radial-gradient(circle at top center, #fffaf5 0%, transparent 70%);
   pointer-events: none;
   z-index: -1;
 }
 
-/* 📦 4. Profile Content Box */
-.profile-container {
-  width: 100%;
-  max-width: 600px;
-  background: var(--cafe-cream);
+/* 👤 4. Modal Header & Profile Info Area */
+.profileCard {
+  background-color: var(--cafe-cream);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
   padding: 2rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: riseFadeIn 0.7s ease;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  margin-bottom: 2rem;
   position: relative;
-  z-index: 2;
 }
 
-/* 🌤️ Section Headings */
-.profile-container h2 {
+.profileCard h2 {
   font-family: var(--heading-font);
-  font-size: 2.4rem;
+  font-size: 2rem;
   color: var(--cafe-brown);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.profile-container p {
+.profileCard p {
   font-size: 1rem;
   color: var(--text-muted);
-  margin-bottom: 1.5rem;
-  text-align: center;
+  margin-bottom: 1rem;
 }
 /* ==========================================================================
-   📸 Profile Photo Display
+   📸 Profile Photo Styling
    ========================================================================== */
 #currentProfilePhoto {
   width: 160px;
@@ -133,7 +125,7 @@ body {
   max-width: 90vw;
   max-height: 90vh;
   border: 10px solid #fff;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   box-shadow: 0 0 30px rgba(0,0,0,0.4);
 }
 
@@ -145,7 +137,7 @@ body {
   padding: 0.6rem 1.2rem;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   transition: background-color var(--transition), transform var(--transition);
@@ -164,7 +156,7 @@ body {
   margin-top: 1rem;
   font-size: 1rem;
   padding: 0.6rem 1rem;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   border: 1px solid #ccc;
   background: #fff;
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
@@ -184,7 +176,7 @@ body {
     padding: 2rem 1rem;
   }
 
-  .profile-container {
+  .profileCard {
     padding: 1.5rem;
   }
 
@@ -222,17 +214,18 @@ body {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
-@keyframes riseFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(40px) scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+/* ==========================================================================
+   👤 Username Display
+   ========================================================================== */
+#userNameDisplay {
+  font-family: var(--heading-font);
+  font-size: 2rem;
+  color: var(--cafe-brown);
+  margin-top: 1rem;
+  text-align: center;
+  animation: fadeSlideIn 0.6s ease-out;
 }
+
 /* ==========================================================================
    🚪 Logout Button
    ========================================================================== */
@@ -243,7 +236,7 @@ body {
   font-size: 1rem;
   font-weight: 600;
   border: none;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   transition: background-color var(--transition), transform var(--transition);
@@ -264,7 +257,7 @@ body {
   font-size: 1.3rem;
   font-family: var(--heading-font);
   color: #5e4738;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   text-align: center;
   margin-top: 2rem;
@@ -272,40 +265,15 @@ body {
 }
 
 /* ==========================================================================
-   👤 Username Display
+   ☁️ Ambient Accents & Steam Trail (Optional)
    ========================================================================== */
-#userNameDisplay {
-  font-family: var(--heading-font);
-  font-size: 2rem;
-  color: var(--cafe-brown);
-  margin-top: 1rem;
-  text-align: center;
-  animation: riseFadeIn 0.6s ease;
-}
-
-/* ==========================================================================
-   ☁️ Ambient Accents
-   ========================================================================== */
-.profile-ambient-blur {
-  position: absolute;
-  top: -80px;
-  left: -60px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, #fffaf5 0%, transparent 70%);
-  filter: blur(60px);
-  opacity: 0.6;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.steam-puff {
+.steam-trail {
   position: absolute;
   top: 20px;
   left: 50%;
   width: 40px;
   height: 40px;
-  background: radial-gradient(circle, #fffaf5 20%, transparent 70%);
+  background: radial-gradient(circle, #fffaf5 30%, transparent 70%);
   animation: steamRise 3s ease-in-out infinite;
   border-radius: 50%;
   opacity: 0;
@@ -330,8 +298,8 @@ body {
    📱 Responsive Tweaks
    ========================================================================== */
 @media (max-width: 480px) {
-  .profile-container {
-    padding: 1rem;
+  #userNameDisplay {
+    font-size: 1.6rem;
   }
 
   #logoutFromProfile {
@@ -344,8 +312,13 @@ body {
     padding: 1rem;
   }
 
-  #userNameDisplay {
-    font-size: 1.6rem;
+  .profileCard {
+    padding: 1.2rem;
+  }
+
+  #currentProfilePhoto {
+    width: 100px;
+    height: 100px;
   }
 }
 
@@ -370,11 +343,18 @@ body {
   justify-content: center;
 }
 
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin: 1.5rem 0;
+}
+
 .shadow-box {
   background: var(--cafe-cream);
   padding: 2rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
 .faded-text {
@@ -382,10 +362,96 @@ body {
   font-size: 0.95rem;
   opacity: 0.9;
 }
+.profile-image-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  position: relative;
+}
 
-.divider {
+.profile-image-frame::after {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  z-index: -1;
+  filter: blur(10px);
+}
+
+.profile-section-card {
+  background: var(--cafe-cream);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
   width: 100%;
-  height: 1px;
-  background: rgba(0,0,0,0.08);
-  margin: 1.5rem 0;
+  max-width: 500px;
+}
+
+.profile-section-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--cafe-brown);
+}
+
+.profile-section-card p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.feature-highlight {
+  background: linear-gradient(135deg, #fefaf6, var(--cafe-foam));
+  padding: 1rem 1.5rem;
+  border-left: 4px solid var(--cafe-accent);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  margin-bottom: 1rem;
+}
+.profile-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--cafe-brown);
+  color: var(--cafe-cream);
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  z-index: 1002;
+  animation: fadeSlideIn 0.4s ease-out;
+}
+.decorative-divider {
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  margin: 2rem auto;
+  background: var(--cafe-accent);
+}
+.wrapped {
+  padding: 0 1rem;
+}
+
+.uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.muted {
+  opacity: 0.7;
+}
+
+.flex-gap-sm {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.flex-gap-lg {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 }

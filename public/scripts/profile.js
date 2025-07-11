@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const closePhotoPreview = document.getElementById("closePhotoPreview");
   const profilePhotoUpload = document.getElementById("profilePhotoUpload");
   const guestBanner = document.getElementById("guestBanner");
-  const fallback = "images/bg.png";
+  const fallback = "https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png";
 
   // 🌟 Show profile info if user exists
   const rawUser = localStorage.getItem("orderCafeUser");

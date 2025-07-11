@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const User = require("./models/User");
 
 // ✅ Optional reusable hash function
 
@@ -12,25 +13,47 @@ app.use(cors());
 
 const users = []; // In-memory storage, replace with a database in production!
 
-app.post('/signup', async (req, res) => {
+app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
-  if (users.find(u => u.username === username)) {
-    return res.status(400).json({ error: 'Username already exists' });
+  try {
+    const existing = await User.findOne({ username });
+    if (existing) return res.status(400).json({ error: "Username already exists" });
+
+    const hash = await bcrypt.hash(password, 10);
+    const user = new User({ username, password: hash });
+    await user.save();
+
+    res.json({ message: "Signup successful" });
+  } catch (error) {
+    console.error("Signup error:", error);
+    res.status(500).json({ error: "Server error during signup" });
   }
-  const hash = await bcrypt.hash(password, 10);
-  users.push({ username, password: hash });
-  res.json({ message: 'Signup successful' });
 });
 
 
-app.post('/signin', async (req, res) => {
+app.post("/signin", async (req, res) => {
   const { username, password } = req.body;
-  const user = users.find(u => u.username === username);
-  if (!user) return res.status(400).json({ error: 'Invalid credentials' });
-  const valid = await bcrypt.compare(password, user.password);
-  if (!valid) return res.status(400).json({ error: 'Invalid credentials' });
-  res.json({ message: 'Signin successful' });
+  try {
+    const user = await User.findOne({ username });
+    if (!user) return res.status(400).json({ error: "Invalid credentials" });
+
+    const valid = await bcrypt.compare(password, user.password);
+    if (!valid) return res.status(400).json({ error: "Invalid credentials" });
+
+    res.json({
+      message: "Signin successful",
+      user: {
+        username: user.username,
+        profilePhoto: user.profilePhoto || "",
+        orders: user.orders || []
+      }
+    });
+  } catch (error) {
+    console.error("Signin error:", error);
+    res.status(500).json({ error: "Server error during signin" });
+  }
 });
+
 
 const path = require("path");
 

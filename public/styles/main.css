@@ -28,7 +28,7 @@
 /* Body Styling */
 body {
   font-family: 'Poppins', sans-serif;
-  background: url('https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png') center/cover no-repeat fixed;
+  background-image: url('https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png') center/cover no-repeat fixed;
   color: #3a2c27;
   overflow-x: hidden;
 }

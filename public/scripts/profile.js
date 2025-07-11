@@ -19,10 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const signInForm = document.getElementById("signInForm");
   const fallback = "https://raw.githubusercontent.com/RosarioEspadera/OrderCafe/main/public/styles/images/bg.png";
 
-  // 🗄️ Load stored user
-  const rawUser = localStorage.getItem("orderCafeUser");
-  const user = rawUser ? JSON.parse(rawUser) : null;
-  const isLoggedOut = localStorage.getItem("isLoggedOut") === "true";
+ 
+ // 🗄️ Load stored user
+const rawUser = localStorage.getItem("orderCafeUser");
+let user = null;
+
+try {
+  user = rawUser ? JSON.parse(rawUser) : null;
+} catch (error) {
+  console.warn("⚠️ Could not parse user data:", error);
+}
+
+const isLoggedOut = localStorage.getItem("isLoggedOut") === "true";
+
 
   // ✨ UI Helpers
   function updateUI(userData) {

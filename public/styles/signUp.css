@@ -1,0 +1,264 @@
+/* signUp.css — Styling for Rio's Café account creation */
+
+/* Center and style signUpModal */
+#signUpModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 90%;
+  padding: 2rem 2.5rem;
+  background-color: #fff8f0;
+  border: 2px solid #d6a75a;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(214, 167, 90, 0.2);
+  font-family: 'Quicksand', sans-serif;
+  z-index: 1000;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Fade-in effect */
+#signUpModal.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#signUpModal:not(.visible) {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* Optional backdrop style */
+::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+#signUpForm label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #6b4f2c;
+}
+
+#signUpForm input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+#signUpForm menu {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+#signUpBtn,
+#signUpCloseBtn {
+  padding: 0.6rem 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#signUpBtn {
+  background-color: #d6a75a;
+  color: #fff;
+}
+
+#signUpBtn:hover {
+  background-color: #b6894f;
+}
+
+#signUpCloseBtn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+#signUpCloseBtn:hover {
+  background-color: #d0d0d0;
+}
+#signUpModal h2 {
+  font-size: 2rem;
+  font-family: 'Pacifico', cursive;
+  color: #6b4f2c;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  
+#signUpModal p {
+  font-size: 1.1rem;
+  color: #7c5c3a;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fadeUp 0.9s ease-out 0.3s forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 🎉 Glow-on-hover animation for Sign Up button */
+#signUpBtn {
+  background-color: #d6a75a;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#signUpBtn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
+}
+
+#signUpBtn:hover {
+  background-color: #b6894f;
+}
+
+#signUpBtn:hover::after {
+  left: 100%;
+}
+.signup-button {
+  background-color: #6f4e37; /* Café mocha */
+  color: #fff; /* Creamy white */
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.signup-button:hover {
+  background-color: #8b5c42;
+  transform: scale(1.05);
+}
+
+.signup-button:focus {
+  outline: 2px solid #c69c6d;
+  outline-offset: 2px;
+}
+
+
+#signUpToggleBtn.animate-in {
+  animation: bounceFadeIn 0.7s ease-out;
+}
+
+@keyframes bounceFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.03);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+#signUpToggleBtn {
+  margin: 1.5rem auto 0;
+  display: block;
+  background-color: #d6a75a;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Optional: hover sparkle */
+#signUpToggleBtn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(214, 167, 90, 0.4);
+}
+#signInModal::-webkit-scrollbar {
+  color: transparent;                /* Chrome, Safari, Edge */
+}
+.signup-toast {
+  position: fixed;
+  bottom: 2em;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #d6a75a, #b6894f);
+  color: #fff;
+  padding: 0.75em 1.5em;
+  border-radius: 8px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 1100;
+}
+.signup-toast.fade-out {
+  opacity: 0;
+  transform: translateX(-50%) translateY(10px);
+}
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border: 5px solid #ccc;
+  border-top-color: #6f4e37;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #6f4e37;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: 'Segoe UI', sans-serif;
+  z-index: 9999;
+  opacity: 0.9;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade-out {
+  opacity: 0;
+}

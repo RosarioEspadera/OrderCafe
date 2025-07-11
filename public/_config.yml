@@ -1,0 +1,33 @@
+# Site Metadata
+title: "Rio's Cafe"
+description: "Order confirmation system for Rio's Cafe"
+baseurl: "/OrderCafe"
+url: "https://RosarioEspadera.github.io"
+
+# Build Settings
+theme: jekyll-theme-cayman
+plugins:
+  - jekyll-seo-tag
+  - jekyll-feed
+
+# Exclude Unnecessary Files
+exclude:
+  - "README.md"
+  - "node_modules"
+  - "Gemfile"
+  - "Gemfile.lock"
+
+# Permalinks (Custom URL Structure)
+permalink: /blog/:title/
+
+# Enable Pagination (if using posts)
+paginate: 5
+paginate_path: "/page:num/"
+
+# Enable Strict Caching Controls (GitHub Pages doesn’t allow `.htaccess`, so this is a workaround)
+defaults:
+  -
+    scope:
+      path: "assets/*"
+    values:
+      cache-control: "public, max-age=31536000, immutable"

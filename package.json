@@ -8,12 +8,7 @@
     "build": "webpack --mode production",
     "test": "jest"
   },
-  "keywords": [
-    "food",
-    "ordering",
-    "online",
-    "web"
-  ],
+  "keywords": ["food", "ordering", "online", "web"],
   "author": "Rosario Espadera",
   "license": "MIT",
   "dependencies": {

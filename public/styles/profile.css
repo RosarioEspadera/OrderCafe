@@ -1,15 +1,16 @@
+/* 🔹 Profile Button */
 #profileBtn {
   z-index: 10;
   pointer-events: auto;
   cursor: pointer;
 }
 
+/* 🔹 Profile Overlay */
 #profileOverlay {
   display: none;
   position: fixed;
   top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100vw; height: 100vh;
   background: linear-gradient(135deg, #fff8f0, #30271a);
   z-index: 9999;
   padding: 40px;
@@ -17,56 +18,45 @@
   transition: opacity 0.3s ease;
 }
 
-#photoPreviewOverlay {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex; justify-content: center; align-items: center;
-  z-index: 999;
+#profileOverlay.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
-#fullSizePhoto {
-  max-width: 80%;
-  max-height: 80%;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.6);
-}
-#closePhotoPreview {
-  position: absolute;
-  top: 20px; right: 20px;
-  font-size: 24px;
-  color: #fff;
-  cursor: pointer;
-}
-
 
 #profileOverlay.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-#profileOverlay.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transition: opacity 0.3s ease;
+/* 🔹 Close Button */
+#closeProfile {
+  position: absolute;
+  top: 20px; right: 20px;
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-  
-  #closeProfile {
-    position: absolute;
-    top: 20px; right: 20px;
-    font-size: 1.2rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  #profileOverlay h2,
-  #profileOverlay p {
-    font-family: 'Poppins', sans-serif;
-    color: #6f4e37;
-  }
-  #logoutFromProfile {
+/* 🔹 Text Styling */
+#profileOverlay h2,
+#profileOverlay p,
+#userGallery h3 {
+  font-family: 'Poppins', sans-serif;
+  color: #6f4e37;
+}
+
+#userGallery h3 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  background: linear-gradient(to right, #fff2e6, #f0d9c6);
+  padding: 8px;
+  border-radius: 8px;
+}
+
+/* 🔹 Logout Button */
+#logoutFromProfile {
   margin-top: 24px;
   padding: 12px 20px;
   background-color: #e74c3c;
@@ -82,71 +72,89 @@
 #logoutFromProfile:hover {
   background-color: #c0392b;
 }
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 10px;
-  margin-top: 10px;
+
+/* 🔹 Photo Preview Modal */
+#photoPreviewOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-.image-grid img {
-  width: 100%;
+#fullSizePhoto {
+  max-width: 80%;
+  max-height: 80%;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
 }
-#userGallery h3 {
-  font-family: 'Poppins', sans-serif;
-  color: #6f4e37;
-  text-align: center;
-  font-size: 1.6rem;
-  margin-bottom: 12px;
-  background: linear-gradient(to right, #fff2e6, #f0d9c6);
-  padding: 8px;
-  border-radius: 8px;
-}
-#profilePhotoWrapper {
+
+#closePhotoPreview {
+  position: absolute;
+  top: 20px; right: 20px;
+  font-size: 24px;
+  color: #fff;
   cursor: pointer;
+}
+
+/* 🔹 Profile Photo Wrapper */
+#profilePhotoWrapper {
   display: inline-block;
+  cursor: pointer;
   transition: transform 0.2s ease;
 }
 
 #profilePhotoWrapper:hover {
   transform: scale(1.05);
 }
+
+/* 🔹 Current Profile Photo */
 #currentProfilePhoto {
   width: 100px;
   height: 100px;
   object-fit: cover;
   border-radius: 50%;
   background-color: #ccc;
+  transition: transform 0.2s ease;
 }
 
 #currentProfilePhoto:hover {
   transform: scale(1.05);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
-#uploadLabel {
-  display: inline-block;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  border-radius: 50%;
-}
 
-#uploadLabel:hover {
-  transform: scale(1.05);
-}
 #currentProfilePhoto.visible {
   display: block;
 }
-.hidden {
-  display: none; /* prevents rendering entirely */
+
+/* 🔹 Upload Label and Input */
+.photo-upload-label,
+#uploadLabel {
+  display: inline-block;
+  background-color: #6f4e37;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease;
 }
 
-.visible {
-  display: block; /* or flex/grid — must override .hidden */
+.photo-upload-label:hover,
+#uploadLabel:hover {
+  transform: scale(1.05);
 }
+
+#profilePhotoUpload {
+  display: none;
+}
+
+/* 🔹 Order Gallery */
 #orderImages {
-  display: block; /* or flex/grid */
+  display: block;
   opacity: 1;
 }
 
@@ -164,25 +172,30 @@
   transform: scale(1.05);
   box-shadow: 0 6px 16px rgba(0,0,0,0.15);
 }
+
+/* 🔹 Image Grid */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* 🔹 Utility Classes */
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
 .profile-photo {
   border-radius: 50%;
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
   width: 80px;
   height: 80px;
   object-fit: cover;
-}
-.photo-upload-label {
-  background-color: #6f4e37;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: bold;
-}
-
-#profilePhotoUpload {
-  display: none; /* hides native input, label handles trigger */
 }
 
   

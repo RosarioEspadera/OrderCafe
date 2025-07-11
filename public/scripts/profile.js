@@ -62,10 +62,11 @@ function renderUserGallery() {
   const orderImages = document.getElementById("orderImages");
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
 
-  if (!orderImages || orderImages.offsetParent === null) {
-    console.warn("⚠️ orderImages is either not found or currently hidden.");
-    return;
-  }
+ if (!orderImages || !orderImages.offsetWidth) {
+  console.warn("⚠️ orderImages is not visible or missing.");
+  return;
+}
+
 
   orderImages.innerHTML = "";
 
@@ -86,8 +87,12 @@ profileBtn.addEventListener("click", () => {
   profileOverlay.classList.add('visible');
 
   loadProfilePhoto();
-  renderUserGallery();
+
+  requestAnimationFrame(() => {
+    renderUserGallery();
+  });
 });
+
 
 closeProfile.addEventListener("click", () => {
   profileOverlay.classList.remove("visible");

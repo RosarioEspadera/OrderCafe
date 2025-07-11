@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const profilePhotoUpload = document.getElementById("profilePhotoUpload");
   const currentProfilePhoto = document.getElementById("currentProfilePhoto");
   const logoutFromProfile = document.getElementById("logoutFromProfile");
+  const photoPreviewOverlay = document.getElementById("photoPreviewOverlay");
+  const fullSizePhoto = document.getElementById("fullSizePhoto");
+  const closePhotoPreview = document.getElementById("closePhotoPreview");
 
 if (logoutFromProfile) {
   logoutFromProfile.addEventListener("click", () => {
@@ -16,7 +19,14 @@ if (logoutFromProfile) {
   });
 }
 currentProfilePhoto?.addEventListener("click", () => {
-  profilePhotoUpload?.click();
+  const src = currentProfilePhoto.src;
+  if (!src) return;
+  fullSizePhoto.src = src;
+  photoPreviewOverlay.classList.remove("hidden");
+});
+
+closePhotoPreview?.addEventListener("click", () => {
+  photoPreviewOverlay.classList.add("hidden");
 });
 
   if (!profileBtn || !profileOverlay) {

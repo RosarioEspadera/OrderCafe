@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora&family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@0;1&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="scripts/profile.js"></script>
+<script src="scripts/profile.js" defer></script>
 <style>
   #signUpToggleBtn {
     display: block;
@@ -131,14 +131,10 @@
   <span id="closePhotoPreview">✖</span>
   <img id="fullSizePhoto" />
 </div>
-         <label for="profilePhotoUpload" id="profilePhotoWrapper">
- <label for="profilePhotoUpload" id="uploadLabel">
+         <label for="profilePhotoUpload" id="uploadLabel">
   <img id="currentProfilePhoto" class="hidden" />
 </label>
 <input type="file" id="profilePhotoUpload" accept="image/*" style="display: none;" />
-
-<input type="file" id="profilePhotoUpload" accept="image/*" />
-
   <div id="orderImages" class="image-grid"></div>
 </div>
 

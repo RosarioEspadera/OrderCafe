@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
     profileOverlay.classList.add("visible");
     profileOverlay.style.display = "block";
     mainContent?.classList.remove("hidden");
-    mainContent?.style.display = "block";
     signInModal?.classList.add("hidden");
     signInModal?.style.display = "none";
 

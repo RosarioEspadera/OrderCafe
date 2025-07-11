@@ -1,9 +1,10 @@
-// models/User.js
-const mongoose = require("mongoose");
-const userSchema = new mongoose.Schema({
-  username: String,
-  password: String,
-  profilePhoto: String,
-  orders: [{ itemId: String, timestamp: Date }]
-});
-module.exports = mongoose.model("User", userSchema);
+// public/scripts/mog.js
+export const mockUser = {
+  username: "testUser",
+  password: "123456",
+  profilePhoto: "profile.jpg",
+  orders: [
+    { itemId: "coffee01", timestamp: new Date() }
+  ]
+};
+

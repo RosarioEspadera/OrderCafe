@@ -11,7 +11,7 @@
   width: 100vw;
   height: 100vh;
   background: linear-gradient(135deg, #fff8f0, #30271a);
-  z-index: 9999;
+  z-index: 999;
   padding: 40px;
   overflow-y: auto;
   transition: opacity 0.3s ease;
@@ -28,8 +28,15 @@
   z-index: 999;
 }
 
-#photoPreviewOverlay.hidden {
-  display: none;
+#profileOverlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#profileOverlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
 }
 
 #fullSizePhoto {

@@ -30,10 +30,12 @@
 }
 
 /* Optional backdrop style */
-::backdrop {
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(4px);
+.backdrop {
+  position: fixed;
+  backdrop-filter: blur(8px);
+  z-index: 1000;
 }
+
 #signUpForm label {
   display: block;
   margin-top: 1rem;
@@ -235,8 +237,11 @@
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
 }
+
 
 @keyframes spin {
   to {

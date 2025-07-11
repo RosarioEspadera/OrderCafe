@@ -88,5 +88,26 @@
   display: block;
   cursor: pointer;
 }
+#currentProfilePhoto {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #6f4e37; /* Café brown border */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  display: none; /* will be toggled by JS */
+  margin: 0 auto; /* centers inside container */
+}
+
+#currentProfilePhoto.visible {
+  display: block;
+}
+
+#currentProfilePhoto:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
 
   

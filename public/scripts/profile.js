@@ -58,24 +58,6 @@ profilePhotoUpload?.addEventListener("change", (event) => {
     currentProfilePhoto.classList.add("visible");
   }
 }
-function renderUserGallery() {
-  const orderImages = document.getElementById("orderImages");
-  const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
-
- if (!orderImages || !orderImages.offsetWidth) {
-  console.warn("⚠️ orderImages is not visible or missing.");
-  return;
-}
-
-
-  orderImages.innerHTML = "";
-
-  userData?.images?.forEach((imgUrl) => {
-    const img = document.createElement("img");
-    img.src = imgUrl;
-    orderImages.appendChild(img);
-  });
-}
 
 profileBtn.addEventListener("click", () => {
   console.log("Profile button clicked!");
@@ -83,15 +65,24 @@ profileBtn.addEventListener("click", () => {
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
   profileName.textContent = userData?.username || "Guest";
 
-  profileOverlay.classList.remove('hidden');
-  profileOverlay.classList.add('visible');
+  profileOverlay.classList.remove("hidden");
+  profileOverlay.classList.add("visible");
 
   loadProfilePhoto();
 
-  requestAnimationFrame(() => {
-    renderUserGallery();
-  });
-});
+  const orderImages = document.getElementById("orderImages");
+ if (!orderImages) {
+  console.warn("⚠️ orderImages is not visible or missing.");
+} else {
+  try {
+    orderImages.innerHTML = generateOrderGallery();
+  } catch (error) {
+    console.error("🚨 Failed to generate gallery:", error);
+    orderImages.innerHTML = "<p>Unable to load your orders at the moment.</p>";
+  }
+}
+
+
 
 
 closeProfile.addEventListener("click", () => {

@@ -11,7 +11,37 @@ document.addEventListener("DOMContentLoaded", () => {
   const photoPreviewOverlay = document.getElementById("photoPreviewOverlay");
   const fullSizePhoto = document.getElementById("fullSizePhoto");
   const closePhotoPreview = document.getElementById("closePhotoPreview");
+  const rememberMe = document.getElementById("rememberMe");
+  const guestBanner = document.getElementById("guestBanner");
+  const isChecked = localStorage.getItem("rememberMeChecked") === "true";
+  const user = localStorage.getItem("orderCafeUser");
+  const isLoggedOut = localStorage.getItem("isLoggedOut") === "true";
 
+  if (rememberMe) rememberMe.checked = isChecked;
+
+  if (user && isChecked) {
+    profileOverlay.style.display = "block";
+    profileOverlay.classList.remove("hidden");
+    profileOverlay.classList.add("visible");
+
+    const usernameDisplay = document.getElementById("usernameDisplay");
+    if (usernameDisplay) {
+      usernameDisplay.textContent = JSON.parse(user).name || "Guest";
+    }
+
+    const orderImages = document.getElementById("orderImages");
+    if (orderImages) {
+      try {
+        orderImages.innerHTML = generateOrderGallery();
+      } catch (error) {
+        console.error("📛 Failed to regenerate gallery:", error);
+        orderImages.innerHTML = "<p>Unable to load your orders at the moment.</p>";
+      }
+    }
+  }
+  if (guestBanner && isLoggedOut) {
+  guestBanner.classList.remove("hidden");
+}
 if (logoutFromProfile) {
   logoutFromProfile.addEventListener("click", () => {
     const rememberMe = document.getElementById("rememberMe");
@@ -99,7 +129,11 @@ console.log("Overlay display style:", profileOverlay.style.display);
 console.log("Overlay classes:", profileOverlay.className);
 
     loadProfilePhoto();
-
+    
+  document.body.classList.remove("readOnlyProfile");
+  // Re-enable profile, so clear guest flag
+  localStorage.removeItem("isLoggedOut");
+    if (guestBanner) guestBanner.classList.add("hidden");
     const orderImages = document.getElementById("orderImages");
     if (!orderImages) {
       console.warn("⚠️ orderImages is not visible or missing.");
@@ -109,11 +143,11 @@ console.log("Overlay classes:", profileOverlay.className);
       } catch (error) {
         console.error("🚨 Failed to generate gallery:", error);
         orderImages.innerHTML = "<p>Unable to load your orders at the moment.</p>";
+        
       }
     }
   }
 });
-
 
 closeProfile.addEventListener("click", () => {
   profileOverlay.classList.remove("visible");

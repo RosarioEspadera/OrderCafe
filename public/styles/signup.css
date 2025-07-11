@@ -1,1 +1,29 @@
+#signUpModal {
+  max-width: 420px;
+  padding: 2rem;
+  background: #fff8f5;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
 
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem;
+  border: 1px solid #d8b4a0;
+  border-radius: var(--radius);
+}
+
+#usernameTakenWarning {
+  color: #b83c2e;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: -0.75rem;
+  margin-bottom: 1rem;
+}

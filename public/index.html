@@ -232,12 +232,15 @@
     Your cart is empty 😌<br />Start adding your favorite treats!
   </div>
 </dialog>
-<dialog id="receiptPreview" class="modal hidden">
-  <h3>Confirm Your Order</h3>
-  <pre id="receiptDetails"></pre>
-  <button id="confirmSend">Send Receipt</button>
-  <button onclick="closeModal('receiptPreview')">Cancel</button>
+<dialog id="receiptModal" class="modal hidden">
+  <h2>🧾 Order Receipt</h2>
+  <pre id="receiptContent"></pre>
+  <menu>
+    <button id="sendReceiptBtn">Send Receipt</button>
+    <button onclick="closeModal('receiptModal')">Close</button>
+  </menu>
 </dialog>
+
 
 
     

@@ -36,22 +36,23 @@ document.addEventListener("DOMContentLoaded", () => {
   // 🔓 Reveal main content (after login or guest access)
  function revealMainContent(withEffects = false) {
   hideModalWithTransition(signInModal);
-  signInBtn.style.display = "none";
+
+  if (withEffects) {
+    signInBtn.style.display = "none"; // only hide when it's interactive
+    document.getElementById("signInAudio")?.play();
+  }
+
   mainContent.classList.remove("hidden");
   mainContent.classList.add("visible");
 
-  // 🚿 Cleanup any remaining overlays that might blur or block
   document.querySelectorAll(".overlay, .photoPreviewOverlay, .modal-backdrop")
     .forEach(el => {
       el.classList.add("hidden");
       el.classList.remove("visible");
       el.style.display = "none";
     });
-
-  if (withEffects) {
-    document.getElementById("signInAudio")?.play();
-  }
 }
+
 
 
   // 🎯 Toggle to Sign-Up modal

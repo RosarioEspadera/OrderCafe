@@ -1,52 +1,50 @@
-.modal.hidden {
-  display: none;
+#profileOverlay {
+  padding: 1.5rem;
+  background: rgba(255, 248, 240, 0.95);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  position: relative;
+  z-index: 100;
 }
 
-.profile-thumb {
+#profileName {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+#currentProfilePhoto {
+  display: block;
   width: 120px;
   height: 120px;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  margin: 0 auto 1rem;
   cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+#currentProfilePhoto:hover {
+  transform: scale(1.05);
 }
 
 #photoPreviewOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 10, 10, 0.8);
+  inset: 0;
+  background: rgba(0,0,0,0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
-}
-
-#photoPreviewOverlay.hidden {
-  display: none;
+  z-index: 1000;
 }
 
 #fullSizePhoto {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 90vw;
+  max-height: 90vh;
+  border: 8px solid #fff;
   border-radius: 12px;
 }
-#profileOverlay,
-#photoPreviewOverlay {
-  display: none;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  backdrop-filter: none; /* Remove blur if set */
-}
-.hidden {
-  opacity: 0 !important;
-  pointer-events: none !important;
-  backdrop-filter: none !important;
-}
-dialog::backdrop {
-  backdrop-filter: blur(8px);
-  transition: backdrop-filter 0.3s ease-out;
-}
+

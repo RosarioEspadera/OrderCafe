@@ -93,5 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
     guestBanner?.classList.remove("hidden");
     profileName.textContent = "Guest";
     currentProfilePhoto.src = fallback;
+    signInModal.showModal();
   });
 });

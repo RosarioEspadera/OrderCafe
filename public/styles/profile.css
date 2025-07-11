@@ -33,3 +33,16 @@
   max-height: 90%;
   border-radius: 12px;
 }
+#profileOverlay,
+#photoPreviewOverlay {
+  display: none;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: none; /* Remove blur if set */
+}
+.hidden {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

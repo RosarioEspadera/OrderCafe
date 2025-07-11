@@ -1,3 +1,4 @@
+(() => {
 const cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
 
 function renderCartItems() {
@@ -69,4 +70,4 @@ emailjs.send("service_epydqmi", "template_vzuexod", {
 
 
 window.addEventListener("DOMContentLoaded", renderCartItems);
-});
+})();

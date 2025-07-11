@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logoutBtn");
   const signInBtn = document.getElementById("signInBtn");
   const mainContent = document.getElementById("mainContent");
-  const welcomeBanner = document.getElementById("welcomeBanner");
   const loader = document.getElementById("loader");
 
   // ✨ Utility: modal transition
@@ -164,8 +163,6 @@ if (result.error?.includes("Username already exists")) {
       if (response.ok) {
         localStorage.setItem("orderCafeUser", JSON.stringify({ username, password }));
         document.getElementById("userNameDisplay").textContent = username;
-        welcomeBanner.classList.remove("hidden");
-        welcomeBanner.classList.add("visible");
         showToast("Signed in successfully ☕");
         revealMainContent(true);
       } else {
@@ -209,8 +206,6 @@ if (result.error?.includes("Username already exists")) {
 
         if (response.ok) {
           document.getElementById("userNameDisplay").textContent = savedUser.username;
-          welcomeBanner.classList.remove("hidden");
-          welcomeBanner.classList.add("visible");
           showToast("Welcome back, " + savedUser.username + " ☕");
           revealMainContent();
         } else {
@@ -222,8 +217,6 @@ if (result.error?.includes("Username already exists")) {
           });
 
           document.getElementById("userNameDisplay").textContent = savedUser.username;
-          welcomeBanner.classList.remove("hidden");
-          welcomeBanner.classList.add("visible");
           showToast("New account created on your return ☕");
           revealMainContent();
         }

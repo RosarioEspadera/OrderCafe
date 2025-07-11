@@ -187,5 +187,18 @@
   height: 80px;
   object-fit: cover;
 }
+.photo-upload-label {
+  background-color: #6f4e37;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+}
+
+#profilePhotoUpload {
+  display: none; /* hides native input, label handles trigger */
+}
 
   

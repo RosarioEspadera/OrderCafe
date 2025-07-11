@@ -1,17 +1,21 @@
-#searchBar {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
+.search-bar {
+  margin: 1rem auto;
+  text-align: center;
 }
 
-#searchInput {
-  flex: 1;
-  padding: 0.75rem;
-  border: 1px solid #d2b5a3;
-  border-radius: var(--radius);
+#searchField {
+  padding: 0.5rem 1rem;
+  width: 80%;
+  max-width: 400px;
+  border: 1px solid #cfae8f;
+  border-radius: 8px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-#searchInput:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(201, 156, 121, 0.2);
+#noResults {
+  font-family: 'Lora', serif;
+  color: #e74c3c;
+  margin-top: 1rem;
+  transition: opacity 0.3s ease;
 }

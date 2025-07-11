@@ -163,6 +163,11 @@
   pointer-events: auto;
   transition: opacity 0.3s ease;
 }
+#orderImages {
+  display: block; /* or flex/grid */
+  opacity: 1;
+}
+
 #orderImages img {
   width: 120px;
   height: 120px;

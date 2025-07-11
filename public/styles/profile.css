@@ -46,3 +46,7 @@
   pointer-events: none !important;
   backdrop-filter: none !important;
 }
+dialog::backdrop {
+  backdrop-filter: blur(8px);
+  transition: backdrop-filter 0.3s ease-out;
+}

@@ -191,7 +191,7 @@ if (result.error?.includes("Username already exists")) {
     if (savedUser?.username && savedUser?.password) {
       toggleLoader(true);
       try {
-        const response = await fetch("https://ordercafe-rio-hxxc.onrender.com/login", {
+        const response = await fetch('https://ordercafe-rio-hxxc.onrender.com/signin', {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(savedUser),

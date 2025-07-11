@@ -54,6 +54,21 @@ app.post("/signin", async (req, res) => {
   }
 });
 
+app.post("/api/user/update", async (req, res) => {
+  const { username, profilePhoto, orders } = req.body;
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { username },
+      { profilePhoto, orders },
+      { new: true }
+    );
+    if (!updatedUser) return res.status(404).json({ error: "User not found" });
+    res.json({ message: "Profile updated", user: updatedUser });
+  } catch (error) {
+    console.error("Update error:", error);
+    res.status(500).json({ error: "Failed to update profile" });
+  }
+});
 
 const path = require("path");
 

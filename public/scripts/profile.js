@@ -14,10 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 if (logoutFromProfile) {
   logoutFromProfile.addEventListener("click", () => {
+  const rememberMe = document.getElementById("rememberMe");
+  if (!rememberMe?.checked) {
     localStorage.removeItem("orderCafeUser");
-    location.reload();
-  });
-}
+  }
+  location.reload();
+});
+
   if (!profileBtn || !profileOverlay) {
   console.log("Missing elements:", { profileBtn, profileOverlay });
   return;
@@ -54,7 +57,8 @@ document.getElementById("uploadProfilePhoto").addEventListener("change", functio
 
    function loadProfilePhoto() {
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
-const fallback = "https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png";
+const fallback = "https://raw.githubusercontent.com/RosarioEspadera/OrderCafe/main/public/styles/images/bg.png";
+
 
   currentProfilePhoto.src = userData?.profilePhoto || fallback;
   currentProfilePhoto.classList.remove("hidden");

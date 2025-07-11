@@ -115,5 +115,4 @@ closeProfile.addEventListener("click", () => {
   profileOverlay.classList.add("hidden");
 });
 
-});
   

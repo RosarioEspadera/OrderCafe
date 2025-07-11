@@ -1,1 +1,22 @@
+.topmodal-bar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--cafe-cream);
+  border-bottom: 1px solid #decdbd;
+}
 
+.topmodal-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--cafe-accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.topmodal-button.active {
+  background-color: #b98360;
+  box-shadow: 0 0 0 2px rgba(201,156,121,0.3);
+}

@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     profileOverlay.classList.remove("hidden");
     profileOverlay.classList.add("visible");
     profileOverlay.style.display = "block";
-    mainContent?.classList.remove("hidden");
     signInModal?.classList.add("hidden");
     signInModal?.style.display = "none";
     

@@ -403,7 +403,44 @@
 
  </main>
 </div>
-    
+    <dialog id="profileOverlay" class="modal hidden">
+  <button id="closeProfile" class="modal-close">✖</button>
+
+  <div id="userGallery">
+    <div id="orderImages"></div>
+
+    <h3>Profile</h3>
+    <img
+      id="currentProfilePhoto"
+      alt="Your profile photo"
+      src="images/bg.png"
+      class="profile-thumb"
+    />
+
+    <div id="photoPreviewOverlay" class="hidden">
+      <span id="closePhotoPreview">✖</span>
+      <img id="fullSizePhoto" alt="Full-size photo" />
+    </div>
+
+    <p>
+      Welcome back, <span id="profileName">Guest</span> ☕
+    </p>
+
+    <button id="logoutFromProfile" class="logout-button">🚪 Log Out</button>
+
+    <input
+      type="file"
+      id="profilePhotoUpload"
+      accept="image/*"
+      title="Upload profile photo"
+    />
+  </div>
+
+  <div id="guestBanner" class="hidden">
+    You are in guest mode.
+  </div>
+</dialog>
+
     <script defer src="app.js"></script>
     <script defer src="signIn.js"></script>
    <script src="accordion.js" defer></script>

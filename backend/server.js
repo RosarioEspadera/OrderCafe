@@ -11,8 +11,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const users = []; // In-memory storage, replace with a database in production!
-
 app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
   try {

@@ -11,58 +11,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Lora&family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@0;1&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="scripts/profile.js" defer></script>
-<style>
-  #signUpToggleBtn {
-    display: block;
-    margin: 40px auto; /* Top margin and horizontal centering */
-    background: linear-gradient(135deg, #6f4e37, #8b5c42);
-    color: #fff8f0;
-    padding: 14px 28px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 0.5px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  #signUpToggleBtn:hover {
-    background-color: #a26d4e;
-    transform: scale(1.05);
-  }
-
-  #signUpToggleBtn:focus {
-    outline: 2px solid #c69c6d;
-    outline-offset: 3px;
-  }
-    ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    border: none;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
-</style>
-  
 
   <title>Rio's Cafe - Order Confirmation</title>
   
 </head>
 <body>
+<div class="top-nav">
+  <button id="menuBtn" onclick="openModal('mainModal')">Menu</button>
+  <button id="ordersBtn" onclick="openModal('orderModal')">Orders</button>
+  <button id="profileBtn" onclick="openModal('profileOverlay')">Profile</button>
+</div>
+
 
 <!-- Sign In Button -->
 <dialog id="signInModal" class="modal">
@@ -115,17 +74,30 @@
     </menu>
   </form>
 </dialog>
+  <dialog id="profileOverlay">
+  <img id="currentProfilePhoto" />
+  <span id="profileName"></span>
+  <input type="file" id="profilePhotoUpload" />
+  <button id="logoutFromProfile">Logout</button>
+  <button id="closeProfile">Close</button>
+</dialog>
+
+<div id="photoPreviewOverlay" class="hidden">
+  <img id="fullSizePhoto" />
+  <button id="closePhotoPreview">✖</button>
+</div>
+
+<div id="guestBanner" class="hidden">Welcome, guest ☕</div>
+
   <div id="mainContent" class="hidden">
   <div id="app">  
     <div class="logo">
   <img src="images/rios-cafe-logo.png" alt="Rio's Cafe Logo" />
 </div>
-    <button id="profileBtn">👤 View Profile</button>
+    
    <header class="site-header">
   <div class="intro">
     <h1>Welcome to Rio's Café ☕</h1>
-    <p>Order your favorite meals and drinks, sign in for a personalized experience, or enter as a guest to browse our menu.</p>
-    <a href="https://ordercafe-rio-hxxc.onrender.com" target="_blank" class="backend-link">Visit Backend Server</a>
   </div>
 </header>
 
@@ -254,10 +226,9 @@
 
     
 
-
-
-    <script defer src="signIn.js"></script>
 <audio id="signInAudio" src="signin.mp3" preload="auto"></audio>
+    <script src="scripts/profile.js" defer></script>
+    <script defer src="scripts/signin.js" defer></script>
     <div id="steamPuff" class="steam-puff"></div>
 <svg id="smokeTrail" viewBox="0 0 120 120" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
   <path d="M60,110 C65,90 55,70 60,50 C65,30 55,20 60,10" 

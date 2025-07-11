@@ -1,14 +1,31 @@
-document.getElementById("signUpBtn").onclick = () => {
-  const newUsername = document.getElementById("newUsername").value;
-  const newPassword = document.getElementById("newPassword").value;
+document.getElementById("signUpBtn")?.addEventListener("click", async () => {
+  const username = document.getElementById("newUsername").value.trim();
+  const password = document.getElementById("newPassword").value.trim();
 
-  if (!newUsername || !newPassword) {
-    showToast("Please fill in all fields");
-    return;
+  if (!username || !password) return showToast("Fill out all fields!");
+
+  try {
+    const res = await fetch(`${BACKEND_URL}/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      localStorage.setItem("orderCafeUser", JSON.stringify({
+        username,
+        profilePhoto: "",
+        orders: []
+      }));
+      closeModal("signUpModal");
+      openModal("mainModal");
+      showToast("Account created ☕");
+    } else {
+      showToast(data.error || "Signup failed");
+    }
+  } catch (err) {
+    showToast("Server error ☁️");
+    console.error(err);
   }
-
-  localStorage.setItem("orderCafeUser", newUsername);
-  closeModal("signUpModal");
-  openModal("mainModal");
-  showToast(`Welcome, ${newUsername}!`);
-};
+});

@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     guestBanner?.classList.remove("hidden");
   }
+signInModal.showModal();
 
   function updateUI(userData) {
     profileOverlay.classList.remove("hidden");

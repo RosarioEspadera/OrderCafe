@@ -1,1 +1,50 @@
+#signInModal {
+  max-width: 400px;
+  padding: 2rem;
+  background: #fff8f0;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  font-family: var(--body-font);
+}
 
+.modal-branding {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.brand-logo {
+  max-width: 80px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border: 1px solid #c99c79;
+  border-radius: var(--radius);
+}
+
+menu {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--cafe-accent);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.guest-button,
+.signup-button {
+  margin-top: 1rem;
+  background-color: #e4d7c9;
+  color: var(--cafe-brown);
+}

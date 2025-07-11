@@ -46,7 +46,9 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px dashed #988a67;
   padding-bottom: 4px;
 }
-
+.container {
+  background-image: url('https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png') center/cover no-repeat fixed;
+  
 .order-details {
   display: flex;
   flex-direction: column;

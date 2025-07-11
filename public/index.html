@@ -126,7 +126,12 @@
      <div id="profileOverlay" class="overlay hidden">
       <button id="closeProfile">✖</button>
        <div id="userGallery">
-  <h3>Profile</h3><label for="profilePhotoUpload" id="profilePhotoWrapper">
+  <h3>Profile</h3>
+         <div id="photoPreviewOverlay" class="hidden">
+  <span id="closePhotoPreview">✖</span>
+  <img id="fullSizePhoto" />
+</div>
+         <label for="profilePhotoUpload" id="profilePhotoWrapper">
  <label for="profilePhotoUpload" id="uploadLabel">
   <img id="currentProfilePhoto" class="hidden" />
 </label>

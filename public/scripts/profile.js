@@ -52,24 +52,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (logoutFromProfile) {
     logoutFromProfile.addEventListener("click", () => {
-      localStorage.removeItem("orderCafeUser");
-      localStorage.removeItem("isLoggedOut");
+  localStorage.removeItem("orderCafeUser");
+  localStorage.removeItem("isLoggedOut");
 
-      // Hide profile
-      profileOverlay.classList.remove("visible");
-      profileOverlay.classList.add("hidden");
+  // Hide profile
+  profileOverlay.classList.remove("visible");
+  profileOverlay.classList.add("hidden");
 
-      // Show sign-in modal
-      if (signInModal) {
-        signInModal.style.display = "block";
-        signInModal.classList.remove("hidden");
-        signInModal.classList.add("visible");
-      }
+  // Hide main content
+  const mainContent = document.getElementById("mainContent");
+  if (mainContent) {
+    mainContent.classList.add("hidden");
+    mainContent.style.display = "none";
+     }
+    
+    // Show sign-in modal
+    if (signInModal) {
+      signInModal.style.display = "block";
+      signInModal.classList.remove("hidden");
+      signInModal.classList.add("visible");
+    }
 
-      if (guestBanner) guestBanner.classList.add("hidden");
-    });
-  }
+    if (guestBanner) guestBanner.classList.add("hidden");
+  });
+}
 
+
+  
   if (!profileBtn || !profileOverlay) {
     console.log("Missing elements:", { profileBtn, profileOverlay });
     return;

@@ -14,13 +14,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 if (logoutFromProfile) {
   logoutFromProfile.addEventListener("click", () => {
-  const rememberMe = document.getElementById("rememberMe");
-  if (!rememberMe?.checked) {
-    localStorage.removeItem("orderCafeUser");
-  }
-  location.reload();
-});
-}
+    const rememberMe = document.getElementById("rememberMe");
+    
+    // Save checkbox state
+    localStorage.setItem("rememberMeChecked", rememberMe?.checked);
+
+    if (!rememberMe?.checked) {
+      localStorage.removeItem("orderCafeUser");
+    }
+    location.reload();
+  });
+} // ✅ This brace completes the outer 'if' block
+
   if (!profileBtn || !profileOverlay) {
   console.log("Missing elements:", { profileBtn, profileOverlay });
   return;

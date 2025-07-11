@@ -1,0 +1,16 @@
+#sendReceiptBtn {
+  background: var(--cafe-accent);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+#sendReceiptBtn:hover {
+  transform: scale(1.05);
+  background: #b88360;
+}

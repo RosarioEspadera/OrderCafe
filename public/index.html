@@ -127,8 +127,11 @@
       <button id="closeProfile">✖</button>
        <div id="userGallery">
   <h3>Profile</h3><label for="profilePhotoUpload" id="profilePhotoWrapper">
+ <label for="profilePhotoUpload" id="uploadLabel">
   <img id="currentProfilePhoto" class="hidden" />
 </label>
+<input type="file" id="profilePhotoUpload" accept="image/*" style="display: none;" />
+
 <input type="file" id="profilePhotoUpload" accept="image/*" />
 
   <div id="orderImages" class="image-grid"></div>

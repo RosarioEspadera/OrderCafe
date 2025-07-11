@@ -19,15 +19,17 @@
 }
 
 /* -------------------- 2. GLOBAL RESET -------------------- */
+/* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+/* Body Styling */
 body {
-  font-family: var(--font-body);
-  background-image: url('https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png') center/cover no-repeat fixed;
-  color: var(--dark-text);
+  font-family: 'Poppins', sans-serif;
+  background: url('/styles/images/bg.png') center/cover no-repeat fixed;
+  color: #3a2c27;
   overflow-x: hidden;
 }
 a {
@@ -709,15 +711,15 @@ body.modal-open {
 }
 /* Hide by default */
 .hidden {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.6s ease;
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
 }
 
-/* Fade in when ready */
 .visible {
-  opacity: 1;
+  display: block;
   pointer-events: auto;
+  opacity: 1;
 }
 /* Core styling for the modal */
 /* Dialog container */
@@ -996,5 +998,35 @@ body.modal-open {
 .guest-toast.fade-out {
   opacity: 0;
 }
+/* Toast Message */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #6f4e37;
+  color: #fff8f0;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
 
+.toast.fade-out {
+  opacity: 0;
+}
+/* Spinner Loader */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #6f4e37;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 

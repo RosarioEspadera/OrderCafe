@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // 🌟 DOM references
   const profileOverlay = document.getElementById("profileOverlay");
   const profileName = document.getElementById("profileName");
   const logoutBtn = document.getElementById("logoutFromProfile");
@@ -8,45 +9,41 @@ document.addEventListener("DOMContentLoaded", () => {
   const closePhotoPreview = document.getElementById("closePhotoPreview");
   const profilePhotoUpload = document.getElementById("profilePhotoUpload");
   const guestBanner = document.getElementById("guestBanner");
-  const fallback = "https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png";
+  const closeProfileBtn = document.getElementById("closeProfile");
 
-  // 🌟 Show profile info if user exists
-  const rawUser = localStorage.getItem("orderCafeUser");
+  const fallbackPhoto = "https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png";
+
+  // 🔑 Load stored user
   let userData = null;
-
   try {
+    const rawUser = localStorage.getItem("orderCafeUser");
     userData = rawUser ? JSON.parse(rawUser) : null;
   } catch (err) {
-    console.warn("Could not parse user data:", err);
+    console.warn("Invalid user data in storage", err);
   }
 
+  // 🎯 Show profile or guest view
   if (userData) {
     showProfile(userData);
   } else {
     guestBanner?.classList.remove("hidden");
   }
 
-function showProfile(user) {
-  profileName.textContent = user.username || "Guest";
-  currentProfilePhoto.src = user.profilePhoto || fallback;
+  // 👤 Profile reveal
+  function showProfile(user) {
+    profileName.textContent = user.username || "Guest";
+    currentProfilePhoto.src = user.profilePhoto || fallbackPhoto;
 
-  profileOverlay.classList.remove("hidden");
-  profileOverlay.style.display = "block";
-
-  // Close it first if already open (prevents errors)
-  if (profileOverlay.open) {
-    profileOverlay.close();
+    if (profileOverlay.open) profileOverlay.close();
+    profileOverlay.showModal?.();
+    profileOverlay.classList.remove("hidden");
+    profileOverlay.style.display = "block";
   }
 
-  profileOverlay.showModal?.();
-}
-
-
-
-  // 🖼️ Photo preview
+  // 🖼️ Click to preview profile photo
   currentProfilePhoto?.addEventListener("click", () => {
     const src = currentProfilePhoto.src;
-    if (src && src !== fallback && src !== location.href) {
+    if (src && src !== fallbackPhoto && src !== window.location.href) {
       fullSizePhoto.src = src;
       photoPreviewOverlay.classList.remove("hidden");
     }
@@ -56,7 +53,7 @@ function showProfile(user) {
     photoPreviewOverlay.classList.add("hidden");
   });
 
-  // 📸 Photo upload
+  // 📷 Upload new profile photo
   profilePhotoUpload?.addEventListener("change", function () {
     const file = this.files[0];
     if (!file || !file.type.startsWith("image/")) {
@@ -73,22 +70,22 @@ function showProfile(user) {
     };
     reader.readAsDataURL(file);
   });
-const closeProfileBtn = document.getElementById("closeProfile");
-closeProfileBtn?.addEventListener("click", () => {
-  profileOverlay.close?.();
-  profileOverlay.style.display = "none";
-});
 
-  // 🚪 Logout
+  // ❌ Close profile view
+  closeProfileBtn?.addEventListener("click", () => {
+    profileOverlay.close?.();
+    profileOverlay.style.display = "none";
+  });
+
+  // 🚪 Logout from profile
   logoutBtn?.addEventListener("click", () => {
     localStorage.removeItem("orderCafeUser");
     profileOverlay.close?.();
     profileOverlay.style.display = "none";
     guestBanner?.classList.remove("hidden");
     profileName.textContent = "Guest";
-    currentProfilePhoto.src = fallback;
+    currentProfilePhoto.src = fallbackPhoto;
 
-    // ⏱️ Trigger sign-in modal if needed
     const signInModal = document.getElementById("signInModal");
     signInModal?.showModal?.();
   });

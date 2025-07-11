@@ -16,29 +16,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const isChecked = localStorage.getItem("rememberMeChecked") === "true";
   const user = localStorage.getItem("orderCafeUser");
   const isLoggedOut = localStorage.getItem("isLoggedOut") === "true";
+  const rawUser = localStorage.getItem("orderCafeUser");
+  const user = rawUser ? JSON.parse(rawUser) : null;
+  
 
   if (rememberMe) rememberMe.checked = isChecked;
 
-  if (user && isChecked) {
-    profileOverlay.style.display = "block";
-    profileOverlay.classList.remove("hidden");
-    profileOverlay.classList.add("visible");
+if (user && isChecked) {
+  profileOverlay.style.display = "block";
+  profileOverlay.classList.remove("hidden");
+  profileOverlay.classList.add("visible");
 
-    const usernameDisplay = document.getElementById("usernameDisplay");
-    if (usernameDisplay) {
-     usernameDisplay.textContent = JSON.parse(user).username || "Guest";
-    }
+  const usernameDisplay = document.getElementById("usernameDisplay");
+  if (usernameDisplay) {
+    usernameDisplay.textContent = user.username || "Guest";
+  }
 
-    const orderImages = document.getElementById("orderImages");
-    if (orderImages) {
-      try {
-        orderImages.innerHTML = generateOrderGallery();
-      } catch (error) {
-        console.error("📛 Failed to regenerate gallery:", error);
-        orderImages.innerHTML = "<p>Unable to load your orders at the moment.</p>";
-      }
+  const orderImages = document.getElementById("orderImages");
+  if (orderImages) {
+    try {
+      orderImages.innerHTML = generateOrderGallery();
+    } catch (error) {
+      console.error("📛 Failed to regenerate gallery:", error);
+      orderImages.innerHTML = "<p>Unable to load your orders at the moment.</p>";
     }
   }
+}
+
   if (guestBanner && isLoggedOut) {
   guestBanner.classList.remove("hidden");
 }
@@ -121,9 +125,9 @@ document.addEventListener("click", (e) => {
 
     const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
     profileName.textContent = userData?.username || "Guest";
-  profileOverlay.classList.remove("hidden");
-profileOverlay.classList.add("visible");
-profileOverlay.style.display = "block";
+    profileOverlay.classList.remove("hidden");
+    profileOverlay.classList.add("visible");
+    profileOverlay.style.display = "block";
 
 console.log("Overlay display style:", profileOverlay.style.display);
 console.log("Overlay classes:", profileOverlay.className);

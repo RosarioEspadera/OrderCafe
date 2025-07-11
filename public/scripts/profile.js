@@ -52,7 +52,7 @@ profilePhotoUpload?.addEventListener("change", (event) => {
 });
    function loadProfilePhoto() {
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
-  const fallback = "/assets/default-avatar.png"; // or your favorite cozy cup icon
+  const fallback = "/images/bg.png"; // or your favorite cozy cup icon
 
   currentProfilePhoto.src = userData?.profilePhoto || fallback;
   currentProfilePhoto.classList.remove("hidden");

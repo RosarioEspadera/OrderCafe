@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
     profileOverlay.classList.add("visible");
     profileOverlay.style.display = "block";
     signInModal?.classList.add("hidden");
-    signInModal?.style.display = "none";
-    
+    mainContent?.classList.remove("hidden");
+
     profileName.textContent = userData.username || "Guest";
     currentProfilePhoto.src = userData.profilePhoto || fallback;
     currentProfilePhoto.classList.remove("hidden");

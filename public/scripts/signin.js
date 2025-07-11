@@ -1,4 +1,3 @@
-// 🌅 Check if user is already logged in
 window.addEventListener("DOMContentLoaded", () => {
   const savedUser = localStorage.getItem("orderCafeUser");
   if (savedUser) {
@@ -9,19 +8,24 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// 🔐 Sign in when user submits the form
-document.getElementById("signInBtn").onclick = () => {
+document.getElementById("signInBtn")?.addEventListener("click", () => {
   const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value.trim();
 
   if (!username || !password) {
-    showToast("Please enter both username and password.");
+    showToast("Please fill in both fields.");
     return;
   }
 
-  localStorage.setItem("orderCafeUser", username);
+  const userData = {
+    username,
+    profilePhoto: "", // default profile photo if needed
+    orders: []        // placeholder until Step 3
+  };
+
+  localStorage.setItem("orderCafeUser", JSON.stringify(userData));
   closeModal("signInModal");
   openModal("mainModal");
   showToast(`Signed in as ${username}`);
-};
+});
 

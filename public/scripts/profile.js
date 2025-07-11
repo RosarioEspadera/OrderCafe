@@ -18,6 +18,10 @@ if (logoutFromProfile) {
     location.reload();
   });
 }
+    if (!profileBtn || !profileOverlay) {
+    console.log("Missing elements:", { profileBtn, profileOverlay });
+    return;
+  }
 currentProfilePhoto?.addEventListener("click", () => {
   const src = currentProfilePhoto.src;
   if (!src) return;
@@ -29,10 +33,6 @@ closePhotoPreview?.addEventListener("click", () => {
   photoPreviewOverlay.classList.add("hidden");
 });
 
-  if (!profileBtn || !profileOverlay) {
-    console.log("Missing elements:", { profileBtn, profileOverlay });
-    return;
-  }
   // Handle new profile photo uploads
 profilePhotoUpload?.addEventListener("change", (event) => {
   const file = event.target.files[0];

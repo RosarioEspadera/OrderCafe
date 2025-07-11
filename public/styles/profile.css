@@ -72,4 +72,21 @@
   padding: 8px;
   border-radius: 8px;
 }
+#profilePhotoWrapper {
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+#profilePhotoWrapper:hover {
+  transform: scale(1.05);
+}
+#currentProfilePhoto.hidden {
+  display: none;
+}
+#currentProfilePhoto.visible {
+  display: block;
+  cursor: pointer;
+}
+
   

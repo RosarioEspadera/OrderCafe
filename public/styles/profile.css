@@ -1,50 +1,182 @@
+/* 🍂 Profile Modal — Fullscreen Aesthetic Overhaul */
+:root {
+  --cafe-brown: #6f4e37;
+  --cafe-cream: #fff8f0;
+  --cafe-parchment: #fef6e4;
+  --cafe-accent: #d2a679;
+  --radius: 14px;
+  --transition: 0.4s ease;
+  --shadow: rgba(0, 0, 0, 0.2);
+  --heading-font: 'Pacifico', cursive;
+  --body-font: 'Poppins', sans-serif;
+}
+
+/* 🧁 Base Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  background: linear-gradient(135deg, #fefaf6, #f5e7d9);
+  color: var(--cafe-brown);
+}
+
+/* 🪞 Fullscreen Modal */
 #profileOverlay {
-  padding: 1.5rem;
-  background: rgba(255, 248, 240, 0.95);
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
-  margin: auto;
-  position: relative;
-  z-index: 100;
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom right, var(--cafe-parchment), #f7e0c8);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  animation: fadeSlideIn 0.6s ease-out;
+  overflow-y: auto;
 }
 
+/* 🧭 Modal Header */
 #profileName {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-family: var(--heading-font);
+  font-size: 2.2rem;
+  color: var(--cafe-brown);
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
+/* 📸 Profile Photo */
 #currentProfilePhoto {
-  display: block;
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
   border-radius: 50%;
-  margin: 0 auto 1rem;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  transition: transform var(--transition), box-shadow var(--transition);
   cursor: pointer;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
+  margin-bottom: 2rem;
 }
 
 #currentProfilePhoto:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 24px rgba(0,0,0,0.3);
 }
 
+/* 🖼️ Photo Preview Overlay */
 #photoPreviewOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 1100;
+  animation: fadeIn 0.4s ease;
 }
 
 #fullSizePhoto {
   max-width: 90vw;
   max-height: 90vh;
-  border: 8px solid #fff;
-  border-radius: 12px;
+  border: 10px solid #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
 }
 
+/* ❌ Close Button */
+#closePhotoPreview,
+#closeProfile {
+  background: var(--cafe-brown);
+  color: var(--cafe-cream);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--shadow);
+  transition: background-color var(--transition), transform var(--transition);
+  margin-top: 2rem;
+}
+
+#closePhotoPreview:hover,
+#closeProfile:hover {
+  background-color: #a26d4e;
+  transform: scale(1.05);
+}
+
+/* 📷 Upload Input */
+#profilePhotoUpload {
+  margin-top: 1rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  background: #fff;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+  transition: border-color var(--transition);
+}
+
+#profilePhotoUpload:focus {
+  border-color: var(--cafe-accent);
+  outline: none;
+}
+
+/* 🧑‍🍳 Guest Banner */
+#guestBanner {
+  background: rgba(255, 248, 240, 0.9);
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  font-family: var(--heading-font);
+  font-size: 1.4rem;
+  color: #5e4738;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* 🌀 Animations */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  #profileOverlay {
+    padding: 2rem 1rem;
+  }
+
+  #profileName {
+    font-size: 1.8rem;
+  }
+
+  #currentProfilePhoto {
+    width: 120px;
+    height: 120px;
+  }
+
+  #fullSizePhoto {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+}

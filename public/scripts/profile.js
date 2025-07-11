@@ -50,23 +50,20 @@ document.addEventListener("DOMContentLoaded", () => {
     guestBanner.classList.remove("hidden");
   }
 
-  if (logoutFromProfile) {
-    logoutFromProfile.addEventListener("click", () => {
-  localStorage.removeItem("orderCafeUser");
-  localStorage.removeItem("isLoggedOut");
+if (logoutFromProfile) {
+  logoutFromProfile.addEventListener("click", () => {
+    localStorage.removeItem("orderCafeUser");
+    localStorage.removeItem("isLoggedOut");
 
-  // Hide profile
-  profileOverlay.classList.remove("visible");
-  profileOverlay.classList.add("hidden");
+    profileOverlay.classList.remove("visible");
+    profileOverlay.classList.add("hidden");
 
-  // Hide main content
-  const mainContent = document.getElementById("mainContent");
-  if (mainContent) {
-    mainContent.classList.add("hidden");
-    mainContent.style.display = "none";
-     }
-    
-    // Show sign-in modal
+    const mainContent = document.getElementById("mainContent");
+    if (mainContent) {
+      mainContent.classList.add("hidden");
+      mainContent.style.display = "none";
+    }
+
     if (signInModal) {
       signInModal.style.display = "block";
       signInModal.classList.remove("hidden");

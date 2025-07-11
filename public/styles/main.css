@@ -175,6 +175,18 @@ p {
   border-bottom: 1px dashed rgba(0,0,0,0.1);
   color: var(--cafe-brown);
 }
+.cart-summary {
+  margin: 1rem 0;
+  list-style: none;
+  padding: 0;
+}
+
+.cart-summary li {
+  font-size: 0.95rem;
+  padding: 0.5rem;
+  border-bottom: 1px dashed rgba(0,0,0,0.08);
+  color: var(--cafe-brown);
+}
 
 /* ==========================================================================
    🔔 Toast Notification

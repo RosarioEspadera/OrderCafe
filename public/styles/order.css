@@ -1,0 +1,29 @@
+#orderModal {
+  background: rgba(255, 248, 240, 0.95);
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  border-radius: var(--radius);
+}
+
+#cartList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e0d4c8;
+  font-size: 1rem;
+}
+
+.remove-item {
+  background: none;
+  border: none;
+  color: #a24c2e;
+  cursor: pointer;
+}
+
+#cartTotal {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: right;
+  margin-top: 1rem;
+}

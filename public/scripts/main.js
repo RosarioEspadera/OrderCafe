@@ -53,6 +53,15 @@ window.addEventListener("DOMContentLoaded", () => {
     card.style.transitionDelay = `${i * 100}ms`;
     observer.observe(card);
   });
+function showMainContent() {
+  // Reveal mainContent
+  document.getElementById("mainContent")?.classList.remove("hidden");
+
+  // Hide any other modals or overlays
+  document.getElementById("signInModal")?.classList.remove("visible");
+  document.querySelector(".modal-backdrop")?.classList.remove("visible");
+}
+document.getElementById("menuBtn")?.addEventListener("click", showMainContent);
 
   // 🔁 Loader Control
   function toggleLoader(show = true) {

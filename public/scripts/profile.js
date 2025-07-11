@@ -33,23 +33,25 @@ closePhotoPreview?.addEventListener("click", () => {
   photoPreviewOverlay.classList.add("hidden");
 });
 
-  // Handle new profile photo uploads
-profilePhotoUpload?.addEventListener("change", (event) => {
-  const file = event.target.files[0];
-  if (!file) return;
+document.getElementById("uploadProfilePhoto").addEventListener("change", function () {
+  const file = this.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const base64Image = e.target.result;
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    const userData = JSON.parse(localStorage.getItem("orderCafeUser")) || {};
-    userData.profilePhoto = reader.result;
-    localStorage.setItem("orderCafeUser", JSON.stringify(userData));
+      // Store the base64 string to localStorage
+      let userData = JSON.parse(localStorage.getItem("orderCafeUser")) || {};
+      userData.profilePhoto = base64Image;
+      localStorage.setItem("orderCafeUser", JSON.stringify(userData));
 
-    currentProfilePhoto.src = reader.result;
-    currentProfilePhoto.classList.remove("hidden");
-    currentProfilePhoto.classList.add("visible");
-  };
-  reader.readAsDataURL(file);
+      // Display new photo immediately
+      currentProfilePhoto.src = base64Image;
+    };
+    reader.readAsDataURL(file);
+  }
 });
+
    function loadProfilePhoto() {
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
 const fallback = "https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png";

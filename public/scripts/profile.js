@@ -13,16 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const closePhotoPreview = document.getElementById("closePhotoPreview");
   const guestBanner = document.getElementById("guestBanner");
   const signInModal = document.getElementById("signInModal");
+  const mainContent = document.getElementById("mainContent");
+  const usernameField = document.getElementById("signInUsername"); // optional input for auto-focus
 
-  const isLoggedOut = localStorage.getItem("isLoggedOut") === "true";
+  const fallback = "https://raw.githubusercontent.com/RosarioEspadera/OrderCafe/main/public/styles/images/bg.png";
   const rawUser = localStorage.getItem("orderCafeUser");
   const user = rawUser ? JSON.parse(rawUser) : null;
-  const fallback = "https://raw.githubusercontent.com/RosarioEspadera/OrderCafe/main/public/styles/images/bg.png";
+  const isLoggedOut = localStorage.getItem("isLoggedOut") === "true";
 
+  // 🟢 Auto-login and profile setup
   if (user) {
     profileOverlay.style.display = "block";
     profileOverlay.classList.remove("hidden");
     profileOverlay.classList.add("visible");
+    mainContent?.classList.remove("hidden");
+    mainContent?.style.display = "block";
 
     const usernameDisplay = document.getElementById("usernameDisplay");
     if (usernameDisplay) {
@@ -50,63 +55,74 @@ document.addEventListener("DOMContentLoaded", () => {
     guestBanner.classList.remove("hidden");
   }
 
-if (logoutFromProfile) {
-  logoutFromProfile.addEventListener("click", () => {
+  // 🔴 Logout and reset UI
+  logoutFromProfile?.addEventListener("click", () => {
     localStorage.removeItem("orderCafeUser");
     localStorage.removeItem("isLoggedOut");
 
     profileOverlay.classList.remove("visible");
     profileOverlay.classList.add("hidden");
 
-    const mainContent = document.getElementById("mainContent");
-    if (mainContent) {
-      mainContent.classList.add("hidden");
-      mainContent.style.display = "none";
-    }
+    profileName.textContent = "Guest";
+    currentProfilePhoto.src = fallback;
+    currentProfilePhoto.classList.remove("visible");
+
+    mainContent?.classList.add("hidden");
+    mainContent?.style.display = "none";
 
     if (signInModal) {
       signInModal.style.display = "block";
       signInModal.classList.remove("hidden");
       signInModal.classList.add("visible");
+      usernameField?.focus(); // optional auto-focus
     }
 
-    if (guestBanner) guestBanner.classList.add("hidden");
+    guestBanner?.classList.add("hidden");
   });
-}
 
-
-  
-  if (!profileBtn || !profileOverlay) {
-    console.log("Missing elements:", { profileBtn, profileOverlay });
-    return;
-  }
-
+  // 📸 Preview full-size profile photo
   currentProfilePhoto?.addEventListener("click", () => {
     const src = currentProfilePhoto.src;
-    if (!src) return;
+    if (!src || src === fallback || src === window.location.href) return;
+
     fullSizePhoto.src = src;
-    photoPreviewOverlay.classList.remove("hidden");
+    photoPreviewOverlay?.classList.remove("hidden");
   });
 
   closePhotoPreview?.addEventListener("click", () => {
-    photoPreviewOverlay.classList.add("hidden");
+    photoPreviewOverlay?.classList.add("hidden");
   });
 
+  // 🖼️ Upload and save profile photo
   profilePhotoUpload?.addEventListener("change", function () {
     const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const base64Image = e.target.result;
-        let userData = JSON.parse(localStorage.getItem("orderCafeUser")) || {};
-        userData.profilePhoto = base64Image;
-        localStorage.setItem("orderCafeUser", JSON.stringify(userData));
-        currentProfilePhoto.src = base64Image;
-      };
-      reader.readAsDataURL(file);
+    if (!file || !file.type.startsWith("image/")) {
+      alert("Please upload a valid image file.");
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const base64Image = e.target.result;
+      let userData = JSON.parse(localStorage.getItem("orderCafeUser")) || {};
+      userData.profilePhoto = base64Image;
+      localStorage.setItem("orderCafeUser", JSON.stringify(userData));
+      currentProfilePhoto.src = base64Image;
+      showToast("Profile photo updated!");
+    };
+    reader.readAsDataURL(file);
   });
 
+  // 🧁 Toast confirmation
+  function showToast(message) {
+    const toast = document.createElement("div");
+    toast.textContent = message;
+    toast.className = "toast";
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+
+  // 🖼️ Load profile photo from localStorage
   function loadProfilePhoto() {
     const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
     currentProfilePhoto.src = userData?.profilePhoto || fallback;
@@ -114,10 +130,10 @@ if (logoutFromProfile) {
     currentProfilePhoto.classList.add("visible");
   }
 
+  // 📷 Build order gallery
   function generateOrderGallery() {
     const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
     const orders = userData?.orders || [];
-
     if (!orders.length) return "<p>No recent orders found ☕</p>";
 
     return orders.map(order => `
@@ -128,6 +144,7 @@ if (logoutFromProfile) {
     `).join("");
   }
 
+  // ☕ Profile button activates overlay
   document.addEventListener("click", (e) => {
     const clickedProfileBtn = e.target.closest("#profileBtn");
     if (clickedProfileBtn) {
@@ -143,10 +160,12 @@ if (logoutFromProfile) {
       console.log("Overlay classes:", profileOverlay.className);
 
       loadProfilePhoto();
+      mainContent?.classList.remove("hidden");
+      mainContent?.style.display = "block";
 
       document.body.classList.remove("readOnlyProfile");
       localStorage.removeItem("isLoggedOut");
-      if (guestBanner) guestBanner.classList.add("hidden");
+      guestBanner?.classList.add("hidden");
 
       const orderImages = document.getElementById("orderImages");
       if (!orderImages) {
@@ -162,7 +181,8 @@ if (logoutFromProfile) {
     }
   });
 
-  closeProfile.addEventListener("click", () => {
+  // ❎ Close profile overlay
+  closeProfile?.addEventListener("click", () => {
     profileOverlay.classList.remove("visible");
     profileOverlay.classList.add("hidden");
   });

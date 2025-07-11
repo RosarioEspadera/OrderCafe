@@ -120,22 +120,6 @@
   <p>Welcome back, <span id="userNameDisplay"></span>! ☕</p>
   <button id="logoutBtn">Logout</button>
 </div>
-  
-<!-- Profile -->
-  <div id="profileOverlay" class="overlay hidden">
-      <button id="closeProfile">✖</button>
-       <div id="userGallery">
-  <h3>Profile</h3>
-         <div id="photoPreviewOverlay" class="hidden">
-  <span id="closePhotoPreview">✖</span>
-  <img id="fullSizePhoto" />
-</div>
-         <label for="profilePhotoUpload" id="uploadLabel">
-  <img id="currentProfilePhoto" class="hidden" />
-</label>
-      <p>Welcome back, <span id="profileName"></span> ☕</p>
-       <button id="logoutFromProfile">🚪 Log Out</button>
-    </div> 
   <div id="mainContent" class="hidden">
   <div id="app">  
     <div class="logo">
@@ -420,6 +404,20 @@
 
  </main>
 </div>
+    <div id="profileOverlay" class="overlay hidden">
+      <button id="closeProfile">✖</button>
+       <div id="userGallery">
+  <h3>Profile</h3>
+         <div id="photoPreviewOverlay" class="hidden">
+  <span id="closePhotoPreview">✖</span>
+  <img id="fullSizePhoto" />
+</div>
+         <label for="profilePhotoUpload" id="uploadLabel">
+  <img id="currentProfilePhoto" class="hidden" />
+</label>
+      <p>Welcome back, <span id="profileName"></span> ☕</p>
+       <button id="logoutFromProfile">🚪 Log Out</button>
+    </div> 
     
     <script defer src="app.js"></script>
     <script defer src="signIn.js"></script>

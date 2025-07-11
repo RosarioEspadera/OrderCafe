@@ -1,507 +1,126 @@
-/* ==========================================================================
-   ☕ OrderCafe Main Stylesheet — Shopee-Inspired Scroll Layout
-   ==========================================================================
-   Sections:
-   1. Root Variables
-   2. Global Reset
-   3. Base Layout
-   4. Product Card Styling
-   ========================================================================== */
-
-/* 🌿 1. Root Variables */
+/* ────────────────────────────────────────────────
+   🧁 Theme Variables
+────────────────────────────────────────────────── */
 :root {
-  --cafe-brown: #6f4e37;
+  --cafe-brown: #4e342e;
   --cafe-cream: #fff8f0;
-  --cafe-parchment: #fef6e4;
-  --cafe-accent: #d2a679;
-  --text-muted: #7a5e4b;
+  --cafe-accent: #c99c79;
+  --cafe-pink: #ffdfd5;
+
+  --heading-font: "Poppins", sans-serif;
+  --body-font: "Roboto", sans-serif;
   --radius: 12px;
   --transition: 0.3s ease;
-  --heading-font: 'Pacifico', cursive;
-  --body-font: 'Poppins', sans-serif;
 }
 
-/* 🔄 2. Global Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* ────────────────────────────────────────────────
+   ☕ Layout Basics
+────────────────────────────────────────────────── */
 body {
+  margin: 0;
   font-family: var(--body-font);
-  background: linear-gradient(145deg, var(--cafe-parchment), var(--cafe-cream));
+  background-color: var(--cafe-cream);
   color: var(--cafe-brown);
-  min-height: 100vh;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
-/* 📦 3. Base Layout */
 .container {
-  max-width: 600px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 2rem;
 }
 
-h1, h2, h3 {
-  font-family: var(--heading-font);
-  text-align: center;
-  color: var(--cafe-brown);
-  margin-bottom: 1rem;
-}
-
-p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
-
-/* 🍮 4. Product Card Styling */
+/* ────────────────────────────────────────────────
+   🛍️ Product Card Styling
+────────────────────────────────────────────────── */
 .product-card {
-  background: var(--cafe-cream);
+  background: white;
   border-radius: var(--radius);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  transition: transform var(--transition);
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-}
-
-.product-image {
-  width: 100%;
-  border-radius: var(--radius);
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transform: scale(1.02);
 }
 
 .product-title {
   font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
   color: var(--cafe-brown);
 }
 
 .product-description {
   font-size: 0.95rem;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
+  color: #5c4534;
+  line-height: 1.4;
 }
 
 .price-tag {
   font-size: 1.1rem;
-  font-weight: 700;
   color: var(--cafe-accent);
-  margin-bottom: 1rem;
-}
-
-.order-cta {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.order-button {
-  flex: 1;
-  background: linear-gradient(to right, var(--cafe-brown), #8b5c42);
-  color: var(--cafe-cream);
-  padding: 0.8rem;
-  font-size: 1rem;
   font-weight: 600;
+}
+
+/* ────────────────────────────────────────────────
+   ✅ Order Button
+────────────────────────────────────────────────── */
+.order-button {
+  background-color: var(--cafe-accent);
   border: none;
+  color: white;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
   border-radius: var(--radius);
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: background-color var(--transition), transform var(--transition);
+  transition: background var(--transition);
 }
 
 .order-button:hover {
-  background-color: #a26d4e;
-  transform: scale(1.05);
-}
-/* Optional CSS add-on for .added state */
-.order-button.added {
-  background: #4caf50;
-  color: #fff;
-  transform: scale(1.02);
+  background-color: #b98360;
 }
 
-/* ==========================================================================
-   🛒 Sticky Bottom Bar
-   ========================================================================== */
-.order-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: var(--cafe-cream);
-  border-top: 1px solid rgba(0,0,0,0.05);
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-  z-index: 900;
-  box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+.order-button.faded {
+  background-color: #ddd;
+  color: #333;
 }
 
-.order-bar button {
-  flex: 1;
-  margin: 0 0.5rem;
-  padding: 0.75rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius);
-  background: linear-gradient(to right, var(--cafe-brown), #8b5c42);
-  color: var(--cafe-cream);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: background-color var(--transition), transform var(--transition);
-}
-
-.order-bar button:hover {
-  background-color: #a26d4e;
-  transform: scale(1.03);
-}
-.cart-summary li {
-  font-size: 0.95rem;
-  padding: 0.5rem;
-  border-bottom: 1px dashed rgba(0,0,0,0.1);
-  color: var(--cafe-brown);
-}
-.cart-summary {
-  margin: 1rem 0;
-  list-style: none;
-  padding: 0;
-}
-
-.cart-summary li {
-  font-size: 0.95rem;
-  padding: 0.5rem;
-  border-bottom: 1px dashed rgba(0,0,0,0.08);
-  color: var(--cafe-brown);
-}
-
-/* ==========================================================================
-   🔔 Toast Notification
-   ========================================================================== */
+/* ────────────────────────────────────────────────
+   🔔 Toast Message
+────────────────────────────────────────────────── */
 .toast {
   position: fixed;
-  bottom: 6rem;
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--cafe-brown);
+  background-color: var(--cafe-brown);
   color: var(--cafe-cream);
-  padding: 0.8rem 1.2rem;
-  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
   font-size: 0.95rem;
-  border-radius: var(--radius);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-  z-index: 1002;
-  animation: toastFade 4s ease forwards;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 2000;
+  animation: fadeSlideUp 0.6s ease forwards;
 }
 
-@keyframes toastFade {
-  0% { opacity: 0; transform: translateY(10px); }
-  10% { opacity: 1; transform: translateY(0); }
-  90% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-10px); }
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-/* ==========================================================================
-   🔄 Loader Spinner
-   ========================================================================== */
-.loader {
-  width: 28px;
-  height: 28px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top-color: var(--cafe-brown);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 1rem auto;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ==========================================================================
-   🧁 Modal Overlay Styling
-   ========================================================================== */
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
-  background: var(--cafe-cream);
-  border-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  max-width: 400px;
-  width: 90%;
-  padding: 2rem;
-  z-index: 1001;
-  opacity: 0;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.modal.visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(8px);
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-}
-
-/* ==========================================================================
+/* ────────────────────────────────────────────────
    📱 Responsive Tweaks
-   ========================================================================== */
-@media (max-width: 480px) {
+────────────────────────────────────────────────── */
+@media (max-width: 640px) {
   .container {
-    padding: 1.5rem 1rem;
-  }
-
-  .product-card {
     padding: 1rem;
   }
-
-  .order-bar {
-    flex-direction: column;
-    align-items: stretch;
+  .product-card {
     padding: 0.75rem;
   }
-
-  .order-bar button {
-    margin: 0.5rem 0;
-  }
-
-  .modal {
-    width: 95%;
-    padding: 1.5rem;
-  }
-
-  .product-title {
-    font-size: 1.05rem;
-  }
-
-  .price-tag {
-    font-size: 1rem;
-  }
-}
-
-/* ==========================================================================
-   ✨ Utility Classes
-   ========================================================================== */
-.hidden {
-  display: none !important;
-  pointer-events: none !important;
-  opacity: 0 !important;
-}
-
-.visible {
-  display: block !important;
-  pointer-events: auto !important;
-  opacity: 1 !important;
-}
-
-.center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background: rgba(0,0,0,0.08);
-  margin: 1.5rem 0;
-}
-/* ==========================================================================
-   🧑‍🍳 Section Banner
-   ========================================================================== */
-.section-banner {
-  background: linear-gradient(to right, #fef6e4, #f8ddc5);
-  padding: 1rem 1.5rem;
-  border-radius: var(--radius);
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #5e4738;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  text-align: center;
-  margin-bottom: 2rem;
-  animation: slideDown 0.5s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ==========================================================================
-   🔍 Filter & Search Header
-   ========================================================================== */
-.filter-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  padding: 0.5rem 1rem;
-  background: var(--cafe-cream);
-  border-radius: var(--radius);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.filter-header input[type="search"] {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  border-radius: var(--radius);
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  background: #fff;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
-}
-
-.filter-header button {
-  margin-left: 1rem;
-  padding: 0.6rem 1rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  background: var(--cafe-accent);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: background-color var(--transition);
-}
-
-.filter-header button:hover {
-  background-color: #b17757;
-}
-
-/* ==========================================================================
-   🏷️ Badge Styling
-   ========================================================================== */
-.badge {
-  display: inline-block;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #fff;
-  background: var(--cafe-brown);
-  border-radius: 999px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  margin-right: 0.5rem;
-}
-
-.badge.sale {
-  background: #d94f4f;
-}
-
-.badge.new {
-  background: #4f9fd9;
-}
-
-.badge.hot {
-  background: #f5a623;
-}
-
-/* ==========================================================================
-   🌫 Ambient Accent (Optional)
-   ========================================================================== */
-.ambient-blur {
-  position: absolute;
-  top: -100px;
-  left: -80px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, #fffaf5 0%, transparent 70%);
-  filter: blur(60px);
-  opacity: 0.7;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ==========================================================================
-   📱 Final Responsive Tweaks
-   ========================================================================== */
-@media (max-width: 640px) {
-  .filter-header {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .filter-header input[type="search"] {
+  .order-button {
     width: 100%;
   }
-
-  .filter-header button {
-    width: 100%;
-  }
-
-  .section-banner {
-    font-size: 1rem;
-    padding: 0.75rem 1rem;
-  }
-
-  .badge {
-    font-size: 0.7rem;
-    padding: 0.25rem 0.5rem;
-  }
-}
-
-/* ==========================================================================
-   🧭 Utility Classes
-   ========================================================================== */
-.flex-row {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.spaced-section {
-  margin: 2rem 0;
-}
-
-.shadow-box {
-  background: var(--cafe-cream);
-  padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-.faded-text {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  opacity: 0.9;
-}
-
-.divider {
-  width: 100%;
-  height: 1px;
-  background: rgba(0,0,0,0.08);
-  margin: 1.5rem 0;
 }

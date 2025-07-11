@@ -18,10 +18,10 @@ if (logoutFromProfile) {
     location.reload();
   });
 }
-    if (!profileBtn || !profileOverlay) {
-    console.log("Missing elements:", { profileBtn, profileOverlay });
-    return;
-  }
+  if (!profileBtn || !profileOverlay) {
+  console.log("Missing elements:", { profileBtn, profileOverlay });
+  return;
+}
 currentProfilePhoto?.addEventListener("click", () => {
   const src = currentProfilePhoto.src;
   if (!src) return;

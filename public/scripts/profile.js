@@ -79,8 +79,8 @@ document.addEventListener("click", (e) => {
 
     const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
     profileName.textContent = userData?.username || "Guest";
-    profileOverlay.classList.remove("hidden");
-    profileOverlay.classList.add("visible");
+   profileOverlay.style.display = "block";
+
 
     loadProfilePhoto();
 

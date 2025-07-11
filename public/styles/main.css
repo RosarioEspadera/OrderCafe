@@ -1,31 +1,27 @@
 /* ==========================================================================
-   OrderCafe Visual Redesign by Rosario & Copilot
+   ☕ OrderCafe Main Stylesheet — Shopee-Inspired Scroll Layout
    ==========================================================================
+   Sections:
    1. Root Variables
-   2. Base Reset
-   3. Global Typography
-   4. Layout Containers
-   5. MainContainer Styling
-   ==========================================================================
-*/
+   2. Global Reset
+   3. Base Layout
+   4. Product Card Styling
+   ========================================================================== */
 
 /* 🌿 1. Root Variables */
 :root {
   --cafe-brown: #6f4e37;
   --cafe-cream: #fff8f0;
   --cafe-parchment: #fef6e4;
-  --cafe-foam: #f5dfcb;
   --cafe-accent: #d2a679;
-  --cafe-fade: rgba(0,0,0,0.05);
-  --cafe-shadow-md: rgba(0,0,0,0.1);
-  --cafe-shadow-lg: rgba(0,0,0,0.2);
+  --text-muted: #7a5e4b;
   --radius: 12px;
-  --transition: 0.4s ease;
+  --transition: 0.3s ease;
   --heading-font: 'Pacifico', cursive;
   --body-font: 'Poppins', sans-serif;
 }
 
-/* 🔄 2. Base Reset */
+/* 🔄 2. Global Reset */
 *,
 *::before,
 *::after {
@@ -36,43 +32,263 @@
 
 body {
   font-family: var(--body-font);
-  background: linear-gradient(145deg, var(--cafe-parchment), var(--cafe-foam));
+  background: linear-gradient(145deg, var(--cafe-parchment), var(--cafe-cream));
   color: var(--cafe-brown);
   min-height: 100vh;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
-/* 🖋️ 3. Global Typography */
-h1, h2, h3 {
-  font-family: var(--heading-font);
-  color: var(--cafe-brown);
-  text-align: center;
-  margin: 2rem 0 1rem;
+/* 📦 3. Base Layout */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
-p {
-  color: #5e4738;
-  font-size: 1rem;
-  line-height: 1.6;
+h1, h2, h3 {
+  font-family: var(--heading-font);
+  text-align: center;
+  color: var(--cafe-brown);
   margin-bottom: 1rem;
 }
 
-a {
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* 🍮 4. Product Card Styling */
+.product-card {
+  background: var(--cafe-cream);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.product-image {
+  width: 100%;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.product-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--cafe-brown);
+}
+
+.product-description {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.price-tag {
+  font-size: 1.1rem;
+  font-weight: 700;
   color: var(--cafe-accent);
-  text-decoration: none;
-  transition: color var(--transition);
+  margin-bottom: 1rem;
 }
 
-a:hover {
-  color: #b17757;
+.order-cta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-/* 📦 4. Layout Containers */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+.order-button {
+  flex: 1;
+  background: linear-gradient(to right, var(--cafe-brown), #8b5c42);
+  color: var(--cafe-cream);
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.order-button:hover {
+  background-color: #a26d4e;
+  transform: scale(1.05);
+}
+/* ==========================================================================
+   🛒 Sticky Bottom Bar
+   ========================================================================== */
+.order-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--cafe-cream);
+  border-top: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  z-index: 900;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
+}
+
+.order-bar button {
+  flex: 1;
+  margin: 0 0.5rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  background: linear-gradient(to right, var(--cafe-brown), #8b5c42);
+  color: var(--cafe-cream);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: background-color var(--transition), transform var(--transition);
+}
+
+.order-bar button:hover {
+  background-color: #a26d4e;
+  transform: scale(1.03);
+}
+
+/* ==========================================================================
+   🔔 Toast Notification
+   ========================================================================== */
+.toast {
+  position: fixed;
+  bottom: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--cafe-brown);
+  color: var(--cafe-cream);
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  z-index: 1002;
+  animation: toastFade 4s ease forwards;
+}
+
+@keyframes toastFade {
+  0% { opacity: 0; transform: translateY(10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+/* ==========================================================================
+   🔄 Loader Spinner
+   ========================================================================== */
+.loader {
+  width: 28px;
+  height: 28px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top-color: var(--cafe-brown);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 1rem auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   🧁 Modal Overlay Styling
+   ========================================================================== */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: var(--cafe-cream);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  max-width: 400px;
+  width: 90%;
+  padding: 2rem;
+  z-index: 1001;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.modal.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+/* ==========================================================================
+   📱 Responsive Tweaks
+   ========================================================================== */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  .product-card {
+    padding: 1rem;
+  }
+
+  .order-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.75rem;
+  }
+
+  .order-bar button {
+    margin: 0.5rem 0;
+  }
+
+  .modal {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  .product-title {
+    font-size: 1.05rem;
+  }
+
+  .price-tag {
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================================================
+   ✨ Utility Classes
+   ========================================================================== */
+.hidden {
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+.visible {
+  display: block !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
 }
 
 .center {
@@ -81,182 +297,16 @@ a:hover {
   justify-content: center;
 }
 
-.grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-/* 🎯 5. #mainContainer Styling */
-#mainContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 3rem 2rem;
-  background: var(--cafe-cream);
-  border-radius: var(--radius);
-  box-shadow: 0 8px 24px var(--cafe-shadow-md);
-  width: 90%;
-  max-width: 960px;
-  margin: 4rem auto;
-  position: relative;
-  z-index: 1;
-  animation: fadeSlideIn 0.6s ease-out;
-}
-
-/* Header Section Inside MainContainer */
-#mainContainer h2 {
-  font-size: 2rem;
-  color: var(--cafe-brown);
-  margin-bottom: 0.5rem;
-}
-
-#mainContainer p {
-  font-size: 1rem;
-  color: #6b4d3c;
-  text-align: center;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  #mainContainer {
-    padding: 2rem 1rem;
-    width: 95%;
-  }
-  h2 {
-    font-size: 1.6rem;
-  }
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin: 1.5rem 0;
 }
 /* ==========================================================================
-   🍩 Modal & Dialog Elements
+   🧑‍🍳 Section Banner
    ========================================================================== */
-
-.modal,
-.dialog,
-#signUpModal,
-#signInModal {
-  background: var(--cafe-parchment);
-  border-radius: var(--radius);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  max-width: 420px;
-  width: 90%;
-  padding: 2rem;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
-  opacity: 0;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  z-index: 1000;
-}
-
-.modal.visible,
-.dialog.visible,
-#signUpModal.visible,
-#signInModal.visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-/* 🧊 Backdrop */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(6px);
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 999;
-}
-
-/* 🧁 Modal Branding */
-.modal-branding {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.modal-branding .brand-logo {
-  width: 90px;
-  height: auto;
-  margin-bottom: 0.5rem;
-}
-
-.modal-branding h2 {
-  font-family: var(--heading-font);
-  font-size: 2rem;
-  color: var(--cafe-brown);
-}
-
-.modal-branding p {
-  font-size: 1rem;
-  color: #6f4e37;
-}
-
-/* 📋 Form Styling */
-form label {
-  font-weight: 600;
-  display: block;
-  margin: 1rem 0 0.4rem;
-  color: var(--cafe-brown);
-}
-
-form input {
-  width: 100%;
-  padding: 0.65rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: var(--radius);
-  background: #fff;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-
-form input:focus {
-  border-color: var(--cafe-accent);
-  box-shadow: 0 0 0 3px rgba(210, 166, 121, 0.3);
-  outline: none;
-}
-
-form menu {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 1.5rem;
-  flex-wrap: wrap;
-}
-
-/* 🎟️ Buttons */
-button,
-.signup-button,
-#signUpToggleBtn,
-#signInBtn,
-#logoutBtn,
-#guestAccessBtn,
-#closeBtn,
-#signUpCloseBtn {
-  padding: 0.8rem 1.6rem;
-  background: linear-gradient(to right, var(--cafe-brown), #8b5c42);
-  color: var(--cafe-cream);
-  border: none;
-  border-radius: var(--radius);
-  font-size: 1rem;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: background-color var(--transition), transform var(--transition);
-  min-width: 120px;
-}
-
-button:hover {
-  background-color: #a26d4e;
-  transform: scale(1.05);
-}
-
-button:focus {
-  outline: 2px solid var(--cafe-accent);
-  outline-offset: 2px;
-}
-
-/* 🍃 Welcome Banner */
-#welcomeBanner {
+.section-banner {
   background: linear-gradient(to right, #fef6e4, #f8ddc5);
   padding: 1rem 1.5rem;
   border-radius: var(--radius);
@@ -280,340 +330,77 @@ button:focus {
   }
 }
 
-/* 🔄 Loader */
-#loader {
-  margin: 1rem auto;
-  display: block;
-  width: 28px;
-  height: 28px;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-top-color: var(--cafe-brown);
-  border-radius: 50%;
-  animation: spin 0.9s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
 /* ==========================================================================
-   🔔 Toasts & Banners
+   🔍 Filter & Search Header
    ========================================================================== */
-.toast,
-.guest-toast {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--cafe-brown);
-  color: var(--cafe-cream);
-  padding: 1rem 1.5rem;
-  font-weight: 600;
-  font-size: 1rem;
-  border-radius: var(--radius);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
-  z-index: 9999;
-  animation: toastFade 4s ease forwards;
-}
-
-.toast {
-  bottom: 2rem;
-}
-
-.guest-toast {
-  top: 1rem;
-  font-family: 'Caveat', cursive;
-  background: rgba(40,26,20,0.95);
-  color: #ecd7bf;
-}
-
-@keyframes toastFade {
-  0% { opacity: 0; transform: translateY(10px); }
-  10% { opacity: 1; transform: translateY(0); }
-  90% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(-10px); }
-}
-
-/* ==========================================================================
-   🖼️ Image Preview & Profile Overlay
-   ========================================================================== */
-.photoPreviewOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1100;
-  backdrop-filter: blur(6px);
-}
-
-#fullSizePhoto {
-  max-width: 90vw;
-  max-height: 90vh;
-  border: 10px solid #fff;
-  border-radius: var(--radius);
-  box-shadow: 0 0 30px rgba(0,0,0,0.4);
-}
-
-/* 🔳 Overlay Fade Transition */
-.overlay,
-.modal-backdrop,
-.photoPreviewOverlay {
-  animation: overlayFade 0.4s ease-in;
-}
-
-@keyframes overlayFade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* ==========================================================================
-   👤 Profile Display
-   ========================================================================== */
-#userNameDisplay {
-  font-family: var(--heading-font);
-  font-size: 1.8rem;
-  color: var(--cafe-brown);
-  margin-top: 1rem;
-  text-align: center;
-}
-
-#profileOverlay {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(to bottom right, var(--cafe-parchment), var(--cafe-foam));
-  padding: 3rem 2rem;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  animation: fadeSlideIn 0.6s ease-out;
-  overflow-y: auto;
-}
-
-#currentProfilePhoto {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  margin: 1rem 0;
-  transition: transform var(--transition);
-}
-
-#currentProfilePhoto:hover {
-  transform: scale(1.05);
-}
-
-/* 📷 Upload Button Styling */
-#profilePhotoUpload {
-  display: block;
-  margin-top: 1rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: var(--radius);
-  border: 1px solid #ccc;
-  background: #fff;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
-}
-
-/* 🔥 Guest Banner */
-#guestBanner {
-  background: rgba(255,248,240,0.9);
-  padding: 1.2rem 2rem;
-  font-size: 1.3rem;
-  font-family: var(--heading-font);
-  color: #5e4738;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  text-align: center;
-  margin-top: 2rem;
-}
-
-/* ==========================================================================
-   🎭 Steam Puff Animations (Optional Flourish)
-   ========================================================================== */
-@keyframes steamRise {
-  0% {
-    transform: translateY(20px) scale(0.9);
-    opacity: 0;
-  }
-  50% {
-    transform: translateY(-10px) scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-30px) scale(1.1);
-    opacity: 0;
-  }
-}
-
-.steam-puff {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle, #fffaf5 20%, transparent 70%);
-  animation: steamRise 3s ease-in-out infinite;
-  border-radius: 50%;
-  opacity: 0;
-}
-
-/* ==========================================================================
-   📱 Responsive Tweaks
-   ========================================================================== */
-@media (max-width: 640px) {
-  #profileOverlay {
-    padding: 2rem 1rem;
-  }
-
-  #fullSizePhoto {
-    max-width: 95vw;
-    max-height: 80vh;
-  }
-
-  .modal,
-  #signUpModal,
-  #signInModal {
-    width: 95%;
-    padding: 1.5rem;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .button,
-  #signInBtn,
-  #signUpBtn,
-  #logoutBtn {
-    width: 100%;
-    min-width: unset;
-  }
-}
-/* ==========================================================================
-   🪄 Accordion Menu Styling
-   ========================================================================== */
-.accordion {
-  border-radius: var(--radius);
-  background: var(--cafe-cream);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  transition: box-shadow var(--transition);
-}
-
-.accordion:hover {
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-}
-
-.accordion-header {
+.filter-header {
   display: flex;
   justify-content: space-between;
-  font-weight: 600;
-  font-size: 1.05rem;
-  cursor: pointer;
-  color: var(--cafe-brown);
-}
-
-.accordion-content {
-  margin-top: 0.8rem;
-  font-size: 0.95rem;
-  color: #5e4738;
-  line-height: 1.6;
-}
-
-/* 🌅 Menu Image Styling */
-.menu-item {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  background: var(--cafe-parchment);
-  padding: 1rem;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.menu-item:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.menu-item img {
-  width: 100%;
-  max-width: 280px;
-  height: auto;
-  border-radius: var(--radius);
-  margin-bottom: 0.75rem;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.06);
-}
-
-/* 📸 Gallery Image Preview */
-.gallery-image {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.gallery-image img {
-  width: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-.gallery-image:hover {
-  transform: scale(1.03);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-/* 🚀 Auto-login Fade-in */
-.auto-login-animation {
-  animation: fadeSlideIn 1.2s ease-out;
-}
-
-/* 🔧 Final Utility Layout */
-.flex-row {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-}
-
-.flex-column {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
-.spaced-section {
-  margin: 2rem 0;
-}
-
-.shadow-box {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem 1rem;
   background: var(--cafe-cream);
-  padding: 2rem;
   border-radius: var(--radius);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.faded-text {
-  color: #7c5f4c;
+.filter-header input[type="search"] {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.filter-header button {
+  margin-left: 1rem;
+  padding: 0.6rem 1rem;
   font-size: 0.95rem;
-  opacity: 0.9;
+  font-weight: 600;
+  background: var(--cafe-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--transition);
 }
 
-.divider {
-  width: 100%;
-  height: 1px;
-  background: rgba(0,0,0,0.08);
-  margin: 1.5rem 0;
+.filter-header button:hover {
+  background-color: #b17757;
 }
 
-/* ☁️ Background Accent (Optional) */
+/* ==========================================================================
+   🏷️ Badge Styling
+   ========================================================================== */
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--cafe-brown);
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-right: 0.5rem;
+}
+
+.badge.sale {
+  background: #d94f4f;
+}
+
+.badge.new {
+  background: #4f9fd9;
+}
+
+.badge.hot {
+  background: #f5a623;
+}
+
+/* ==========================================================================
+   🌫 Ambient Accent (Optional)
+   ========================================================================== */
 .ambient-blur {
   position: absolute;
   top: -100px;
@@ -628,5 +415,68 @@ button:focus {
 }
 
 /* ==========================================================================
-   🔚 End of Stylesheet
+   📱 Final Responsive Tweaks
    ========================================================================== */
+@media (max-width: 640px) {
+  .filter-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .filter-header input[type="search"] {
+    width: 100%;
+  }
+
+  .filter-header button {
+    width: 100%;
+  }
+
+  .section-banner {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   🧭 Utility Classes
+   ========================================================================== */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.spaced-section {
+  margin: 2rem 0;
+}
+
+.shadow-box {
+  background: var(--cafe-cream);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.faded-text {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin: 1.5rem 0;
+}

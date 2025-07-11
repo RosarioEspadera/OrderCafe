@@ -127,6 +127,13 @@ p {
   background-color: #a26d4e;
   transform: scale(1.05);
 }
+/* Optional CSS add-on for .added state */
+.order-button.added {
+  background: #4caf50;
+  color: #fff;
+  transform: scale(1.02);
+}
+
 /* ==========================================================================
    🛒 Sticky Bottom Bar
    ========================================================================== */
@@ -161,6 +168,12 @@ p {
 .order-bar button:hover {
   background-color: #a26d4e;
   transform: scale(1.03);
+}
+.cart-summary li {
+  font-size: 0.95rem;
+  padding: 0.5rem;
+  border-bottom: 1px dashed rgba(0,0,0,0.1);
+  color: var(--cafe-brown);
 }
 
 /* ==========================================================================

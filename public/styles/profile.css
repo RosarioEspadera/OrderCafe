@@ -153,5 +153,15 @@
 #currentProfilePhoto.visible {
   display: block;
 }
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}
 
   

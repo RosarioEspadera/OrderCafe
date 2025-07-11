@@ -26,13 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
     guestBanner?.classList.remove("hidden");
   }
 
-  function showProfile(user) {
-    profileName.textContent = user.username || "Guest";
-    currentProfilePhoto.src = user.profilePhoto || fallback;
-    profileOverlay.showModal?.(); // works if it's a <dialog>
-    profileOverlay.style.display = "block";
-    guestBanner?.classList.add("hidden");
-  }
+function showProfile(user) {
+  profileName.textContent = user.username || "Guest";
+  currentProfilePhoto.src = user.profilePhoto || fallback;
+
+  profileOverlay.classList.remove("hidden");
+  profileOverlay.style.display = "block";
+
+  // If it's a dialog
+  profileOverlay.showModal?.();
+}
+
 
   // 🖼️ Photo preview
   currentProfilePhoto?.addEventListener("click", () => {

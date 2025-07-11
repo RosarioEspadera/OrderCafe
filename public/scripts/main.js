@@ -8,16 +8,9 @@ function showToast(message = "Added to cart!", duration = 3000) {
   setTimeout(() => toast.remove(), duration);
 }
 
-// 🛍️ Sticky Bottom Bar State
-window.addEventListener("scroll", () => {
-  const bar = document.querySelector(".order-bar");
-  if (window.scrollY > 300) {
-    bar.classList.add("visible");
-  } else {
-    bar.classList.remove("visible");
-  }
-  let summaryRefreshTimeout;
 
+// 🛍️ Sticky Bottom Bar State
+let summaryRefreshTimeout;
 window.addEventListener("scroll", () => {
   const bar = document.querySelector(".order-bar");
   if (window.scrollY > 300) {
@@ -29,8 +22,9 @@ window.addEventListener("scroll", () => {
   clearTimeout(summaryRefreshTimeout);
   summaryRefreshTimeout = setTimeout(() => {
     showOrderSummary();
-  }, 300); // updates after 300ms of no scroll
+  }, 300);
 });
+
 
 const searchInput = document.querySelector('input[type="search"]');
 searchInput?.addEventListener("input", (e) => {

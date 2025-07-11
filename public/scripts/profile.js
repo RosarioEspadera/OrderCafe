@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("signInModal").showModal();
   console.log("🎯 Simple Profile Flow Activated");
 
   // Element references
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileBtn = document.getElementById("profileBtn"); // For opening overlay
   const closeProfile = document.getElementById("closeProfile");
   const fallback = "images/bg.png";
+  const signInModal = document.getElementById("signInModal");
 
   // Load stored user
   const rawUser = localStorage.getItem("orderCafeUser");

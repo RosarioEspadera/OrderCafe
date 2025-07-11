@@ -95,7 +95,6 @@
     <div class="logo">
   <img src="images/rios-cafe-logo.png" alt="Rio's Cafe Logo" />
 </div>
-    
    <header class="site-header">
   <div class="intro">
     <h1>Welcome to Rio's Café ☕</h1>
@@ -205,25 +204,31 @@
     </div>
   </section>
 </main>
-<dialog id="cartModal" class="modal hidden">
-  <form method="dialog" class="modal-content">
-    <h2>🧾 Your Order</h2>
-    <ul class="cart-summary">
-      <!-- JS will inject <li>Apple Crisp — $4.00</li> here -->
-    </ul>
+<dialog id="orderModal" class="modal hidden">
+  <div class="modal-header">
+    <h2>Your Order Summary 🛍️</h2>
+    <button id="closeOrderModal" class="close-button">✕</button>
+  </div>
 
-    <div class="divider"></div>
+  <ul id="cartList" class="cart-list">
+    <!-- JS will populate this with items -->
+  </ul>
 
-    <button type="button" id="checkoutBtn" class="order-button">
-      ✅ Place Order
-    </button>
-    <button type="button" onclick="closeModal('cartModal')" class="order-button faded">
-      ❌ Cancel
-    </button>
-  </form>
+  <div class="order-summary">
+    <div class="total-label">Total:</div>
+    <div id="cartTotal" class="total-value">$0.00</div>
+  </div>
+
+  <menu class="order-actions">
+    <button id="placeOrderBtn" class="order-button">Place Order</button>
+    <button class="order-button faded" onclick="closeModal('orderModal')">Cancel</button>
+  </menu>
+
+  <div id="emptyCartMessage" class="empty-message hidden">
+    Your cart is empty 😌<br />Start adding your favorite treats!
+  </div>
 </dialog>
 
-<div class="modal-backdrop hidden"></div>
 
     
 

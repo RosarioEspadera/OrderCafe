@@ -232,51 +232,31 @@
     </div>
   </section>
 </main>
+<dialog id="cartModal" class="modal hidden">
+  <form method="dialog" class="modal-content">
+    <h2>🧾 Your Order</h2>
+    <ul class="cart-summary">
+      <!-- JS will inject <li>Apple Crisp — $4.00</li> here -->
+    </ul>
 
-    
-</div>
-    <dialog id="profileOverlay" class="modal hidden">
-  <button id="closeProfile" class="modal-close">✖</button>
+    <div class="divider"></div>
 
-  <div id="userGallery">
-    <div id="orderImages"></div>
-
-    <h3>Profile</h3>
-    <img
-      id="currentProfilePhoto"
-      alt="Your profile photo"
-      src="https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png"
-      class="profile-thumb"
-    />
-
-    <div id="photoPreviewOverlay" class="hidden">
-      <span id="closePhotoPreview">✖</span>
-      <img id="fullSizePhoto" alt="Full-size photo" />
-    </div>
-
-    <p>
-      Welcome back, <span id="profileName">Guest</span> ☕
-    </p>
-
-    <button id="logoutFromProfile" class="logout-button">🚪 Log Out</button>
-
-    <input
-      type="file"
-      id="profilePhotoUpload"
-      accept="image/*"
-      title="Upload profile photo"
-    />
-  </div>
-
-  <div id="guestBanner" class="hidden">
-    You are in guest mode.
-  </div>
+    <button type="button" id="checkoutBtn" class="order-button">
+      ✅ Place Order
+    </button>
+    <button type="button" onclick="closeModal('cartModal')" class="order-button faded">
+      ❌ Cancel
+    </button>
+  </form>
 </dialog>
 
-    <script defer src="app.js"></script>
+<div class="modal-backdrop hidden"></div>
+
+    
+
+
+
     <script defer src="signIn.js"></script>
-   <script src="accordion.js" defer></script>
-     <script defer src="carousel.js"></script>
 <audio id="signInAudio" src="signin.mp3" preload="auto"></audio>
     <div id="steamPuff" class="steam-puff"></div>
 <svg id="smokeTrail" viewBox="0 0 120 120" width="100" height="100" xmlns="http://www.w3.org/2000/svg">

@@ -58,6 +58,19 @@ profilePhotoUpload?.addEventListener("change", (event) => {
     currentProfilePhoto.classList.add("visible");
   }
 }
+function generateOrderGallery() {
+  const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
+  const orders = userData?.orders || [];
+
+  if (!orders.length) return "<p>No recent orders found ☕</p>";
+
+  return orders.map(order => `
+    <div class="gallery-item">
+      <img src="${order.image}" alt="${order.name}" />
+      <p>${order.name} - $${order.price}</p>
+    </div>
+  `).join("");
+}
 
 document.addEventListener("click", (e) => {
   const clickedProfileBtn = e.target.closest("#profileBtn");

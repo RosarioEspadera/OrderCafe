@@ -52,7 +52,7 @@ profilePhotoUpload?.addEventListener("change", (event) => {
 });
    function loadProfilePhoto() {
   const userData = JSON.parse(localStorage.getItem("orderCafeUser"));
-const fallback = "../styles/images/bg.png";
+const fallback = "https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png";
 
   currentProfilePhoto.src = userData?.profilePhoto || fallback;
   currentProfilePhoto.classList.remove("hidden");

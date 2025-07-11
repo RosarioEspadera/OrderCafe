@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     toggleLoader(true);
 try {
-  const response = await fetch("https://ordercafe-rio-hxxc.onrender.com/signup", {
+  const response = await fetch('https://ordercafe-rio-hxxc.onrender.com/signup', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username: newUsername, password: newPassword }),

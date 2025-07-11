@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 🌟 DOM references
+  // 🌟 DOM Elements
   const signInModal = document.getElementById("signInModal");
   const signInForm = document.getElementById("signInForm");
   const signUpModal = document.getElementById("signUpModal");
@@ -11,14 +11,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const signInBtn = document.getElementById("signInBtn");
   const mainContent = document.getElementById("mainContent");
   const loader = document.getElementById("loader");
+  const userDisplay = document.getElementById("userNameDisplay");
+  const usernameTakenWarning = document.getElementById("usernameTakenWarning");
 
-  // ✨ Utility: modal transition
-  function hideModalWithTransition(modal) {
+  // ✨ Utility: Modal fade-out
+  function closeModal(modal) {
     modal.classList.remove("visible");
     modal.addEventListener("transitionend", () => modal.close(), { once: true });
   }
 
-  // ✨ Utility: toast
+  // ✨ Utility: Loader toggle
+  function toggleLoader(show) {
+    loader?.classList.toggle("hidden", !show);
+  }
+
+  // ✨ Utility: Toast
   function showToast(message) {
     const toast = document.createElement("div");
     toast.textContent = message;
@@ -28,34 +35,27 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => toast.remove(), 3500);
   }
 
-  // ✨ Utility: loader toggle
-  function toggleLoader(show) {
-    loader?.classList.toggle("hidden", !show);
+  // ✨ Cleanup overlays and reveal content
+  function revealMainContent(playAudio = false) {
+    closeModal(signInModal);
+    mainContent.classList.remove("hidden");
+    mainContent.classList.add("visible");
+
+    document.querySelectorAll(".overlay, .photoPreviewOverlay, .modal-backdrop")
+      .forEach(el => {
+        el.classList.add("hidden");
+        el.classList.remove("visible");
+        el.style.display = "none";
+        el.style.pointerEvents = "none";
+        el.style.filter = "none";
+      });
+
+    if (playAudio) {
+      document.getElementById("signInAudio")?.play();
+    }
   }
 
-  // 🔓 Reveal main content (after login or guest access)
- function revealMainContent(withEffects = false) {
-  hideModalWithTransition(signInModal);
-
-  if (withEffects) {
-    signInBtn.style.display = "none"; // only hide when it's interactive
-    document.getElementById("signInAudio")?.play();
-  }
-
-  mainContent.classList.remove("hidden");
-  mainContent.classList.add("visible");
-
-  document.querySelectorAll(".overlay, .photoPreviewOverlay, .modal-backdrop")
-    .forEach(el => {
-      el.classList.add("hidden");
-      el.classList.remove("visible");
-      el.style.display = "none";
-    });
-}
-
-
-
-  // 🎯 Toggle to Sign-Up modal
+  // 🎯 Toggle to sign-up
   signUpToggleBtn?.addEventListener("click", () => {
     signInModal.close();
     signUpModal.showModal();
@@ -65,10 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 📝 Sign-Up logic
+  // 📝 Handle sign-up
   signUpBtn?.addEventListener("click", async (e) => {
     e.preventDefault();
-
     const newUsername = document.getElementById("newUsername").value.trim();
     const newPassword = document.getElementById("newPassword").value.trim();
 
@@ -82,48 +81,41 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     toggleLoader(true);
-try {
-  const response = await fetch('https://ordercafe-rio-hxxc.onrender.com/signup', {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username: newUsername, password: newPassword }),
+    try {
+      const res = await fetch('https://ordercafe-rio-hxxc.onrender.com/signup', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: newUsername, password: newPassword }),
+      });
+
+      if (res.ok) {
+        showToast("Account created — please sign in ☕");
+        closeModal(signUpModal);
+        signInModal.showModal();
+        requestAnimationFrame(() => {
+          signInModal.classList.add("visible");
+          document.getElementById("username").focus();
+        });
+      } else {
+        const result = await res.json();
+        usernameTakenWarning.style.display = result.error?.includes("Username") ? "block" : "none";
+        showToast(result.error || "Signup failed.");
+        signUpModal.classList.add("shake");
+        signUpModal.addEventListener("animationend", () => {
+          signUpModal.classList.remove("shake");
+        }, { once: true });
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      showToast("Network error. Try again.");
+    } finally {
+      toggleLoader(false);
+    }
   });
 
-  if (response.ok) {
-    showToast("Account created — please sign in ☕");
-    hideModalWithTransition(signUpModal);
-    signInModal.showModal();
-    requestAnimationFrame(() => {
-      signInModal.classList.add("visible");
-      document.getElementById("username").focus();
-    });
-  } else {
-    const result = await response.json();
-    const usernameWarning = document.getElementById("usernameTakenWarning");
-
-if (result.error?.includes("Username already exists")) {
-  usernameWarning.style.display = "block";
-} else {
-  usernameWarning.style.display = "none";
-}
-
-    showToast(result.error || "Signup failed. Try a different username.");
-    signUpModal.classList.add("shake");
-    signUpModal.addEventListener("animationend", () => {
-      signUpModal.classList.remove("shake");
-    }, { once: true });
-  }
-} catch (err) {
-  console.error("Signup error:", err);
-  showToast("Network error. Please try again.");
-} finally {
-  toggleLoader(false);
-}
-  });
-
-  // ❌ Close Sign-Up modal
+  // ❌ Close sign-up
   signUpCloseBtn?.addEventListener("click", () => {
-    hideModalWithTransition(signUpModal);
+    closeModal(signUpModal);
     signInModal.showModal();
     requestAnimationFrame(() => {
       signInModal.classList.add("visible");
@@ -136,7 +128,7 @@ if (result.error?.includes("Username already exists")) {
     location.reload();
   });
 
-  // 👤 Sign-In submit
+  // 👤 Manual sign-in
   signInForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     const username = document.getElementById("username").value.trim();
@@ -153,17 +145,17 @@ if (result.error?.includes("Username already exists")) {
 
     toggleLoader(true);
     try {
-      const response = await fetch("https://ordercafe-rio-hxxc.onrender.com/signin", {
+      const res = await fetch("https://ordercafe-rio-hxxc.onrender.com/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
 
-      const result = await response.json();
+      const result = await res.json();
 
-      if (response.ok) {
+      if (res.ok) {
         localStorage.setItem("orderCafeUser", JSON.stringify({ username, password }));
-        document.getElementById("userNameDisplay").textContent = username;
+        userDisplay.textContent = username;
         showToast("Signed in successfully ☕");
         revealMainContent(true);
       } else {
@@ -174,13 +166,13 @@ if (result.error?.includes("Username already exists")) {
         }, { once: true });
       }
     } catch (err) {
-      showToast("Network error. Please try again.");
+      showToast("Network error. Try again.");
     } finally {
       toggleLoader(false);
     }
   });
 
-  // 🧑‍🎨 Guest Access
+  // 🎨 Guest Access
   guestAccessBtn?.addEventListener("click", () => {
     showToast("Welcome, Guest ☕");
     revealMainContent(true);
@@ -189,36 +181,35 @@ if (result.error?.includes("Username already exists")) {
   // 💫 Escape closes modal
   signInModal?.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      hideModalWithTransition(signInModal);
+      closeModal(signInModal);
     }
   });
 
-  // 🚀 Auto-login or fallback auto-signup
+  // 🚀 Auto-login or fallback signup
   setTimeout(async () => {
     const savedUser = JSON.parse(localStorage.getItem("orderCafeUser"));
     if (savedUser?.username && savedUser?.password) {
       toggleLoader(true);
       try {
-        const response = await fetch('https://ordercafe-rio-hxxc.onrender.com/signin', {
+        const res = await fetch("https://ordercafe-rio-hxxc.onrender.com/signin", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(savedUser),
         });
 
-        if (response.ok) {
-          document.getElementById("userNameDisplay").textContent = savedUser.username;
+        if (res.ok) {
+          userDisplay.textContent = savedUser.username;
           showToast("Welcome back, " + savedUser.username + " ☕");
           revealMainContent();
         } else {
-          // ✨ Auto-signup fallback
+          // fallback to signup
           await fetch("https://ordercafe-rio-hxxc.onrender.com/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(savedUser),
           });
-
-          document.getElementById("userNameDisplay").textContent = savedUser.username;
-          showToast("New account created on your return ☕");
+          userDisplay.textContent = savedUser.username;
+          showToast("New account created ☕");
           revealMainContent();
         }
       } catch (err) {
@@ -229,7 +220,7 @@ if (result.error?.includes("Username already exists")) {
     }
   }, 100);
 
-  // 📦 Show Sign-In modal initially
+  // 🧊 Show modal initially
   signInModal?.showModal();
   requestAnimationFrame(() => {
     signInModal.classList.add("visible");

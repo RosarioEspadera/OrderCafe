@@ -16,7 +16,22 @@ window.addEventListener("scroll", () => {
   } else {
     bar.classList.remove("visible");
   }
+  let summaryRefreshTimeout;
+
+window.addEventListener("scroll", () => {
+  const bar = document.querySelector(".order-bar");
+  if (window.scrollY > 300) {
+    bar.classList.add("visible");
+  } else {
+    bar.classList.remove("visible");
+  }
+
+  clearTimeout(summaryRefreshTimeout);
+  summaryRefreshTimeout = setTimeout(() => {
+    showOrderSummary();
+  }, 300); // updates after 300ms of no scroll
 });
+
 const searchInput = document.querySelector('input[type="search"]');
 searchInput?.addEventListener("input", (e) => {
   const keyword = e.target.value.toLowerCase();

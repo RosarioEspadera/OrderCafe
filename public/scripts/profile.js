@@ -15,6 +15,9 @@ if (logoutFromProfile) {
     location.reload();
   });
 }
+currentProfilePhoto?.addEventListener("click", () => {
+  profilePhotoUpload?.click();
+});
 
   if (!profileBtn || !profileOverlay) {
     console.log("Missing elements:", { profileBtn, profileOverlay });

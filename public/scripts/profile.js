@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const rememberMe = document.getElementById("rememberMe");
   const guestBanner = document.getElementById("guestBanner");
   const isChecked = localStorage.getItem("rememberMeChecked") === "true";
-  const user = localStorage.getItem("orderCafeUser");
   const isLoggedOut = localStorage.getItem("isLoggedOut") === "true";
   const rawUser = localStorage.getItem("orderCafeUser");
   const user = rawUser ? JSON.parse(rawUser) : null;

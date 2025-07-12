@@ -2,8 +2,10 @@ window.addEventListener("DOMContentLoaded", () => {
   const main = document.getElementById("mainContent");
   if (!main) return;
 
+  // 🛒 Cart state
   let cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
 
+  // 🍩 Utility: Toast Notification
   function showToast(message = "Added to cart!", duration = 3000) {
     const toast = document.createElement("div");
     toast.className = "toast";
@@ -13,10 +15,12 @@ window.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => toast.remove(), duration);
   }
 
+  // 💾 Save Cart to Storage
   function saveCart() {
     localStorage.setItem("orderCafeCart", JSON.stringify(cart));
   }
 
+  // 🔢 Update Cart Count Badge
   function updateCartCount() {
     const badge = main.querySelector(".cart-count");
     if (badge) {
@@ -30,6 +34,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ➕ Add Item to Cart
   function addToCart(itemId) {
     if (!cart.includes(itemId)) {
       cart.push(itemId);
@@ -39,6 +44,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // 🧾 Show Order Summary Modal
   function showOrderSummary() {
     const modal = document.getElementById("orderModal");
     const list = modal?.querySelector(".cart-summary");
@@ -57,6 +63,7 @@ window.addEventListener("DOMContentLoaded", () => {
     modal?.showModal();
   }
 
+  // 🔍 Product Search Filter
   const searchInput = main.querySelector("input[type='search']");
   searchInput?.addEventListener("input", (e) => {
     const keyword = e.target.value.toLowerCase();
@@ -66,10 +73,12 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // 🧁 Handle "Order Now" Button Clicks
   main.querySelectorAll(".order-button").forEach(btn => {
     btn.addEventListener("click", () => {
       const productId = btn.closest(".product-card")?.id;
       if (productId) addToCart(productId);
+
       btn.classList.add("added");
       btn.textContent = "✓ Added!";
       setTimeout(() => {
@@ -79,6 +88,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // ✅ Checkout Button Logic
   document.getElementById("checkoutBtn")?.addEventListener("click", () => {
     showToast("☕ Order placed! Thank you.");
     cart = [];
@@ -87,5 +97,6 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("orderModal")?.close();
   });
 
+  // 🔁 Initial Cart Badge Update
   updateCartCount();
 });

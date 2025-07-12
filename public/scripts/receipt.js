@@ -1,3 +1,4 @@
+import { showToast } from './toast.js';
 document.addEventListener("DOMContentLoaded", () => {
   const placeOrderBtn = document.getElementById("placeOrderBtn");
   if (!placeOrderBtn) return;

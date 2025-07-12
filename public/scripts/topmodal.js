@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
   profileOverlay?.classList.add("hidden");
   backdrop?.classList.add("hidden");
   mainContent.classList.remove("hidden"); // 👈 Add this!
+  activateTab(homeTab);
   toggleProductButtons(false);
   toggleSignInButtons(false);
   lockModalButtons(true);

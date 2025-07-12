@@ -7,66 +7,40 @@
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* 🔝 Top Navigation Bar */
-.topmodal-bar {
+/* 🍫 Café Tab Bar */
+.cafe-tab-bar {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
   background-color: var(--cafe-cream);
-  padding: 1rem;
-  border-bottom: 1px solid #decdbd;
-  gap: 1rem;
+  border-top: 1px solid #decdbd;
+  z-index: 1000;
+  padding: 0.5rem 0;
   box-shadow: var(--shadow);
   font-family: var(--font-body);
-  position: sticky;
-  top: 0;
-  z-index: 11111;
 }
 
-/* 🍯 Top Navigation Buttons */
-.topmodal-button {
-  background-color: var(--cafe-toast);
-  color: white;
-  font-weight: 600;
-  padding: 0.6rem 1.2rem;
+/* 🍪 Tab Buttons */
+.tab-button {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  background: none;
   border: none;
-  border-radius: var(--radius);
   cursor: pointer;
+  color: var(--cafe-brown);
+  font-weight: 600;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.topmodal-button:hover {
-  background-color: var(--cafe-brown);
-  transform: scale(1.04);
+/* ✨ Active State */
+.tab-button.active {
+  color: var(--cafe-toast);
+  border-top: 2px solid var(--cafe-toast);
+  background-color: rgba(201, 156, 121, 0.1);
+  transform: translateY(-1px);
 }
 
-.topmodal-button.active {
-  background-color: #b98360;
-  box-shadow: 0 0 0 3px rgba(201, 156, 121, 0.3);
-}
-
-
-
-/* 🧍‍♂️ Profile Slide Effect */
-#profileOverlay {
-  transform: translateY(-10px);
-  opacity: 0;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-#profileOverlay:not(.hidden) {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* 📱 Responsive Enhancements */
-@media screen and (max-width: 768px) {
-  .topmodal-bar {
-    flex-direction: column;
-    padding: 0.75rem;
-  }
-
-  .topmodal-button {
-    width: 100%;
-  }
-}

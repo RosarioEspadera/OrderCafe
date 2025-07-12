@@ -4,9 +4,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("mainContent")?.classList.remove("hidden");
   });
 
-  document.getElementById("orderBtn")?.addEventListener("click", () => {
-    openModal("orderModal");
-  });
+ document.getElementById("orderBtn")?.addEventListener("click", () => {
+  const orderModal = document.getElementById("orderModal");
+  if (orderModal) {
+    orderModal.classList.remove("hidden");   // Make it visible
+    orderModal.showModal?.();                // Open dialog
+  }
+});
+
 
   document.getElementById("profileBtn")?.addEventListener("click", () => {
     document.getElementById("profileOverlay")?.classList.remove("hidden");

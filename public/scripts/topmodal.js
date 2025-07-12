@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  document.getElementById("menuBtn")?.addEventListener("click", () => {
+    document.getElementById("mainContent")?.classList.remove("hidden");
+  });
+
+  document.getElementById("orderBtn")?.addEventListener("click", () => {
+    openModal("orderModal");
+  });
+
+  document.getElementById("profileBtn")?.addEventListener("click", () => {
+    document.getElementById("profileOverlay")?.classList.remove("hidden");
+  });
+});
+
   const menuBtn = document.getElementById("menuBtn");
   const ordersBtn = document.getElementById("ordersBtn");
   const profileBtn = document.getElementById("profileBtn");

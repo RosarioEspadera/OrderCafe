@@ -31,7 +31,7 @@ body {
 
 /* 🧁 Product Cards */
 .product-card {
-  display: flex;
+ display: flex;
   flex-direction: column;
   align-items: center;
   background: white;
@@ -44,14 +44,14 @@ body {
 
 .product-image {
   width: 100%;
-  max-height: 180px;
-  border-radius: var(--radius);
+  aspect-ratio: 4 / 3; /* Ensures consistent image height across cards */
   overflow: hidden;
+  border-radius: var(--radius);
   margin-bottom: 1rem;
+  background-color: #fdf5ee;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fdf5ee;
 }
 
 .product-image img {
@@ -61,7 +61,6 @@ body {
   border-radius: var(--radius);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
 }
-
 
 .product-card.visible {
   opacity: 1;

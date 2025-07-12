@@ -1,16 +1,110 @@
+:root {
+  --cafe-brown: #6f4e37;
+  --cafe-cream: #fff8f0;
+  --cafe-accent: #c99c79;
+  --radius: 8px;
+  --font-title: 'Pacifico', cursive;
+  --font-body: 'Inter', sans-serif;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 🎟️ Send Receipt Button */
 #sendReceiptBtn {
   background: var(--cafe-accent);
   color: white;
-  border: none;
-  padding: 0.75rem 1.25rem;
+  font-family: var(--font-body);
   font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.25rem;
+  border: none;
   border-radius: var(--radius);
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+  box-shadow: var(--shadow);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 #sendReceiptBtn:hover {
-  transform: scale(1.05);
   background: #b88360;
+  transform: scale(1.04);
 }
+
+/* 🧾 Receipt Container */
+.receipt-confirmation {
+  background-color: var(--cafe-cream);
+  border: 2px dashed var(--cafe-accent);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-family: var(--font-body);
+  color: var(--cafe-brown);
+  max-width: 600px;
+  margin: 2rem auto;
+  animation: slideFadeIn 0.5s ease;
+}
+
+/* ✨ Fade + Slide Entrance */
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📝 Receipt Title */
+.receipt-confirmation h2 {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--cafe-brown);
+}
+
+/* 📃 Receipt Details */
+.receipt-details {
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  padding: 1rem;
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 📬 Confirmation Toast */
+.receipt-toast {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: var(--cafe-brown);
+  color: white;
+  padding: 0.75rem 1.2rem;
+  border-radius: var(--radius);
+  font-weight: bold;
+  box-shadow: var(--shadow);
+  z-index: 999;
+  opacity: 1;
+  animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* 📱 Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .receipt-confirmation {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  #sendReceiptBtn {
+    width: 100%;
+  }
+}
+

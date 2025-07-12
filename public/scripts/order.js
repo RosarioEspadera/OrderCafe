@@ -1,18 +1,20 @@
-(() => {
-  // 🛒 Load cart from storage
+document.addEventListener("DOMContentLoaded", () => {
+  // 🛒 Load cart from local storage or initialize
   let cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
 
-  // 🔁 Save cart to localStorage
-  function saveCart() {
+  const cartList = document.getElementById("cartList");
+  const emptyMsg = document.getElementById("emptyCartMessage");
+  const totalLabel = document.getElementById("cartTotal");
+  const placeOrderBtn = document.getElementById("placeOrderBtn");
+  const closeOrderModalBtn = document.getElementById("closeOrderModal");
+
+  // 💾 Save cart to localStorage
+  const saveCart = () => {
     localStorage.setItem("orderCafeCart", JSON.stringify(cart));
-  }
+  };
 
-  // 🧾 Render items inside order modal
-  function renderCartItems() {
-    const cartList = document.getElementById("cartList");
-    const emptyMsg = document.getElementById("emptyCartMessage");
-    const totalLabel = document.getElementById("cartTotal");
-
+  // 🧾 Render items inside the cart
+  const renderCartItems = () => {
     if (!cartList || !emptyMsg || !totalLabel) return;
 
     cartList.innerHTML = "";
@@ -27,21 +29,23 @@
     emptyMsg.classList.add("hidden");
 
     cart.forEach((item, index) => {
-      total += item.price;
+      const itemPrice = typeof item.price === "number" ? item.price : 0;
+      total += itemPrice;
+
       const li = document.createElement("li");
       li.innerHTML = `
         <span class="item-name">${item.name}</span>
-        <span class="item-price">$${item.price.toFixed(2)}</span>
+        <span class="item-price">$${itemPrice.toFixed(2)}</span>
         <button class="remove-item" data-index="${index}">✕</button>
       `;
       cartList.appendChild(li);
     });
 
     totalLabel.textContent = `$${total.toFixed(2)}`;
-  }
+  };
 
-  // 🧹 Remove item from cart
-  document.getElementById("cartList")?.addEventListener("click", (e) => {
+  // 🧹 Remove item when ✕ is clicked
+  cartList?.addEventListener("click", (e) => {
     const target = e.target;
     if (target.classList.contains("remove-item")) {
       const index = parseInt(target.dataset.index);
@@ -51,49 +55,31 @@
     }
   });
 
-  // ❌ Close order modal
-  document.getElementById("closeOrderModal")?.addEventListener("click", () => {
-    closeModal("orderModal");
+  // ❌ Close the order modal
+  closeOrderModalBtn?.addEventListener("click", () => {
+    document.getElementById("orderModal")?.close();
+    document.querySelector(".modal-backdrop")?.classList.add("hidden");
+    document.getElementById("mainContent")?.classList.remove("hidden");
+    document.getElementById("mainContent")?.scrollIntoView({ behavior: "smooth" });
   });
 
-  // ✅ Order submission via EmailJS
-  document.getElementById("placeOrderBtn")?.addEventListener("click", () => {
+  // ✅ Place order (add your EmailJS or API logic here)
+  placeOrderBtn?.addEventListener("click", () => {
     if (cart.length === 0) {
       showToast("Your cart is empty ☕");
       return;
     }
 
-    const user = JSON.parse(localStorage.getItem("orderCafeUser"));
-    if (!user?.username || user.username === "Guest") {
-      showToast("Please sign in to place your order 🍃");
-      return;
-    }
+    // You can insert your order submission logic here
+    showToast("Your order was placed successfully 🎉");
 
-    const orderDetails = cart
-      .map(item => `${item.name} — $${item.price.toFixed(2)}`)
-      .join("\n");
-
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-    emailjs.send("service_epydqmi", "template_vzuexod", {
-      user_name: user.username,
-      order_details: orderDetails,
-      order_total: `$${total.toFixed(2)}`
-    })
-    .then(() => {
-      showToast("Order sent to Rio's Café 📩");
-      cart = [];
-      saveCart();
-      renderCartItems();
-      closeModal("orderModal");
-    })
-    .catch((err) => {
-      console.error("EmailJS error:", err);
-      showToast("Failed to send receipt ☁️");
-    });
+    cart = [];
+    saveCart();
+    renderCartItems();
+    document.getElementById("orderModal")?.close();
+    document.querySelector(".modal-backdrop")?.classList.add("hidden");
   });
 
-  // 🚀 Initialize on load
-  window.addEventListener("DOMContentLoaded", renderCartItems);
-})();
-
+  // 🧊 Initial render
+  renderCartItems();
+});

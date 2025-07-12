@@ -235,6 +235,7 @@
 <dialog id="orderModal" class="modal hidden">
   <div class="modal-header">
     <h2>Your Order Summary 🛍️</h2>
+    <button id="closeOrderModal" class="order-button faded" onclick="closeModal('orderModal')">Cancel</button>
   </div>
 
   <ul id="cartList" class="cart-list">
@@ -248,7 +249,6 @@
 
   <menu class="order-actions">
     <button id="placeOrderBtn" class="order-button">Place Order</button>
-<button id="closeOrderModal" class="order-button faded" onclick="closeModal('orderModal')">Cancel</button>
   </menu>
 
   <div id="emptyCartMessage" class="empty-message hidden">

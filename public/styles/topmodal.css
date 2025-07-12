@@ -44,6 +44,21 @@
   background-color: var(--cafe-brown);
   transform: scale(1.04);
 }
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 /* ✅ Active State */
 .topmodal-button.active {

@@ -19,4 +19,11 @@ function openModal(modalId) {
   if (modal) modal.classList.add("visible");
   if (backdrop) backdrop.classList.add("visible");
 }
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  const backdrop = document.querySelector(".modal-backdrop");
+
+  if (modal) modal.classList.remove("visible");
+  if (backdrop) backdrop.classList.remove("visible");
+}
 

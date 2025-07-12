@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
  const homeTab = document.getElementById("homeTab");
 const orderTab = document.getElementById("orderTab");
 const profileTab = document.getElementById("profileTab");
-
+const closeProfileButton = document.getElementById("closeProfile");
 const tabs = [homeTab, orderTab, profileTab];
 const activateTab = (active) => {
   tabs.forEach(tab => tab.classList.remove("active"));
@@ -40,5 +40,14 @@ profileTab?.addEventListener("click", () => {
   toggleProductButtons(true);
   toggleSignInButtons(true);
   lockModalButtons(false);
+ 
+});
+ closeProfileButton?.addEventListener("click", () => {
+  profileOverlay?.close();
+  profileOverlay?.classList.add("hidden");
+  backdrop?.classList.add("hidden");
+  toggleProductButtons(false);
+  toggleSignInButtons(false);
+  lockModalButtons(true);
 });
  });

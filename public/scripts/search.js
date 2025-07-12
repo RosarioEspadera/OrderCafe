@@ -1,18 +1,46 @@
 (() => {
   const searchInput = document.getElementById("searchField");
-  searchInput.addEventListener("input", () => {
-    const keyword = searchInput.value.trim().toLowerCase();
-    let matchFound = false;
+  const resultsContainer = document.getElementById("searchResults");
+  const allProducts = Array.from(document.querySelectorAll(".product-card"));
 
-    document.querySelectorAll(".product-card").forEach(card => {
-      const titleElement = card.querySelector(".product-title");
-      const title = titleElement ? titleElement.textContent.toLowerCase() : "";
-      const isMatch = title.includes(keyword);
-      card.style.display = isMatch ? "block" : "none";
-      if (isMatch) matchFound = true;
+  // 🧼 Clear previous results
+  function clearResults() {
+    resultsContainer.innerHTML = "";
+  }
+
+  // 🎯 Render filtered products
+  function showResults(filtered) {
+    clearResults();
+
+    if (filtered.length === 0) {
+      resultsContainer.innerHTML = `
+        <p class="search-empty">No matching drinks found ☕</p>
+      `;
+      return;
+    }
+
+    filtered.forEach((card) => {
+      const clone = card.cloneNode(true);
+      clone.classList.add("search-result");
+      resultsContainer.appendChild(clone);
+    });
+  }
+
+  // 🔍 Handle search input
+  searchInput?.addEventListener("input", () => {
+    const keyword = searchInput.value.trim().toLowerCase();
+
+    if (!keyword) {
+      clearResults();
+      return;
+    }
+
+    const filtered = allProducts.filter(card => {
+      const title = card.querySelector(".product-title")?.textContent.toLowerCase();
+      return title?.includes(keyword);
     });
 
-    const noResultsMsg = document.getElementById("noResults");
-    noResultsMsg.style.display = matchFound ? "none" : "block";
+    showResults(filtered);
   });
 })();
+

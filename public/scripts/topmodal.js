@@ -41,3 +41,4 @@ profileTab?.addEventListener("click", () => {
   toggleSignInButtons(true);
   lockModalButtons(false);
 });
+ });

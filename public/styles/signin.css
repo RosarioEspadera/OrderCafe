@@ -48,3 +48,13 @@ button {
   background-color: #e4d7c9;
   color: var(--cafe-brown);
 }
+.modal {
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+

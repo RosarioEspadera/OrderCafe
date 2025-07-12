@@ -7,7 +7,7 @@ const BACKEND_URL = location.hostname === "localhost"
   ? "http://localhost:3000"
   : "https://ordercafe-rio-hxxc.onrender.com";
 
-// 🎉 Personalize greeting
+// 🎉 Personalized greeting
 function updateGreeting() {
   const banner = document.querySelector("#greetingBanner h2");
   const user = JSON.parse(localStorage.getItem("orderCafeUser"));
@@ -16,12 +16,12 @@ function updateGreeting() {
   }
 }
 
-// 🚪 Show sign-in modal on load
+// 🚪 Show Sign-In Modal on Initial Load
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("signInModal")?.showModal();
 });
 
-// 🔐 Handle sign-in logic
+// 🔐 Sign-In Form Submission
 document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -53,23 +53,23 @@ document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
       closeModal("signInModal");
       showToast(`Welcome back, ${data.user.username} ☕`);
 
-      // 🎯 Show main content
+      // 🎯 Show main content and greeting
       document.getElementById("mainContent")?.classList.remove("hidden");
       document.getElementById("greetingBanner")?.classList.remove("hidden");
       document.getElementById("guestBanner")?.classList.add("hidden");
 
-      // 🧹 Cleanup
+      // 🧹 Clean up modals
       document.getElementById("profileOverlay")?.close();
       document.getElementById("profileOverlay")?.classList.add("hidden");
       document.getElementById("backdrop")?.classList.add("hidden");
 
-      // 🏠 Activate Home tab
+      // 🏠 Activate Home tab visually
       const homeTab = document.getElementById("homeTab");
       const tabs = [homeTab, document.getElementById("orderTab"), document.getElementById("profileTab")];
       tabs.forEach(tab => tab?.classList.remove("active"));
       homeTab?.classList.add("active");
 
-      // 🌟 Smooth scroll
+      // 🌟 Smooth scroll to top
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       showToast(data.error || "Signin failed ❌");
@@ -83,20 +83,20 @@ document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
   }
 });
 
-// 🧁 Open sign-up modal
+// 🧁 Open Sign-Up Modal
 document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
   closeModal("signInModal");
   openModal("signUpModal");
   showToast("Let’s get you signed up ☕");
 });
 
-// ❌ Cancel sign-in
+// ❌ Cancel Sign-In
 document.getElementById("closeBtn")?.addEventListener("click", () => {
   closeModal("signInModal");
   showToast("Sign-in cancelled");
 });
 
-// 🔙 Return to sign-in (e.g. from sign-up)
+// 🔙 Return to Sign-In from Sign-Up
 document.getElementById("backToSignIn")?.addEventListener("click", () => {
   localStorage.removeItem("orderCafeUser");
 
@@ -107,11 +107,10 @@ document.getElementById("backToSignIn")?.addEventListener("click", () => {
   closeModal("mainModal");
   closeModal("signUpModal");
   openModal("signInModal");
-
   showToast("Signed out — back to sign in");
 });
 
-// 🔓 Logout via profile modal
+// 🔓 Logout from Profile Modal
 document.getElementById("logoutFromProfile")?.addEventListener("click", () => {
   localStorage.removeItem("orderCafeUser");
 
@@ -122,7 +121,5 @@ document.getElementById("logoutFromProfile")?.addEventListener("click", () => {
   closeModal("profileOverlay");
   closeModal("mainModal");
   openModal("signInModal");
-
   showToast("Logged out — see you again soon ☕");
 });
-

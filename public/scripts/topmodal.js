@@ -1,7 +1,8 @@
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("menuBtn")?.addEventListener("click", showMainContent);
-  document.getElementById("ordersBtn")?.addEventListener("click", () => openModal("orderModal"));
-  document.getElementById("profileBtn")?.addEventListener("click", () => openModal("profileOverlay"));
+ document.getElementById("ordersBtn")?.addEventListener("click", () => openModal("orderModal"));  // ✅ 'orderModal' with an 'L'
+document.getElementById("profileBtn")?.addEventListener("click", () => openModal("profileOverlay"));
+document.getElementById("menuBtn")?.addEventListener("click", showMainContent);
+
 });
 function showMainContent() {
   const mainContent = document.getElementById("mainContent");
@@ -13,17 +14,21 @@ function showMainContent() {
   if (backdrop) backdrop.classList.remove("visible");
 }
 function openModal(modalId) {
-  const backdrop = document.querySelector(".modal-backdrop");
-
-  // Close any currently open modals
+  // Close visible modals
   document.querySelectorAll("dialog.visible").forEach(modal => {
     modal.classList.remove("visible");
   });
 
-  // Open the requested modal
-  const newModal = document.getElementById(modalId);
-  if (newModal) newModal.classList.add("visible");
+  // Hide mainContent when showing a modal
+  const mainContent = document.getElementById("mainContent");
+  if (mainContent) mainContent.classList.add("hidden");
+
+  // Show the requested modal
+  const modal = document.getElementById(modalId);
+  const backdrop = document.querySelector(".modal-backdrop");
+  if (modal) modal.classList.add("visible");
   if (backdrop) backdrop.classList.add("visible");
 }
+
 
 

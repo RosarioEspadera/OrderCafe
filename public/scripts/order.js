@@ -39,12 +39,16 @@
       renderCartItems();
     }
   });
+document.getElementById("closeOrderModal")?.addEventListener("click", () => {
+  closeModal("orderModal");
+});
 
   // ✅ Close Order Modal
-  function closeModal(id) {
+ function closeModal(id) {
   const modal = document.getElementById(id);
-  if (modal) modal.classList.add("hidden"); // or whatever class hides it
+  if (modal) modal.classList.add("hidden"); // or modal.style.display = "none";
 }
+
 
   // 🚀 Place Order
   document.getElementById("placeOrderBtn")?.addEventListener("click", () => {

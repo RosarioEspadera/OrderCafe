@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".modal-backdrop")?.classList.add("hidden");
   }
 });
-
+});
 
 
 

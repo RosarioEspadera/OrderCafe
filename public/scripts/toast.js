@@ -1,5 +1,4 @@
 export function showToast(message) {
-function showToast(message) {
   const toast = document.createElement("div");
   toast.className = "toast";
   toast.textContent = message;

@@ -150,11 +150,4 @@ input[type="file"]:hover {
   background-color: #802f1a;
 }
 
-/* 🫥 Utility */
-.hidden {
-  display: none !important;
-  opacity: 0;
-  pointer-events: none;
-}
-
 

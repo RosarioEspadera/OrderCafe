@@ -2,11 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const orderBtn = document.getElementById("orderBtn");
   const profileBtn = document.getElementById("profileBtn");
-
   const closeProfileBtn = document.getElementById("closeProfile");
   const closeOrderModalBtn = document.getElementById("closeOrderModal");
   const backToSignInBtn = document.getElementById("backToSignIn");
-  const switchAccountBtn = document.getElementById("switchAccountBtn");
 
   const mainContent = document.getElementById("mainContent");
   const orderModal = document.getElementById("orderModal");
@@ -17,83 +15,85 @@ document.addEventListener("DOMContentLoaded", () => {
   const productOrderButtons = document.querySelectorAll(".order-button");
   const signInButtons = signInModal?.querySelectorAll("button:not(#backToSignIn)");
 
-  // Helpers to toggle state
-  const toggleProductButtons = (isEnabled) => {
-    productOrderButtons?.forEach(btn => { btn.disabled = !isEnabled; });
+  // Select ALL modal-related buttons
+  const modalButtons = [
+    ...document.querySelectorAll("#orderModal button"),
+    ...document.querySelectorAll("#profileOverlay button"),
+    ...document.querySelectorAll("#signInModal button:not(#backToSignIn)")
+  ];
+
+  const lockModalButtons = (isLocked) => {
+    modalButtons.forEach(btn => {
+      if (isLocked) {
+        btn.setAttribute("disabled", "true");
+        btn.classList.add("disabled-modal");
+      } else {
+        btn.removeAttribute("disabled");
+        btn.classList.remove("disabled-modal");
+      }
+    });
   };
 
-  const toggleSignInButtons = (isEnabled) => {
-    signInButtons?.forEach(btn => { btn.disabled = !isEnabled; });
-  };
-
-  const toggleSwitchAccount = (isEnabled) => {
-    switchAccountBtn.disabled = !isEnabled;
-  };
-
-  // Show Main Content and lock interaction
+  // ✨ Menu View Lockdown
   menuBtn?.addEventListener("click", () => {
     mainContent?.classList.remove("hidden");
     mainContent?.scrollIntoView({ behavior: "smooth" });
-    toggleProductButtons(false);
-    toggleSignInButtons(false);
-    toggleSwitchAccount(false); // disable Switch Account in menu
+    productOrderButtons.forEach(btn => btn.disabled = true);
+    signInButtons.forEach(btn => btn.disabled = true);
+    lockModalButtons(true);
   });
 
-  // Open Order Modal
+  // 📦 Order Modal
   orderBtn?.addEventListener("click", () => {
-    toggleProductButtons(true);
-    toggleSignInButtons(true);
-    toggleSwitchAccount(true);
+    productOrderButtons.forEach(btn => btn.disabled = false);
+    signInButtons.forEach(btn => btn.disabled = false);
+    lockModalButtons(false);
     orderModal?.showModal();
     backdrop?.classList.remove("hidden");
   });
 
-  // Open Profile Modal
+  // 👤 Profile Modal
   profileBtn?.addEventListener("click", () => {
-    toggleProductButtons(true);
-    toggleSignInButtons(true);
-    toggleSwitchAccount(true);
+    productOrderButtons.forEach(btn => btn.disabled = false);
+    signInButtons.forEach(btn => btn.disabled = false);
+    lockModalButtons(false);
     profileOverlay?.classList.remove("hidden");
     profileOverlay?.showModal();
     backdrop?.classList.remove("hidden");
   });
 
-  // Switch Account — Only allowed when not in mainContent
-  switchAccountBtn?.addEventListener("click", () => {
-    const isInMain = !mainContent.classList.contains("hidden");
-    if (!isInMain) {
-      signInModal?.classList.remove("hidden");
-      signInModal?.showModal();
-      backdrop?.classList.remove("hidden");
-    } else {
-      console.warn("Switching accounts is disabled during menu view.");
-    }
+  // 🔐 Prevent Switch to SignIn in menu view
+  backToSignInBtn?.addEventListener("click", () => {
+    mainContent?.classList.add("hidden");
+    signInModal?.showModal();
+    backdrop?.classList.remove("hidden");
+    lockModalButtons(false);
   });
 
-  // Close Profile
+  // 🧼 Close Profile
   closeProfileBtn?.addEventListener("click", () => {
     profileOverlay?.close();
     profileOverlay?.classList.add("hidden");
     backdrop?.classList.add("hidden");
     mainContent?.classList.remove("hidden");
     mainContent?.scrollIntoView({ behavior: "smooth" });
-    toggleProductButtons(false);
-    toggleSignInButtons(false);
-    toggleSwitchAccount(false);
+    productOrderButtons.forEach(btn => btn.disabled = true);
+    signInButtons.forEach(btn => btn.disabled = true);
+    lockModalButtons(true);
   });
 
-  // Close Order
+  // 🧼 Close Order
   closeOrderModalBtn?.addEventListener("click", () => {
     orderModal?.close();
     backdrop?.classList.add("hidden");
     mainContent?.classList.remove("hidden");
     mainContent?.scrollIntoView({ behavior: "smooth" });
-    toggleProductButtons(false);
-    toggleSignInButtons(false);
-    toggleSwitchAccount(false);
+    productOrderButtons.forEach(btn => btn.disabled = true);
+    signInButtons.forEach(btn => btn.disabled = true);
+    lockModalButtons(true);
   });
 
-  // Escape Key — Close all modals and return to mainContent
+  // ⎋ Escape Key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       document.querySelectorAll("dialog[open]")?.forEach(modal => {
@@ -103,9 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
       backdrop?.classList.add("hidden");
       mainContent?.classList.remove("hidden");
       mainContent?.scrollIntoView({ behavior: "smooth" });
-      toggleProductButtons(false);
-      toggleSignInButtons(false);
-      toggleSwitchAccount(false);
+      productOrderButtons.forEach(btn => btn.disabled = true);
+      signInButtons.forEach(btn => btn.disabled = true);
+      lockModalButtons(true);
     }
   });
 });
+

@@ -29,8 +29,23 @@ body {
   padding: 2rem;
 }
 .hidden {
-  display: none;
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
+.modal {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.modal.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.modal.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
 #backToSignIn {
   display: inline-block;
   padding: 0.6rem 1.2rem;

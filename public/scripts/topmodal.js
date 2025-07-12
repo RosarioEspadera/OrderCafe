@@ -1,29 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 📦 Get references
   const menuBtn = document.getElementById("menuBtn");
   const ordersBtn = document.getElementById("ordersBtn");
   const profileBtn = document.getElementById("profileBtn");
-
   const orderModal = document.getElementById("orderModal");
   const profileOverlay = document.getElementById("profileOverlay");
-  const mainContent = document.getElementById("mainContent"); // If needed for Menu
+  const mainContent = document.getElementById("mainContent");
 
-  // 🍽 Menu Button shows main content
-  menuBtn.addEventListener("click", () => {
-    mainContent.classList.remove("hidden");
-  });
+  if (menuBtn && mainContent) {
+    menuBtn.addEventListener("click", () => {
+      mainContent.classList.remove("hidden");
+    });
+  }
 
-  // 🧾 Orders Button opens dialog
-  ordersBtn.addEventListener("click", () => {
-    orderModal.showModal?.();
-    orderModal.classList.remove("hidden"); // fallback if dialog doesn't support showModal
-  });
+  if (ordersBtn && orderModal) {
+    ordersBtn.addEventListener("click", () => {
+      orderModal.showModal?.();
+      orderModal.classList.remove("hidden");
+    });
+  }
 
-  // 👤 Profile Button shows overlay
-  profileBtn.addEventListener("click", () => {
-    profileOverlay.classList.remove("hidden");
-    profileOverlay.style.display = "block";
-  });
+  if (profileBtn && profileOverlay) {
+    profileBtn.addEventListener("click", () => {
+      profileOverlay.classList.remove("hidden");
+      profileOverlay.style.display = "block";
+    });
+  }
 });
 
 

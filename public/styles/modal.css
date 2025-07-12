@@ -7,7 +7,7 @@
   --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
-/* ☕ Base Modal Dialog */
+/* ☕ Base Modal Styling */
 dialog.modal {
   border: none;
   padding: 0;
@@ -19,15 +19,15 @@ dialog.modal {
   z-index: 1000;
 }
 
-/* 🪟 Modal Backdrop */
+/* 🪟 Native Dialog Backdrop */
 dialog::backdrop {
-  backdrop-filter: blur(2px); /* softer */
-  background-color: rgba(0, 0, 0, 0.2); /* lighter dim */
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
 }
 
-/* 🧁 Modal Inner Box */
+/* 📦 Modal Container */
 .modal-content {
-  background: var(--cafe-cream);
+  background-color: var(--cafe-cream);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 2rem;
@@ -36,6 +36,7 @@ dialog::backdrop {
   animation: fadeInUp 0.4s ease;
 }
 
+/* ✨ Modal Entrance Animation */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -47,7 +48,7 @@ dialog::backdrop {
   }
 }
 
-/* ✍️ Form Fields */
+/* ✍️ Form Elements */
 label {
   display: block;
   margin-bottom: 0.5rem;
@@ -60,7 +61,7 @@ input {
   padding: 0.75rem;
   border-radius: var(--radius);
   border: 1px solid var(--cafe-toast);
-  background: #fff;
+  background-color: #fff;
   color: var(--cafe-brown);
   margin-bottom: 1.25rem;
   transition: border-color 0.3s ease;
@@ -71,7 +72,7 @@ input:focus {
   outline: none;
 }
 
-/* 🔘 Buttons */
+/* 🔘 Button Styles */
 button {
   padding: 0.8rem 1.2rem;
   background-color: var(--cafe-toast);
@@ -89,7 +90,7 @@ button:hover {
   transform: scale(1.03);
 }
 
-/* 🎨 Responsive */
+/* 📱 Responsive Modal Content */
 @media screen and (max-width: 600px) {
   .modal-content {
     max-width: 90%;
@@ -100,9 +101,11 @@ button:hover {
     width: 100%;
   }
 }
+
+/* 🌫️ Custom Modal Backdrop */
 .modal-backdrop {
   backdrop-filter: blur(6px);
-  background: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
   inset: 0;
   z-index: 999;
@@ -113,4 +116,3 @@ button:hover {
   opacity: 0;
   pointer-events: none;
 }
-

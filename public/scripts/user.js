@@ -1,8 +1,11 @@
-export function getUserData() {
+export function clearUserData() {
+  localStorage.removeItem("orderCafeUser");
+}
+
+export function saveUserData(user) {
   try {
-    const raw = localStorage.getItem("orderCafeUser");
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
+    localStorage.setItem("orderCafeUser", JSON.stringify(user));
+  } catch (err) {
+    console.error("Failed to save user data ☁️", err);
   }
 }

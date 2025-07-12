@@ -4,19 +4,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logoutFromProfile");
   const currentPhoto = document.getElementById("currentProfilePhoto");
   const photoUploadInput = document.getElementById("profilePhotoUpload");
+  const closeBtn = document.getElementById("closeProfile");
+  const backdrop = document.querySelector(".modal-backdrop");
 
-  let user = JSON.parse(localStorage.getItem("orderCafeUser")) || null;
   const fallbackPhoto = "styles/images/bg.png";
+  let user = JSON.parse(localStorage.getItem("orderCafeUser")) || null;
 
   function loadProfile() {
-    if (user?.username) {
-      profileName.textContent = user.username;
-      currentPhoto.src = user.profilePhoto || fallbackPhoto;
-      profileOverlay.showModal();
-    } else {
-      currentPhoto.src = fallbackPhoto;
-      profileName.textContent = "Guest";
-    }
+    currentPhoto.src = user?.profilePhoto || fallbackPhoto;
+    profileName.textContent = user?.username || "Guest";
+
+    profileOverlay.classList.remove("hidden");
+    profileOverlay.showModal();
+    backdrop?.classList.remove("hidden");
   }
 
   photoUploadInput?.addEventListener("change", () => {
@@ -35,11 +35,18 @@ document.addEventListener("DOMContentLoaded", () => {
   logoutBtn?.addEventListener("click", () => {
     localStorage.removeItem("orderCafeUser");
     profileOverlay.close();
+    profileOverlay.classList.add("hidden");
     profileName.textContent = "Guest";
     currentPhoto.src = fallbackPhoto;
+    backdrop?.classList.add("hidden");
     document.getElementById("signInModal")?.showModal();
+  });
+
+  closeBtn?.addEventListener("click", () => {
+    profileOverlay.close();
+    profileOverlay.classList.add("hidden");
+    backdrop?.classList.add("hidden");
   });
 
   loadProfile();
 });
-

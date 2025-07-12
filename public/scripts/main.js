@@ -65,7 +65,7 @@ toggleGuestBanner();
     observer.observe(card);
   });
   
-document.getElementById("menuBtn")?.addEventListener("click", showMainContent);
+document.getElementById("mainContent")?.classList.remove("hidden");
 
   
   document.getElementById("backToSignIn")?.addEventListener("click", function (e) {

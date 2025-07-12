@@ -79,8 +79,7 @@ profileTab?.addEventListener("click", () => {
     toggleSignInButtons(true);
     lockModalButtons(false);
   } else {
-    showToast("Please sign in first ☕");
-    // Optional: redirect to sign-in modal
+    showToast("Please sign in to access your profile ☕");
     openModal("signInModal");
   }
 });

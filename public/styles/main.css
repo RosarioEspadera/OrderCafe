@@ -31,6 +31,21 @@ body {
 .hidden {
   display: none;
 }
+#backToSignIn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: #6b4f3b;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#backToSignIn:hover {
+  background-color: #8c6651;
+}
 
 /* ────────────────────────────────────────────────
    🛍️ Product Card Styling

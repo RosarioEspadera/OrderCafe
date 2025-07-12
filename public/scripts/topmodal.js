@@ -1,4 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+  // ✅ Global State Initialization Function
+  function initializeAppState() {
+    const modals = document.querySelectorAll("dialog");
+    const backdrop = document.querySelector(".modal-backdrop");
+    const tabs = ["homeTab", "orderTab", "profileTab"];
+    const banners = ["guestBanner", "greetingBanner"];
+    const mainContent = document.getElementById("mainContent");
+    const profileOverlay = document.getElementById("profileOverlay");
+
+    modals.forEach(modal => {
+      modal.close?.();
+      modal.classList.add("hidden");
+    });
+
+    profileOverlay?.close();
+    profileOverlay?.classList.add("hidden");
+    backdrop?.classList.add("hidden");
+
+    tabs.forEach(id => {
+      document.getElementById(id)?.classList.remove("active");
+    });
+    document.getElementById("homeTab")?.classList.add("active");
+
+    banners.forEach(id => {
+      document.getElementById(id)?.classList.add("hidden");
+    });
+    document.getElementById("guestBanner")?.classList.remove("hidden");
+
+    mainContent?.classList.remove("hidden");
+
+    console.log("✅ App state initialized");
+  }
+
+  // 🔄 Reset app state before anything else
+  initializeAppState();
+
   // 🌟 Element References
   const homeTab = document.getElementById("homeTab");
   const orderTab = document.getElementById("orderTab");
@@ -10,11 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileOverlay = document.getElementById("profileOverlay");
   const closeProfileButton = document.getElementById("closeProfile");
   const backdrop = document.querySelector(".modal-backdrop");
-profileOverlay?.classList.add("hidden");
-profileOverlay?.close();
-backdrop?.classList.add("hidden");
 
-  
   // 🧩 Utility Functions
   const activateTab = (activeTab) => {
     tabs.forEach(tab => {
@@ -70,24 +103,23 @@ backdrop?.classList.add("hidden");
   });
 
   // 👤 Profile Tab
-profileTab?.addEventListener("click", () => {
-  const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+  profileTab?.addEventListener("click", () => {
+    const user = JSON.parse(localStorage.getItem("orderCafeUser"));
 
-  if (user && typeof user.username === "string" && user.username.trim() !== "" && user.username !== "Guest") {
-    activateTab(profileTab);
-    mainContent.classList.add("hidden");
-    profileOverlay?.classList.remove("hidden");
-    profileOverlay?.showModal();
-    backdrop?.classList.remove("hidden");
-    toggleProductButtons(true);
-    toggleSignInButtons(true);
-    lockModalButtons(false);
-  } else {
-    showToast("Please sign in to access your profile ☕");
-    openModal("signInModal");
-  }
-});
-
+    if (user && typeof user.username === "string" && user.username.trim() !== "" && user.username !== "Guest") {
+      activateTab(profileTab);
+      mainContent.classList.add("hidden");
+      profileOverlay?.classList.remove("hidden");
+      profileOverlay?.showModal();
+      backdrop?.classList.remove("hidden");
+      toggleProductButtons(true);
+      toggleSignInButtons(true);
+      lockModalButtons(false);
+    } else {
+      showToast("Please sign in to access your profile ☕");
+      openModal("signInModal");
+    }
+  });
 
   // ❌ Close Profile Modal
   closeProfileButton?.addEventListener("click", () => {
@@ -101,7 +133,6 @@ profileTab?.addEventListener("click", () => {
     lockModalButtons(true);
   });
 
-  // ✨ Optional: Activate Home Tab on First Load
- homeTab?.click();
-
+  // ✨ Activate Home Tab on First Load
+  homeTab?.click();
 });

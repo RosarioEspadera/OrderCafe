@@ -1,26 +1,27 @@
+// 🌐 Import utilities
 import { showToast } from './toast.js';
 import { openModal, closeModal } from './modal.js';
 
+// 🔗 Backend endpoint
 const BACKEND_URL = location.hostname === "localhost"
   ? "http://localhost:3000"
   : "https://ordercafe-rio-hxxc.onrender.com";
 
-// 🎉 Inject Greeting
+// 🎉 Personalize greeting
 function updateGreeting() {
   const banner = document.querySelector("#greetingBanner h2");
   const user = JSON.parse(localStorage.getItem("orderCafeUser"));
-
   if (banner && user?.username) {
     banner.innerHTML = `Welcome back, <span class="username">${user.username}</span> ☕`;
   }
 }
 
-// 🚪 Open Sign-In Modal on Load
+// 🚪 Show sign-in modal on load
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("signInModal")?.showModal();
 });
 
-// 📝 Handle Sign-In
+// 🔐 Handle sign-in logic
 document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -38,29 +39,43 @@ document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
     button.disabled = true;
     loader?.classList.remove("hidden");
 
-    const res = await fetch(`${BACKEND_URL}/signin`, {
+    const response = await fetch(`${BACKEND_URL}/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password })
     });
 
-    const data = await res.json();
+    const data = await response.json();
 
-    if (res.ok && data.user) {
+    if (response.ok && data.user) {
       localStorage.setItem("orderCafeUser", JSON.stringify(data.user));
       updateGreeting();
-
       closeModal("signInModal");
       showToast(`Welcome back, ${data.user.username} ☕`);
 
+      // 🎯 Show main content
       document.getElementById("mainContent")?.classList.remove("hidden");
       document.getElementById("greetingBanner")?.classList.remove("hidden");
       document.getElementById("guestBanner")?.classList.add("hidden");
+
+      // 🧹 Cleanup
+      document.getElementById("profileOverlay")?.close();
+      document.getElementById("profileOverlay")?.classList.add("hidden");
+      document.getElementById("backdrop")?.classList.add("hidden");
+
+      // 🏠 Activate Home tab
+      const homeTab = document.getElementById("homeTab");
+      const tabs = [homeTab, document.getElementById("orderTab"), document.getElementById("profileTab")];
+      tabs.forEach(tab => tab?.classList.remove("active"));
+      homeTab?.classList.add("active");
+
+      // 🌟 Smooth scroll
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       showToast(data.error || "Signin failed ❌");
     }
-  } catch (err) {
-    console.error("Signin error:", err);
+  } catch (error) {
+    console.error("Signin error:", error);
     showToast("Server error ☁️");
   } finally {
     button.disabled = false;
@@ -68,20 +83,20 @@ document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
   }
 });
 
-// 🧁 Toggle to Sign-Up
+// 🧁 Open sign-up modal
 document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
   closeModal("signInModal");
   openModal("signUpModal");
   showToast("Let’s get you signed up ☕");
 });
 
-// ❌ Cancel Sign-In
+// ❌ Cancel sign-in
 document.getElementById("closeBtn")?.addEventListener("click", () => {
   closeModal("signInModal");
   showToast("Sign-in cancelled");
 });
 
-// 🔙 Back to Sign-In
+// 🔙 Return to sign-in (e.g. from sign-up)
 document.getElementById("backToSignIn")?.addEventListener("click", () => {
   localStorage.removeItem("orderCafeUser");
 
@@ -96,12 +111,18 @@ document.getElementById("backToSignIn")?.addEventListener("click", () => {
   showToast("Signed out — back to sign in");
 });
 
-// 🔄 Switch Account
-document.getElementById("switchAccountBtn")?.addEventListener("click", () => {
-  if (window.confirm("Sign out and return to sign-in?")) {
-    localStorage.removeItem("orderCafeUser");
-    closeModal("mainModal");
-    openModal("signInModal");
-    showToast("Signed out ☕");
-  }
+// 🔓 Logout via profile modal
+document.getElementById("logoutFromProfile")?.addEventListener("click", () => {
+  localStorage.removeItem("orderCafeUser");
+
+  document.getElementById("mainContent")?.classList.add("hidden");
+  document.getElementById("greetingBanner")?.classList.add("hidden");
+  document.getElementById("guestBanner")?.classList.remove("hidden");
+
+  closeModal("profileOverlay");
+  closeModal("mainModal");
+  openModal("signInModal");
+
+  showToast("Logged out — see you again soon ☕");
 });
+

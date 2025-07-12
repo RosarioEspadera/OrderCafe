@@ -103,35 +103,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 👤 Profile Tab
-  profileTab?.addEventListener("click", () => {
-    const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+profileTab?.addEventListener("click", () => {
+  // Instead of opening a modal, reveal a dedicated profile section
+  mainContent?.classList.add("hidden");
+  document.getElementById("profileContent")?.classList.remove("hidden");
 
-    if (user && typeof user.username === "string" && user.username.trim() !== "" && user.username !== "Guest") {
-      activateTab(profileTab);
-      mainContent.classList.add("hidden");
-      profileOverlay?.classList.remove("hidden");
-      profileOverlay?.showModal();
-      backdrop?.classList.remove("hidden");
-      toggleProductButtons(true);
-      toggleSignInButtons(true);
-      lockModalButtons(false);
-    } else {
-      showToast("Please sign in to access your profile ☕");
-      openModal("signInModal");
-    }
-  });
+  activateTab(profileTab); // if you're still using tab highlighting
+});
 
-  // ❌ Close Profile Modal
-  closeProfileButton?.addEventListener("click", () => {
-    profileOverlay?.close();
-    profileOverlay?.classList.add("hidden");
-    backdrop?.classList.add("hidden");
-    mainContent.classList.remove("hidden");
-    activateTab(homeTab);
-    toggleProductButtons(false);
-    toggleSignInButtons(false);
-    lockModalButtons(true);
-  });
 
   // ✨ Activate Home Tab on First Load
   homeTab?.click();

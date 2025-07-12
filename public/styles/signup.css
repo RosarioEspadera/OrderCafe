@@ -1,29 +1,84 @@
-#signUpModal {
-  max-width: 420px;
-  padding: 2rem;
-  background: #fff8f5;
-  border-radius: var(--radius);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+:root {
+  --cafe-cream: #fff8f5;
+  --cafe-brown: #6f4e37;
+  --cafe-accent: #c99c79;
+  --radius: 10px;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  --font-body: 'Inter', sans-serif;
+  --font-logo: 'Pacifico', cursive;
 }
 
+/* 🍪 Sign-Up Modal */
+#signUpModal {
+  max-width: 420px;
+  margin: auto;
+  padding: 2rem;
+  background: var(--cafe-cream);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-family: var(--font-body);
+  animation: slideInFade 0.5s ease;
+}
+
+/* ✨ Modal Entrance */
+@keyframes slideInFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🧁 Input Labels */
 label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
+  color: var(--cafe-brown);
 }
 
+/* ☕ Input Fields */
 input {
   width: 100%;
   margin-bottom: 1.25rem;
   padding: 0.75rem;
-  border: 1px solid #d8b4a0;
+  border: 1px solid var(--cafe-accent);
   border-radius: var(--radius);
+  background: white;
+  color: var(--cafe-brown);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
+input:focus {
+  border-color: var(--cafe-brown);
+  outline: none;
+}
+
+/* 🚫 Username Warning */
 #usernameTakenWarning {
   color: #b83c2e;
   font-size: 0.9rem;
   font-style: italic;
   margin-top: -0.75rem;
   margin-bottom: 1rem;
+  text-align: left;
 }
+
+/* 🧈 Button Styling */
+button {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--cafe-accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--cafe-brown);
+  transform: scale(1.02);
+}
+

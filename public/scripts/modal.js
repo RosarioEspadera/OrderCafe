@@ -4,7 +4,19 @@ export function openModal(id) {
 
   if (!modal) return;
 
-  if (modal.tagName === "DIALOG" && modal.showModal) {
+  // Accessibility improvement
+  modal.setAttribute("aria-hidden", "false");
+
+  // Force hide other modals
+  document.querySelectorAll("dialog").forEach(m => {
+    if (m.id !== id) {
+      m.classList.add("hidden");
+      m.close?.();
+    }
+  });
+
+  // Toggle visibility
+  if (modal.tagName === "DIALOG" && typeof modal.showModal === "function") {
     modal.classList.remove("hidden");
     modal.showModal();
   } else {
@@ -20,9 +32,12 @@ export function closeModal(id) {
 
   if (!modal) return;
 
-  if (modal.tagName === "DIALOG" && modal.close) {
+  // Accessibility improvement
+  modal.setAttribute("aria-hidden", "true");
+
+  if (modal.tagName === "DIALOG" && typeof modal.close === "function") {
     modal.close();
-    modal.classList.add("hidden"); // optional if you use this in styles
+    modal.classList.add("hidden");
   } else {
     modal.classList.remove("visible");
   }

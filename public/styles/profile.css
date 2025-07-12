@@ -1,10 +1,19 @@
 #profileOverlay {
-  max-width: 420px;
-  padding: 2rem;
-  border-radius: var(--radius);
-  background-color: #fff6ee;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff8f0;
+  z-index: 1000;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 
 #currentProfilePhoto {
   width: 80px;

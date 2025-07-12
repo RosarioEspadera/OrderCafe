@@ -7,7 +7,7 @@
   --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* 🔝 Top Modal Bar */
+/* 🔝 Top Navigation Bar */
 .topmodal-bar {
   display: flex;
   justify-content: center;
@@ -18,17 +18,12 @@
   gap: 1rem;
   box-shadow: var(--shadow);
   font-family: var(--font-body);
-  z-index: 11111;
   position: sticky;
   top: 0;
+  z-index: 11111;
 }
-.modal-backdrop {
-  z-index: 900;
-}
-.modal {
-  z-index: 1000;
-}
-/* 🍯 Top Buttons */
+
+/* 🍯 Top Navigation Buttons */
 .topmodal-button {
   background-color: var(--cafe-toast);
   color: white;
@@ -44,14 +39,21 @@
   background-color: var(--cafe-brown);
   transform: scale(1.04);
 }
+
+.topmodal-button.active {
+  background-color: #b98360;
+  box-shadow: 0 0 0 3px rgba(201, 156, 121, 0.3);
+}
+
+/* 🌫️ Modal Backdrop */
 .modal-backdrop {
   position: fixed;
   inset: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 900;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+  z-index: 900;
 }
 
 .modal-backdrop.visible {
@@ -59,14 +61,22 @@
   pointer-events: auto;
 }
 
-
-/* ✅ Active State */
-.topmodal-button.active {
-  background-color: #b98360;
-  box-shadow: 0 0 0 3px rgba(201,156,121,0.3);
+/* 🎬 Modal Component Visibility */
+.modal {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 1000;
 }
 
-/* 🔽 Modal Slide Animation */
+.modal.visible {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 🧍‍♂️ Profile Slide Effect */
 #profileOverlay {
   transform: translateY(-10px);
   opacity: 0;
@@ -78,14 +88,14 @@
   opacity: 1;
 }
 
-/* 🫥 Utility */
+/* 🙈 Utility Class */
 .hidden {
   display: none !important;
   opacity: 0;
   pointer-events: none;
 }
 
-/* 📱 Responsive Tweaks */
+/* 📱 Responsive Enhancements */
 @media screen and (max-width: 768px) {
   .topmodal-bar {
     flex-direction: column;
@@ -96,4 +106,3 @@
     width: 100%;
   }
 }
-

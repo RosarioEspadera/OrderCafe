@@ -9,7 +9,7 @@ activateTab(homeTab);
   const mainContent = document.getElementById("mainContent");
   const orderModal = document.getElementById("orderModal");
   const profileOverlay = document.getElementById("profileOverlay");
-  const closeProfileButton = document.getElementById("closeProfile");
+ const closeProfileButton = document.getElementById("closeProfile");
   const backdrop = document.getElementById("backdrop");
 
   // 🧃 Utility Functions
@@ -67,21 +67,21 @@ activateTab(homeTab);
   });
 
   profileTab?.addEventListener("click", () => {
-    activateTab(profileTab);
-    mainContent.classList.add("hidden");
-    profileOverlay?.classList.remove("hidden");
-    profileOverlay?.showModal();
-    backdrop?.classList.remove("hidden");
-    toggleProductButtons(true);
-    toggleSignInButtons(true);
-    lockModalButtons(false);
-  });
+  activateTab(profileTab);
+  mainContent.classList.add("hidden");
+  profileOverlay?.classList.remove("hidden");
+  profileOverlay?.showModal();
+  backdrop?.classList.remove("hidden");
+  toggleProductButtons(true);
+  toggleSignInButtons(true);
+  lockModalButtons(false);
+});
 
-  closeProfileButton?.addEventListener("click", () => {
+closeProfileButton?.addEventListener("click", () => {
   profileOverlay?.close();
   profileOverlay?.classList.add("hidden");
   backdrop?.classList.add("hidden");
-  mainContent.classList.remove("hidden"); // 👈 Add this!
+  mainContent.classList.remove("hidden");
   activateTab(homeTab);
   toggleProductButtons(false);
   toggleSignInButtons(false);

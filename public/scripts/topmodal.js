@@ -16,16 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
     orderModal?.showModal();
   });
 
-  profileBtn?.addEventListener("click", () => {
-    profileOverlay?.showModal();
-  });
+ profileBtn?.addEventListener("click", () => {
+  profileOverlay.classList.remove("hidden");         // ensure visibility
+  profileOverlay.showModal();                        // native dialog open
+  document.querySelector(".modal-backdrop")?.classList.remove("hidden"); // blur overlay
+});
+
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      document.querySelectorAll("dialog[open]")?.forEach(modal => modal.close?.());
-    }
-  });
+  if (e.key === "Escape") {
+    document.querySelectorAll("dialog[open]")?.forEach(modal => {
+      modal.close?.();
+      modal.classList.add("hidden");
+    });
+    document.querySelector(".modal-backdrop")?.classList.add("hidden");
+  }
 });
+
 
 
 

@@ -49,10 +49,14 @@
     closeModal("orderModal");
   });
 
-  function closeModal(id) {
-    const modal = document.getElementById(id);
-    if (modal) modal.classList.add("hidden");
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.close(); // ← important for dialog element
   }
+}
+
 
   // 🚚 Place Order via EmailJS
   document.getElementById("placeOrderBtn")?.addEventListener("click", () => {

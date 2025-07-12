@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 🌟 DOM Elements
+  // 🌟 Element References
   const profileOverlay = document.getElementById("profileOverlay");
   const profileName = document.getElementById("profileName");
   const logoutBtn = document.getElementById("logoutFromProfile");
@@ -10,37 +10,38 @@ document.addEventListener("DOMContentLoaded", () => {
   const photoUploadInput = document.getElementById("profilePhotoUpload");
   const guestBanner = document.getElementById("guestBanner");
   const closeProfileBtn = document.getElementById("closeProfile");
+  const fallbackPhoto = "styles/images/bg.png";
 
-  const fallbackPhoto = "https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png";
-
-  // 🔑 Load User Data
+  // 🔍 Load User Info
   let user = null;
   try {
-    user = JSON.parse(localStorage.getItem("orderCafeUser")) || null;
+    user = JSON.parse(localStorage.getItem("orderCafeUser"));
   } catch (err) {
-    console.warn("Unable to parse user data:", err);
+    console.warn("Failed to load user data:", err);
   }
 
-  // 🧾 Show Profile or Guest
-  if (user) {
-    displayUserProfile(user);
+  // 🧾 Show Profile or Guest Mode
+  if (user && user.username) {
+    showProfile(user);
   } else {
     guestBanner?.classList.remove("hidden");
+    currentPhoto.src = fallbackPhoto;
   }
 
-  // 👤 Display Profile Info
-  function displayUserProfile(user) {
-    profileName.textContent = user.username || "Guest";
+  // 👤 Display User Details
+  function showProfile(user) {
+    profileName.textContent = user.username;
     currentPhoto.src = user.profilePhoto || fallbackPhoto;
 
-    if (!profileOverlay.open) {
+    if (profileOverlay?.tagName === "DIALOG") {
       profileOverlay.showModal?.();
+    } else {
+      profileOverlay?.classList.remove("hidden");
+      profileOverlay.style.display = "block";
     }
-    profileOverlay.classList.remove("hidden");
-    profileOverlay.style.display = "block";
   }
 
-  // 🖼️ Preview Profile Photo
+  // 🖼️ View Full Size Profile Photo
   currentPhoto?.addEventListener("click", () => {
     const src = currentPhoto.src;
     if (src && src !== fallbackPhoto) {
@@ -49,11 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // ❌ Close Photo Preview
   closePhotoPreview?.addEventListener("click", () => {
     photoPreviewOverlay.classList.add("hidden");
+    fullSizePhoto.src = "";
   });
 
-  // 📷 Handle New Profile Photo Upload
+  // 📷 Handle Profile Photo Upload
   photoUploadInput?.addEventListener("change", () => {
     const file = photoUploadInput.files[0];
     if (!file || !file.type.startsWith("image/")) {
@@ -71,24 +74,37 @@ document.addEventListener("DOMContentLoaded", () => {
     reader.readAsDataURL(file);
   });
 
-  // ❌ Close Profile Modal
+  // 🔙 Close Profile Overlay
   closeProfileBtn?.addEventListener("click", () => {
-    profileOverlay.close?.();
-    profileOverlay.style.display = "none";
+    if (profileOverlay?.tagName === "DIALOG") {
+      profileOverlay.close?.();
+    } else {
+      profileOverlay?.classList.add("hidden");
+      profileOverlay.style.display = "none";
+    }
   });
 
-  // 🚪 Logout
+  // 🔓 Logout and Reset View
   logoutBtn?.addEventListener("click", () => {
     localStorage.removeItem("orderCafeUser");
-    profileOverlay.close?.();
-    profileOverlay.style.display = "none";
-    guestBanner?.classList.remove("hidden");
 
+    if (profileOverlay?.tagName === "DIALOG") {
+      profileOverlay.close?.();
+    } else {
+      profileOverlay?.classList.add("hidden");
+      profileOverlay.style.display = "none";
+    }
+
+    guestBanner?.classList.remove("hidden");
     profileName.textContent = "Guest";
     currentPhoto.src = fallbackPhoto;
 
-    document.getElementById("signInModal")?.showModal?.();
+    const signInModal = document.getElementById("signInModal");
+    if (signInModal?.tagName === "DIALOG") {
+      signInModal.showModal?.();
+    } else {
+      signInModal?.classList.remove("hidden");
+      signInModal.style.display = "block";
+    }
   });
 });
-
-

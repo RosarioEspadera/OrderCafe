@@ -1,77 +1,72 @@
-// ✏️ Live Username Validation
 import { showToast } from './toast.js';
-document.getElementById("newUsername")?.addEventListener("input", async (e) => {
-  const BACKEND_URL = location.hostname === "localhost" 
-  ? "http://localhost:3000" 
+import { openModal, closeModal } from './modal.js';
+
+const BACKEND_URL = location.hostname === "localhost"
+  ? "http://localhost:3000"
   : "https://ordercafe-rio-hxxc.onrender.com";
-  const username = e.target.value.trim();
-  const warning = document.getElementById("usernameTakenWarning");
 
-  if (!username || username.length < 3) {
+document.addEventListener("DOMContentLoaded", () => {
+  const signUpForm = document.getElementById("signUpForm");
+  const usernameInput = document.getElementById("newUsername");
+  const passwordInput = document.getElementById("newPassword");
+  const warning = document.getElementById("usernameTakenWarning");
+  const signUpBtn = document.getElementById("signUpBtn");
+  const cancelBtn = document.getElementById("signUpCloseBtn");
+
+  // ✅ Hide warning on input
+  usernameInput?.addEventListener("input", () => {
     warning?.classList.add("hidden");
-    return;
-  }
+  });
 
-  try {
-    const res = await fetch(`${BACKEND_URL}/api/user/${username}`);
-    const isTaken = res.ok;
-    warning?.classList[isTaken ? "remove" : "add"]("hidden");
-  } catch (err) {
-    console.error("Username check error:", err);
-    warning?.classList.add("hidden"); // Fallback: assume not taken
-  }
-});
+  // 🔐 Handle Sign-Up
+  signUpForm?.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-// 🛂 Sign-Up Button Handler
-document.getElementById("signUpBtn")?.addEventListener("click", async () => {
-  const username = document.getElementById("newUsername")?.value.trim();
-  const password = document.getElementById("newPassword")?.value.trim();
-  const warning = document.getElementById("usernameTakenWarning");
+    const username = usernameInput?.value.trim();
+    const password = passwordInput?.value.trim();
 
-  if (!username || !password) {
-    showToast("Fill out all fields!");
-    return;
-  }
-
-  if (password.length < 6) {
-    showToast("Password must be at least 6 characters 🔐");
-    return;
-  }
-
-  const warningVisible = !warning?.classList.contains("hidden");
-  if (warningVisible) {
-    showToast("That username is already taken ☕");
-    return;
-  }
-
-  try {
-    const res = await fetch(`${BACKEND_URL}/signup`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password })
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      localStorage.setItem("orderCafeUser", JSON.stringify({
-        username,
-        profilePhoto: "",
-        orders: []
-      }));
-
-      // Optional: Hide guest banner, update profile, refresh UI
-      document.getElementById("guestBanner")?.classList.add("hidden");
-      document.getElementById("mainContent")?.classList.remove("hidden");
-
-      closeModal("signUpModal");
-      openModal("mainModal");
-      showToast("Account created ☕");
-    } else {
-      showToast(data.error || "Signup failed ❌");
+    if (!username || !password) {
+      showToast("Please enter a username and password ☕");
+      return;
     }
-  } catch (err) {
-    console.error("Signup error:", err);
-    showToast("Server error ☁️");
-  }
+
+    try {
+      signUpBtn.disabled = true;
+
+      const res = await fetch(`${BACKEND_URL}/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.user) {
+        localStorage.setItem("orderCafeUser", JSON.stringify(data.user));
+        showToast("Account created! Welcome to Rio’s Café ☕");
+
+        closeModal("signUpModal");
+        openModal("signInModal");
+        document.getElementById("username")?.focus();
+      } else if (res.status === 409) {
+        warning?.classList.remove("hidden");
+        showToast("Username already taken 🍩");
+      } else {
+        showToast(data.error || "Sign-up failed ❌");
+      }
+    } catch (err) {
+      console.error("Signup error:", err);
+      showToast("Server error ☁️");
+    } finally {
+      signUpBtn.disabled = false;
+    }
+  });
+
+  // ❌ Cancel Sign-Up
+  cancelBtn?.addEventListener("click", () => {
+    closeModal("signUpModal");
+    openModal("signInModal");
+    showToast("Sign-up cancelled 🍃");
+  });
 });
+

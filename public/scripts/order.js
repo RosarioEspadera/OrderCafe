@@ -1,12 +1,19 @@
 (() => {
-  // 🛒 Load Cart from localStorage
+  // 🛒 Load cart from storage
   let cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
 
-  // ✅ Render Cart Items in the Modal
+  // 🔁 Save cart to localStorage
+  function saveCart() {
+    localStorage.setItem("orderCafeCart", JSON.stringify(cart));
+  }
+
+  // 🧾 Render items inside order modal
   function renderCartItems() {
     const cartList = document.getElementById("cartList");
     const emptyMsg = document.getElementById("emptyCartMessage");
     const totalLabel = document.getElementById("cartTotal");
+
+    if (!cartList || !emptyMsg || !totalLabel) return;
 
     cartList.innerHTML = "";
     let total = 0;
@@ -33,32 +40,23 @@
     totalLabel.textContent = `$${total.toFixed(2)}`;
   }
 
-  // 🧹 Remove Item from Cart
+  // 🧹 Remove item from cart
   document.getElementById("cartList")?.addEventListener("click", (e) => {
     const target = e.target;
     if (target.classList.contains("remove-item")) {
       const index = parseInt(target.dataset.index);
       cart.splice(index, 1);
-      localStorage.setItem("orderCafeCart", JSON.stringify(cart));
+      saveCart();
       renderCartItems();
     }
   });
 
-  // ❌ Close Cart Modal
+  // ❌ Close order modal
   document.getElementById("closeOrderModal")?.addEventListener("click", () => {
     closeModal("orderModal");
   });
 
-function closeModal(id) {
-  const modal = document.getElementById(id);
-  if (modal) {
-    modal.classList.add("hidden");
-    modal.close(); // ← important for dialog element
-  }
-}
-
-
-  // 🚚 Place Order via EmailJS
+  // ✅ Order submission via EmailJS
   document.getElementById("placeOrderBtn")?.addEventListener("click", () => {
     if (cart.length === 0) {
       showToast("Your cart is empty ☕");
@@ -66,13 +64,13 @@ function closeModal(id) {
     }
 
     const user = JSON.parse(localStorage.getItem("orderCafeUser"));
-    if (!user?.username) {
-      showToast("No user found ❌");
+    if (!user?.username || user.username === "Guest") {
+      showToast("Please sign in to place your order 🍃");
       return;
     }
 
     const orderDetails = cart
-      .map(item => `${item.name} - $${item.price.toFixed(2)}`)
+      .map(item => `${item.name} — $${item.price.toFixed(2)}`)
       .join("\n");
 
     const total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -85,7 +83,7 @@ function closeModal(id) {
     .then(() => {
       showToast("Order sent to Rio's Café 📩");
       cart = [];
-      localStorage.setItem("orderCafeCart", JSON.stringify([]));
+      saveCart();
       renderCartItems();
       closeModal("orderModal");
     })
@@ -95,6 +93,7 @@ function closeModal(id) {
     });
   });
 
-  // 🚀 Initialize Cart on Page Load
+  // 🚀 Initialize on load
   window.addEventListener("DOMContentLoaded", renderCartItems);
 })();
+

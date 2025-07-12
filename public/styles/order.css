@@ -89,3 +89,14 @@
   font-style: italic;
   color: #6e4e3b;
 }
+.modal {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.modal:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+}
+.modal.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+}

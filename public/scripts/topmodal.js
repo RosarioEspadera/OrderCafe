@@ -10,7 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileOverlay = document.getElementById("profileOverlay");
   const closeProfileButton = document.getElementById("closeProfile");
   const backdrop = document.querySelector(".modal-backdrop");
+profileOverlay?.classList.add("hidden");
+profileOverlay?.close();
+backdrop?.classList.add("hidden");
 
+  
   // 🧩 Utility Functions
   const activateTab = (activeTab) => {
     tabs.forEach(tab => {
@@ -69,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 profileTab?.addEventListener("click", () => {
   const user = JSON.parse(localStorage.getItem("orderCafeUser"));
 
-  if (user && user.username) {
+  if (user && typeof user.username === "string" && user.username.trim() !== "" && user.username !== "Guest") {
     activateTab(profileTab);
     mainContent.classList.add("hidden");
     profileOverlay?.classList.remove("hidden");
@@ -98,5 +102,6 @@ profileTab?.addEventListener("click", () => {
   });
 
   // ✨ Optional: Activate Home Tab on First Load
-  activateTab(homeTab);
+ homeTab?.click();
+
 });

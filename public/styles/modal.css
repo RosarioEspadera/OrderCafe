@@ -1,0 +1,102 @@
+:root {
+  --cafe-brown: #6f4e37;
+  --cafe-toast: #c99c79;
+  --cafe-cream: #fff8f0;
+  --radius: 10px;
+  --font-body: 'Inter', sans-serif;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ☕ Base Modal Dialog */
+dialog.modal {
+  border: none;
+  padding: 0;
+  background: transparent;
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  font-family: var(--font-body);
+  z-index: 1000;
+}
+
+/* 🪟 Modal Backdrop */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+/* 🧁 Modal Inner Box */
+.modal-content {
+  background: var(--cafe-cream);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  max-width: 500px;
+  margin: auto;
+  animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ✍️ Form Fields */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--cafe-brown);
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--cafe-toast);
+  background: #fff;
+  color: var(--cafe-brown);
+  margin-bottom: 1.25rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: var(--cafe-brown);
+  outline: none;
+}
+
+/* 🔘 Buttons */
+button {
+  padding: 0.8rem 1.2rem;
+  background-color: var(--cafe-toast);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--cafe-brown);
+  transform: scale(1.03);
+}
+
+/* 🎨 Responsive */
+@media screen and (max-width: 600px) {
+  .modal-content {
+    max-width: 90%;
+    padding: 1.5rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}

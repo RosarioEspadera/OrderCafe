@@ -1,11 +1,14 @@
+// 🌐 Imports
 import { showToast } from './toast.js';
 import { openModal, closeModal } from './modal.js';
 
+// 🔗 Backend Endpoint
 const BACKEND_URL = location.hostname === "localhost"
   ? "http://localhost:3000"
   : "https://ordercafe-rio-hxxc.onrender.com";
 
 document.addEventListener("DOMContentLoaded", () => {
+  // 🌟 Element References
   const signUpForm = document.getElementById("signUpForm");
   const usernameInput = document.getElementById("newUsername");
   const passwordInput = document.getElementById("newPassword");
@@ -13,12 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const signUpBtn = document.getElementById("signUpBtn");
   const cancelBtn = document.getElementById("signUpCloseBtn");
 
-  // ✅ Hide warning on input
+  // 🔎 Hide warning when typing
   usernameInput?.addEventListener("input", () => {
     warning?.classList.add("hidden");
   });
 
-  // 🔐 Handle Sign-Up
+  // 🔐 Handle Sign-Up Submission
   signUpForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -42,11 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
 
       if (res.ok && data.user) {
-        localStorage.setItem("orderCafeUser", JSON.stringify(data.user));
-        showToast("Account created! Welcome to Rio’s Café ☕");
+        // Do NOT store user yet to avoid auto-login or profile modal popping
+        showToast("Account created! Please sign in ☕");
 
+        // Hide sign-up modal, show sign-in modal
         closeModal("signUpModal");
         openModal("signInModal");
+
+        // Focus the username field for smooth login
         document.getElementById("username")?.focus();
       } else if (res.status === 409) {
         warning?.classList.remove("hidden");
@@ -54,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         showToast(data.error || "Sign-up failed ❌");
       }
-    } catch (err) {
-      console.error("Signup error:", err);
+    } catch (error) {
+      console.error("Signup error:", error);
       showToast("Server error ☁️");
     } finally {
       signUpBtn.disabled = false;

@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 🌟 Element References
- const homeTab = document.getElementById("homeTab");
-activateTab(homeTab); // ✅ Now it works
-
+  const homeTab = document.getElementById("homeTab");
   const orderTab = document.getElementById("orderTab");
   const profileTab = document.getElementById("profileTab");
   const tabs = [homeTab, orderTab, profileTab];
@@ -10,41 +8,40 @@ activateTab(homeTab); // ✅ Now it works
   const mainContent = document.getElementById("mainContent");
   const orderModal = document.getElementById("orderModal");
   const profileOverlay = document.getElementById("profileOverlay");
- const closeProfileButton = document.getElementById("closeProfile");
-  const backdrop = document.getElementById("backdrop");
+  const closeProfileButton = document.getElementById("closeProfile");
+  const backdrop = document.querySelector(".modal-backdrop");
 
-  // 🧃 Utility Functions
-  const activateTab = (active) => {
+  // 🧩 Utility Functions
+  const activateTab = (activeTab) => {
     tabs.forEach(tab => {
-      tab.classList.remove("active");
-      tab.setAttribute("aria-selected", "false");
+      tab?.classList.remove("active");
+      tab?.setAttribute("aria-selected", "false");
     });
-    active.classList.add("active");
-    active.setAttribute("aria-selected", "true");
+    activeTab?.classList.add("active");
+    activeTab?.setAttribute("aria-selected", "true");
   };
 
   const toggleProductButtons = (enable) => {
-    const buttons = document.querySelectorAll(".order-button");
-    buttons.forEach(btn => {
-      btn.disabled = !enable;
-      btn.classList.toggle("faded", !enable);
+    document.querySelectorAll(".order-button").forEach(button => {
+      button.disabled = !enable;
+      button.classList.toggle("faded", !enable);
     });
   };
 
   const toggleSignInButtons = (enable) => {
-    const buttons = document.querySelectorAll(".sign-in-button");
-    buttons.forEach(btn => {
-      btn.disabled = !enable;
-      btn.classList.toggle("faded", !enable);
+    document.querySelectorAll(".sign-in-button").forEach(button => {
+      button.disabled = !enable;
+      button.classList.toggle("faded", !enable);
     });
   };
 
   const lockModalButtons = (lock) => {
-    const buttons = document.querySelectorAll(".modal-button");
-    buttons.forEach(btn => btn.disabled = lock);
+    document.querySelectorAll(".modal-button").forEach(button => {
+      button.disabled = lock;
+    });
   };
 
-  // 📌 Tab Handlers
+  // 🏠 Home Tab
   homeTab?.addEventListener("click", () => {
     activateTab(homeTab);
     mainContent.classList.remove("hidden");
@@ -57,6 +54,7 @@ activateTab(homeTab); // ✅ Now it works
     lockModalButtons(true);
   });
 
+  // 🛒 Order Tab
   orderTab?.addEventListener("click", () => {
     activateTab(orderTab);
     mainContent.classList.add("hidden");
@@ -67,24 +65,30 @@ activateTab(homeTab); // ✅ Now it works
     lockModalButtons(false);
   });
 
+  // 👤 Profile Tab
   profileTab?.addEventListener("click", () => {
-  activateTab(profileTab);
-  mainContent.classList.add("hidden");
-  profileOverlay?.classList.remove("hidden");
-  profileOverlay?.showModal();
-  backdrop?.classList.remove("hidden");
-  toggleProductButtons(true);
-  toggleSignInButtons(true);
-  lockModalButtons(false);
-});
+    activateTab(profileTab);
+    mainContent.classList.add("hidden");
+    profileOverlay?.classList.remove("hidden");
+    profileOverlay?.showModal();
+    backdrop?.classList.remove("hidden");
+    toggleProductButtons(true);
+    toggleSignInButtons(true);
+    lockModalButtons(false);
+  });
 
-closeProfileButton?.addEventListener("click", () => {
-  profileOverlay?.close();
-  profileOverlay?.classList.add("hidden");
-  backdrop?.classList.add("hidden");
-  mainContent.classList.remove("hidden");
-  toggleProductButtons(false);
-  toggleSignInButtons(false);
-  lockModalButtons(true);
-});
+  // ❌ Close Profile Modal
+  closeProfileButton?.addEventListener("click", () => {
+    profileOverlay?.close();
+    profileOverlay?.classList.add("hidden");
+    backdrop?.classList.add("hidden");
+    mainContent.classList.remove("hidden");
+    activateTab(homeTab);
+    toggleProductButtons(false);
+    toggleSignInButtons(false);
+    lockModalButtons(true);
+  });
+
+  // ✨ Optional: Activate Home Tab on First Load
+  activateTab(homeTab);
 });

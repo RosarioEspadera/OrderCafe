@@ -18,10 +18,6 @@ body {
   color: var(--cafe-brown);
 }
 
-.hidden {
-  display: none !important;
-}
-
 /* 🛍️ Main Layout */
 #mainContent {
   padding: 2rem;
@@ -163,42 +159,6 @@ button:hover {
 
 .cart-count.visible {
   display: inline-block;
-}
-
-/* 🎬 Modal & Backdrop */
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  z-index: 1000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-fast);
-}
-
-.modal.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 900;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-fast);
-}
-
-.modal-backdrop.visible {
-  opacity: 1;
-  pointer-events: auto;
 }
 
 /* 📱 Responsive Adjustments */

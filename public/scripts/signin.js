@@ -79,6 +79,10 @@ document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
 });
 
 document.getElementById("backToSignIn")?.addEventListener("click", () => {
+  document.getElementById("mainContent")?.classList.add("hidden");
+  document.getElementById("greetingBanner")?.classList.add("hidden");
+  document.getElementById("guestBanner")?.classList.remove("hidden");
+
   // 🗑️ Clear saved user data
   localStorage.removeItem("orderCafeUser");
 

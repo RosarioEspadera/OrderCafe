@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const orderTab = document.getElementById("orderTab");
 const profileTab = document.getElementById("profileTab");
 const closeProfileButton = document.getElementById("closeProfile");
+const backdrop = document.getElementById("backdrop");
 const tabs = [homeTab, orderTab, profileTab];
 const activateTab = (active) => {
   tabs.forEach(tab => tab.classList.remove("active"));

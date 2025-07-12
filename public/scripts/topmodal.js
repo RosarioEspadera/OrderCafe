@@ -1,34 +1,31 @@
-window.addEventListener("DOMContentLoaded", () => {
- document.getElementById("ordersBtn")?.addEventListener("click", () => openModal("orderModal"));  // ✅ 'orderModal' with an 'L'
-document.getElementById("profileBtn")?.addEventListener("click", () => openModal("profileOverlay"));
-document.getElementById("menuBtn")?.addEventListener("click", showMainContent);
+document.addEventListener("DOMContentLoaded", () => {
+  // 📦 Get references
+  const menuBtn = document.getElementById("menuBtn");
+  const ordersBtn = document.getElementById("ordersBtn");
+  const profileBtn = document.getElementById("profileBtn");
 
-});
-function showMainContent() {
-  const mainContent = document.getElementById("mainContent");
-  const signInModal = document.getElementById("signInModal");
-  const backdrop = document.querySelector(".modal-backdrop");
+  const orderModal = document.getElementById("orderModal");
+  const profileOverlay = document.getElementById("profileOverlay");
+  const mainContent = document.getElementById("mainContent"); // If needed for Menu
 
-  if (mainContent) mainContent.classList.remove("hidden");
-  if (signInModal) signInModal.classList.remove("visible");
-  if (backdrop) backdrop.classList.remove("visible");
-}
-function openModal(modalId) {
-  // Close visible modals
-  document.querySelectorAll("dialog.visible").forEach(modal => {
-    modal.classList.remove("visible");
+  // 🍽 Menu Button shows main content
+  menuBtn.addEventListener("click", () => {
+    mainContent.classList.remove("hidden");
   });
 
-  // Hide mainContent when showing a modal
-  const mainContent = document.getElementById("mainContent");
-  if (mainContent) mainContent.classList.add("hidden");
+  // 🧾 Orders Button opens dialog
+  ordersBtn.addEventListener("click", () => {
+    orderModal.showModal?.();
+    orderModal.classList.remove("hidden"); // fallback if dialog doesn't support showModal
+  });
 
-  // Show the requested modal
-  const modal = document.getElementById(modalId);
-  const backdrop = document.querySelector(".modal-backdrop");
-  if (modal) modal.classList.add("visible");
-  if (backdrop) backdrop.classList.add("visible");
-}
+  // 👤 Profile Button shows overlay
+  profileBtn.addEventListener("click", () => {
+    profileOverlay.classList.remove("hidden");
+    profileOverlay.style.display = "block";
+  });
+});
+
 
 
 

@@ -77,11 +77,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   closeProfileButton?.addEventListener("click", () => {
-    profileOverlay?.close();
-    profileOverlay?.classList.add("hidden");
-    backdrop?.classList.add("hidden");
-    toggleProductButtons(false);
-    toggleSignInButtons(false);
-    lockModalButtons(true);
-  });
+  profileOverlay?.close();
+  profileOverlay?.classList.add("hidden");
+  backdrop?.classList.add("hidden");
+  mainContent.classList.remove("hidden"); // 👈 Add this!
+  toggleProductButtons(false);
+  toggleSignInButtons(false);
+  lockModalButtons(true);
+});
 });

@@ -19,10 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
  function showProfileModal() {
   const freshUser = JSON.parse(localStorage.getItem("orderCafeUser"));
 
-  if (!freshUser || typeof freshUser.username !== "string" || !freshUser.username.trim()) {
-    showToast("Please sign in to view your profile ☕");
-    return;
-  }
+ if (
+  !freshUser ||
+  typeof freshUser.username !== "string" ||
+  !freshUser.username.trim() ||
+  freshUser.username === "Guest"
+) {
+  console.log("Blocked auto-modal for Guest");
+  return;
+}
+
 
   currentPhoto.src = freshUser.profilePhoto || fallbackPhoto;
   profileName.textContent = freshUser.username;

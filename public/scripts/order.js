@@ -41,9 +41,10 @@
   });
 
   // ✅ Close Order Modal
-  document.getElementById("closeOrderModal")?.addEventListener("click", () => {
-    closeModal("orderModal");
-  });
+  function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (modal) modal.classList.add("hidden"); // or whatever class hides it
+}
 
   // 🚀 Place Order
   document.getElementById("placeOrderBtn")?.addEventListener("click", () => {

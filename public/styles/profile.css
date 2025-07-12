@@ -49,3 +49,21 @@
   border-radius: var(--radius);
   margin-bottom: 1rem;
 }
+#profileName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6b4226; /* Cafe-brown */
+  text-transform: capitalize;
+  font-family: 'Quicksand', sans-serif;
+  margin: 0.5rem 0;
+  border-bottom: 2px solid #c99c79;
+  display: inline-block;
+  padding-bottom: 0.2rem;
+  transition: all 0.3s ease;
+}
+#profileName:hover {
+  color: #a0552e;
+  border-color: #a0552e;
+  cursor: pointer;
+}
+

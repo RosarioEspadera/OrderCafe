@@ -35,16 +35,17 @@ body {
   pointer-events: none;
 }
 .modal {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.modal.visible {
+.modal:not(.hidden) {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
 }
 .modal.hidden {
   opacity: 0;
-  transform: scale(0.95);
+  transform: translateY(-10px);
 }
+
 
 #backToSignIn {
   display: inline-block;

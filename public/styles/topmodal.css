@@ -45,36 +45,7 @@
   box-shadow: 0 0 0 3px rgba(201, 156, 121, 0.3);
 }
 
-/* 🌫️ Modal Backdrop */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 900;
-}
 
-.modal-backdrop.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* 🎬 Modal Component Visibility */
-.modal {
-  display: none;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
-  z-index: 1000;
-}
-
-.modal.visible {
-  display: block;
-  opacity: 1;
-  pointer-events: auto;
-}
 
 /* 🧍‍♂️ Profile Slide Effect */
 #profileOverlay {
@@ -88,13 +59,6 @@
   opacity: 1;
 }
 
-/* 🙈 Utility Class */
-.hidden {
-  display: none !important;
-  opacity: 0;
-  pointer-events: none;
-}
-
 /* 📱 Responsive Enhancements */
 @media screen and (max-width: 768px) {
   .topmodal-bar {
@@ -105,13 +69,4 @@
   .topmodal-button {
     width: 100%;
   }
-}
-dialog {
-  border: none;
-  padding: 0;
-  background: transparent;
-}
-
-dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.4);
 }

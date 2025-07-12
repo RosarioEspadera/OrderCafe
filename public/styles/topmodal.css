@@ -18,11 +18,16 @@
   gap: 1rem;
   box-shadow: var(--shadow);
   font-family: var(--font-body);
-  z-index: 900;
+  z-index: 1001;
   position: sticky;
   top: 0;
 }
-
+.modal-backdrop {
+  z-index: 900;
+}
+.modal {
+  z-index: 1000;
+}
 /* 🍯 Top Buttons */
 .topmodal-button {
   background-color: var(--cafe-toast);

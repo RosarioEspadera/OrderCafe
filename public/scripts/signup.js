@@ -1,5 +1,8 @@
 // ✏️ Live Username Validation
 document.getElementById("newUsername")?.addEventListener("input", async (e) => {
+  const BACKEND_URL = location.hostname === "localhost" 
+  ? "http://localhost:3000" 
+  : "https://ordercafe-rio-hxxc.onrender.com";
   const username = e.target.value.trim();
   const warning = document.getElementById("usernameTakenWarning");
 

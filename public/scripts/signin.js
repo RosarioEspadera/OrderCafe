@@ -1,12 +1,6 @@
 import { mockUser } from "./mog.js";
+import { openModal, closeModal } from "./modal.js";
 console.log(mockUser.username); // Just for testing
-function openModal(id) {
-  document.getElementById(id).style.display = "block";
-}
-
-function closeModal(id) {
-  document.getElementById(id).style.display = "none";
-}
 
 window.addEventListener("DOMContentLoaded", () => {
  const savedUser = JSON.parse(localStorage.getItem("orderCafeUser"));

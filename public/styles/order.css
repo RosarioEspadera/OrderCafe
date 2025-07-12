@@ -31,20 +31,6 @@
   }
 }
 
-/* 🧾 Header */
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.modal-header h2 {
-  font-size: 1.6rem;
-  font-family: var(--font-title);
-  color: var(--cafe-brown);
-}
-
 /* 🧺 Cart List */
 .cart-list {
   list-style: none;
@@ -131,17 +117,4 @@
   font-size: 1rem;
 }
 
-/* 🙈 Utility */
-.hidden {
-  display: none !important;
-  opacity: 0;
-  pointer-events: none;
-}
 
-.modal {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

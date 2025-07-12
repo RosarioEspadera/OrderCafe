@@ -1,12 +1,31 @@
+:root {
+  --cafe-brown: #6f4e37;
+  --cafe-cream: #fff8f0;
+  --cafe-accent: #c99c79;
+  --radius: 10px;
+  --font-body: 'Inter', sans-serif;
+  --font-logo: 'Pacifico', cursive;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 🧋 Sign-In Modal Styling */
 #signInModal {
   max-width: 400px;
   padding: 2rem;
-  background: #fff8f0;
+  background-color: var(--cafe-cream);
   border-radius: var(--radius);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-  font-family: var(--body-font);
+  box-shadow: var(--shadow);
+  font-family: var(--font-body);
+  animation: fadeInUp 0.4s ease;
 }
 
+/* 🎬 Modal Animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 🧁 Branding Section */
 .modal-branding {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -15,56 +34,76 @@
 .brand-logo {
   max-width: 80px;
   border-radius: 50%;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
+/* ✍️ Input Fields */
 input {
   width: 100%;
   margin-bottom: 1rem;
   padding: 0.75rem;
-  border: 1px solid #c99c79;
+  border: 1px solid var(--cafe-accent);
   border-radius: var(--radius);
+  background-color: #ffffff;
+  color: var(--cafe-brown);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
 }
 
+input:focus {
+  border-color: var(--cafe-brown);
+  outline: none;
+}
+
+/* ☕ Form Button Group */
 menu {
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.75rem;
   margin-top: 1rem;
 }
 
+/* 🍯 Action Buttons */
 button {
-  padding: 0.75rem 1.25rem;
+  padding: 0.75rem 1.2rem;
   border: none;
   border-radius: var(--radius);
-  background-color: var(--cafe-accent);
-  color: white;
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-family: var(--font-body);
 }
 
-.guest-button,
+button:hover {
+  transform: scale(1.02);
+}
+
 .signup-button {
-  margin-top: 1rem;
+  background-color: var(--cafe-accent);
+  color: white;
+}
+
+.guest-button {
   background-color: #e4d7c9;
   color: var(--cafe-brown);
 }
+
+/* 🎯 Modal Dialog + Backdrop */
 .modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1000;
-  background: white;
+  background-color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius);
   padding: 2rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow);
 }
 
-.modal.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
+.modal.visible,
 dialog[open] {
   opacity: 1;
   pointer-events: auto;
@@ -75,12 +114,15 @@ dialog:not([open]) {
   opacity: 0;
   pointer-events: none;
 }
+
 dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
+
+/* 💬 Username Greeting */
 .username {
   font-weight: bold;
   color: var(--cafe-brown);
-  font-family: 'Pacifico', cursive;
+  font-family: var(--font-logo);
+  font-size: 1.2rem;
 }
-

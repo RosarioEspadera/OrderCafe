@@ -64,10 +64,11 @@ function showMainContent() {
 document.getElementById("menuBtn")?.addEventListener("click", showMainContent);
 
   
-  document.getElementById("backToSignIn").addEventListener("click", function (e) {
-  e.preventDefault(); // prevents default anchor behavior
-  document.getElementById("signInButton").click(); // triggers modal
+  document.getElementById("backToSignIn")?.addEventListener("click", function (e) {
+  e.preventDefault();
+  document.getElementById("signInButton")?.click();
 });
+
 
   // 🔁 Loader Control
   function toggleLoader(show = true) {

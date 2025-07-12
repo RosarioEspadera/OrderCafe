@@ -1,11 +1,18 @@
 :root {
-  --cafe-brown: #6f4e37;
-  --cafe-toast: #c99c79;
   --cafe-cream: #fff8f0;
-  --radius: 10px;
+  --cafe-brown: #5a3921;
+  --cafe-toast: #d79d74;
   --font-body: 'Inter', sans-serif;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow: 0 -2px 8px rgba(0,0,0,0.1);
 }
+
+[data-theme="dark"] {
+  --cafe-cream: #1e1b18;
+  --cafe-brown: #f2e2c4;
+  --cafe-toast: #ffa97c;
+  --shadow: 0 -2px 8px rgba(255,255,255,0.05);
+}
+
 
 /* 🍫 Café Tab Bar */
 .cafe-tab-bar {

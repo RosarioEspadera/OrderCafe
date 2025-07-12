@@ -7,9 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("closeProfile");
   const backdrop = document.querySelector(".modal-backdrop");
 
-  const photoPreviewOverlay = document.getElementById("photoPreviewOverlay");
-  const closePhotoPreviewBtn = document.getElementById("closePhotoPreview");
-
+  
   const fallbackPhoto = "styles/images/bg.png";
   let user = JSON.parse(localStorage.getItem("orderCafeUser")) || null;
 
@@ -50,11 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     profileOverlay.classList.add("hidden");
     backdrop?.classList.add("hidden");
   });
-
-  closePhotoPreviewBtn?.addEventListener("click", () => {
-    photoPreviewOverlay?.classList.add("hidden");
-  });
-
+  
   loadProfile();
 });
 

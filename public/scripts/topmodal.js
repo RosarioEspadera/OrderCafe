@@ -38,12 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (profileBtn && profileOverlay) {
-    profileBtn.addEventListener("click", () => {
-      profileOverlay.classList.remove("hidden");
-      profileOverlay.style.display = "block";
-    });
-  }
+  profileBtn.addEventListener("click", () => {
+  profileOverlay.classList.remove("hidden");
+});
+
 });
 
 

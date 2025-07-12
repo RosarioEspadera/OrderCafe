@@ -1,3 +1,8 @@
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("signInModal")?.showModal();
+  document.getElementById("profileOverlay")?.classList.add("hidden"); // 👈 Add this line here
+});
+
 // 🌐 Import utilities
 import { showToast } from './toast.js';
 import { openModal, closeModal } from './modal.js';

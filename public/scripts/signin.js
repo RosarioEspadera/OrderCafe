@@ -1,14 +1,22 @@
 import { mockUser } from "./mog.js";
 console.log(mockUser.username); // Just for testing
+function openModal(id) {
+  document.getElementById(id).style.display = "block";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
 
 window.addEventListener("DOMContentLoaded", () => {
-  const savedUser = localStorage.getItem("orderCafeUser");
-  if (savedUser) {
-    openModal("mainModal");
-    showToast(`Welcome back, ${savedUser}!`);
-  } else {
-    openModal("signInModal");
-  }
+ const savedUser = JSON.parse(localStorage.getItem("orderCafeUser"));
+if (savedUser) {
+  openModal("mainModal");
+  showToast(`Welcome back, ${savedUser.username}!`);
+} else {
+  openModal("signInModal");
+}
+
 });
 
 document.getElementById("signInBtn")?.addEventListener("click", async () => {

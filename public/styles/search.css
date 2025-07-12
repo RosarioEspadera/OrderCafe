@@ -1,21 +1,86 @@
+:root {
+  --cafe-brown: #6f4e37;
+  --cafe-cream: #fff8f0;
+  --cafe-toast: #c99c79;
+  --radius: 10px;
+  --font-body: 'Inter', sans-serif;
+  --font-title: 'Pacifico', cursive;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* 🧃 Search Bar Container */
 .search-bar {
-  margin: 1rem auto;
   text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
 }
 
 #searchField {
-  padding: 0.5rem 1rem;
   width: 80%;
-  max-width: 400px;
-  border: 1px solid #cfae8f;
-  border-radius: 8px;
-  font-family: 'Quicksand', sans-serif;
+  max-width: 480px;
+  padding: 0.75rem 1rem;
   font-size: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--cafe-toast);
+  border-radius: var(--radius);
+  background-color: var(--cafe-cream);
+  color: var(--cafe-brown);
+  font-family: var(--font-body);
+  box-shadow: var(--shadow);
+  transition: border-color 0.3s ease;
 }
-#noResults {
-  font-family: 'Lora', serif;
-  color: #e74c3c;
-  margin-top: 1rem;
-  transition: opacity 0.3s ease;
+
+#searchField:focus {
+  outline: none;
+  border-color: var(--cafe-brown);
 }
+
+/* 📦 Search Results Grid */
+#searchResults {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  padding: 2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+/* 🧁 Search Result Cards */
+.search-result {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideUpFade 0.3s forwards;
+}
+
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ☕ Empty Search Feedback */
+.search-empty {
+  text-align: center;
+  color: var(--cafe-brown);
+  font-family: var(--font-title);
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+/* 📱 Responsive Tweaks */
+@media screen and (max-width: 768px) {
+  #searchField {
+    width: 90%;
+    font-size: 0.95rem;
+  }
+
+  #searchResults {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
+

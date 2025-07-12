@@ -5,6 +5,17 @@ window.addEventListener("DOMContentLoaded", () => {
   let cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
   let summaryRefreshTimeout;
 
+// Define the function first
+function toggleGuestBanner() {
+  const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+  const banner = document.getElementById("guestBanner");
+  if (!banner) return;
+  banner.classList.toggle("hidden", !!user);
+}
+
+// Then call it
+toggleGuestBanner();
+
   // 🛎️ Toast Notification
   function showToast(message = "Added to cart!", duration = 3000) {
     const toast = document.createElement("div");
@@ -53,23 +64,16 @@ window.addEventListener("DOMContentLoaded", () => {
     card.style.transitionDelay = `${i * 100}ms`;
     observer.observe(card);
   });
-function showMainContent() {
-  // Reveal mainContent
-  document.getElementById("mainContent")?.classList.remove("hidden");
-
-  // Hide any other modals or overlays
-  document.getElementById("signInModal")?.classList.remove("visible");
-  document.querySelector(".modal-backdrop")?.classList.remove("visible");
-}
+  
 document.getElementById("menuBtn")?.addEventListener("click", showMainContent);
 
   
   document.getElementById("backToSignIn")?.addEventListener("click", function (e) {
   e.preventDefault();
   document.getElementById("signInButton")?.click();
+    
 });
-
-
+  
   // 🔁 Loader Control
   function toggleLoader(show = true) {
     const loader = main.querySelector(".loader");

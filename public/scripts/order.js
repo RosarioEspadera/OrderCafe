@@ -1,16 +1,19 @@
 (() => {
-  const cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
+  // 🛒 Load Cart from localStorage
+  let cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
 
+  // ✅ Render Cart Items in the Modal
   function renderCartItems() {
     const cartList = document.getElementById("cartList");
     const emptyMsg = document.getElementById("emptyCartMessage");
-    let total = 0;
+    const totalLabel = document.getElementById("cartTotal");
 
     cartList.innerHTML = "";
+    let total = 0;
 
     if (cart.length === 0) {
       emptyMsg.classList.remove("hidden");
-      document.getElementById("cartTotal").textContent = "$0.00";
+      totalLabel.textContent = "$0.00";
       return;
     }
 
@@ -27,37 +30,47 @@
       cartList.appendChild(li);
     });
 
-    document.getElementById("cartTotal").textContent = `$${total.toFixed(2)}`;
+    totalLabel.textContent = `$${total.toFixed(2)}`;
   }
 
-  // 🗑️ Handle Item Removal
+  // 🧹 Remove Item from Cart
   document.getElementById("cartList")?.addEventListener("click", (e) => {
-    if (e.target.classList.contains("remove-item")) {
-      const index = e.target.dataset.index;
+    const target = e.target;
+    if (target.classList.contains("remove-item")) {
+      const index = parseInt(target.dataset.index);
       cart.splice(index, 1);
       localStorage.setItem("orderCafeCart", JSON.stringify(cart));
       renderCartItems();
     }
   });
-document.getElementById("closeOrderModal")?.addEventListener("click", () => {
-  closeModal("orderModal");
-});
 
-  // ✅ Close Order Modal
- function closeModal(id) {
-  const modal = document.getElementById(id);
-  if (modal) modal.classList.add("hidden"); // or modal.style.display = "none";
-}
+  // ❌ Close Cart Modal
+  document.getElementById("closeOrderModal")?.addEventListener("click", () => {
+    closeModal("orderModal");
+  });
 
+  function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.add("hidden");
+  }
 
-  // 🚀 Place Order
+  // 🚚 Place Order via EmailJS
   document.getElementById("placeOrderBtn")?.addEventListener("click", () => {
-    if (cart.length === 0) return showToast("Your cart is empty ☕");
+    if (cart.length === 0) {
+      showToast("Your cart is empty ☕");
+      return;
+    }
 
     const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+    if (!user?.username) {
+      showToast("No user found ❌");
+      return;
+    }
+
     const orderDetails = cart
       .map(item => `${item.name} - $${item.price.toFixed(2)}`)
       .join("\n");
+
     const total = cart.reduce((sum, item) => sum + item.price, 0);
 
     emailjs.send("service_epydqmi", "template_vzuexod", {
@@ -67,6 +80,7 @@ document.getElementById("closeOrderModal")?.addEventListener("click", () => {
     })
     .then(() => {
       showToast("Order sent to Rio's Café 📩");
+      cart = [];
       localStorage.setItem("orderCafeCart", JSON.stringify([]));
       renderCartItems();
       closeModal("orderModal");
@@ -77,5 +91,6 @@ document.getElementById("closeOrderModal")?.addEventListener("click", () => {
     });
   });
 
+  // 🚀 Initialize Cart on Page Load
   window.addEventListener("DOMContentLoaded", renderCartItems);
 })();

@@ -66,7 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 👤 Profile Tab
-  profileTab?.addEventListener("click", () => {
+profileTab?.addEventListener("click", () => {
+  const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+
+  if (user && user.username) {
     activateTab(profileTab);
     mainContent.classList.add("hidden");
     profileOverlay?.classList.remove("hidden");
@@ -75,7 +78,13 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleProductButtons(true);
     toggleSignInButtons(true);
     lockModalButtons(false);
-  });
+  } else {
+    showToast("Please sign in first ☕");
+    // Optional: redirect to sign-in modal
+    openModal("signInModal");
+  }
+});
+
 
   // ❌ Close Profile Modal
   closeProfileButton?.addEventListener("click", () => {

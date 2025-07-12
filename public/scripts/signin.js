@@ -1,58 +1,80 @@
-import { mockUser } from "./mog.js";
-import { openModal, closeModal } from "./modal.js";
+export function openModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
 
-console.log(mockUser.username); // Just for testing
-
-window.addEventListener("DOMContentLoaded", () => {
-  const savedUser = JSON.parse(localStorage.getItem("orderCafeUser"));
-  if (savedUser) {
-    openModal("mainModal");
-    showToast(`Welcome back, ${savedUser.username}!`);
+  if (modal.tagName === "DIALOG") {
+    if (!modal.open) modal.showModal();
   } else {
-    openModal("signInModal");
+    modal.classList.add("visible");
+    document.querySelector(".modal-backdrop")?.classList.add("visible");
+  }
+}
+
+export function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+
+  if (modal.tagName === "DIALOG") {
+    if (modal.open) modal.close();
+  } else {
+    modal.classList.remove("visible");
+    document.querySelector(".modal-backdrop")?.classList.remove("visible");
+  }
+}
+
+
+ document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const username = document.getElementById("username")?.value.trim();
+  const password = document.getElementById("password")?.value.trim();
+  const loader = document.getElementById("loader");
+
+  if (!username || !password) {
+    showToast("Missing username or password");
+    return;
   }
 
-  // 🔐 Sign-in Button
-  document.getElementById("signInBtn")?.addEventListener("click", async () => {
-    const username = document.getElementById("username")?.value.trim();
-    const password = document.getElementById("password")?.value.trim();
+  try {
+    document.getElementById("signInBtn").disabled = true;
+    loader?.classList.remove("hidden");
 
-    if (!username || !password) return showToast("Missing username or password");
+    const res = await fetch(`${BACKEND_URL}/signin`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
 
-    try {
-      const res = await fetch(`${BACKEND_URL}/signin`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-      });
+    const data = await res.json();
 
-      const data = await res.json();
-
-      if (res.ok) {
-        localStorage.setItem("orderCafeUser", JSON.stringify(data.user));
-        closeModal("signInModal");
-        openModal("mainModal");
-        showToast(`Welcome back, ${username}!`);
-      } else {
-        showToast(data.error || "Signin failed ❌");
-      }
-    } catch (err) {
-      console.error("Signin error:", err);
-      showToast("Server error ☁️");
+    if (res.ok) {
+      localStorage.setItem("orderCafeUser", JSON.stringify(data.user));
+      closeModal("signInModal");
+      openModal("mainModal");
+      showToast(`Welcome back, ${username}!`);
+    } else {
+      showToast(data.error || "Signin failed ❌");
     }
-  });
-
-  // 🔄 Switch Account
-  document.getElementById("switchAccountBtn")?.addEventListener("click", () => {
-    const confirmed = window.confirm("Are you sure you want to sign out and switch accounts?");
-    if (confirmed) {
-      localStorage.removeItem("orderCafeUser");
-      closeModal("mainModal");
-      openModal("signInModal");
-      showToast("Signed out successfully ☕");
-    }
-  });
+  } catch (err) {
+    console.error("Signin error:", err);
+    showToast("Server error ☁️");
+  } finally {
+    document.getElementById("signInBtn").disabled = false;
+    loader?.classList.add("hidden");
+  }
 });
+
+
+document.getElementById("switchAccountBtn")?.addEventListener("click", () => {
+  const confirmed = window.confirm("Sign out and return to sign-in?");
+  if (confirmed) {
+    localStorage.removeItem("orderCafeUser");
+    closeModal("mainModal");
+    openModal("signInModal");
+    showToast("Signed out ☕");
+  }
+});
+
 
 
 

@@ -64,6 +64,26 @@ export function closeModal(id) {
   }
 });
 
+document.getElementById("backToSignIn")?.addEventListener("click", () => {
+  // 🗑️ Clear saved user data
+  localStorage.removeItem("orderCafeUser");
+
+  // 🔒 Close main modal and sign-up modal if they're open
+  closeModal("mainModal");
+  closeModal("signUpModal");
+
+  // 🔐 Open the <dialog> modal using showModal()
+  const signInModal = document.getElementById("signInModal");
+  if (signInModal?.tagName === "DIALOG") {
+    signInModal.showModal();
+  } else {
+    signInModal?.classList.add("visible");
+  }
+
+  // ☕ Toast for feedback
+  showToast("Signed out — back to sign in");
+});
+
 
 document.getElementById("switchAccountBtn")?.addEventListener("click", () => {
   const confirmed = window.confirm("Sign out and return to sign-in?");

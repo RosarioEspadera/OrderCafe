@@ -1,160 +1,197 @@
-/* ────────────────────────────────────────────────
-   🧁 Theme Variables
-────────────────────────────────────────────────── */
 :root {
-  --cafe-brown: #4e342e;
-  --cafe-cream: #fff8f0;
+  --cafe-brown: #6f4e37;
   --cafe-accent: #c99c79;
-  --cafe-pink: #ffdfd5;
-
-  --heading-font: "Poppins", sans-serif;
-  --body-font: "Roboto", sans-serif;
-  --radius: 12px;
-  --transition: 0.3s ease;
+  --cafe-cream: #f9f6f2;
+  --radius: 8px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --transition-fast: 0.3s ease;
+  --transition-slow: 0.6s ease;
+  --font-title: 'Pacifico', cursive;
+  --font-body: 'Inter', sans-serif;
 }
 
-/* ────────────────────────────────────────────────
-   ☕ Layout Basics
-────────────────────────────────────────────────── */
+/* 🌿 Base Styles */
 body {
   margin: 0;
-  font-family: var(--body-font);
+  font-family: var(--font-body);
   background-color: var(--cafe-cream);
   color: var(--cafe-brown);
 }
 
-.container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-}
 .hidden {
   display: none !important;
-  visibility: hidden;
+}
+
+/* 🛍️ Main Layout */
+#mainContent {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 🧁 Product Cards */
+.product-card {
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
   opacity: 0;
-  pointer-events: none;
+  transform: translateY(20px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
 }
-.modal {
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.modal:not(.hidden) {
+
+.product-card.visible {
   opacity: 1;
   transform: translateY(0);
 }
-.modal.hidden {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-
-#backToSignIn {
-  display: inline-block;
-  padding: 0.6rem 1.2rem;
-  background-color: #6b4f3b;
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: bold;
-  margin-top: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-#backToSignIn:hover {
-  background-color: #8c6651;
-}
-
-/* ────────────────────────────────────────────────
-   🛍️ Product Card Styling
-────────────────────────────────────────────────── */
-.product-card {
-  background: white;
-  border-radius: var(--radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  transition: transform var(--transition);
-}
-
-.product-card:hover {
-  transform: scale(1.02);
-}
 
 .product-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0.5rem 0;
-  color: var(--cafe-brown);
-}
-
-.product-description {
-  font-size: 0.95rem;
-  color: #5c4534;
-  line-height: 1.4;
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
 }
 
 .price-tag {
   font-size: 1.1rem;
+  font-weight: bold;
   color: var(--cafe-accent);
-  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
-/* ────────────────────────────────────────────────
-   ✅ Order Button
-────────────────────────────────────────────────── */
-.order-button {
-  background-color: var(--cafe-accent);
-  border: none;
-  color: white;
-  padding: 0.75rem 1.25rem;
-  font-size: 1rem;
+/* 🎯 Search Input */
+input[type="search"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--cafe-accent);
   border-radius: var(--radius);
+}
+
+/* 🧈 Buttons */
+button {
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--cafe-accent);
+  color: white;
+  font-weight: bold;
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background var(--transition-fast);
 }
 
-.order-button:hover {
-  background-color: #b98360;
+button:hover {
+  background-color: var(--cafe-brown);
 }
 
-.order-button.faded {
-  background-color: #ddd;
-  color: #333;
+.order-button.added {
+  background-color: #a2c4a2;
+  color: var(--cafe-brown);
 }
 
-/* ────────────────────────────────────────────────
-   🔔 Toast Message
-────────────────────────────────────────────────── */
+/* 🧾 Toast Message */
 .toast {
   position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 1rem;
+  right: 1rem;
   background-color: var(--cafe-brown);
-  color: var(--cafe-cream);
-  padding: 1rem 2rem;
+  color: white;
+  padding: 0.75rem 1.25rem;
   border-radius: var(--radius);
-  font-size: 0.95rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow);
   z-index: 2000;
-  animation: fadeSlideUp 0.6s ease forwards;
+  opacity: 1;
+  transition: opacity 0.4s ease;
 }
 
-@keyframes fadeSlideUp {
-  from { opacity: 0; transform: translate(-50%, 20px); }
-  to { opacity: 1; transform: translate(-50%, 0); }
+.toast.fade-out {
+  opacity: 0;
 }
 
-/* ────────────────────────────────────────────────
-   📱 Responsive Tweaks
-────────────────────────────────────────────────── */
-@media (max-width: 640px) {
-  .container {
+/* 🚚 Sticky Order Bar */
+.order-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--cafe-accent);
+  padding: 1rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transform: translateY(100%);
+  transition: transform var(--transition-fast);
+  z-index: 1000;
+}
+
+.order-bar.visible {
+  transform: translateY(0);
+}
+
+.cart-count {
+  background-color: var(--cafe-brown);
+  color: white;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  margin-left: 0.5rem;
+  display: none;
+}
+
+.cart-count.visible {
+  display: inline-block;
+}
+
+/* 🎬 Modal & Backdrop */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+.modal-backdrop.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 📱 Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  #mainContent {
     padding: 1rem;
   }
+
   .product-card {
-    padding: 0.75rem;
+    padding: 1rem;
   }
-  .order-button {
+
+  button {
     width: 100%;
+  }
+
+  input[type="search"] {
+    margin-bottom: 1rem;
   }
 }

@@ -16,15 +16,21 @@ document.addEventListener("DOMContentLoaded", () => {
   backdrop?.classList.add("hidden");
 
   // 🎉 Display user info when profile modal is triggered
-  function showProfileModal() {
-    if (!user || !user.username) return; // ⛔ Only show for logged-in users
+ function showProfileModal() {
+  const freshUser = JSON.parse(localStorage.getItem("orderCafeUser"));
 
-    currentPhoto.src = user.profilePhoto || fallbackPhoto;
-    profileName.textContent = user.username || "Guest";
-    profileOverlay.classList.remove("hidden");
-    profileOverlay.showModal();
-    backdrop?.classList.remove("hidden");
+  if (!freshUser || typeof freshUser.username !== "string" || !freshUser.username.trim()) {
+    showToast("Please sign in to view your profile ☕");
+    return;
   }
+
+  currentPhoto.src = freshUser.profilePhoto || fallbackPhoto;
+  profileName.textContent = freshUser.username;
+  profileOverlay.classList.remove("hidden");
+  profileOverlay.showModal();
+  backdrop?.classList.remove("hidden");
+}
+
 
   // ✨ Export function for topmodal.js or tab clicks
   window.showProfileModal = showProfileModal;

@@ -21,6 +21,18 @@ export function closeModal(id) {
     document.querySelector(".modal-backdrop")?.classList.remove("visible");
   }
 }
+document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
+  closeModal("signInModal"); // Optional: hide sign-in if it's currently open
+
+  const signUpModal = document.getElementById("signUpModal");
+  if (signUpModal?.tagName === "DIALOG") {
+    signUpModal.showModal(); // For <dialog> elements
+  } else {
+    signUpModal?.classList.add("visible"); // If using non-dialog modals
+  }
+
+  showToast("Let’s get you signed up ☕");
+});
 
 
  document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
@@ -94,6 +106,8 @@ document.getElementById("switchAccountBtn")?.addEventListener("click", () => {
     showToast("Signed out ☕");
   }
 });
+
+
 
 
 

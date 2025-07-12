@@ -2,40 +2,63 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const orderBtn = document.getElementById("orderBtn");
   const profileBtn = document.getElementById("profileBtn");
+  const closeProfileBtn = document.getElementById("closeProfile");
+  const closeOrderModalBtn = document.getElementById("closeOrderModal");
 
   const mainContent = document.getElementById("mainContent");
   const orderModal = document.getElementById("orderModal");
   const profileOverlay = document.getElementById("profileOverlay");
+  const backdrop = document.querySelector(".modal-backdrop");
 
+  // Open Menu
   menuBtn?.addEventListener("click", () => {
     mainContent?.classList.remove("hidden");
     mainContent?.scrollIntoView({ behavior: "smooth" });
   });
 
+  // Open Order Modal
   orderBtn?.addEventListener("click", () => {
     orderModal?.showModal();
+    backdrop?.classList.remove("hidden");
   });
 
- profileBtn?.addEventListener("click", () => {
-  profileOverlay.classList.remove("hidden");         // ensure visibility
-  profileOverlay.showModal();                        // native dialog open
-  document.querySelector(".modal-backdrop")?.classList.remove("hidden"); // blur overlay
-});
+  // Open Profile Modal
+  profileBtn?.addEventListener("click", () => {
+    profileOverlay?.classList.remove("hidden");
+    profileOverlay?.showModal();
+    backdrop?.classList.remove("hidden");
+  });
 
+  // Close Profile Modal via button
+  closeProfileBtn?.addEventListener("click", () => {
+    profileOverlay?.close();
+    profileOverlay?.classList.add("hidden");
+    backdrop?.classList.add("hidden");
+    mainContent?.classList.remove("hidden");
+    mainContent?.scrollIntoView({ behavior: "smooth" });
+  });
 
+  // Close Order Modal via button
+  closeOrderModalBtn?.addEventListener("click", () => {
+    orderModal?.close();
+    backdrop?.classList.add("hidden");
+    mainContent?.classList.remove("hidden");
+    mainContent?.scrollIntoView({ behavior: "smooth" });
+  });
+
+  // Close any open modal with Escape key
   document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    document.querySelectorAll("dialog[open]")?.forEach(modal => {
-      modal.close?.();
-      modal.classList.add("hidden");
-    });
-    document.querySelector(".modal-backdrop")?.classList.add("hidden");
-  }
+    if (e.key === "Escape") {
+      document.querySelectorAll("dialog[open]")?.forEach(modal => {
+        modal.close?.();
+        modal.classList.add("hidden");
+      });
+      backdrop?.classList.add("hidden");
+      mainContent?.classList.remove("hidden");
+      mainContent?.scrollIntoView({ behavior: "smooth" });
+    }
+  });
 });
-});
-
-
-
 
 
 

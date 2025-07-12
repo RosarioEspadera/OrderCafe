@@ -13,17 +13,17 @@ function showMainContent() {
   if (backdrop) backdrop.classList.remove("visible");
 }
 function openModal(modalId) {
-  const modal = document.getElementById(modalId);
   const backdrop = document.querySelector(".modal-backdrop");
 
-  if (modal) modal.classList.add("visible");
+  // Close any currently open modals
+  document.querySelectorAll("dialog.visible").forEach(modal => {
+    modal.classList.remove("visible");
+  });
+
+  // Open the requested modal
+  const newModal = document.getElementById(modalId);
+  if (newModal) newModal.classList.add("visible");
   if (backdrop) backdrop.classList.add("visible");
 }
-function closeModal(modalId) {
-  const modal = document.getElementById(modalId);
-  const backdrop = document.querySelector(".modal-backdrop");
 
-  if (modal) modal.classList.remove("visible");
-  if (backdrop) backdrop.classList.remove("visible");
-}
 

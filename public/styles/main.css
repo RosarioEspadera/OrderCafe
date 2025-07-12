@@ -45,6 +45,23 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+.product-image {
+  width: 100%;
+  max-height: 200px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  background-color: #faf6f0;
+  box-shadow: var(--shadow);
+}
+
+.product-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius);
+}
 
 .product-title {
   font-family: var(--font-title);
@@ -193,5 +210,10 @@ button:hover {
 
   input[type="search"] {
     margin-bottom: 1rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .product-image {
+    max-height: 160px;
   }
 }

@@ -1,129 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="public, max-age=31536000">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles/main.css?v=2.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="public, max-age=31536000" />
+  <title>Rio's Café ☕</title>
+  <link rel="icon" href="favicon.ico" />
+  <link rel="stylesheet" href="styles/main.css" />
   <link rel="stylesheet" href="styles/order.css" />
   <link rel="stylesheet" href="styles/profile.css" />
-  <link rel="stylesheet" href="styles/search.css" /> 
+  <link rel="stylesheet" href="styles/search.css" />
   <link rel="stylesheet" href="styles/signin.css" />
-   <link rel="stylesheet" href="styles/signup.css" />
-   <link rel="stylesheet" href="styles/topmodal.css" />
+  <link rel="stylesheet" href="styles/signup.css" />
+  <link rel="stylesheet" href="styles/topmodal.css" />
   <link rel="stylesheet" href="styles/receipt.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Lora&family=Pacifico&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital@0;1&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-
-  <title>Rio's Cafe - Order Confirmation</title>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Inter&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
-<div class="top-nav">
-  <button id="menuBtn">Menu</button>
-  <button id="orderBtn">Orders</button>
-  <button id="profileBtn">Profile</button>
-</div>
 
+  <!-- 🔝 Navigation Bar -->
+  <nav class="topmodal-bar">
+    <button class="topmodal-button" id="menuBtn">Menu</button>
+    <button class="topmodal-button" id="orderBtn">Cart</button>
+    <button class="topmodal-button" id="profileBtn">Profile</button>
+  </nav>
+
+  <!-- 🔍 Search Section -->
   <div class="search-bar">
     <input type="search" id="searchField" placeholder="Search for coffee, tea, or treats..." />
-  <section id="searchResults" class="results-grid"></section>
-</div>
-
-
-
-
-<!-- Sign In Button -->
-<dialog id="signInModal" class="modal">
-  <div class="modal-branding">
-    <img src="https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png" alt="OrderCafe Logo" class="brand-logo" />
-    <h2>Welcome to Rio's Cafe</h2>
-    <p>Please sign in to start your order</p>
+    <section id="searchResults" class="results-grid"></section>
   </div>
-  <form id="signInForm" novalidate>
-    <div class="input-group">
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username" placeholder="e.g. cafeLover123" title="Enter your username" autocomplete="username" required />
 
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password" placeholder="Your secure password" title="Enter your password" autocomplete="current-password" required />
+  <!-- 🔐 Sign In Modal -->
+  <dialog id="signInModal" class="modal">
+    <div class="modal-branding">
+      <img src="styles/images/bg.png" alt="Rio's Logo" class="brand-logo" />
+      <h2>Welcome to Rio's Café</h2>
+      <p>Please sign in to begin</p>
     </div>
-    <menu>
-      <button type="submit" id="signInBtn">Sign In</button>
-      <button type="button" id="closeBtn">Cancel</button>
-    </menu>
-    <div id="loader" class="spinner hidden"></div>
-  </form>
-  <button id="signUpToggleBtn" class="signup-button">Create Account</button>
-</dialog>
+    <form id="signInForm" novalidate>
+      <label for="username">Username</label>
+      <input type="text" id="username" autocomplete="username" required />
+      <label for="password">Password</label>
+      <input type="password" id="password" autocomplete="current-password" required />
+      <menu>
+        <button type="submit" id="signInBtn">Sign In</button>
+        <button type="button" id="closeBtn">Cancel</button>
+      </menu>
+      <div id="loader" class="spinner hidden"></div>
+    </form>
+    <button id="signUpToggleBtn" class="signup-button">Create Account</button>
+  </dialog>
 
-<dialog id="signUpModal" class="modal">
-  <div class="modal-branding">
-    <img src="images/rios-cafe-logo.png" alt="OrderCafe Logo" class="brand-logo" />
-    <h2>Create an Account</h2>
-    <p>Join Rio's Café and start your order</p>
+  <!-- ✍️ Sign Up Modal -->
+  <dialog id="signUpModal" class="modal">
+    <div class="modal-branding">
+      <img src="styles/images/bg.png" alt="Rio's Logo" class="brand-logo" />
+      <h2>Create Your Account</h2>
+      <p>Join our cozy corner</p>
+    </div>
+    <form id="signUpForm" novalidate>
+      <label for="newUsername">Username</label>
+      <input type="text" id="newUsername" autocomplete="username" required />
+      <div id="usernameTakenWarning" class="hidden">That username is taken ☕</div>
+      <label for="newPassword">Password</label>
+      <input type="password" id="newPassword" autocomplete="new-password" required />
+      <menu>
+        <button type="submit" id="signUpBtn">Sign Up</button>
+        <button type="button" id="signUpCloseBtn">Cancel</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <!-- 👤 Profile Modal -->
+  <dialog id="profileOverlay" class="hidden">
+    <header class="modal-header">
+      <img id="currentProfilePhoto" />
+      <h2 id="profileName"></h2>
+      <input type="file" id="profilePhotoUpload" />
+      <button id="logoutFromProfile">Log Out</button>
+    </header>
+    <button id="closeProfile">Close</button>
+  </dialog>
+
+  <!-- 👀 Photo Preview Overlay -->
+  <div id="photoPreviewOverlay" class="hidden">
+    <img id="fullSizePhoto" />
+    <button id="closePhotoPreview">Close</button>
   </div>
-  <form method="dialog" id="signUpForm" novalidate>
-     <label for="newUsername">Username</label>
-    <input type="text" id="newUsername" name="newUsername" autocomplete="username" required />
-<div id="usernameTakenWarning" style="
-  display: none;
-  margin-top: 6px;
-  font-size: 0.9rem;
-  color: #e74c3c;
-  font-family: 'Poppins', sans-serif;
-">
-  That username is already taken ☕ Please choose another.
-</div>
-    <label for="newPassword">Password</label>
-    <input type="password" id="newPassword" name="newPassword" autocomplete="new-password" required />
 
-    <menu>
-      <button type="submit" id="signUpBtn">Sign Up</button>
-      <button type="button" id="signUpCloseBtn">Cancel</button>
-    </menu>
-  </form>
-<div id="profileOverlay" class="hidden">
- <header class="profile-header">
-  <img id="currentProfilePhoto" />
-  <div class="profile-info">
-    <h2 id="profileName"></h2>
-    <button class="close-btn">×</button>
-  </div>
-</header>
-  <section class="profile-tabs">
-    <button class="tab active">Gallery</button>
-    <button class="tab">Orders</button>
-    <button class="tab">Settings</button>
-  </section>
-  <section class="profile-content">
-    <!-- Dynamic content here -->
-  </section>
-</div>
-<div id="guestBanner" class="hidden">Welcome, guest ☕</div>
-<a href="#" id="backToSignIn">🔙 Back to Sign In</a>
-    <button id="switchAccountBtn">Switch Account</button>
+  <!-- 🧑 Guest Greeting -->
+  <div id="guestBanner" class="hidden">Welcome, guest ☕</div>
+  <a id="backToSignIn">🔙 Back to Sign In</a>
+  <button id="switchAccountBtn">Switch Account</button>
 
-  <div id="mainContent" class="hidden">
+  <!-- 🎯 Main Section -->
+  <section id="mainContent" class="hidden">
     <div id="greetingBanner">
-  <h2>Welcome back  ☕</h2>
-  <p>Ready to craft another delicious interface?</p>
-</div>
-  <div id="app">  
-    <div class="logo">
-  <img src="images/rios-cafe-logo.png" alt="Rio's Cafe Logo" />
-</div>
-   <header class="site-header">
-  <div class="intro">
-    <h1>Welcome to Rio's Café ☕</h1>
-  </div>
-</header>
+      <h2>Welcome back ☕</h2>
+      <p>Ready to craft another delicious interface?</p>
+    </div>
+  <main id="app">
+      <header class="site-header">
+        <img src="styles/images/bg.png" alt="Rio's Café Logo" class="brand-logo" />
+        <h1>Rio's Café Menu</h1>
+      </header>
 
-<main class="container">
-  <h2 class="section-banner">🍰 Desserts</h2>
+      <h2 class="section-banner">🧁 Desserts</h2>
   <section class="product-list">
     <div class="product-card" id="AppleCrisp">
       <img src="images/AppleCrisp.png" alt="Apple Crisp" class="product-image" />
@@ -225,69 +209,57 @@
     </div>
   </section>
 </main>
-<dialog id="orderModal" class="modal hidden">
-  <div class="modal-header">
-    <h2>Your Order Summary 🛍️</h2>
-    <button id="closeOrderModal" onclick="closeModal('orderModal')">Cancel</button>
-  </div>
+<!-- 🛒 Order Summary Modal -->
+  <dialog id="orderModal" class="modal hidden">
+    <div class="modal-header">
+      <h2>Your Order Summary 🧾</h2>
+      <button id="closeOrderModal">Cancel</button>
+    </div>
+    <ul id="cartList" class="cart-list"></ul>
+    <div class="order-summary">
+      <span>Total:</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
+    <menu class="order-actions">
+      <button id="placeOrderBtn">Place Order</button>
+    </menu>
+    <div id="emptyCartMessage" class="empty-message hidden">Your cart is empty 😌</div>
+  </dialog>
 
-  <ul id="cartList" class="cart-list">
-    <!-- JS will populate this with items -->
-  </ul>
+  <!-- 📨 Receipt Modal -->
+  <dialog id="receiptModal" class="modal hidden">
+    <h2>🧾 Order Receipt</h2>
+    <pre id="receiptContent"></pre>
+    <menu>
+      <button id="sendReceiptBtn">Send Receipt</button>
+      <button onclick="closeModal('receiptModal')">Close</button>
+    </menu>
+  </dialog>
 
-  <div class="order-summary">
-    <div class="total-label">Total:</div>
-    <div id="cartTotal" class="total-value">$0.00</div>
-  </div>
+  <!-- 🔊 Audio for Sign-In Feedback -->
+  <audio id="signInAudio" src="signin.mp3" preload="auto"></audio>
 
-  <menu class="order-actions">
-    <button id="placeOrderBtn" class="order-button">Place Order</button>
-  </menu>
-
-  <div id="emptyCartMessage" class="empty-message hidden">
-    Your cart is empty 😌<br />Start adding your favorite treats!
-  </div>
-</dialog>
-
-<dialog id="receiptModal" class="modal hidden">
-  <h2>🧾 Order Receipt</h2>
-  <pre id="receiptContent"></pre>
-  <menu>
-    <button id="sendReceiptBtn">Send Receipt</button>
-    <button onclick="closeModal('receiptModal')">Close</button>
-  </menu>
-</dialog>
-
-
-
-    
-
-<audio id="signInAudio" src="signin.mp3" preload="auto"></audio>
-    <script type="module" src="scripts/toast.js"></script> 
+  <!-- ⚙️ Scripts -->
+  <script type="module" src="scripts/toast.js"></script>
+  <script type="module" src="scripts/modal.js"></script>
   <script type="module" src="scripts/signin.js"></script>
-    <script type="module" src="scripts/signup.js" defer></script>
-    <script src="scripts/main.js" defer></script>
-    <script src="scripts/profile.js" defer></script>
-     <script src="scripts/search.js" defer></script>
-     <script src="scripts/topmodal.js" defer></script>
-    <script type="module" src="scripts/modal.js"></script>
-     <script type="module" src="scripts/user.js"></script>
-     <script src="scripts/order.js" defer></script>
-     <script src="scripts/receipt.js" defer></script>
-    <script type="module" src="scripts/mog.js"></script>
-    <div id="steamPuff" class="steam-puff"></div>
-<svg id="smokeTrail" viewBox="0 0 120 120" width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-  <path d="M60,110 C65,90 55,70 60,50 C65,30 55,20 60,10" 
-        fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-linecap="round" />
-</svg>
+  <script type="module" src="scripts/signup.js"></script>
+  <script type="module" src="scripts/receipt.js"></script>
+  <script type="module" src="scripts/topmodal.js"></script>
+  <script type="module" src="scripts/profile.js"></script>
+  <script type="module" src="scripts/search.js"></script>
+  <script type="module" src="scripts/order.js"></script>
+  <script type="module" src="scripts/main.js"></script>
 
-<footer class="site-footer">
-  <p>&copy; 2025 Rio's Café. Built by Rosario Espadera. <a href="https://github.com/RosarioEspadera/OrderCafe" target="_blank">GitHub Repo</a></p>
-</footer>
+  <!-- 🌬️ Artful Details -->
+  <div id="steamPuff" class="steam-puff"></div>
+  <svg id="smokeTrail" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60,110 C65,90 55,70 60,50 C65,30 55,20 60,10" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-linecap="round"/>
+  </svg>
 
+  <!-- 🧾 Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2025 Rio's Café. Built by Rosario Espadera. <a href="https://github.com/RosarioEspadera/OrderCafe" target="_blank">View GitHub Repo</a></p>
+  </footer>
 </body>
-  
-
 </html>
-
-

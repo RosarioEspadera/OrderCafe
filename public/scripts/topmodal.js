@@ -19,43 +19,48 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // Open Menu
+  // Open Menu and disable product buttons
   menuBtn?.addEventListener("click", () => {
     mainContent?.classList.remove("hidden");
     mainContent?.scrollIntoView({ behavior: "smooth" });
+    toggleProductButtons(false); // lock product buttons while viewing menu
   });
 
   // Open Order Modal
   orderBtn?.addEventListener("click", () => {
+    toggleProductButtons(true); // re-enable before opening
     orderModal?.showModal();
     backdrop?.classList.remove("hidden");
   });
 
   // Open Profile Modal
   profileBtn?.addEventListener("click", () => {
+    toggleProductButtons(true);
     profileOverlay?.classList.remove("hidden");
     profileOverlay?.showModal();
     backdrop?.classList.remove("hidden");
   });
 
-  // Close Profile Modal via button
+  // Close Profile Modal
   closeProfileBtn?.addEventListener("click", () => {
     profileOverlay?.close();
     profileOverlay?.classList.add("hidden");
     backdrop?.classList.add("hidden");
     mainContent?.classList.remove("hidden");
     mainContent?.scrollIntoView({ behavior: "smooth" });
+    toggleProductButtons(false);
   });
 
-  // Close Order Modal via button
+  // Close Order Modal
   closeOrderModalBtn?.addEventListener("click", () => {
     orderModal?.close();
     backdrop?.classList.add("hidden");
     mainContent?.classList.remove("hidden");
     mainContent?.scrollIntoView({ behavior: "smooth" });
+    toggleProductButtons(false);
   });
 
-  // Close any open modal with Escape key
+  // Escape closes any modal and restores mainContent
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       document.querySelectorAll("dialog[open]")?.forEach(modal => {
@@ -65,10 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
       backdrop?.classList.add("hidden");
       mainContent?.classList.remove("hidden");
       mainContent?.scrollIntoView({ behavior: "smooth" });
+      toggleProductButtons(false);
     }
   });
 });
-
-
 
 

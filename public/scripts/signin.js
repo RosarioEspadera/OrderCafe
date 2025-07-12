@@ -1,48 +1,25 @@
-document.getElementById("signInModal").showModal();
-const BACKEND_URL =
-  location.hostname === "localhost"
-    ? "http://localhost:3000"
-    : "https://ordercafe-rio-hxxc.onrender.com";
-
 import { showToast } from './toast.js';
-export function openModal(id) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
+import { openModal, closeModal } from './modal.js';
 
-  if (modal.tagName === "DIALOG") {
-    if (!modal.open) modal.showModal();
-  } else {
-    modal.classList.add("visible");
-    document.querySelector(".modal-backdrop")?.classList.add("visible");
+const BACKEND_URL = location.hostname === "localhost"
+  ? "http://localhost:3000"
+  : "https://ordercafe-rio-hxxc.onrender.com";
+
+// 🔔 Personalized Greeting Banner
+function showGreeting() {
+  const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+  const banner = document.querySelector("#greetingBanner h2");
+
+  if (user && banner) {
+    banner.innerHTML = `Welcome back, <span class="username">${user.username}</span> ☕`;
   }
 }
 
-export function closeModal(id) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
+// 🚪 Open Sign-In Modal on page load
+document.getElementById("signInModal")?.showModal();
 
-  if (modal.tagName === "DIALOG") {
-    if (modal.open) modal.close();
-  } else {
-    modal.classList.remove("visible");
-    document.querySelector(".modal-backdrop")?.classList.remove("visible");
-  }
-}
-document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
-  closeModal("signInModal"); // Optional: hide sign-in if it's currently open
-
-  const signUpModal = document.getElementById("signUpModal");
-  if (signUpModal?.tagName === "DIALOG") {
-    signUpModal.showModal(); // For <dialog> elements
-  } else {
-    signUpModal?.classList.add("visible"); // If using non-dialog modals
-  }
-
-  showToast("Let’s get you signed up ☕");
-});
-
-
- document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
+// 📝 Handle Sign-In Form Submission
+document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const username = document.getElementById("username")?.value.trim();
@@ -58,19 +35,24 @@ document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
     document.getElementById("signInBtn").disabled = true;
     loader?.classList.remove("hidden");
 
-   const res = await fetch(`${BACKEND_URL}/signin`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ username, password })
-});
-
+    const res = await fetch(`${BACKEND_URL}/signin`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password })
+    });
 
     const data = await res.json();
 
     if (res.ok) {
       localStorage.setItem("orderCafeUser", JSON.stringify(data.user));
+
       closeModal("signInModal");
-      openModal("mainModal");
+      showGreeting();
+
+      document.getElementById("mainContent")?.classList.remove("hidden");
+      document.getElementById("greetingBanner")?.classList.remove("hidden");
+      document.getElementById("guestBanner")?.classList.add("hidden");
+
       showToast(`Welcome back, ${username}!`);
     } else {
       showToast(data.error || "Signin failed ❌");
@@ -84,31 +66,36 @@ document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
   }
 });
 
+// 🔁 Toggle to Sign-Up Modal
+document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
+  closeModal("signInModal");
+  openModal("signUpModal");
+
+  showToast("Let’s get you signed up ☕");
+});
+
+// ❌ Handle Cancel Button
+document.getElementById("closeBtn")?.addEventListener("click", () => {
+  closeModal("signInModal");
+  showToast("Sign-in cancelled");
+});
+
+// 🔙 Back to Sign-In (from another page/modal)
 document.getElementById("backToSignIn")?.addEventListener("click", () => {
+  localStorage.removeItem("orderCafeUser");
+
   document.getElementById("mainContent")?.classList.add("hidden");
   document.getElementById("greetingBanner")?.classList.add("hidden");
   document.getElementById("guestBanner")?.classList.remove("hidden");
 
-  // 🗑️ Clear saved user data
-  localStorage.removeItem("orderCafeUser");
-
-  // 🔒 Close main modal and sign-up modal if they're open
   closeModal("mainModal");
   closeModal("signUpModal");
+  openModal("signInModal");
 
-  // 🔐 Open the <dialog> modal using showModal()
-  const signInModal = document.getElementById("signInModal");
-  if (signInModal?.tagName === "DIALOG") {
-    signInModal.showModal();
-  } else {
-    signInModal?.classList.add("visible");
-  }
-
-  // ☕ Toast for feedback
   showToast("Signed out — back to sign in");
 });
 
-
+// 🔄 Switch Account
 document.getElementById("switchAccountBtn")?.addEventListener("click", () => {
   const confirmed = window.confirm("Sign out and return to sign-in?");
   if (confirmed) {
@@ -118,9 +105,3 @@ document.getElementById("switchAccountBtn")?.addEventListener("click", () => {
     showToast("Signed out ☕");
   }
 });
-
-
-
-
-
-

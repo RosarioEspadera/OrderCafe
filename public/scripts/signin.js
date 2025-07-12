@@ -1,3 +1,8 @@
+const BACKEND_URL =
+  location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://ordercafe-rio-hxxc.onrender.com";
+
 import { showToast } from './toast.js';
 export function openModal(id) {
   const modal = document.getElementById(id);
@@ -52,7 +57,7 @@ document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
     document.getElementById("signInBtn").disabled = true;
     loader?.classList.remove("hidden");
 
-    const res = await fetch(`${BACKEND_URL}/signin`, {
+    const res = await fetch(`${https://ordercafe-rio-hxxc.onrender.com}/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, password })

@@ -10,6 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileOverlay = document.getElementById("profileOverlay");
   const backdrop = document.querySelector(".modal-backdrop");
 
+  const productOrderButtons = document.querySelectorAll(".order-button");
+
+  // Disable product interaction when in mainContent
+  const toggleProductButtons = (isEnabled) => {
+    productOrderButtons?.forEach(btn => {
+      btn.disabled = !isEnabled;
+    });
+  };
+
   // Open Menu
   menuBtn?.addEventListener("click", () => {
     mainContent?.classList.remove("hidden");

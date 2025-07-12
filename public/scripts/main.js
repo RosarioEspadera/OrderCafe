@@ -19,8 +19,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function updateCartCount() {
     const badge = main.querySelector(".cart-count");
-    badge.textContent = cart.length;
-    badge.classList.toggle("visible", cart.length > 0);
+    if (badge) {
+      badge.textContent = cart.length;
+      badge.classList.toggle("visible", cart.length > 0);
+    }
+
+    const cartCountElement = document.getElementById("cartCount");
+    if (cartCountElement) {
+      cartCountElement.textContent = cart.length;
+    }
   }
 
   function addToCart(itemId) {
@@ -34,7 +41,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function showOrderSummary() {
     const modal = document.getElementById("orderModal");
-    const list = modal.querySelector(".cart-summary");
+    const list = modal?.querySelector(".cart-summary");
+    if (!list) return;
+
     list.innerHTML = "";
     cart.forEach(itemId => {
       const card = main.querySelector(`#${itemId}`);
@@ -44,7 +53,8 @@ window.addEventListener("DOMContentLoaded", () => {
       row.textContent = `${title} — ${price}`;
       list.appendChild(row);
     });
-    modal.showModal();
+
+    modal?.showModal();
   }
 
   const searchInput = main.querySelector("input[type='search']");
@@ -79,4 +89,3 @@ window.addEventListener("DOMContentLoaded", () => {
 
   updateCartCount();
 });
-

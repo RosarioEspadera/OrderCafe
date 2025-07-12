@@ -71,7 +71,6 @@ document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
       closeModal("signInModal");
       openModal("mainModal");
       showToast(`Welcome back, ${username}!`);
-     toast.textContent = `☕ Welcome back, ${data.user.name}!`;
     } else {
       showToast(data.error || "Signin failed ❌");
     }

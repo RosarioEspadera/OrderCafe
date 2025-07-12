@@ -61,6 +61,13 @@
   display: flex;
   gap: 1rem;
 }
+.order-actions .order-button:first-child {
+  flex: 2;
+}
+.order-actions .order-button:last-child {
+  flex: 1;
+}
+
 
 .order-button {
   flex: 1;
@@ -94,15 +101,15 @@
   opacity: 0;
   pointer-events: none;
 }
-
 .modal {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.modal:not(.hidden) {
-  opacity: 1;
-  transform: translateY(0);
-}
-.modal.hidden {
-  opacity: 0;
-  transform: translateY(-10px);
-}
+
+

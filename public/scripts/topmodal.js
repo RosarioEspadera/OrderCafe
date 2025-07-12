@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 🌟 Element References
-  const homeTab = document.getElementById("homeTab");
-activateTab(homeTab);
+ const homeTab = document.getElementById("homeTab");
+activateTab(homeTab); // ✅ Now it works
+
   const orderTab = document.getElementById("orderTab");
   const profileTab = document.getElementById("profileTab");
   const tabs = [homeTab, orderTab, profileTab];
@@ -82,7 +83,6 @@ closeProfileButton?.addEventListener("click", () => {
   profileOverlay?.classList.add("hidden");
   backdrop?.classList.add("hidden");
   mainContent.classList.remove("hidden");
-  activateTab(homeTab);
   toggleProductButtons(false);
   toggleSignInButtons(false);
   lockModalButtons(true);

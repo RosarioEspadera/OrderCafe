@@ -5,26 +5,29 @@ const BACKEND_URL = location.hostname === "localhost"
   ? "http://localhost:3000"
   : "https://ordercafe-rio-hxxc.onrender.com";
 
-// 🔔 Personalized Greeting Banner
-function showGreeting() {
-  const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+// 🎉 Inject Greeting
+function updateGreeting() {
   const banner = document.querySelector("#greetingBanner h2");
+  const user = JSON.parse(localStorage.getItem("orderCafeUser"));
 
-  if (user && banner) {
+  if (banner && user?.username) {
     banner.innerHTML = `Welcome back, <span class="username">${user.username}</span> ☕`;
   }
 }
 
-// 🚪 Open Sign-In Modal on page load
-document.getElementById("signInModal")?.showModal();
+// 🚪 Open Sign-In Modal on Load
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("signInModal")?.showModal();
+});
 
-// 📝 Handle Sign-In Form Submission
+// 📝 Handle Sign-In
 document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const username = document.getElementById("username")?.value.trim();
   const password = document.getElementById("password")?.value.trim();
   const loader = document.getElementById("loader");
+  const button = document.getElementById("signInBtn");
 
   if (!username || !password) {
     showToast("Missing username or password");
@@ -32,7 +35,7 @@ document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
   }
 
   try {
-    document.getElementById("signInBtn").disabled = true;
+    button.disabled = true;
     loader?.classList.remove("hidden");
 
     const res = await fetch(`${BACKEND_URL}/signin`, {
@@ -43,17 +46,16 @@ document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
 
     const data = await res.json();
 
-    if (res.ok) {
+    if (res.ok && data.user) {
       localStorage.setItem("orderCafeUser", JSON.stringify(data.user));
+      updateGreeting();
 
       closeModal("signInModal");
-      showGreeting();
+      showToast(`Welcome back, ${data.user.username} ☕`);
 
       document.getElementById("mainContent")?.classList.remove("hidden");
       document.getElementById("greetingBanner")?.classList.remove("hidden");
       document.getElementById("guestBanner")?.classList.add("hidden");
-
-      showToast(`Welcome back, ${username}!`);
     } else {
       showToast(data.error || "Signin failed ❌");
     }
@@ -61,26 +63,25 @@ document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
     console.error("Signin error:", err);
     showToast("Server error ☁️");
   } finally {
-    document.getElementById("signInBtn").disabled = false;
+    button.disabled = false;
     loader?.classList.add("hidden");
   }
 });
 
-// 🔁 Toggle to Sign-Up Modal
+// 🧁 Toggle to Sign-Up
 document.getElementById("signUpToggleBtn")?.addEventListener("click", () => {
   closeModal("signInModal");
   openModal("signUpModal");
-
   showToast("Let’s get you signed up ☕");
 });
 
-// ❌ Handle Cancel Button
+// ❌ Cancel Sign-In
 document.getElementById("closeBtn")?.addEventListener("click", () => {
   closeModal("signInModal");
   showToast("Sign-in cancelled");
 });
 
-// 🔙 Back to Sign-In (from another page/modal)
+// 🔙 Back to Sign-In
 document.getElementById("backToSignIn")?.addEventListener("click", () => {
   localStorage.removeItem("orderCafeUser");
 
@@ -97,8 +98,7 @@ document.getElementById("backToSignIn")?.addEventListener("click", () => {
 
 // 🔄 Switch Account
 document.getElementById("switchAccountBtn")?.addEventListener("click", () => {
-  const confirmed = window.confirm("Sign out and return to sign-in?");
-  if (confirmed) {
+  if (window.confirm("Sign out and return to sign-in?")) {
     localStorage.removeItem("orderCafeUser");
     closeModal("mainModal");
     openModal("signInModal");

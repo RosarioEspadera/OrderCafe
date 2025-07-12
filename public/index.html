@@ -90,14 +90,24 @@
       <button type="button" id="signUpCloseBtn">Cancel</button>
     </menu>
   </form>
-</dialog>
-  <dialog id="profileOverlay">
+<div id="profileOverlay" class="hidden">
+ <header class="profile-header">
   <img id="currentProfilePhoto" />
-  <span id="profileName"></span>
-  <input type="file" id="profilePhotoUpload" />
-  <button id="logoutFromProfile">Logout</button>
-  <button id="closeProfile">Close</button>
-</dialog>
+  <div class="profile-info">
+    <h2 id="username"></h2>
+    <button class="close-btn">×</button>
+  </div>
+</header>
+  <section class="profile-tabs">
+    <button class="tab active">Gallery</button>
+    <button class="tab">Orders</button>
+    <button class="tab">Settings</button>
+  </section>
+  <section class="profile-content">
+    <!-- Dynamic content here -->
+  </section>
+</div>
+
 
   <div id="mainContent" class="hidden">
     <div id="greetingBanner">

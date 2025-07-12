@@ -49,10 +49,18 @@ button {
   color: var(--cafe-brown);
 }
 .modal {
-  transition: opacity 0.3s ease;
-  opacity: 0;
-  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
+
 .modal.visible {
   opacity: 1;
   pointer-events: auto;
@@ -66,5 +74,8 @@ dialog[open] {
 dialog:not([open]) {
   opacity: 0;
   pointer-events: none;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
 }
 

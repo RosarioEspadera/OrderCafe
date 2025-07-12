@@ -2,21 +2,10 @@ window.addEventListener("DOMContentLoaded", () => {
   const main = document.getElementById("mainContent");
   if (!main) return;
 
+  // 🛒 Initialize Cart
   let cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
-  let summaryRefreshTimeout;
 
-// Define the function first
-function toggleGuestBanner() {
-  const user = JSON.parse(localStorage.getItem("orderCafeUser"));
-  const banner = document.getElementById("guestBanner");
-  if (!banner) return;
-  banner.classList.toggle("hidden", !!user);
-}
-
-// Then call it
-toggleGuestBanner();
-
-  // 🛎️ Toast Notification
+  // 🔔 Toast Notification
   function showToast(message = "Added to cart!", duration = 3000) {
     const toast = document.createElement("div");
     toast.className = "toast";
@@ -26,58 +15,47 @@ toggleGuestBanner();
     setTimeout(() => toast.remove(), duration);
   }
 
-  // 🛍️ Sticky Bottom Bar
-  const orderBar = main.querySelector(".order-bar");
-  if (orderBar) {
-    window.addEventListener("scroll", () => {
-      orderBar.classList.toggle("visible", window.scrollY > 300);
-      clearTimeout(summaryRefreshTimeout);
-      summaryRefreshTimeout = setTimeout(showOrderSummary, 300);
-    });
-
-    orderBar.querySelector("button")?.addEventListener("click", () => {
-      openModal("cartModal");
-    });
+  // 🧾 Cart Save & Update
+  function saveCart() {
+    localStorage.setItem("orderCafeCart", JSON.stringify(cart));
   }
 
-  // 🔍 Live Search
-  const searchInput = main.querySelector('input[type="search"]');
-  if (searchInput) {
-    searchInput.addEventListener("input", (e) => {
-      const keyword = e.target.value.toLowerCase();
-      main.querySelectorAll(".product-card").forEach((card) => {
-        const title = card.querySelector(".product-title")?.textContent.toLowerCase() || "";
-        card.style.display = title.includes(keyword) ? "block" : "none";
-      });
-    });
+  function updateCartCount() {
+    const badge = main.querySelector(".cart-count");
+    if (badge) {
+      badge.textContent = cart.length;
+      badge.classList.toggle("visible", cart.length > 0);
+    }
   }
 
-  // 🎬 Fade-in Effect
-  const productCards = main.querySelectorAll(".product-card");
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
+  function addToCart(itemId) {
+    if (!cart.includes(itemId)) {
+      cart.push(itemId);
+      saveCart();
+      updateCartCount();
+      showToast("✓ Saved to Cart");
+    }
+  }
+
+  // 🛍️ Show Cart Summary
+  function showOrderSummary() {
+    const modal = main.querySelector("#cartModal");
+    const list = modal?.querySelector(".cart-summary");
+    if (!list) return;
+
+    list.innerHTML = "";
+    cart.forEach(itemId => {
+      const card = main.querySelector(`#${itemId}`);
+      if (card) {
+        const title = card.querySelector(".product-title")?.textContent || "Item";
+        const price = card.querySelector(".price-tag")?.textContent || "₱0";
+        const row = document.createElement("li");
+        row.textContent = `${title} — ${price}`;
+        list.appendChild(row);
+      }
     });
-  }, { threshold: 0.1 });
 
-  productCards.forEach((card, i) => {
-    card.style.transitionDelay = `${i * 100}ms`;
-    observer.observe(card);
-  });
-  
-document.getElementById("mainContent")?.classList.remove("hidden");
-
-  
-  document.getElementById("backToSignIn")?.addEventListener("click", function (e) {
-  e.preventDefault();
-  document.getElementById("signInButton")?.click();
-    
-});
-  
-  // 🔁 Loader Control
-  function toggleLoader(show = true) {
-    const loader = main.querySelector(".loader");
-    if (loader) loader.style.display = show ? "block" : "none";
+    openModal("cartModal");
   }
 
   // 📦 Modal Controls
@@ -91,57 +69,54 @@ document.getElementById("mainContent")?.classList.remove("hidden");
     main.querySelector(".modal-backdrop")?.classList.remove("visible");
   }
 
-  // 🛒 Cart Management
-  function updateCartCount() {
-    const badge = main.querySelector(".cart-count");
-    if (badge) {
-      badge.textContent = cart.length;
-      badge.classList.add("visible");
-    }
-  }
+  // 🔍 Live Search
+  const searchInput = main.querySelector('input[type="search"]');
+  searchInput?.addEventListener("input", (e) => {
+    const keyword = e.target.value.toLowerCase();
+    main.querySelectorAll(".product-card").forEach(card => {
+      const title = card.querySelector(".product-title")?.textContent.toLowerCase() || "";
+      card.style.display = title.includes(keyword) ? "block" : "none";
+    });
+  });
 
-  function saveCart() {
-    localStorage.setItem("orderCafeCart", JSON.stringify(cart));
-  }
+  // 🎬 Fade-in Effect
+  const productCards = main.querySelectorAll(".product-card");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("visible");
+    });
+  }, { threshold: 0.1 });
 
-  function addToCart(itemId) {
-    if (!cart.includes(itemId)) {
-      cart.push(itemId);
-      saveCart();
-      showToast("✓ Saved to Cart");
-      updateCartCount();
-    }
-  }
+  productCards.forEach((card, i) => {
+    card.style.transitionDelay = `${i * 100}ms`;
+    observer.observe(card);
+  });
 
-  function showOrderSummary() {
-    const modal = main.querySelector("#cartModal");
-    const list = modal?.querySelector(".cart-summary");
-    if (!list) return;
+  // 📦 Sticky Cart Bar
+  const orderBar = main.querySelector(".order-bar");
+  let summaryRefreshTimeout;
 
-    list.innerHTML = "";
-    cart.forEach(itemId => {
-      const itemCard = main.querySelector(`#${itemId}`);
-      if (itemCard) {
-        const title = itemCard.querySelector(".product-title")?.textContent || "Item";
-        const price = itemCard.querySelector(".price-tag")?.textContent || "₱0";
-        const row = document.createElement("li");
-        row.textContent = `${title} — ${price}`;
-        list.appendChild(row);
-      }
+  if (orderBar) {
+    window.addEventListener("scroll", () => {
+      orderBar.classList.toggle("visible", window.scrollY > 300);
+      clearTimeout(summaryRefreshTimeout);
+      summaryRefreshTimeout = setTimeout(showOrderSummary, 300);
     });
 
-    openModal("cartModal");
+    orderBar.querySelector("button")?.addEventListener("click", () => {
+      showOrderSummary();
+    });
   }
 
-  // 🔑 Escape Key Closes Modals
-  document.addEventListener("keydown", e => {
+  // 🧹 Escape Key to Close Modals
+  document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      main.querySelectorAll(".modal.visible").forEach(modal => modal.classList.remove("visible"));
+      main.querySelectorAll(".modal.visible")?.forEach(modal => modal.classList.remove("visible"));
       main.querySelector(".modal-backdrop")?.classList.remove("visible");
     }
   });
 
-  // 🛍️ Checkout Button
+  // 🧾 Checkout Button
   main.querySelector("#checkoutBtn")?.addEventListener("click", () => {
     showToast("☕ Order placed! Thank you.");
     cart = [];
@@ -150,12 +125,25 @@ document.getElementById("mainContent")?.classList.remove("hidden");
     closeModal("cartModal");
   });
 
-  // 🧃 Order Buttons
-  main.querySelectorAll(".order-button").forEach(btn => {
+  // 🛎️ Back to Sign-In Trigger
+  document.getElementById("backToSignIn")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("signInButton")?.click();
+  });
+
+  // 🧈 Loader Toggle
+  function toggleLoader(show = true) {
+    const loader = main.querySelector(".loader");
+    if (loader) loader.style.display = show ? "block" : "none";
+  }
+
+  // 🧁 Interactive Order Buttons
+  main.querySelectorAll(".order-button").forEach((btn) => {
     btn.addEventListener("click", () => {
+      const product = btn.closest(".product-card")?.id;
+      if (product) addToCart(product);
       btn.classList.add("added");
       btn.textContent = "✓ Added!";
-      showToast("Item added to cart!");
       setTimeout(() => {
         btn.classList.remove("added");
         btn.textContent = "Order Now";
@@ -163,7 +151,8 @@ document.getElementById("mainContent")?.classList.remove("hidden");
     });
   });
 
+  // 🎯 Initial Setup
+  document.getElementById("mainContent")?.classList.remove("hidden");
   updateCartCount();
+  toggleLoader(false);
 });
-
-

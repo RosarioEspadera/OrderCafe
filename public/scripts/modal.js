@@ -1,15 +1,21 @@
-// In modal.js
 export function openModal(id) {
   const modal = document.getElementById(id);
-  const backdrop = document.querySelector(".modal-backdrop");
-  if (modal) modal.style.display = "block";
-  if (backdrop) backdrop.classList.add("visible");
+  if (!modal) return;
+  if (modal.tagName === "DIALOG" && modal.showModal) {
+    modal.showModal();
+  } else {
+    modal.classList.add("visible");
+  }
 }
 
 export function closeModal(id) {
   const modal = document.getElementById(id);
-  const backdrop = document.querySelector(".modal-backdrop");
-  if (modal) modal.style.display = "none";
-  if (backdrop) backdrop.classList.remove("visible");
+  if (!modal) return;
+  if (modal.tagName === "DIALOG" && modal.close) {
+    modal.close();
+  } else {
+    modal.classList.remove("visible");
+  }
 }
+
 

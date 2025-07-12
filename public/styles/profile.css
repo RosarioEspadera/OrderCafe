@@ -66,4 +66,20 @@
   border-color: #a0552e;
   cursor: pointer;
 }
+.hidden {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+.modal {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.modal:not(.hidden) {
+  opacity: 1;
+  transform: translateY(0);
+}
+.modal.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+}
 

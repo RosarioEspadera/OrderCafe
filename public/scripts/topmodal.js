@@ -12,4 +12,11 @@ function showMainContent() {
   if (signInModal) signInModal.classList.remove("visible");
   if (backdrop) backdrop.classList.remove("visible");
 }
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  const backdrop = document.querySelector(".modal-backdrop");
+
+  if (modal) modal.classList.add("visible");
+  if (backdrop) backdrop.classList.add("visible");
+}
 

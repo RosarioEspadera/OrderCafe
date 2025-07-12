@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   // 🌟 Element References
   const homeTab = document.getElementById("homeTab");
+activateTab(homeTab);
   const orderTab = document.getElementById("orderTab");
   const profileTab = document.getElementById("profileTab");
   const tabs = [homeTab, orderTab, profileTab];

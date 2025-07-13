@@ -69,12 +69,31 @@ cartTab?.addEventListener("click", () => {
 });
 
   // 🧑 Account Tab Handler
-  accountTab?.addEventListener("click", () => {
-  activateTab(accountTab, tabs);
-  openModal("userModal");              // ✅ Preferred method
-  toggleSignInButtons(true);           // 🧑‍💻 Enable sign-in flow
-  toggleProductButtons(false);         // 🛑 Disable ordering buttons
+ accountTab?.addEventListener("click", () => {
+  userModal?.classList.add("fullscreen");
+
+  if (!user || user.username === "Guest") {
+    userName.value = "";
+    userEmail.value = "";
+    userAddress.value = "";
+    currentAvatar.src = fallbackPhoto;
+  } else {
+    userName.value = user.username || "";
+    userEmail.value = user.email || "";
+    userAddress.value = user.address || "";
+    currentAvatar.src = user.profilePhoto || fallbackPhoto;
+  }
+
+  userModal.showModal?.();
+  backdrop?.classList.remove("hidden");
 });
+closeBtn?.addEventListener("click", () => {
+  userModal?.classList.remove("fullscreen");
+  userModal?.close();
+  userModal?.classList.add("hidden");
+  backdrop?.classList.add("hidden");
+});
+
 
   // 🚀 Launch with Home Tab Active
   homeTab?.click();

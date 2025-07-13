@@ -8,7 +8,7 @@ export function openModal(id) {
   const backdrop = document.querySelector(".modal-backdrop");
   if (!modal) return;
 
-  // 🔄 Deactivate all modals except the one being opened
+  // 🔒 Close all other modals first
   document.querySelectorAll("dialog").forEach(m => {
     if (m.id !== id) {
       m.classList.add("hidden");
@@ -17,22 +17,14 @@ export function openModal(id) {
     }
   });
 
-  // ✨ Activate target modal
+  // 🔓 Activate the target modal
   modal.classList.remove("hidden");
   modal.removeAttribute("inert");
+  if (typeof modal.showModal === "function") modal.showModal();
   lockModalButtons(false);
-
-  if (typeof modal.showModal === "function") {
-    modal.showModal();
-  } else {
-    modal.classList.add("visible");
-  }
-
   backdrop?.classList.remove("hidden");
-  modal.querySelector(".modal-button")?.focus();
-
-  console.log(`✅ ${id} opened. Inert:`, modal.hasAttribute("inert"));
 }
+
 
 /**
  * Closes a modal by ID.

@@ -1,13 +1,3 @@
-import { initUserCredentials } from './user.js';
-import { initProductEvents } from './products.js';
-import { renderCartItems } from './cart.js';
-
-document.addEventListener("DOMContentLoaded", () => {
-  initUserCredentials();
-  initProductEvents();
-  renderCartItems();
-});
-
 window.addEventListener("DOMContentLoaded", () => {
   const main = document.getElementById("mainContent");
   if (!main) return;

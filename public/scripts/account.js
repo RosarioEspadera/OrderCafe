@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logoutFromProfile");
   const closeBtn = document.getElementById("closeProfile");
   const backdrop = document.querySelector(".modal-backdrop");
+  const addressInput = document.getElementById("address");
 
   const greetingBanner = document.getElementById("greetingBanner");
   const guestBanner = document.getElementById("guestBanner");
@@ -25,20 +26,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🧑 Open Account Modal
   document.getElementById("accountTab")?.addEventListener("click", () => {
-    if (!user || user.username === "Guest") {
-      userNameInput.value = "";
-      emailInput.value = "";
-      currentAvatar.src = fallbackPhoto;
-    } else {
-      userNameInput.value = user.username || "";
-      emailInput.value = user.email || "";
-      currentAvatar.src = user.profilePhoto || fallbackPhoto;
-    }
+  if (!user || user.username === "Guest") {
+    userNameInput.value = "";
+    emailInput.value = "";
+    addressInput.value = "";
+    currentAvatar.src = fallbackPhoto;
+  } else {
+    userNameInput.value = user.username || "";
+    emailInput.value = user.email || "";
+    addressInput.value = user.address || "";
+    currentAvatar.src = user.profilePhoto || fallbackPhoto;
+  }
 
-    userModal.classList.remove("hidden");
-    userModal.showModal?.();
-    backdrop?.classList.remove("hidden");
-  });
+  userModal.classList.remove("hidden");
+  userModal.showModal?.();
+  backdrop?.classList.remove("hidden");
+});
+
 
   // 📷 Handle avatar upload
   avatarUpload?.addEventListener("change", () => {

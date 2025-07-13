@@ -43,6 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
   backdrop?.classList.remove("hidden");
 });
 
+const input = document.getElementById("profilePhoto");
+input.addEventListener("input", () => {
+  const preview = document.getElementById("preview");
+  preview.src = input.value;
+});
 
 
   // 📷 Handle avatar upload

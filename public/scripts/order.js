@@ -46,16 +46,18 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // 🧹 Remove item when ✕ is clicked
-  cartList?.addEventListener("click", (e) => {
-    const target = e.target;
-    if (target.classList.contains("remove-item")) {
-      const index = parseInt(target.dataset.index);
-      cart.splice(index, 1);
-      showToast(`Removed ${item.name} from cart 🧹`);
-      saveCart();
-      renderCartItems();
-    }
-  });
+ cartList?.addEventListener("click", (e) => {
+  const target = e.target;
+  if (target.classList.contains("remove-item")) {
+    const index = parseInt(target.dataset.index);
+    const removedItem = cart[index]; // ✅ Get the item before splicing
+    cart.splice(index, 1);
+    showToast(`Removed ${removedItem.name} from cart 🧹`);
+    saveCart();
+    renderCartItems();
+  }
+});
+
 
   // ❌ Close the order modal
   closeOrderModalBtn?.addEventListener("click", () => {

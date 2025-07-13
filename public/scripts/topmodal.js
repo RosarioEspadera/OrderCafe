@@ -86,10 +86,11 @@ document.addEventListener("DOMContentLoaded", () => {
       userAddress?.value = "";
       currentAvatar.src = fallbackPhoto;
     } else {
-      userName?.value = user.userName || "";
-      userEmail?.value = user.email || "";
-      userAddress?.value = user.address || "";
-      currentAvatar.src = user.profilePhoto || fallbackPhoto;
+    userName?.value = user.userName || "";
+    userEmail?.value = user.email || "";
+    userAddress?.value = user.address || "";
+    currentAvatar.src = user.profilePhoto || fallbackPhoto;
+
     }
 
     userModal.showModal?.();

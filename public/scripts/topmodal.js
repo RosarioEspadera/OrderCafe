@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartTab = document.getElementById("orderTab");
   const accountTab = document.getElementById("accountTab");
   const orderModal = document.getElementById("orderModal");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const tabs = [homeTab, cartTab, accountTab];
 

@@ -1,3 +1,4 @@
+import { showToast } from './toast.js';
 document.addEventListener("DOMContentLoaded", () => {
   // 🛒 Load cart from local storage or initialize
   let cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
@@ -50,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (target.classList.contains("remove-item")) {
       const index = parseInt(target.dataset.index);
       cart.splice(index, 1);
+      showToast(`Removed ${item.name} from cart 🧹`);
       saveCart();
       renderCartItems();
     }

@@ -71,13 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const profilePhoto = currentAvatar.src || fallbackPhoto;
 
   if (!username || !email || !email.includes("@") || !address) {
-    userFeedback.textContent = "❌ Please enter name, email, and address.";
-    userFeedback.classList.remove("hidden");
-    return;
-  }
+  userFeedback.textContent = "❌ Please enter name, email, and address.";
+  userFeedback.classList.remove("hidden");
+  return;
+}
 
-  user = { username, email, address, profilePhoto };
-  localStorage.setItem("orderCafeUser", JSON.stringify(user));
+user = { username, email, address, profilePhoto };
+localStorage.setItem("orderCafeUser", JSON.stringify(user));
 
   userFeedback.textContent = "✅ Credentials saved!";
   userFeedback.classList.remove("hidden");

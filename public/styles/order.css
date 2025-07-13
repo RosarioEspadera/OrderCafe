@@ -117,5 +117,8 @@
   color: #6e4e3b;
   font-size: 1rem;
 }
+.empty-message.hidden {
+  display: none !important;
+}
 
 

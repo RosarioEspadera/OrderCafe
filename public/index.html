@@ -212,6 +212,22 @@
     </div>
   </section>
 </main>
+    <dialog id="userModal" class="modal">
+  <h2>👤 Your Details</h2>
+  <form id="userForm">
+    <label for="username">Name:</label>
+    <input type="text" id="username" required />
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" required />
+    
+    <menu>
+      <button type="submit">Save</button>
+    </menu>
+    <div id="userFeedback" class="hidden">✅ Credentials saved!</div>
+  </form>
+</dialog>
+
 <!-- 🛒 Order Summary Modal -->
   <dialog id="orderModal" class="modal">
     <div class="modal-header">
@@ -238,6 +254,7 @@
       <button onclick="closeModal('receiptModal')">Close</button>
     </menu>
   </dialog>
+    
       <!-- 👤 Profile Modal -->
 <section id="profileContent" class="hidden">
   <header class="site-header">
@@ -269,7 +286,7 @@
   <script type="module" src="scripts/profile.js"></script>
   <script type="module" src="scripts/search.js"></script>
   <script type="module" src="scripts/order.js"></script>
-  <script type="module" src="scripts/main.js"></script>
+  <script type="module" src="scripts/mainContent.js"></script>
 
   <!-- 🌬️ Artful Details -->
   <div id="steamPuff" class="steam-puff"></div>

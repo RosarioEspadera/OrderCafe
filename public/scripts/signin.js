@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
 document.getElementById("signInForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const username = document.getElementById("username")?.value.trim();
+  const username = document.getElementById("signInUsername").value.trim();
   const password = document.getElementById("password")?.value.trim();
   const loader = document.getElementById("loader");
   const button = document.getElementById("signInBtn");

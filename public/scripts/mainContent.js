@@ -30,12 +30,20 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("mainContent")?.classList.remove("hidden");
   });
 
-  // ✅ Place Order logic
-  document.getElementById("checkoutBtn")?.addEventListener("click", () => {
-    showToast("☕ Order placed! Thank you.");
-    localStorage.setItem("orderCafeCart", JSON.stringify([]));
-    updateCartCount();
-    closeModal("orderModal");
-    document.getElementById("mainContent")?.classList.remove("hidden");
-  });
+document.getElementById("checkoutBtn")?.addEventListener("click", () => {
+  const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+
+  if (!user || !user.username || !user.email || !user.email.includes("@")) {
+    showToast("🚫 Please provide your name and email before checking out.");
+    return;
+  }
+
+  showToast("☕ Order placed! Thank you.");
+  localStorage.setItem("orderCafeCart", JSON.stringify([]));
+  updateCartCount();
+  sendReceiptEmail();
+  closeModal("orderModal");
+  document.getElementById("mainContent")?.classList.remove("hidden");
+});
+
 });

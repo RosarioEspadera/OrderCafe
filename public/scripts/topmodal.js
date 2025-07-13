@@ -54,16 +54,16 @@ document.addEventListener("DOMContentLoaded", () => {
     lockModalButtons(true);
   });
 
-  // 🛒 Cart Tab Handler
-  cartTab?.addEventListener("click", () => {
-    activateTab(cartTab, tabs);
-    mainContent?.classList.add("hidden");
-    orderModal?.showModal?.();
-    showBackdrop();
-    toggleProductButtons(true);
-    toggleSignInButtons(true);
-    lockModalButtons(false);
-  });
+
+ // 🛒 Cart Tab Handler
+cartTab?.addEventListener("click", () => {
+  activateTab(cartTab, tabs);
+  renderCartItems();                  // Refresh cart contents
+  updateCartCount();                 // Sync visual badge
+  openModal("orderModal");           // 💥 Fixed modal handler
+  toggleProductButtons(true);
+  toggleSignInButtons(true);
+});
 
   // 🧑 Account Tab Handler
   accountTab?.addEventListener("click", () => {

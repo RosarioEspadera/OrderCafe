@@ -10,22 +10,24 @@ export function openModal(id) {
 
   // 🔒 Close all other modals first
   document.querySelectorAll("dialog").forEach(m => {
-    if (m.id !== id) {
-      m.classList.add("hidden");
-      m.setAttribute("inert", "");
-      m.close?.();
-    }
-  });
+  if (m.id !== id) {
+    m.classList.add("hidden");
+    m.setAttribute("inert", "");
+    m.close?.();
+  }
+});
+
 
   // 🔓 Activate the target modal
-  modal.classList.remove("hidden");
-  modal.removeAttribute("inert");
+modal.classList.remove("hidden");
+modal.removeAttribute("inert"); // 👈 This unfreezes button interactivity
 
-  if (typeof modal.showModal === "function") {
-    modal.showModal();
-  } else {
-    modal.classList.add("visible");
-  }
+
+ if (typeof modal.showModal === "function") {
+  modal.showModal();
+} else {
+  modal.classList.add("visible"); // Fallback for older browsers
+}
 
   lockModalButtons(false);
   backdrop?.classList.remove("hidden");

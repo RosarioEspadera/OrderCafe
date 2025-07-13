@@ -27,10 +27,12 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // 🛒 CartTab click — open order modal
 document.getElementById("cartTab")?.addEventListener("click", () => {
-  renderCartItems();            // 💡 Refresh cart before opening
-  openModal("orderModal");      // ✅ Then show the modal
+  renderCartItems();            // Refresh with full item data
+  updateCartCount();           // Ensure count matches
+  openModal("orderModal");     // Open modal properly
   document.getElementById("mainContent")?.classList.add("hidden");
 });
+
 
   // ❌ Cancel from cart modal
   document.getElementById("closeOrderModal")?.addEventListener("click", () => {

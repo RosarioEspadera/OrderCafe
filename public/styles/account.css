@@ -150,4 +150,19 @@ input[type="file"]:hover {
   box-shadow: var(--cafe-shadow);
   margin-top: 10px;
 }
+#currentAvatar {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--cafe-toast);
+  box-shadow: var(--cafe-shadow);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+#currentAvatar:hover {
+  transform: scale(1.1);
+}
+
 

@@ -31,7 +31,7 @@ export function sendReceiptEmail() {
   }, 0);
 
   // 📬 Send via EmailJS with address included
-emailjs.send("service_epydqmi", "template_vzuexod", {
+eemailjs.send("service_epydqmi", "template_vzuexod", {
   to_name: user.username,
   from_name: "OrderCafe",
   message: `Your order has been confirmed!\n\n${items}`,

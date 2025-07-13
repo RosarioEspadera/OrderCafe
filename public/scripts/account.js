@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   backdrop?.classList.add("hidden");
 
   // 🧑 Open Account Modal
-  document.getElementById("accountTab")?.addEventListener("click", () => {
+ document.getElementById("accountTab")?.addEventListener("click", () => {
   if (!user || user.username === "Guest") {
     userNameInput.value = "";
     emailInput.value = "";
@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   userModal.showModal?.();
   backdrop?.classList.remove("hidden");
 });
+
 
 
   // 📷 Handle avatar upload

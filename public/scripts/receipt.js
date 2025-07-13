@@ -48,7 +48,6 @@ emailjs.send("service_epydqmi", "template_vzuexod", {
   showToast("Failed to send receipt ☁️");
 });
 
-
 // 🖱️ Optional DOM binding
 document.addEventListener("DOMContentLoaded", () => {
   const placeOrderBtn = document.getElementById("placeOrderBtn");

@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentAvatar = document.getElementById('currentAvatar')
   const userModal = document.getElementById('userModal')
   const closeBtn = document.getElementById('modalCloseBtn')
-  const fallbackPhoto = 'https://i.ibb.co/K5tW92m/default-avatar.png' // Or whatever fallback you want
+  const fallbackPhoto = 'https://github.com/RosarioEspadera/OrderCafe/blob/main/public/styles/images/bg.png' // Or whatever fallback you want
 
   const tabs = [homeTab, cartTab, accountTab]
 

@@ -26,12 +26,12 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // 🛒 Cart tab click — open cart modal
-  document.getElementById("cartTab")?.addEventListener("click", () => {
-    renderCartItems();                       // Refresh cart items
-    updateCartCount();                       // Ensure count is correct
-    openModal("orderModal");                 // Open modal safely
-    main.classList.add("hidden");            // Hide main content while modal is visible
-  });
+ document.getElementById("cartTab")?.addEventListener("click", () => {
+  renderCartItems();                      // Refresh cart contents
+  updateCartCount();                      // Sync badge & count
+  openModal("orderModal");                // Open via fixed modal util
+});
+
 
   // ❌ Cancel button in cart modal
   document.getElementById("closeOrderModal")?.addEventListener("click", () => {

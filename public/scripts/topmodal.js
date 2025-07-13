@@ -82,19 +82,17 @@ document.addEventListener("DOMContentLoaded", () => {
     userModal?.classList.add("fullscreen");
 
     if (!user || user.userName === "Guest") {
-     if (userName) {
-  userName.value = "";
+  userName?.value = "";
+  userEmail?.value = "";
+  userAddress?.value = "";
+  currentAvatar.src = fallbackPhoto;
+} else {
+  userName?.value = user.userName || "";
+  userEmail?.value = user.email || "";
+  userAddress?.value = user.address || "";
+  currentAvatar.src = user.profilePhoto || fallbackPhoto;
 }
-      userEmail?.value = "";
-      userAddress?.value = "";
-      currentAvatar.src = fallbackPhoto;
-    } else {
-    userName?.value = user.userName || "";
-    userEmail?.value = user.email || "";
-    userAddress?.value = user.address || "";
-    currentAvatar.src = user.profilePhoto || fallbackPhoto;
 
-    }
 
     userModal.showModal?.();
     backdrop?.classList.remove("hidden");

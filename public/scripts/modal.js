@@ -3,7 +3,7 @@ export function openModal(id) {
   const backdrop = document.querySelector(".modal-backdrop");
   if (!modal) return;
 
-  // 🔒 Deactivate other modals
+  // 🔒 Hide and deactivate other modals
   document.querySelectorAll("dialog").forEach(m => {
     const isTarget = m.id === id;
     m.classList.toggle("hidden", !isTarget);
@@ -11,17 +11,15 @@ export function openModal(id) {
     if (!isTarget) m.close?.();
   });
 
-  // 🎯 Activate target modal
+  // 🪄 Re-activate modal directly
   modal.classList.remove("hidden");
-  modal.removeAttribute("inert");
-
+  modal.removeAttribute("inert"); // ← Important!
   if (typeof modal.showModal === "function") {
     modal.showModal();
   } else {
     modal.classList.add("visible");
   }
 
-  // 🎭 Show backdrop
   backdrop?.classList.remove("hidden");
 }
 

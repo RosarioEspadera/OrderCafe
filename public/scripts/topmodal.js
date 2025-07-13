@@ -77,7 +77,7 @@ cartTab?.addEventListener("click", () => {
  accountTab?.addEventListener("click", () => {
   userModal?.classList.add("fullscreen");
 
-  if (!user || user.username === "Guest") {
+  if (!user || user.userName === "Guest") {
     userName?.value = "";
     userEmail?.value = "";
     userAddress?.value = "";

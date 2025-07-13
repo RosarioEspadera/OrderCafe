@@ -98,8 +98,8 @@ export function addToCart(itemId) {
   if (!cart.some(item => item.id === itemId)) {
     cart.push({ id: itemId, name, price });
     saveCart();
-    updateCartCount();
-    showToast(`✓ Added ${name} to Cart`);
+    renderCartItems(); // ← Add this line
+  showToast(`✓ Added ${name} to Cart`);
   }
 }
 

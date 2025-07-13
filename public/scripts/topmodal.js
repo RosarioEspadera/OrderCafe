@@ -6,6 +6,7 @@ import {
   showBackdrop,
   hideBackdrop
 } from './ui.js';
+import { renderCartItems } from './cart.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   // 🌟 Element References

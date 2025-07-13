@@ -26,7 +26,6 @@ const formatCurrency = amount => new Intl.NumberFormat("en-PH", {
   currency: "PHP"
 }).format(amount);
 
-totalDisplay.textContent = formatCurrency(total);
 
 // 🧾 Render cart items into modal
 export function renderCartItems() {

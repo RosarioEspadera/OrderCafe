@@ -1,21 +1,17 @@
 export function openModal(id) {
   const modal = document.getElementById(id);
   const backdrop = document.querySelector(".modal-backdrop");
-
   if (!modal) return;
 
-  // 🔐 Accessibility: Deactivate other modals
+  // 🔒 Deactivate other modals
   document.querySelectorAll("dialog").forEach(m => {
-    if (m.id !== id) {
-      m.classList.add("hidden");
-      m.setAttribute("inert", "");
-      m.close?.();
-    } else {
-      m.removeAttribute("inert");
-    }
+    const isTarget = m.id === id;
+    m.classList.toggle("hidden", !isTarget);
+    m.toggleAttribute("inert", !isTarget);
+    if (!isTarget) m.close?.();
   });
 
-  // 🎯 Show target modal
+  // 🎯 Activate target modal
   modal.classList.remove("hidden");
   modal.removeAttribute("inert");
 
@@ -25,16 +21,16 @@ export function openModal(id) {
     modal.classList.add("visible");
   }
 
+  // 🎭 Show backdrop
   backdrop?.classList.remove("hidden");
 }
 
 export function closeModal(id) {
   const modal = document.getElementById(id);
   const backdrop = document.querySelector(".modal-backdrop");
-
   if (!modal) return;
 
-  // 🔐 Accessibility: Hide and disable modal
+  // 🔐 Hide modal and remove interactivity
   modal.setAttribute("inert", "");
   modal.classList.add("hidden");
 
@@ -44,5 +40,6 @@ export function closeModal(id) {
     modal.classList.remove("visible");
   }
 
+  // 🧼 Hide backdrop
   backdrop?.classList.add("hidden");
 }

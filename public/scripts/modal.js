@@ -20,11 +20,26 @@ export function openModal(id) {
   // 🔓 Activate the target modal
   modal.classList.remove("hidden");
   modal.removeAttribute("inert");
-  if (typeof modal.showModal === "function") modal.showModal();
+
+  if (typeof modal.showModal === "function") {
+    modal.showModal();
+  } else {
+    modal.classList.add("visible");
+  }
+
   lockModalButtons(false);
   backdrop?.classList.remove("hidden");
-}
 
+  // 🧭 Optional: focus first interactive button
+  modal.querySelector(".modal-button")?.focus();
+
+  // 🧪 Dev log to confirm status
+  console.log("Modal status:", {
+    id: modal.id,
+    inert: modal.hasAttribute("inert"),
+    visible: !modal.classList.contains("hidden")
+  });
+}
 
 /**
  * Closes a modal by ID.

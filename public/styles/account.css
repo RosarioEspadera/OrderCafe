@@ -8,29 +8,28 @@
   --font-body: 'Inter', sans-serif;
 }
 
-/* 🧑‍💻 User Modal */
+/* 🧑‍💻 Modal Styling */
 #userModal {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  background-color: var(--cafe-cream);
+  background: var(--cafe-cream);
   border-radius: var(--radius);
   box-shadow: var(--cafe-shadow);
+  font-family: var(--font-body);
   z-index: 1000;
   padding: 2rem;
   width: 90%;
   max-width: 480px;
   animation: fadeIn 0.5s ease;
-  font-family: var(--font-body);
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-/* 🧁 Title Input Styling */
+/* 🧁 Modal Headings */
 #userModal h2 {
   font-size: 1.8rem;
   font-family: var(--font-title);
@@ -39,7 +38,7 @@
   text-align: center;
 }
 
-/* 📷 Avatar Preview */
+/* 📸 Avatar Section */
 .avatar-preview {
   display: flex;
   align-items: center;
@@ -52,8 +51,8 @@
   height: 64px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: var(--cafe-shadow);
   border: 2px solid var(--cafe-toast);
+  box-shadow: var(--cafe-shadow);
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -62,17 +61,17 @@
   transform: scale(1.05);
 }
 
-/* 📝 Form Fields */
+/* 📝 Form Inputs */
 #userForm input {
   width: 100%;
   margin-bottom: 1rem;
   padding: 0.6rem 1rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--cafe-brown);
   border: 1px solid var(--cafe-toast);
   border-radius: var(--radius);
-  background-color: #fffaf4;
-  font-size: 1rem;
-  color: var(--cafe-brown);
-  font-family: var(--font-body);
+  background: #fffaf4;
 }
 
 #userForm input:focus {
@@ -80,15 +79,15 @@
   border-color: var(--cafe-brown);
 }
 
-/* 📤 File Upload */
+/* 📤 File Upload Styling */
 input[type="file"] {
+  width: 100%;
+  margin-top: 1rem;
   padding: 0.6rem;
   border: 2px dashed var(--cafe-toast);
   border-radius: var(--radius);
   background: #fffaf4;
   color: var(--cafe-brown);
-  width: 100%;
-  margin-top: 1rem;
   cursor: pointer;
   transition: border-color 0.3s ease;
 }
@@ -97,55 +96,48 @@ input[type="file"]:hover {
   border-color: var(--cafe-brown);
 }
 
-/* ✅ Submit + ❌ Close + 🚪 Logout Buttons */
+/* ✅ Buttons */
 #userModal button,
 #logoutFromProfile,
 #closeProfile {
   margin-top: 1rem;
   padding: 0.6rem 1rem;
-  border-radius: var(--radius);
   font-weight: bold;
   border: none;
   cursor: pointer;
+  border-radius: var(--radius);
   transition: background 0.3s ease;
 }
 
-#userModal button {
-  background-color: var(--cafe-toast);
-  color: white;
+#userModal button,
+#closeProfile {
+  background: var(--cafe-toast);
+  color: #fff;
 }
 
-#userModal button:hover {
-  background-color: var(--cafe-brown);
+#userModal button:hover,
+#closeProfile:hover {
+  background: var(--cafe-brown);
 }
 
 #logoutFromProfile {
-  background-color: #a24c2e;
+  background: #a24c2e;
   color: #fff;
   box-shadow: var(--cafe-shadow);
 }
 
 #logoutFromProfile:hover {
-  background-color: #802f1a;
+  background: #802f1a;
 }
 
-#closeProfile {
-  background-color: var(--cafe-toast);
-  color: white;
-}
-
-#closeProfile:hover {
-  background-color: var(--cafe-brown);
-}
-
-/* 📦 Guest Banner */
+/* 📦 Guest Message */
 #guestBanner {
   margin-top: 1rem;
-  background: #fceee2;
-  color: var(--cafe-brown);
   padding: 1rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--cafe-brown);
+  background: #fceee2;
   border-radius: var(--radius);
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.06);
-  font-style: italic;
-  text-align: center;
 }

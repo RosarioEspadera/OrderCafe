@@ -141,3 +141,13 @@ input[type="file"]:hover {
   border-radius: var(--radius);
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.06);
 }
+#preview {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--cafe-toast);
+  box-shadow: var(--cafe-shadow);
+  margin-top: 10px;
+}
+

@@ -1,5 +1,6 @@
 import { showToast } from './toast.js';
 document.addEventListener("DOMContentLoaded", () => {
+    emailjs.init("AqvkFhQnxowOJda9J");
   const placeOrderBtn = document.getElementById("placeOrderBtn");
   if (!placeOrderBtn) return;
 

@@ -26,10 +26,11 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // 🛒 CartTab click — open order modal
-  document.getElementById("cartTab")?.addEventListener("click", () => {
-    openModal("orderModal");
-    main.classList.add("hidden"); // Hide main content while modal is open
-  });
+document.getElementById("cartTab")?.addEventListener("click", () => {
+  renderCartItems();            // 💡 Refresh cart before opening
+  openModal("orderModal");      // ✅ Then show the modal
+  document.getElementById("mainContent")?.classList.add("hidden");
+});
 
   // ❌ Cancel from cart modal
   document.getElementById("closeOrderModal")?.addEventListener("click", () => {

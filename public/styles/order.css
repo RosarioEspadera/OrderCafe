@@ -30,6 +30,9 @@
     transform: translateY(0);
   }
 }
+.hidden {
+  display: none;
+}
 
 /* 🧺 Cart List */
 .cart-list {

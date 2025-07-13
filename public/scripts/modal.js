@@ -1,23 +1,26 @@
 import { lockModalButtons } from './ui.js';
 
 /**
- * Opens a modal by ID and ensures it's fully interactive and focused.
+ * Opens a modal by ID and ensures it's interactive.
  */
 export function openModal(id) {
   const modal = document.getElementById(id);
   const backdrop = document.querySelector(".modal-backdrop");
   if (!modal) return;
 
-  // 🔄 Hide and deactivate all other modals
+  // 🔄 Deactivate all modals except the one being opened
   document.querySelectorAll("dialog").forEach(m => {
-    m.classList.add("hidden");
-    m.setAttribute("inert", "");
-    m.close?.();
+    if (m.id !== id) {
+      m.classList.add("hidden");
+      m.setAttribute("inert", "");
+      m.close?.();
+    }
   });
 
-  // 🎯 Activate target modal directly
+  // ✨ Activate target modal
   modal.classList.remove("hidden");
   modal.removeAttribute("inert");
+  lockModalButtons(false);
 
   if (typeof modal.showModal === "function") {
     modal.showModal();
@@ -25,21 +28,14 @@ export function openModal(id) {
     modal.classList.add("visible");
   }
 
-  // 🔓 Ensure modal buttons respond
-  lockModalButtons(false);
-
-  // 🌘 Show backdrop
   backdrop?.classList.remove("hidden");
-
-  // 🎯 Focus first interactive element (optional)
   modal.querySelector(".modal-button")?.focus();
 
-  // 🧪 Confirm modal is interactive
   console.log(`✅ ${id} opened. Inert:`, modal.hasAttribute("inert"));
 }
 
 /**
- * Closes a modal by ID and restores main UI.
+ * Closes a modal by ID.
  */
 export function closeModal(id) {
   const modal = document.getElementById(id);
@@ -55,9 +51,6 @@ export function closeModal(id) {
     modal.classList.remove("visible");
   }
 
-  // 🌘 Hide backdrop
   backdrop?.classList.add("hidden");
-
-  // 🧪 Confirm modal closed
   console.log(`❎ ${id} closed. Inert:`, modal.hasAttribute("inert"));
 }

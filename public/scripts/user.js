@@ -10,7 +10,7 @@ export function initUserCredentials() {
 
   userForm?.addEventListener("submit", (e) => {
     e.preventDefault();
-    const username = document.getElementById("username").value.trim();
+   const username = document.getElementById("userNameInput").value.trim();
     const email = document.getElementById("email").value.trim();
 
     if (!username || !email.includes("@")) {

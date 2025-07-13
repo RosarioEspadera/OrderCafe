@@ -108,4 +108,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 🚀 Auto-Launch Home View
   homeTab?.click();
-});

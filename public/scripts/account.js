@@ -47,27 +47,34 @@ document.addEventListener("DOMContentLoaded", () => {
     backdrop?.classList.remove("hidden");
   });
 
-  // 📷 Avatar Upload via File
-  avatarUpload?.addEventListener("change", () => {
-    const file = avatarUpload.files[0];
-    if (file?.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const photo = e.target.result;
-        currentAvatar.src = photo;
-        if (user) {
-          user.profilePhoto = photo;
-          localStorage.setItem("orderCafeUser", JSON.stringify(user));
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  });
+ // 📷 Preview and store uploaded avatar file
+avatarUpload?.addEventListener("change", () => {
+  const file = avatarUpload.files[0];
+  if (file?.type.startsWith("image/")) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const photo = e.target.result;
+      currentAvatar.src = photo;       // ✅ update main avatar
+      previewImg.src = photo;          // update preview (optional)
+      if (user) {
+        user.profilePhoto = photo;
+        localStorage.setItem("orderCafeUser", JSON.stringify(user));
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
-  // 🔗 Live URL Preview
-  profilePhotoURL?.addEventListener("input", () => {
-    previewImg.src = profilePhotoURL.value;
-  });
+// 🔗 Live preview from pasted URL and update avatar
+profilePhotoURL?.addEventListener("input", () => {
+  const url = profilePhotoURL.value;
+  previewImg.src = url;
+  currentAvatar.src = url;             // ✅ update main avatar too
+  if (user) {
+    user.profilePhoto = url;
+    localStorage.setItem("orderCafeUser", JSON.stringify(user));
+  }
+});
 
   // 💾 Save Account Info
   userForm?.addEventListener("submit", (e) => {

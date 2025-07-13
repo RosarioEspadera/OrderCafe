@@ -1,3 +1,4 @@
+// 📦 Core Dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -6,6 +7,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 require('dotenv').config();
 
+// 🧠 Mongoose Schema
 const User = require('./models/User');
 
 const app = express();
@@ -22,22 +24,28 @@ mongoose.connect(process.env.MONGO_URI, {
 
 
 // 📝 Signup Route
-app.post('/signup', async (req, res) => {
-  const { username, password } = req.body;
+app.post("/api/signup", async (req, res) => {
   try {
-    const existing = await User.findOne({ username });
-    if (existing) return res.status(400).json({ error: 'Username already exists' });
+    const { username, password, email, profilePhoto } = req.body;
 
-    const hash = await bcrypt.hash(password, 10);
-    const user = new User({ username, password: hash });
-    await user.save();
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    res.json({ message: 'Signup successful' });
+    const newUser = new User({
+      username,
+      password: hashedPassword,
+      email,
+      profilePhoto,
+      orders: []
+    });
+
+    await newUser.save();
+    res.status(201).json({ success: true, user: newUser });
   } catch (error) {
-    console.error('Signup error:', error);
-    res.status(500).json({ error: 'Server error during signup' });
+    console.error("Signup error:", error);
+    res.status(500).json({ error: "User creation failed" });
   }
 });
+
 
 // 🔐 Signin Route
 app.post('/signin', async (req, res) => {
@@ -53,6 +61,7 @@ app.post('/signin', async (req, res) => {
       message: 'Signin successful',
       user: {
         username: user.username,
+        email: user.email || '',
         profilePhoto: user.profilePhoto || '',
         orders: user.orders || []
       }
@@ -63,16 +72,18 @@ app.post('/signin', async (req, res) => {
   }
 });
 
+
 // 💾 Update Profile & Orders
 app.post('/api/user/update', async (req, res) => {
-  const { username, profilePhoto, orders } = req.body;
+  const { username, profilePhoto, email, orders } = req.body;
   try {
     const updatedUser = await User.findOneAndUpdate(
       { username },
-      { profilePhoto, orders },
+      { profilePhoto, email, orders },
       { new: true }
     );
     if (!updatedUser) return res.status(404).json({ error: 'User not found' });
+
     res.json({ message: 'Profile updated', user: updatedUser });
   } catch (error) {
     console.error('Update error:', error);
@@ -80,11 +91,13 @@ app.post('/api/user/update', async (req, res) => {
   }
 });
 
+
 // 🔍 Fetch User Profile
 app.get('/api/user/:username', async (req, res) => {
   try {
     const user = await User.findOne({ username: req.params.username });
     if (!user) return res.status(404).json({ error: 'User not found' });
+
     res.json(user);
   } catch (error) {
     console.error('Fetch error:', error);
@@ -92,13 +105,14 @@ app.get('/api/user/:username', async (req, res) => {
   }
 });
 
-// 🌐 Serve Static Files
+
+// 🌐 Static File Serving
 app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
-// 🚀 Start Server
+// 🚀 Launch Server
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🟢 Server running on port ${PORT}`));

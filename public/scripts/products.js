@@ -1,18 +1,19 @@
-import { cart, saveCart, renderCartItems } from "./cart.js";
-import { showToast } from "./toast.js";
+import { addToCart } from './cart.js';
 
-export const initProductEvents = () => {
-  const cards = document.querySelectorAll(".product-card");
-  cards.forEach(card => {
-    const name = card.querySelector(".product-title")?.textContent?.trim();
-    const priceText = card.querySelector(".price-tag")?.textContent?.trim();
-    const price = parseFloat(priceText?.replace("$", ""));
-    const button = card.querySelector(".order-button");
-    button?.addEventListener("click", () => {
-      cart.push({ name, price });
-      saveCart();
-      renderCartItems();
-      showToast(`🛒 ${name} added to your cart`);
+export function initProductEvents() {
+  const main = document.getElementById("mainContent");
+  main?.querySelectorAll(".order-button").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const productId = btn.closest(".product-card")?.id;
+      if (productId) addToCart(productId);
+
+      btn.classList.add("added");
+      btn.textContent = "✓ Added!";
+      setTimeout(() => {
+        btn.classList.remove("added");
+        btn.textContent = "Order Now";
+      }, 2000);
     });
   });
-};
+}
+

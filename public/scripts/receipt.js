@@ -1,4 +1,3 @@
-// receipt.js
 import { showToast } from './toast.js';
 
 emailjs.init("AqvkFhQnxowOJda9J");
@@ -24,12 +23,13 @@ export function sendReceiptEmail() {
     return sum + (typeof item.price === "number" ? item.price : 0);
   }, 0);
 
-  // 📬 Send via EmailJS
+  // 📬 Send via EmailJS with address included
   emailjs.send("service_epydqmi", "template_vzuexod", {
     to_name: user.username || "Guest",
     from_name: "OrderCafe",
     message: `Your order has been confirmed!\n\n${items}\n\nTotal: $${total.toFixed(2)}`,
-    reply_to: "rosario@ordercafe.com"
+    Address: user.address || "Not provided",
+    reply_to: user.email || "no-reply@ordercafe.com"
   })
   .then(() => {
     showToast("📩 Confirmation sent to your inbox");

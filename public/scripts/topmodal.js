@@ -111,7 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
       currentAvatar.src = user.profilePhoto || fallbackPhoto
     }
 
-    userModal.showModal?.()
+    if (userModal?.showModal) {
+  userModal.showModal();
+} else {
+  userModal?.classList.remove("hidden");
+}
     backdrop?.classList.remove('hidden')
   })
 

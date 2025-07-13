@@ -4,20 +4,22 @@ export function openModal(id) {
 
   if (!modal) return;
 
-  // Accessibility improvement
-  modal.setAttribute("aria-hidden", "false");
-
-  // Force hide other modals
+  // 🔐 Accessibility: Deactivate other modals
   document.querySelectorAll("dialog").forEach(m => {
     if (m.id !== id) {
       m.classList.add("hidden");
+      m.setAttribute("inert", "");
       m.close?.();
+    } else {
+      m.removeAttribute("inert");
     }
   });
 
-  // Toggle visibility
-  if (modal.tagName === "DIALOG" && typeof modal.showModal === "function") {
-    modal.classList.remove("hidden");
+  // 🎯 Show target modal
+  modal.classList.remove("hidden");
+  modal.removeAttribute("inert");
+
+  if (typeof modal.showModal === "function") {
     modal.showModal();
   } else {
     modal.classList.add("visible");
@@ -32,18 +34,15 @@ export function closeModal(id) {
 
   if (!modal) return;
 
-  // Accessibility improvement
-  modal.setAttribute("aria-hidden", "true");
+  // 🔐 Accessibility: Hide and disable modal
+  modal.setAttribute("inert", "");
+  modal.classList.add("hidden");
 
-  if (modal.tagName === "DIALOG" && typeof modal.close === "function") {
+  if (typeof modal.close === "function") {
     modal.close();
-    modal.classList.add("hidden");
   } else {
     modal.classList.remove("visible");
   }
 
   backdrop?.classList.add("hidden");
 }
-
-
-

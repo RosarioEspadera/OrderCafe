@@ -57,10 +57,10 @@ document.getElementById("cartTab")?.addEventListener("click", () => {
     }
 
     showToast("☕ Order placed! Thank you.");
-    localStorage.setItem("orderCafeCart", JSON.stringify([]));
     updateCartCount();
-    sendReceiptEmail();
+    sendReceiptEmail(); // ⛳ Clears cart only after email success
     closeModal("orderModal");
     main.classList.remove("hidden");
+
   });
 });

@@ -24,13 +24,15 @@ export function sendReceiptEmail() {
   }, 0);
 
   // 📬 Send via EmailJS with address included
-  emailjs.send("service_epydqmi", "template_vzuexod", {
-    to_name: user.username || "Guest",
-    from_name: "OrderCafe",
-    message: `Your order has been confirmed!\n\n${items}\n\nTotal: $${total.toFixed(2)}`,
-    Address: user.address || "Not provided",
-    reply_to: user.email || "no-reply@ordercafe.com"
-  })
+ emailjs.send("service_epydqmi", "template_vzuexod", {
+  to_name: user.username,
+  from_name: "OrderCafe",
+  message: `Your order has been confirmed!\n\n${items}`,
+  order_total: `$${total.toFixed(2)}`,
+  Address: user.address || "Not provided",
+  reply_to: user.email || "no-reply@ordercafe.com"
+});
+
   .then(() => {
     showToast("📩 Confirmation sent to your inbox");
   })

@@ -34,34 +34,43 @@ export function renderCartItems() {
 
   emptyMsg.classList.add("hidden");
 
-  cart.forEach(itemId => {
-    const productCard = document.getElementById(itemId);
-    const name = productCard?.querySelector(".product-title")?.textContent || "Item";
-    const priceText = productCard?.querySelector(".price-tag")?.textContent || "₱0";
-    const price = parseFloat(priceText.replace(/[^\d.]/g, "")) || 0;
-    total += price;
+  cart.forEach(item => {
+  total += item.price;
 
-    const li = document.createElement("li");
-    li.classList.add("cart-item");
+  const li = document.createElement("li");
+  li.classList.add("cart-item");
 
-    const nameSpan = document.createElement("span");
-    nameSpan.className = "product-title";
-    nameSpan.textContent = name;
+  const nameSpan = document.createElement("span");
+  nameSpan.className = "product-title";
+  nameSpan.textContent = item.name;
 
-    const priceSpan = document.createElement("span");
-    priceSpan.className = "price-tag";
-    priceSpan.textContent = `₱${price.toFixed(2)}`;
+  const priceSpan = document.createElement("span");
+  priceSpan.className = "price-tag";
+  priceSpan.textContent = `₱${item.price.toFixed(2)}`;
 
-    li.append(nameSpan, priceSpan);
-    cartList.appendChild(li);
-  });
+  li.append(nameSpan, priceSpan);
+  cartList.appendChild(li);
+});
+
 
   totalLabel.textContent = `₱${total.toFixed(2)}`;
 }
-
+export function removeFromCart(itemId) {
+  cart = cart.filter(item => item.id !== itemId);
+  saveCart();
+  updateCartCount();
+  renderCartItems();
+  showToast("🗑️ Removed from Cart");
+}
 export function addToCart(itemId) {
-  if (!cart.includes(itemId)) {
-    cart.push(itemId);
+  const productCard = document.getElementById(itemId);
+  const name = productCard?.querySelector(".product-title")?.textContent || "Unnamed Item";
+  const priceText = productCard?.querySelector(".price-tag")?.textContent || "₱0";
+  const price = parseFloat(priceText.replace(/[^\d.]/g, "")) || 0;
+
+  // Prevent duplicates
+  if (!cart.some(item => item.id === itemId)) {
+    cart.push({ id: itemId, name, price });
     saveCart();
     updateCartCount();
     showToast("✓ Saved to Cart");

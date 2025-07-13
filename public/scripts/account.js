@@ -62,33 +62,35 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 📝 Save credentials
-  userForm?.addEventListener("submit", (e) => {
-    e.preventDefault();
+ userForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    const username = userNameInput.value.trim();
-    const email = emailInput.value.trim();
-    const profilePhoto = currentAvatar.src || fallbackPhoto;
+  const username = userNameInput.value.trim();
+  const email = emailInput.value.trim();
+  const address = addressInput.value.trim();
+  const profilePhoto = currentAvatar.src || fallbackPhoto;
 
-    if (!username || !email || !email.includes("@")) {
-      userFeedback.textContent = "❌ Please enter valid credentials.";
-      userFeedback.classList.remove("hidden");
-      return;
-    }
-
-    user = { username, email, profilePhoto };
-    localStorage.setItem("orderCafeUser", JSON.stringify(user));
-
-    userFeedback.textContent = "✅ Credentials saved!";
+  if (!username || !email || !email.includes("@") || !address) {
+    userFeedback.textContent = "❌ Please enter name, email, and address.";
     userFeedback.classList.remove("hidden");
+    return;
+  }
 
-    setTimeout(() => {
-      userModal.close?.();
-      userModal.classList.add("hidden");
-      backdrop?.classList.add("hidden");
-      greetingBanner?.classList.remove("hidden");
-      guestBanner?.classList.add("hidden");
-    }, 1200);
-  });
+  user = { username, email, address, profilePhoto };
+  localStorage.setItem("orderCafeUser", JSON.stringify(user));
+
+  userFeedback.textContent = "✅ Credentials saved!";
+  userFeedback.classList.remove("hidden");
+
+  setTimeout(() => {
+    userModal.close?.();
+    userModal.classList.add("hidden");
+    backdrop?.classList.add("hidden");
+    greetingBanner?.classList.remove("hidden");
+    guestBanner?.classList.add("hidden");
+  }, 1200);
+});
+
 
   // 🔓 Logout
   logoutBtn?.addEventListener("click", () => {

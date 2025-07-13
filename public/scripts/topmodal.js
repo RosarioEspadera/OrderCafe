@@ -6,7 +6,9 @@ import {
   showBackdrop,
   hideBackdrop
 } from './ui.js';
-import { renderCartItems } from './cart.js';
+
+import { renderCartItems, updateCartCount } from './cart.js';       // ✅ Cart logic
+import { openModal } from './modal.js';                             // ✅ Safe modal handler
 
 document.addEventListener("DOMContentLoaded", () => {
   // 🌟 Element References

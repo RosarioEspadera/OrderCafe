@@ -21,6 +21,12 @@ export function updateCartCount() {
   const cartCount = document.getElementById("cartCount");
   if (cartCount) cartCount.textContent = cart.length;
 }
+const formatCurrency = amount => new Intl.NumberFormat("en-PH", {
+  style: "currency",
+  currency: "PHP"
+}).format(amount);
+
+totalDisplay.textContent = formatCurrency(total);
 
 // 🧾 Render cart items into modal
 export function renderCartItems() {

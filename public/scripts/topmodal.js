@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // 🎯 Initial UI State
+  // 🌟 Element References
   const modals = document.querySelectorAll("dialog");
   const backdrop = document.querySelector(".modal-backdrop");
   const mainContent = document.getElementById("mainContent");
@@ -7,14 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const greetingBanner = document.getElementById("greetingBanner");
 
   const homeTab = document.getElementById("homeTab");
-  const orderTab = document.getElementById("orderTab");
+  const cartTab = document.getElementById("orderTab");
   const accountTab = document.getElementById("accountTab");
-  const tabs = [homeTab, orderTab, accountTab];
-
   const orderModal = document.getElementById("orderModal");
 
-  // 🔁 Global Reset
-  function initializeAppState() {
+  const tabs = [homeTab, cartTab, accountTab];
+
+  // 🔁 Initial UI State
+  function resetAppState() {
     modals.forEach(modal => {
       modal.close?.();
       modal.classList.add("hidden");
@@ -32,37 +32,31 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("✅ App state initialized");
   }
 
-  initializeAppState();
+  resetAppState();
 
-  // 🧩 UI Utilities
-  const activateTab = (activeTab) => {
+  // 🎯 Tab Activation Utility
+  function activateTab(active) {
     tabs.forEach(tab => {
       tab?.classList.remove("active");
       tab?.setAttribute("aria-selected", "false");
     });
-    activeTab?.classList.add("active");
-    activeTab?.setAttribute("aria-selected", "true");
-  };
+    active?.classList.add("active");
+    active?.setAttribute("aria-selected", "true");
+  }
 
-  const toggleProductButtons = (enable) => {
-    document.querySelectorAll(".order-button").forEach(btn => {
+  // 🔘 UI Toggle Utilities
+  function toggleButtons(selector, enable) {
+    document.querySelectorAll(selector).forEach(btn => {
       btn.disabled = !enable;
       btn.classList.toggle("faded", !enable);
     });
-  };
+  }
 
-  const toggleSignInButtons = (enable) => {
-    document.querySelectorAll(".sign-in-button").forEach(btn => {
-      btn.disabled = !enable;
-      btn.classList.toggle("faded", !enable);
-    });
-  };
-
-  const lockModalButtons = (lock) => {
-    document.querySelectorAll(".modal-button").forEach(btn => {
+  function lockButtons(selector, lock) {
+    document.querySelectorAll(selector).forEach(btn => {
       btn.disabled = lock;
     });
-  };
+  }
 
   // 🏠 Home Tab
   homeTab?.addEventListener("click", () => {
@@ -70,29 +64,31 @@ document.addEventListener("DOMContentLoaded", () => {
     mainContent?.classList.remove("hidden");
     orderModal?.close();
     backdrop?.classList.add("hidden");
-    toggleProductButtons(false);
-    toggleSignInButtons(false);
-    lockModalButtons(true);
+
+    toggleButtons(".order-button", false);
+    toggleButtons(".sign-in-button", false);
+    lockButtons(".modal-button", true);
   });
 
   // 🛒 Cart Tab
-  orderTab?.addEventListener("click", () => {
-    activateTab(orderTab);
+  cartTab?.addEventListener("click", () => {
+    activateTab(cartTab);
     mainContent?.classList.add("hidden");
     orderModal?.showModal?.();
     backdrop?.classList.remove("hidden");
-    toggleProductButtons(true);
-    toggleSignInButtons(true);
-    lockModalButtons(false);
+
+    toggleButtons(".order-button", true);
+    toggleButtons(".sign-in-button", true);
+    lockButtons(".modal-button", false);
   });
 
-  // 🧑 Account Tab (opens userModal elsewhere)
+  // 🧑 Account Tab
   accountTab?.addEventListener("click", () => {
     activateTab(accountTab);
     mainContent?.classList.remove("hidden");
-    // Optional: highlight tab and leave modal logic to account.js
+    // Modal opening handled by account.js
   });
 
-  // ✨ Default to Home Tab
+  // 🚀 Kick off with Home Tab
   homeTab?.click();
 });

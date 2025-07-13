@@ -32,9 +32,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
 document.getElementById("checkoutBtn")?.addEventListener("click", () => {
   const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+  const userModal = document.getElementById("userModal");
 
   if (!user || !user.username || !user.email || !user.email.includes("@")) {
-    showToast("🚫 Please provide your name and email before checking out.");
+    showToast("🚫 Please enter your name and email before checking out.");
+    
+    // Trigger the credentials modal
+    if (userModal?.showModal) {
+      userModal.showModal();
+    } else {
+      userModal?.classList.add("visible");
+    }
+
     return;
   }
 
@@ -45,5 +54,6 @@ document.getElementById("checkoutBtn")?.addEventListener("click", () => {
   closeModal("orderModal");
   document.getElementById("mainContent")?.classList.remove("hidden");
 });
+
 
 });

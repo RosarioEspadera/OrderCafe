@@ -77,6 +77,12 @@ export function addToCart(itemId) {
   const priceText = productCard?.querySelector(".price-tag")?.textContent || "₱0";
   const price = parseFloat(priceText.replace(/[^\d.]/g, "")) || 0;
 
+  
+  if (!productCard) {
+  showToast("❌ Item not found on the page");
+  return;
+}
+
   // Prevent duplicates
   if (!cart.some(item => item.id === itemId)) {
     cart.push({ id: itemId, name, price });
@@ -84,4 +90,11 @@ export function addToCart(itemId) {
     updateCartCount();
     showToast("✓ Saved to Cart");
   }
+}
+export function clearCart() {
+  cart = [];
+  saveCart();
+  updateCartCount();
+  renderCartItems();
+  showToast("🧺 Cart cleared");
 }

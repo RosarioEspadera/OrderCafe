@@ -3,19 +3,19 @@ import { initProductEvents } from './products.js';
 import { renderCartItems, updateCartCount } from './cart.js';
 import { showToast } from './toast.js';
 import { openModal, closeModal } from './modal.js';
-import { sendReceiptEmail } from './receipt.js'; // ✅ Add if not imported
+import { sendReceiptEmail } from './receipt.js';
 
 window.addEventListener("DOMContentLoaded", () => {
   const main = document.getElementById("mainContent");
   if (!main) return;
 
-  // 🎯 Initialize core modules
+  // 🚀 Initialize key modules
   initUserCredentials();
   initProductEvents();
   renderCartItems();
   updateCartCount();
 
-  // 🔍 Product Search Filter
+  // 🔍 Product search filter
   const searchInput = main.querySelector("input[type='search']");
   searchInput?.addEventListener("input", (e) => {
     const keyword = e.target.value.toLowerCase();
@@ -25,44 +25,43 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 🛒 CartTab click — open order modal
-document.getElementById("cartTab")?.addEventListener("click", () => {
-  renderCartItems();            // Refresh with full item data
-  updateCartCount();           // Ensure count matches
-  openModal("orderModal");     // Open modal properly
-  document.getElementById("mainContent")?.classList.add("hidden");
-});
-
-
-  // ❌ Cancel from cart modal
-  document.getElementById("closeOrderModal")?.addEventListener("click", () => {
-    closeModal("orderModal");
-    main.classList.remove("hidden"); // Return to main content
+  // 🛒 Cart tab click — open cart modal
+  document.getElementById("cartTab")?.addEventListener("click", () => {
+    renderCartItems();                       // Refresh cart items
+    updateCartCount();                       // Ensure count is correct
+    openModal("orderModal");                 // Open modal safely
+    main.classList.add("hidden");            // Hide main content while modal is visible
   });
 
-  // ✅ Checkout button logic
+  // ❌ Cancel button in cart modal
+  document.getElementById("closeOrderModal")?.addEventListener("click", () => {
+    closeModal("orderModal");                // Hide modal properly
+    main.classList.remove("hidden");         // Reveal main content again
+  });
+
+  // ✅ Checkout button click handler
   document.getElementById("checkoutBtn")?.addEventListener("click", () => {
     const user = JSON.parse(localStorage.getItem("orderCafeUser"));
     const userModal = document.getElementById("userModal");
 
+    // 🧠 Validate user credentials
     if (!user || !user.username || !user.email || !user.email.includes("@")) {
       showToast("🚫 Please enter your name and email before checking out.");
-
-      // Trigger credentials modal
+      
+      // Prompt user to fill credentials
       if (userModal?.showModal) {
         userModal.showModal();
       } else {
         userModal?.classList.add("visible");
       }
-
       return;
     }
 
+    // ☕ Confirm order
     showToast("☕ Order placed! Thank you.");
     updateCartCount();
-    sendReceiptEmail(); // ⛳ Clears cart only after email success
-    closeModal("orderModal");
+    sendReceiptEmail();                      // Email receipt and clear cart after sending
+    closeModal("orderModal");                // Close modal and restore main content
     main.classList.remove("hidden");
-
   });
 });

@@ -1,6 +1,32 @@
 import { showToast } from './toast.js';
 
 document.addEventListener("DOMContentLoaded", () => {
+  // 🧊 Load user modal
+  const userModal = document.getElementById("userModal");
+  const userForm = document.getElementById("userForm");
+  const userFeedback = document.getElementById("userFeedback");
+
+  const storedUser = JSON.parse(localStorage.getItem("orderCafeUser"));
+  if (!storedUser) {
+    userModal?.showModal();
+  }
+
+  userForm?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+
+    if (!username || !email.includes("@")) {
+      showToast("Please enter a valid name and email 📭");
+      return;
+    }
+
+    localStorage.setItem("orderCafeUser", JSON.stringify({ username, email }));
+    userFeedback?.classList.remove("hidden");
+    showToast("User credentials saved 📝");
+    setTimeout(() => userModal?.close(), 1500);
+  });
+
   // 🛒 Initialize cart
   let cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
 
@@ -11,12 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const placeOrderBtn = document.getElementById("placeOrderBtn");
   const closeOrderModalBtn = document.getElementById("closeOrderModal");
 
-  // 💾 Save cart to localStorage
   const saveCart = () => {
     localStorage.setItem("orderCafeCart", JSON.stringify(cart));
   };
 
-  // 🧾 Render cart items
   const renderCartItems = () => {
     if (!cartList || !emptyMsg || !totalLabel) return;
 
@@ -26,6 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cart.length === 0) {
       emptyMsg.classList.remove("hidden");
       totalLabel.textContent = "$0.00";
+      return;
+    }
+
+    const user = JSON.parse(localStorage.getItem("orderCafeUser"));
+    if (!user || !user.email.includes("@")) {
+      showToast("Missing or invalid credentials ⚠️");
       return;
     }
 
@@ -59,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
     totalLabel.textContent = `$${total.toFixed(2)}`;
   };
 
-  // 🧹 Handle item removal
   cartList?.addEventListener("click", (e) => {
     const target = e.target;
     if (target.classList.contains("remove-item")) {
@@ -72,7 +101,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 🧊 Load product buttons
   const productCards = document.querySelectorAll(".product-card");
   productCards.forEach(card => {
     const orderButton = card.querySelector(".order-button");
@@ -88,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ❌ Close order modal
   closeOrderModalBtn?.addEventListener("click", () => {
     document.getElementById("orderModal")?.close();
     document.querySelector(".modal-backdrop")?.classList.add("hidden");
@@ -96,14 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("mainContent")?.scrollIntoView({ behavior: "smooth" });
   });
 
-  // ✅ Submit order
   placeOrderBtn?.addEventListener("click", () => {
     if (cart.length === 0) {
       showToast("Your cart is empty ☕");
       return;
     }
 
-    // Submit logic (EmailJS/API) goes here
     showToast("Your order was placed successfully 🎉");
 
     cart = [];
@@ -113,6 +138,5 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".modal-backdrop")?.classList.add("hidden");
   });
 
-  // 🚀 Initial load
   renderCartItems();
 });

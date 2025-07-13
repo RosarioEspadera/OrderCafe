@@ -70,10 +70,11 @@ cartTab?.addEventListener("click", () => {
 
   // 🧑 Account Tab Handler
   accountTab?.addEventListener("click", () => {
-    activateTab(accountTab, tabs);
-    mainContent?.classList.remove("hidden");
-    // Modal opening is handled in account.js
-  });
+  activateTab(accountTab, tabs);
+  openModal("userModal");              // ✅ Preferred method
+  toggleSignInButtons(true);           // 🧑‍💻 Enable sign-in flow
+  toggleProductButtons(false);         // 🛑 Disable ordering buttons
+});
 
   // 🚀 Launch with Home Tab Active
   homeTab?.click();

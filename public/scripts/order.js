@@ -34,8 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const li = document.createElement("li");
       li.innerHTML = `
-        <span class="item-name">${item.name}</span>
-        <span class="item-price">$${itemPrice.toFixed(2)}</span>
+        <span class="product-title">${item.name}</span>
+        <span class="price-tag">$${itemPrice.toFixed(2)}</span>
         <button class="remove-item" data-index="${index}">✕</button>
       `;
       cartList.appendChild(li);

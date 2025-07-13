@@ -213,25 +213,28 @@
   </section>
 </main>
    <dialog id="userModal" class="modal">
-  <!-- 🖼️ Avatar Section -->
-  <section class="avatar-preview">
-    <h2>🖼️ Profile Photo</h2>
-    <img id="currentAvatar" src="styles/images/bg.png" alt="Current Profile Photo" />
-    <input type="file" id="avatarUpload" accept="image/*" />
+  <!-- 🖼️ Avatar Upload -->
+  <section class="form-section photo-upload">
+    <h2 class="modal-heading">🖼️ Profile Photo</h2>
+    <div class="photo-preview">
+      <img id="currentAvatar" src="styles/images/bg.png" alt="Current Profile Photo" />
+      <input type="file" id="avatarUpload" accept="image/*" />
+    </div>
   </section>
 
-  <!-- 🔗 Photo URL Form -->
-  <form id="profileForm">
-    <label for="profilePhoto">Paste Profile Photo URL</label>
-    <input type="url" id="profilePhoto" name="profilePhoto" placeholder="https://your-image-url.com" required />
-    <img id="preview" src="" alt="Photo Preview" width="100" style="margin-top: 10px;" />
+  <!-- 🔗 Paste Image URL -->
+  <section class="form-section photo-url">
+    <form id="profileForm">
+      <label for="profilePhoto">Paste Photo URL:</label>
+      <input type="url" id="profilePhoto" name="profilePhoto" placeholder="https://..." required />
+      <img id="preview" src="" alt="Preview" width="100" style="margin-top: 10px;" />
+      <button type="submit">Save Photo</button>
+    </form>
+  </section>
 
-    <button type="submit" id="photoUploadBtn">Save Photo</button>
-  </form>
-
-  <!-- 👤 Account Details Form -->
-  <section class="account-details">
-    <h2>👤 Your Details</h2>
+  <!-- 👤 Account Info -->
+  <section class="form-section account-details">
+    <h2 class="modal-heading">👤 Your Details</h2>
     <form id="userForm">
       <label for="userNameInput">Name:</label>
       <input type="text" id="userNameInput" name="username" required />
@@ -242,13 +245,12 @@
       <label for="address">Address:</label>
       <input type="text" id="address" name="address" required />
 
-      <menu>
-        <button type="submit">Save Details</button>
-      </menu>
+      <menu><button type="submit">Save Details</button></menu>
       <div id="userFeedback" class="hidden">✅ Credentials saved!</div>
     </form>
   </section>
 </dialog>
+
 
 
 <!-- 🛒 Order Summary Modal -->

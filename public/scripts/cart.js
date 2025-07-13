@@ -1,6 +1,7 @@
 import { showToast } from './toast.js';
+import { lockModalButtons } from './ui.js';
 
-// 🛒 Load cart from storage or initialize empty
+// 🛒 Load cart from storage or initialize
 export let cart = JSON.parse(localStorage.getItem("orderCafeCart")) || [];
 
 // 💾 Save cart to localStorage
@@ -8,7 +9,7 @@ export function saveCart() {
   localStorage.setItem("orderCafeCart", JSON.stringify(cart));
 }
 
-// 🔢 Update cart count indicators
+// 🔢 Update visual cart counts
 export function updateCartCount() {
   const main = document.getElementById("mainContent");
   const badge = main?.querySelector(".cart-count");
@@ -21,11 +22,12 @@ export function updateCartCount() {
   if (cartCount) cartCount.textContent = cart.length;
 }
 
-// 🛍️ Render cart items to UI
+// 🧾 Render cart items into modal
 export function renderCartItems() {
   const cartList = document.getElementById("cartList");
   const emptyMessage = document.getElementById("emptyCartMessage");
   const totalDisplay = document.getElementById("cartTotal");
+
   if (!cartList || !emptyMessage || !totalDisplay) return;
 
   cartList.innerHTML = "";
@@ -34,6 +36,7 @@ export function renderCartItems() {
   if (cart.length === 0) {
     emptyMessage.classList.remove("hidden");
     totalDisplay.textContent = "₱0.00";
+    lockModalButtons(false); // ✅ Even if empty, buttons stay responsive
     return;
   }
 
@@ -43,7 +46,7 @@ export function renderCartItems() {
     total += price;
 
     const itemElement = document.createElement("li");
-    itemElement.classList.add("cart-item");
+    itemElement.className = "cart-item";
 
     const nameSpan = document.createElement("span");
     nameSpan.className = "product-title";
@@ -63,6 +66,7 @@ export function renderCartItems() {
   });
 
   totalDisplay.textContent = `₱${total.toFixed(2)}`;
+  lockModalButtons(false); // ✅ Unlock buttons after render
 }
 
 // ➖ Remove item from cart
@@ -74,7 +78,7 @@ export function removeFromCart(itemId) {
   showToast("🗑️ Removed from Cart");
 }
 
-// ➕ Add product to cart using DOM data
+// ➕ Add product to cart using DOM reference
 export function addToCart(itemId) {
   const productCard = document.getElementById(itemId);
   if (!productCard) {
@@ -94,11 +98,11 @@ export function addToCart(itemId) {
   }
 }
 
-// 🧺 Clear entire cart
+// 🧹 Clear entire cart
 export function clearCart() {
   cart = [];
   saveCart();
   updateCartCount();
   renderCartItems();
-  showToast("🧺 Cart cleared");
+  showToast("🧼 Cart cleared");
 }

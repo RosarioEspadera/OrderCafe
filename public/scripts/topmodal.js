@@ -78,14 +78,14 @@ cartTab?.addEventListener("click", () => {
   userModal?.classList.add("fullscreen");
 
   if (!user || user.username === "Guest") {
-    userName.value = "";
-    userEmail.value = "";
-    userAddress.value = "";
+    userName?.value = "";
+    userEmail?.value = "";
+    userAddress?.value = "";
     currentAvatar.src = fallbackPhoto;
   } else {
-    userName.value = user.username || "";
-    userEmail.value = user.email || "";
-    userAddress.value = user.address || "";
+    userName?.value = user.username || "";
+    userEmail?.value = user.email || "";
+    userAddress?.value = user.address || "";
     currentAvatar.src = user.profilePhoto || fallbackPhoto;
   }
 

@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("closeProfile");
   const backdrop = document.querySelector(".modal-backdrop");
   const addressInput = document.getElementById("address");
+  const previewURL = document.getElementById("profilePhoto");
+  const previewImg = document.getElementById("preview");
 
   const greetingBanner = document.getElementById("greetingBanner");
   const guestBanner = document.getElementById("guestBanner");
@@ -43,12 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
   backdrop?.classList.remove("hidden");
 });
 
-const input = document.getElementById("profilePhoto");
-input.addEventListener("input", () => {
-  const preview = document.getElementById("preview");
-  preview.src = input.value;
-});
-
 
   // 📷 Handle avatar upload
   avatarUpload?.addEventListener("change", () => {
@@ -66,7 +62,10 @@ input.addEventListener("input", () => {
       reader.readAsDataURL(file);
     }
   });
-
+// 🔄 Preview from pasted URL
+previewURL.addEventListener("input", () => {
+  previewImg.src = previewURL.value;
+});
   // 📝 Save credentials
  userForm?.addEventListener("submit", (e) => {
   e.preventDefault();

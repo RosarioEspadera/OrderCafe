@@ -82,7 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
     userModal?.classList.add("fullscreen");
 
     if (!user || user.userName === "Guest") {
-      userName?.value = "";
+     if (userName) {
+  userName.value = "";
+}
       userEmail?.value = "";
       userAddress?.value = "";
       currentAvatar.src = fallbackPhoto;

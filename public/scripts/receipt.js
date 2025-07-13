@@ -1,6 +1,7 @@
 import { showToast } from './toast.js';
 
 emailjs.init("AqvkFhQnxowOJda9J");
+
 export function clearCart() {
   localStorage.removeItem("orderCafeCart");
   document.getElementById("cartList").innerHTML = "";
@@ -31,24 +32,25 @@ export function sendReceiptEmail() {
   }, 0);
 
   // 📬 Send via EmailJS with address included
-eemailjs.send("service_epydqmi", "template_vzuexod", {
-  to_name: user.username,
-  from_name: "OrderCafe",
-  message: `Your order has been confirmed!\n\n${items}`,
-  order_total: `$${total.toFixed(2)}`,
-  Address: user.address || "Not provided",
-  reply_to: user.email || "no-reply@ordercafe.com"
-})
-.then(() => {
-  showToast("📩 Confirmation sent to your inbox");
-  clearCart(); // 🧹 Clear cart after sending
-})
-.catch((err) => {
-  console.error("EmailJS error:", err);
-  showToast("Failed to send receipt ☁️");
-});
+  emailjs.send("service_epydqmi", "template_vzuexod", {
+    to_name: user.username,
+    from_name: "OrderCafe",
+    message: `🧾 Order Summary:\n\n${items}\n\n💵 Total: $${total.toFixed(2)}`,
+    order_total: `$${total.toFixed(2)}`,
+    Address: user.address || "Not provided",
+    reply_to: user.email || "no-reply@ordercafe.com"
+  })
+  .then(() => {
+    showToast("📩 Confirmation sent to your inbox");
+    clearCart(); // 🧹 Clear cart after sending
+  })
+  .catch((err) => {
+    console.error("EmailJS error:", err);
+    showToast("Failed to send receipt ☁️");
+  });
+}
 
-// 🖱️ Optional DOM binding
+// 🖱️ Optional DOM binding — moved outside the function
 document.addEventListener("DOMContentLoaded", () => {
   const placeOrderBtn = document.getElementById("placeOrderBtn");
   placeOrderBtn?.addEventListener("click", sendReceiptEmail);

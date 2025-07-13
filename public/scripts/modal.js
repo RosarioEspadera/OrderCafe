@@ -8,40 +8,39 @@ export function openModal(id) {
   const backdrop = document.querySelector(".modal-backdrop");
   if (!modal) return;
 
-  // 🔒 Close all other modals first
+  // 🚫 Lock and hide other modals first
   document.querySelectorAll("dialog").forEach(m => {
-  if (m.id !== id) {
-    m.classList.add("hidden");
-    m.setAttribute("inert", "");
-    m.close?.();
-  }
-});
+    if (m.id !== id) {
+      m.classList.add("hidden");
+      m.setAttribute("inert", "");
+      m.close?.();
+    }
+  });
 
-
-  // 🔓 Activate the target modal
-modal.classList.remove("hidden");
-modal.removeAttribute("inert"); // 👈 This unfreezes button interactivity
-
-
- if (typeof modal.showModal === "function") {
-  modal.showModal();
-} else {
-  modal.classList.add("visible"); // Fallback for older browsers
-}
-
-  lockModalButtons(false);
+  modal.classList.remove("hidden");
   backdrop?.classList.remove("hidden");
+  lockModalButtons(false);
 
-  // 🧭 Optional: focus first interactive button
-  modal.querySelector(".modal-button")?.focus();
+  // ✅ Safely remove inert after rendering
+  requestAnimationFrame(() => {
+    modal.removeAttribute("inert");
 
-  // 🧪 Dev log to confirm status
-  console.log("Modal status:", {
-    id: modal.id,
-    inert: modal.hasAttribute("inert"),
-    visible: !modal.classList.contains("hidden")
+    if (typeof modal.showModal === "function") {
+      modal.showModal();
+    } else {
+      modal.classList.add("visible");
+    }
+
+    modal.querySelector(".modal-button, button")?.focus();
+
+    console.log("Modal now interactive:", {
+      id: modal.id,
+      inert: modal.hasAttribute("inert"),
+      visible: !modal.classList.contains("hidden")
+    });
   });
 }
+
 
 /**
  * Closes a modal by ID.
